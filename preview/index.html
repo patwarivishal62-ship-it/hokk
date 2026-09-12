@@ -89,7 +89,7 @@
       </button>
       <div class="site-header__logo">
         <a href="index.html" class="site-header__logo-link" aria-label="House of Kala Katha">
-          <span class="wordmark"><span class="wordmark__top">House of</span><span class="wordmark__name">Kala Katha</span></span>
+          <span class="logo-placeholder">LOGO</span>
         </a>
       </div>
       <nav class="site-nav" aria-label="Primary">
@@ -285,15 +285,175 @@
       <div class="container">
         <div class="story__head">
           <p class="eyebrow">The Story in the Cloth</p>
-          <h2 class="section-title">This Season's Katha: The Ikat of Pochampally</h2>
-          <p class="story__intro">Kala is the craft. Katha is everything around it — where it comes from, who makes it, why the pattern looks the way it does, and how it found its way onto a jacket you'd actually wear on a Tuesday.</p>
+          <h2 class="section-title">The Craft Map of India</h2>
+          <p class="story__intro">Four regions, hundreds of looms, thousands of hands. Hover over the map, click a region, and read its katha — the handloom cultures it carries and the speciality that makes it sing.</p>
         </div>
-        <div class="story__grid">
-          <div class="story__cell"><span class="story__label">Region</span><h3 class="story__title">Pochampally, Telangana</h3><p class="story__text">A village whose name is now synonymous with the double-ikat weave.</p></div>
-          <div class="story__cell"><span class="story__label">Technique</span><h3 class="story__title">Ikat — Resist-Dyed Yarn</h3><p class="story__text">Threads are tie-dyed before weaving, so the pattern lives inside the yarn itself.</p></div>
-          <div class="story__cell"><span class="story__label">Motif</span><h3 class="story__title">The Diamond Chowka</h3><p class="story__text">A geometric motif once reserved for temple textiles, now a print for the everyday.</p></div>
-          <div class="story__cell"><span class="story__label">Reimagined as</span><h3 class="story__title">Shirts, Co-ords &amp; Jackets</h3><p class="story__text">Cut into relaxed silhouettes that move with your day, not against it.</p></div>
+
+        <div class="craft-map">
+          <div class="craft-map__wrap">
+            <svg viewBox="0 0 360 440" role="img" aria-label="Interactive map of India's four craft regions" class="craft-map__svg">
+              <path class="craft-map__outline" d="M104,44 L148,26 L198,32 L232,54 L256,76 L270,100 L290,90 L320,102 L316,130 L296,146 L282,140 L266,150 L250,170 L260,208 L264,250 L248,300 L226,346 L200,392 L182,382 L170,348 L176,300 L170,266 L164,232 L156,206 L148,186 L136,170 L114,160 L92,154 L82,134 L68,120 L72,96 L86,76 Z" />
+              <g class="region region--north" data-region="north" tabindex="0" role="button" aria-label="North India">
+                <path class="region__shape" d="M104,44 L148,26 L198,32 L232,54 L256,76 L270,100 L240,128 L150,128 L86,76 Z" />
+                <text class="region__label" x="168" y="80" text-anchor="middle">NORTH</text>
+              </g>
+              <g class="region region--west" data-region="west" tabindex="0" role="button" aria-label="West and Central India">
+                <path class="region__shape" d="M150,128 L240,128 L214,180 L236,296 L170,266 L164,232 L156,206 L148,186 L136,170 L114,160 L92,154 L82,134 L68,120 L72,96 L86,76 Z" />
+                <text class="region__label" x="146" y="196" text-anchor="middle">WEST &amp;</text>
+                <text class="region__label" x="146" y="212" text-anchor="middle">CENTRAL</text>
+              </g>
+              <g class="region region--east" data-region="east" tabindex="0" role="button" aria-label="East India">
+                <path class="region__shape" d="M270,100 L290,90 L320,102 L316,130 L296,146 L282,140 L266,150 L250,170 L260,208 L264,250 L236,296 L214,180 L240,128 Z" />
+                <text class="region__label" x="238" y="200" text-anchor="middle">EAST</text>
+              </g>
+              <g class="region region--south" data-region="south" tabindex="0" role="button" aria-label="South India">
+                <path class="region__shape" d="M236,296 L264,250 L248,300 L226,346 L200,392 L182,382 L170,348 L176,300 L170,266 Z" />
+                <text class="region__label" x="210" y="330" text-anchor="middle">SOUTH</text>
+              </g>
+              <path class="craft-map__divider" d="M86,76 L150,128 M150,128 L240,128 M240,128 L214,180 L236,296 M270,100 L240,128 M236,296 L264,250 M236,296 L170,266" />
+            </svg>
+
+            <div class="craft-map__side">
+              <p class="craft-map__hint">Hover, then click a region to read its katha.</p>
+              <div class="craft-map__legend">
+                <button type="button" class="craft-map__legend-item" data-region-open="north">
+                  <span class="craft-map__legend-dot craft-map__legend-dot--north"></span>
+                  <span class="craft-map__legend-text"><span class="craft-map__legend-name">North India</span><span class="craft-map__legend-count">5 handloom traditions</span></span>
+                  <span class="craft-map__legend-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="13 5 20 12 13 19"></polyline></svg></span>
+                </button>
+                <button type="button" class="craft-map__legend-item" data-region-open="west">
+                  <span class="craft-map__legend-dot craft-map__legend-dot--west"></span>
+                  <span class="craft-map__legend-text"><span class="craft-map__legend-name">West &amp; Central India</span><span class="craft-map__legend-count">7 handloom traditions</span></span>
+                  <span class="craft-map__legend-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="13 5 20 12 13 19"></polyline></svg></span>
+                </button>
+                <button type="button" class="craft-map__legend-item" data-region-open="east">
+                  <span class="craft-map__legend-dot craft-map__legend-dot--east"></span>
+                  <span class="craft-map__legend-text"><span class="craft-map__legend-name">East India</span><span class="craft-map__legend-count">6 handloom traditions</span></span>
+                  <span class="craft-map__legend-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="13 5 20 12 13 19"></polyline></svg></span>
+                </button>
+                <button type="button" class="craft-map__legend-item" data-region-open="south">
+                  <span class="craft-map__legend-dot craft-map__legend-dot--south"></span>
+                  <span class="craft-map__legend-text"><span class="craft-map__legend-name">South India</span><span class="craft-map__legend-count">6 handloom traditions</span></span>
+                  <span class="craft-map__legend-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="13 5 20 12 13 19"></polyline></svg></span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Region modals -->
+        <div class="region-modal" data-region-modal="north" hidden>
+          <div class="region-modal__overlay" data-region-close></div>
+          <div class="region-modal__panel" role="dialog" aria-modal="true" aria-labelledby="region-title-north">
+            <button type="button" class="region-modal__close" data-region-close aria-label="Close"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button>
+            <p class="region-modal__kicker eyebrow">Craft Region</p>
+            <h3 class="region-modal__title" id="region-title-north">North India</h3>
+            <p class="region-modal__intro">The cold mountains and royal plains of the north — where wool meets gold.</p>
+            <p class="region-modal__stat">5 handloom traditions · North India</p>
+            <div class="region-modal__cols">
+              <div class="region-modal__col">
+                <h4>Handloom cultures</h4>
+                <ul class="region-modal__list">
+                  <li>Pashmina &amp; Kani shawls — Kashmir</li>
+                  <li>Kullu &amp; Kinnauri shawls — Himachal</li>
+                  <li>Phulkari embroidery — Punjab</li>
+                  <li>Chikankari — Lucknow</li>
+                  <li>Banarasi brocade — Varanasi</li>
+                </ul>
+              </div>
+              <div class="region-modal__col">
+                <h4>Speciality / USP</h4>
+                <p class="region-modal__usp">Luxe winter weaves and royal brocades. The north's story is fine wool, silk zari and the regal Banarasi loom.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="region-modal" data-region-modal="west" hidden>
+          <div class="region-modal__overlay" data-region-close></div>
+          <div class="region-modal__panel" role="dialog" aria-modal="true" aria-labelledby="region-title-west">
+            <button type="button" class="region-modal__close" data-region-close aria-label="Close"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button>
+            <p class="region-modal__kicker eyebrow">Craft Region</p>
+            <h3 class="region-modal__title" id="region-title-west">West &amp; Central India</h3>
+            <p class="region-modal__intro">The print-and-dye powerhouse of the country — from the deserts of Kutch to the looms of Paithan.</p>
+            <p class="region-modal__stat">7 handloom traditions · West &amp; Central India</p>
+            <div class="region-modal__cols">
+              <div class="region-modal__col">
+                <h4>Handloom cultures</h4>
+                <ul class="region-modal__list">
+                  <li>Bandhani tie-dye — Gujarat &amp; Rajasthan</li>
+                  <li>Patola double ikat — Patan</li>
+                  <li>Ajrakh block print — Kutch</li>
+                  <li>Bagru &amp; Sanganeri prints — Rajasthan</li>
+                  <li>Paithani silk — Maharashtra</li>
+                  <li>Chanderi &amp; Maheshwari — Madhya Pradesh</li>
+                  <li>Kosa silk — Chhattisgarh</li>
+                </ul>
+              </div>
+              <div class="region-modal__col">
+                <h4>Speciality / USP</h4>
+                <p class="region-modal__usp">The masters of resist-dye and block print. Home to the legendary Patola — one of the world's most complex weaves.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="region-modal" data-region-modal="east" hidden>
+          <div class="region-modal__overlay" data-region-close></div>
+          <div class="region-modal__panel" role="dialog" aria-modal="true" aria-labelledby="region-title-east">
+            <button type="button" class="region-modal__close" data-region-close aria-label="Close"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button>
+            <p class="region-modal__kicker eyebrow">Craft Region</p>
+            <h3 class="region-modal__title" id="region-title-east">East India</h3>
+            <p class="region-modal__intro">Featherlight silks and narrative weaving, from the Ganges delta to the Northeast hills.</p>
+            <p class="region-modal__stat">6 handloom traditions · East India</p>
+            <div class="region-modal__cols">
+              <div class="region-modal__col">
+                <h4>Handloom cultures</h4>
+                <ul class="region-modal__list">
+                  <li>Ikat of Odisha — single ikat</li>
+                  <li>Sambalpuri &amp; Bomkai — Odisha</li>
+                  <li>Jamdani — Bengal</li>
+                  <li>Kantha embroidery — Bengal</li>
+                  <li>Bhagalpuri tussar — Bihar</li>
+                  <li>Muga &amp; Eri silk — Assam</li>
+                </ul>
+              </div>
+              <div class="region-modal__col">
+                <h4>Speciality / USP</h4>
+                <p class="region-modal__usp">Air-light muslins and golden Muga silk. The east weaves stories into every thread.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="region-modal" data-region-modal="south" hidden>
+          <div class="region-modal__overlay" data-region-close></div>
+          <div class="region-modal__panel" role="dialog" aria-modal="true" aria-labelledby="region-title-south">
+            <button type="button" class="region-modal__close" data-region-close aria-label="Close"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button>
+            <p class="region-modal__kicker eyebrow">Craft Region</p>
+            <h3 class="region-modal__title" id="region-title-south">South India</h3>
+            <p class="region-modal__intro">Temple-town silks and the double-ikat heartland, from Pochampally to Kanchipuram.</p>
+            <p class="region-modal__stat">6 handloom traditions · South India</p>
+            <div class="region-modal__cols">
+              <div class="region-modal__col">
+                <h4>Handloom cultures</h4>
+                <ul class="region-modal__list">
+                  <li>Pochampally &amp; Puttapaka ikat — Telangana</li>
+                  <li>Kanjeevaram silk — Tamil Nadu</li>
+                  <li>Uppada jamdani — Andhra</li>
+                  <li>Kalamkari art — Andhra</li>
+                  <li>Mysore silk &amp; Ilkal — Karnataka</li>
+                  <li>Kasavu — Kerala</li>
+                </ul>
+              </div>
+              <div class="region-modal__col">
+                <h4>Speciality / USP</h4>
+                <p class="region-modal__usp">The seat of the double ikat. South India dresses temples and weddings in silk and gold zari.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <a href="#lookbook" class="btn btn--outline">See it worn</a>
       </div>
     </div>
@@ -432,7 +592,7 @@
     <div class="container">
       <div class="site-footer__top">
         <div class="site-footer__brand">
-          <span class="wordmark wordmark--footer"><span class="wordmark__top">House of</span><span class="wordmark__name">Kala Katha</span></span>
+          <span class="logo-placeholder logo-placeholder--footer">LOGO</span>
           <p class="site-footer__tagline">Kala is the art. Katha is the story.</p>
           <p class="site-footer__blurb">Handloom, ikat, kalamkari and patola — heritage craft, re-cut for everyday life.</p>
         </div>

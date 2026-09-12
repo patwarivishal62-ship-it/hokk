@@ -25,21 +25,112 @@
       {%- endif -%}
     </div>
 
-    {%- if section.blocks.size > 0 -%}
-      <div class="story__grid">
-        {%- for block in section.blocks -%}
-          <div class="story__cell" {{ block.shopify_attributes }}>
-            <span class="story__label">{{ block.settings.label | escape }}</span>
-            {%- if block.settings.title != blank -%}
-              <h3 class="story__title">{{ block.settings.title | escape }}</h3>
+    {%- comment -%} Interactive India craft map {%- endcomment -%}
+    <div class="craft-map">
+      <div class="craft-map__wrap">
+        <svg viewBox="0 0 360 440" role="img" aria-label="Interactive map of India's four craft regions" class="craft-map__svg">
+          <path class="craft-map__outline" d="M104,44 L148,26 L198,32 L232,54 L256,76 L270,100 L290,90 L320,102 L316,130 L296,146 L282,140 L266,150 L250,170 L260,208 L264,250 L248,300 L226,346 L200,392 L182,382 L170,348 L176,300 L170,266 L164,232 L156,206 L148,186 L136,170 L114,160 L92,154 L82,134 L68,120 L72,96 L86,76 Z" />
+
+          <g class="region region--north" data-region="north" tabindex="0" role="button" aria-label="North India">
+            <path class="region__shape" d="M104,44 L148,26 L198,32 L232,54 L256,76 L270,100 L240,128 L150,128 L86,76 Z" />
+            <text class="region__label" x="168" y="80" text-anchor="middle">NORTH</text>
+          </g>
+
+          <g class="region region--west" data-region="west" tabindex="0" role="button" aria-label="West and Central India">
+            <path class="region__shape" d="M150,128 L240,128 L214,180 L236,296 L170,266 L164,232 L156,206 L148,186 L136,170 L114,160 L92,154 L82,134 L68,120 L72,96 L86,76 Z" />
+            <text class="region__label" x="146" y="196" text-anchor="middle">WEST &amp;</text>
+            <text class="region__label" x="146" y="212" text-anchor="middle">CENTRAL</text>
+          </g>
+
+          <g class="region region--east" data-region="east" tabindex="0" role="button" aria-label="East India">
+            <path class="region__shape" d="M270,100 L290,90 L320,102 L316,130 L296,146 L282,140 L266,150 L250,170 L260,208 L264,250 L236,296 L214,180 L240,128 Z" />
+            <text class="region__label" x="238" y="200" text-anchor="middle">EAST</text>
+          </g>
+
+          <g class="region region--south" data-region="south" tabindex="0" role="button" aria-label="South India">
+            <path class="region__shape" d="M236,296 L264,250 L248,300 L226,346 L200,392 L182,382 L170,348 L176,300 L170,266 Z" />
+            <text class="region__label" x="210" y="330" text-anchor="middle">SOUTH</text>
+          </g>
+
+          <path class="craft-map__divider" d="M86,76 L150,128 M150,128 L240,128 M240,128 L214,180 L236,296 M270,100 L240,128 M236,296 L264,250 M236,296 L170,266" />
+        </svg>
+
+        <div class="craft-map__side">
+          <p class="craft-map__hint">Hover, then click a region to read its katha.</p>
+
+          <div class="craft-map__legend">
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign zone = block.settings.zone
+                assign cultures = block.settings.cultures | split: '|'
+              -%}
+              <button
+                type="button"
+                class="craft-map__legend-item"
+                data-region-open="{{ zone }}"
+                {{ block.shopify_attributes }}
+              >
+                <span class="craft-map__legend-dot craft-map__legend-dot--{{ zone }}"></span>
+                <span class="craft-map__legend-text">
+                  <span class="craft-map__legend-name">{{ block.settings.title | escape }}</span>
+                  {%- if block.settings.cultures != blank -%}
+                    <span class="craft-map__legend-count">{{ cultures.size }} handloom traditions</span>
+                  {%- endif -%}
+                </span>
+                <span class="craft-map__legend-arrow">{%- render 'icon', icon: 'arrow-right' -%}</span>
+              </button>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Region modals {%- endcomment -%}
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign zone = block.settings.zone
+        assign cultures = block.settings.cultures | split: '|'
+      -%}
+      <div class="region-modal" data-region-modal="{{ zone }}" hidden>
+        <div class="region-modal__overlay" data-region-close></div>
+        <div class="region-modal__panel" role="dialog" aria-modal="true" aria-labelledby="region-title-{{ zone }}">
+          <button type="button" class="region-modal__close" data-region-close aria-label="{{ 'general.close' | t }}">
+            {%- render 'icon', icon: 'close' -%}
+          </button>
+
+          <p class="region-modal__kicker eyebrow">Craft Region</p>
+          <h3 class="region-modal__title" id="region-title-{{ zone }}">{{ block.settings.title | escape }}</h3>
+
+          {%- if block.settings.intro != blank -%}
+            <p class="region-modal__intro">{{ block.settings.intro | escape }}</p>
+          {%- endif -%}
+
+          {%- if block.settings.cultures != blank -%}
+            <p class="region-modal__stat">{{ cultures.size }} handloom traditions · {{ block.settings.title | escape }}</p>
+          {%- endif -%}
+
+          <div class="region-modal__cols">
+            {%- if block.settings.cultures != blank -%}
+              <div class="region-modal__col">
+                <h4>Handloom cultures</h4>
+                <ul class="region-modal__list">
+                  {%- for culture in cultures -%}
+                    <li>{{ culture | strip }}</li>
+                  {%- endfor -%}
+                </ul>
+              </div>
             {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <p class="story__text">{{ block.settings.text | escape }}</p>
+
+            {%- if block.settings.usp != blank -%}
+              <div class="region-modal__col">
+                <h4>Speciality / USP</h4>
+                <p class="region-modal__usp">{{ block.settings.usp | escape }}</p>
+              </div>
             {%- endif -%}
           </div>
-        {%- endfor -%}
+        </div>
       </div>
-    {%- endif -%}
+    {%- endfor -%}
 
     {%- if section.settings.button_label != blank -%}
       <a href="{{ section.settings.button_link }}" class="btn btn--{{ section.settings.button_style }}">
@@ -79,13 +170,13 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "This Season's Katha: The Ikat of Pochampally"
+      "default": "The Craft Map of India"
     },
     {
       "type": "text",
       "id": "text",
       "label": "Intro text",
-      "default": "Kala is the craft. Katha is everything around it — where it comes from, who makes it, why the pattern looks the way it does, and how it found its way onto a jacket you'd actually wear on a Tuesday."
+      "default": "Four regions, hundreds of looms, thousands of hands. Hover over the map, click a region, and read its katha — the handloom cultures it carries and the speciality that makes it sing."
     },
     {
       "type": "text",
@@ -107,30 +198,53 @@
         { "value": "outline", "label": "Outline" }
       ],
       "default": "outline"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add one block per region — North, West & Central, East, South. Each block powers one clickable zone on the map and its popup."
     }
   ],
   "blocks": [
     {
-      "type": "cell",
-      "name": "Story cell",
+      "type": "region",
+      "name": "Craft region",
       "settings": [
         {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "Region"
+          "type": "select",
+          "id": "zone",
+          "label": "Map zone",
+          "options": [
+            { "value": "north", "label": "North India" },
+            { "value": "west", "label": "West & Central India" },
+            { "value": "east", "label": "East India" },
+            { "value": "south", "label": "South India" }
+          ],
+          "default": "north"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Title",
-          "default": "Pochampally, Telangana"
+          "label": "Region name",
+          "default": "North India"
         },
         {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "A village whose name is now synonymous with the double-ikat weave."
+          "type": "textarea",
+          "id": "intro",
+          "label": "Intro line",
+          "default": "The cold mountains and royal plains of the north — where wool meets gold."
+        },
+        {
+          "type": "textarea",
+          "id": "cultures",
+          "label": "Handloom cultures",
+          "info": "One per line, separated by a vertical bar |",
+          "default": "Pashmina & Kani shawls — Kashmir | Kullu & Kinnauri shawls — Himachal | Phulkari embroidery — Punjab | Chikankari — Lucknow | Banarasi brocade — Varanasi"
+        },
+        {
+          "type": "textarea",
+          "id": "usp",
+          "label": "Speciality / USP",
+          "default": "Luxe winter weaves and royal brocades. The north's story is fine wool, silk zari and the regal Banarasi loom."
         }
       ]
     }
@@ -140,10 +254,46 @@
     {
       "name": "Story",
       "blocks": [
-        { "type": "cell", "settings": { "label": "Region", "title": "Pochampally, Telangana", "text": "A village whose name is now synonymous with the double-ikat weave." } },
-        { "type": "cell", "settings": { "label": "Technique", "title": "Ikat — Resist-Dyed Yarn", "text": "Threads are tie-dyed before weaving, so the pattern lives inside the yarn itself." } },
-        { "type": "cell", "settings": { "label": "Motif", "title": "The Diamond Chowka", "text": "A geometric motif once reserved for temple textiles, now a print for the everyday." } },
-        { "type": "cell", "settings": { "label": "Reimagined as", "title": "Shirts, Co-ords & Jackets", "text": "Cut into relaxed silhouettes that move with your day, not against it." } }
+        {
+          "type": "region",
+          "settings": {
+            "zone": "north",
+            "title": "North India",
+            "intro": "The cold mountains and royal plains of the north — where wool meets gold.",
+            "cultures": "Pashmina & Kani shawls — Kashmir | Kullu & Kinnauri shawls — Himachal | Phulkari embroidery — Punjab | Chikankari — Lucknow | Banarasi brocade — Varanasi",
+            "usp": "Luxe winter weaves and royal brocades. The north's story is fine wool, silk zari and the regal Banarasi loom."
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "zone": "west",
+            "title": "West & Central India",
+            "intro": "The print-and-dye powerhouse of the country — from the deserts of Kutch to the looms of Paithan.",
+            "cultures": "Bandhani tie-dye — Gujarat & Rajasthan | Patola double ikat — Patan | Ajrakh block print — Kutch | Bagru & Sanganeri prints — Rajasthan | Paithani silk — Maharashtra | Chanderi & Maheshwari — Madhya Pradesh | Kosa silk — Chhattisgarh",
+            "usp": "The masters of resist-dye and block print. Home to the legendary Patola — one of the world's most complex weaves."
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "zone": "east",
+            "title": "East India",
+            "intro": "Featherlight silks and narrative weaving, from the Ganges delta to the Northeast hills.",
+            "cultures": "Ikat of Odisha — single ikat | Sambalpuri & Bomkai — Odisha | Jamdani — Bengal | Kantha embroidery — Bengal | Bhagalpuri tussar — Bihar | Muga & Eri silk — Assam",
+            "usp": "Air-light muslins and golden Muga silk. The east weaves stories into every thread."
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "zone": "south",
+            "title": "South India",
+            "intro": "Temple-town silks and the double-ikat heartland, from Pochampally to Kanchipuram.",
+            "cultures": "Pochampally & Puttapaka ikat — Telangana | Kanjeevaram silk — Tamil Nadu | Uppada jamdani — Andhra | Kalamkari art — Andhra | Mysore silk & Ilkal — Karnataka | Kasavu — Kerala",
+            "usp": "The seat of the double ikat. South India dresses temples and weddings in silk and gold zari."
+          }
+        }
       ]
     }
   ]

@@ -87,44 +87,52 @@
     "story": {
       "type": "story",
       "blocks": {
-        "cell-1": {
-          "type": "cell",
+        "region-north": {
+          "type": "region",
           "settings": {
-            "label": "Region",
-            "title": "Pochampally, Telangana",
-            "text": "A village whose name is now synonymous with the double-ikat weave."
+            "zone": "north",
+            "title": "North India",
+            "intro": "The cold mountains and royal plains of the north — where wool meets gold.",
+            "cultures": "Pashmina & Kani shawls — Kashmir | Kullu & Kinnauri shawls — Himachal | Phulkari embroidery — Punjab | Chikankari — Lucknow | Banarasi brocade — Varanasi",
+            "usp": "Luxe winter weaves and royal brocades. The north's story is fine wool, silk zari and the regal Banarasi loom."
           }
         },
-        "cell-2": {
-          "type": "cell",
+        "region-west": {
+          "type": "region",
           "settings": {
-            "label": "Technique",
-            "title": "Ikat \u2014 Resist-Dyed Yarn",
-            "text": "Threads are tie-dyed before weaving, so the pattern lives inside the yarn itself."
+            "zone": "west",
+            "title": "West & Central India",
+            "intro": "The print-and-dye powerhouse of the country — from the deserts of Kutch to the looms of Paithan.",
+            "cultures": "Bandhani tie-dye — Gujarat & Rajasthan | Patola double ikat — Patan | Ajrakh block print — Kutch | Bagru & Sanganeri prints — Rajasthan | Paithani silk — Maharashtra | Chanderi & Maheshwari — Madhya Pradesh | Kosa silk — Chhattisgarh",
+            "usp": "The masters of resist-dye and block print. Home to the legendary Patola — one of the world's most complex weaves."
           }
         },
-        "cell-3": {
-          "type": "cell",
+        "region-east": {
+          "type": "region",
           "settings": {
-            "label": "Motif",
-            "title": "The Diamond Chowka",
-            "text": "A geometric motif once reserved for temple textiles, now a print for the everyday."
+            "zone": "east",
+            "title": "East India",
+            "intro": "Featherlight silks and narrative weaving, from the Ganges delta to the Northeast hills.",
+            "cultures": "Ikat of Odisha — single ikat | Sambalpuri & Bomkai — Odisha | Jamdani — Bengal | Kantha embroidery — Bengal | Bhagalpuri tussar — Bihar | Muga & Eri silk — Assam",
+            "usp": "Air-light muslins and golden Muga silk. The east weaves stories into every thread."
           }
         },
-        "cell-4": {
-          "type": "cell",
+        "region-south": {
+          "type": "region",
           "settings": {
-            "label": "Reimagined as",
-            "title": "Shirts, Co-ords & Jackets",
-            "text": "Cut into relaxed silhouettes that move with your day, not against it."
+            "zone": "south",
+            "title": "South India",
+            "intro": "Temple-town silks and the double-ikat heartland, from Pochampally to Kanchipuram.",
+            "cultures": "Pochampally & Puttapaka ikat — Telangana | Kanjeevaram silk — Tamil Nadu | Uppada jamdani — Andhra | Kalamkari art — Andhra | Mysore silk & Ilkal — Karnataka | Kasavu — Kerala",
+            "usp": "The seat of the double ikat. South India dresses temples and weddings in silk and gold zari."
           }
         }
       },
       "block_order": [
-        "cell-1",
-        "cell-2",
-        "cell-3",
-        "cell-4"
+        "region-north",
+        "region-west",
+        "region-east",
+        "region-south"
       ],
       "settings": {}
     },

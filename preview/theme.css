@@ -869,12 +869,157 @@ svg.icon { width: 20px; height: 20px; }
 .rich-text__text { font-size: 1.6rem; margin-bottom: 24px; }
 
 /* --------------------------------------------------------------------------
-   27. Placeholder SVGs
+   28. Logo placeholder
+   -------------------------------------------------------------------------- */
+.logo-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border: 1.5px dashed var(--color-line);
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  text-indent: 0.42em; /* visually balance the letterspacing */
+  background: rgba(169, 74, 51, 0.03);
+}
+.site-header__logo-link .logo-placeholder { min-width: 150px; }
+.logo-placeholder--footer {
+  border-color: rgba(243, 236, 225, 0.35);
+  color: rgba(243, 236, 225, 0.6);
+  background: transparent;
+  margin-bottom: 20px;
+}
+.site-footer__logo { max-height: 60px; width: auto; margin-bottom: 20px; }
+
+/* --------------------------------------------------------------------------
+   29. Interactive craft map (Story section)
+   -------------------------------------------------------------------------- */
+.craft-map { margin-bottom: clamp(32px, 4vw, 56px); }
+.craft-map__wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 520px) 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+.craft-map__svg { width: 100%; height: auto; display: block; }
+.craft-map__outline { fill: none; stroke: var(--color-gold); stroke-width: 1.6; stroke-opacity: 0.65; }
+
+.region { cursor: pointer; outline: none; }
+.region__shape { transition: fill 0.25s ease; }
+.region__shape { stroke: var(--color-dark); stroke-width: 2; }
+.region:hover .region__shape,
+.region:focus .region__shape { fill: var(--color-accent); }
+.region--north .region__shape { fill: #E8DCC6; }
+.region--west .region__shape { fill: #CFA468; }
+.region--east .region__shape { fill: #B57C55; }
+.region--south .region__shape { fill: #A68B70; }
+.region__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  fill: #3a2c20;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+.region:hover .region__label,
+.region:focus .region__label { fill: var(--color-accent-text); }
+.craft-map__divider { fill: none; stroke: var(--color-dark); stroke-width: 2.5; }
+
+.craft-map__hint {
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  color: rgba(243, 236, 225, 0.6);
+  margin-bottom: 24px;
+}
+.craft-map__legend { display: flex; flex-direction: column; gap: 12px; }
+.craft-map__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  padding: 16px 18px;
+  border: 1px solid rgba(243, 236, 225, 0.22);
+  background: transparent;
+  color: var(--color-dark-text);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.craft-map__legend-item:hover,
+.craft-map__legend-item:focus { border-color: var(--color-gold); background: rgba(243, 236, 225, 0.06); }
+.craft-map__legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.craft-map__legend-dot--north { background: #E8DCC6; }
+.craft-map__legend-dot--west { background: #CFA468; }
+.craft-map__legend-dot--east { background: #B57C55; }
+.craft-map__legend-dot--south { background: #A68B70; }
+.craft-map__legend-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.craft-map__legend-name { font-family: var(--font-heading-family); font-size: 1.9rem; font-weight: 600; line-height: 1.1; }
+.craft-map__legend-count { font-size: 1.2rem; letter-spacing: 0.06em; color: rgba(243, 236, 225, 0.6); }
+.craft-map__legend-arrow { color: var(--color-gold); opacity: 0; transform: translateX(-6px); transition: all 0.25s ease; }
+.craft-map__legend-item:hover .craft-map__legend-arrow { opacity: 1; transform: none; }
+.craft-map__legend-arrow .icon { width: 16px; height: 16px; }
+
+/* Region modal */
+.region-modal {
+  position: fixed; inset: 0; z-index: 130;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  visibility: hidden; pointer-events: none;
+}
+.region-modal.is-open { visibility: visible; pointer-events: auto; }
+.region-modal__overlay { position: absolute; inset: 0; background: rgba(20, 13, 8, 0.62); opacity: 0; transition: opacity 0.3s ease; }
+.region-modal.is-open .region-modal__overlay { opacity: 1; }
+.region-modal__panel {
+  position: relative;
+  width: 100%; max-width: 720px; max-height: 86vh; overflow-y: auto;
+  background: var(--color-base); color: var(--color-base-text);
+  padding: clamp(28px, 4vw, 48px);
+  opacity: 0; transform: translateY(18px) scale(0.98);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.region-modal.is-open .region-modal__panel { opacity: 1; transform: none; }
+.region-modal__close { position: absolute; top: 18px; right: 18px; color: var(--color-base-text); }
+.region-modal__close:hover { color: var(--color-accent); }
+.region-modal__kicker { color: var(--color-accent); }
+.region-modal__title { font-size: clamp(2.8rem, 4.6vw, 4.2rem); font-weight: 500; margin-bottom: 16px; }
+.region-modal__intro { color: var(--color-muted); font-size: 1.6rem; margin-bottom: 20px; }
+.region-modal__stat {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; margin-bottom: 28px;
+  border: 1px solid var(--color-line);
+  font-size: 1.15rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+  color: var(--color-accent);
+}
+.region-modal__cols { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; }
+.region-modal__col h4 {
+  font-size: 1.15rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--color-muted); margin-bottom: 12px;
+}
+.region-modal__list li { padding: 11px 0; border-bottom: 1px solid var(--color-line); font-size: 1.45rem; line-height: 1.4; }
+.region-modal__list li:last-child { border-bottom: 0; }
+.region-modal__usp { font-family: var(--font-heading-family); font-size: 1.9rem; line-height: 1.4; font-weight: 500; }
+
+/* --------------------------------------------------------------------------
+   29b. Responsive (additions)
+   -------------------------------------------------------------------------- */
+@media (max-width: 990px) {
+  .craft-map__wrap { grid-template-columns: 1fr; }
+  .craft-map__svg { max-width: 440px; margin-inline: auto; }
+}
+@media (max-width: 640px) {
+  .region-modal__cols { grid-template-columns: 1fr; gap: 24px; }
+  .region-modal { padding: 16px; }
+}
+
+/* --------------------------------------------------------------------------
+   30. Placeholder SVGs
    -------------------------------------------------------------------------- */
 .placeholder-svg { width: 100%; height: 100%; }
 
 /* --------------------------------------------------------------------------
-   28. Responsive
+   31. Responsive
    -------------------------------------------------------------------------- */
 @media (max-width: 990px) {
   .site-header__burger { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; color: var(--color-base-text); }

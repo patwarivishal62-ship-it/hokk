@@ -121,7 +121,7 @@
   });
 
   doc.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeAllDrawers();
+    if (e.key === 'Escape') { closeAllDrawers(); closeRegionModals(); }
   });
 
   /* ------------------------------------------------------------------ */
@@ -438,6 +438,53 @@
 
     searchInput.addEventListener('input', function () { handleSearch(searchInput.value); });
   }
+
+  /* ------------------------------------------------------------------ */
+  /* Interactive craft map & region modals                               */
+  /* ------------------------------------------------------------------ */
+  function openRegionModal(key) {
+    var modal = doc.querySelector('[data-region-modal="' + key + '"]');
+    if (!modal) return;
+    doc.querySelectorAll('.region-modal.is-open').forEach(function (m) {
+      m.classList.remove('is-open');
+    });
+    modal.classList.add('is-open');
+    doc.body.style.overflow = 'hidden';
+  }
+
+  function closeRegionModals() {
+    var anyOpen = false;
+    doc.querySelectorAll('.region-modal.is-open').forEach(function (m) {
+      m.classList.remove('is-open');
+      anyOpen = true;
+    });
+    if (anyOpen && !doc.querySelector('.cart-drawer.is-open, .menu-drawer.is-open, .search-drawer.is-open')) {
+      doc.body.style.overflow = '';
+    }
+  }
+
+  doc.addEventListener('click', function (e) {
+    var zone = e.target.closest('[data-region]');
+    if (zone) {
+      openRegionModal(zone.getAttribute('data-region'));
+      return;
+    }
+    var openBtn = e.target.closest('[data-region-open]');
+    if (openBtn) {
+      openRegionModal(openBtn.getAttribute('data-region-open'));
+      return;
+    }
+    if (e.target.closest('[data-region-close]')) {
+      closeRegionModals();
+    }
+  });
+
+  doc.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.matches && e.target.matches('[data-region]')) {
+      e.preventDefault();
+      openRegionModal(e.target.getAttribute('data-region'));
+    }
+  });
 
   /* ------------------------------------------------------------------ */
   /* Recover password toggle                                             */

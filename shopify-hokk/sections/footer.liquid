@@ -8,10 +8,16 @@
   <div class="container">
     <div class="site-footer__top">
       <div class="site-footer__brand">
-        <span class="wordmark wordmark--footer">
-          <span class="wordmark__top">House of</span>
-          <span class="wordmark__name">Kala Katha</span>
-        </span>
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}"
+            alt="{{ shop.name | escape }}"
+            class="site-footer__logo"
+            loading="lazy"
+          >
+        {%- else -%}
+          <span class="logo-placeholder logo-placeholder--footer">LOGO</span>
+        {%- endif -%}
         <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>
         {%- if section.settings.blurb != blank -%}
           <p class="site-footer__blurb">{{ section.settings.blurb | escape }}</p>
@@ -66,6 +72,25 @@
   "name": "Footer",
   "class": "section-footer",
   "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Footer logo width",
+      "min": 80,
+      "max": 260,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
     {
       "type": "textarea",
       "id": "blurb",
