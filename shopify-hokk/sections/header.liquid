@@ -12,10 +12,12 @@
     <div class="site-header__logo">
       <a href="{{ routes.root_url }}" class="site-header__logo-link" aria-label="{{ shop.name }}" style="--logo-width: {{ section.settings.logo_width }}px;">
         {%- if section.settings.logo != blank -%}
-          {{ section.settings.logo | image_url: width: section.settings.logo_width | image_tag:
+          {{ section.settings.logo | image_url: width: 800 | image_tag:
             loading: 'eager',
-            widths: '120, 200, 320, 480',
-            class: 'site-header__logo-img'
+            widths: '80, 120, 160, 200, 320, 480, 640, 800',
+            sizes: section.settings.logo_width | append: 'px',
+            class: 'site-header__logo-img',
+            alt: shop.name
           }}
         {%- else -%}
           <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-header__logo-img" loading="eager">

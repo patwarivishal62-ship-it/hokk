@@ -8,17 +8,19 @@
   <div class="container">
     <div class="site-footer__top">
       <div class="site-footer__brand">
-        {%- if section.settings.logo != blank -%}
-          <img
-            src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}"
-            alt="{{ shop.name | escape }}"
-            class="site-footer__logo"
-            loading="lazy"
-            style="--logo-width: {{ section.settings.logo_width }}px;"
-          >
-        {%- else -%}
-          <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy" style="--logo-width: {{ section.settings.logo_width }}px;">
-        {%- endif -%}
+        <a href="{{ routes.root_url }}" class="site-footer__logo-link" aria-label="{{ shop.name }}" style="--logo-width: {{ section.settings.logo_width }}px;">
+          {%- if section.settings.logo != blank -%}
+            {{ section.settings.logo | image_url: width: 600 | image_tag:
+              loading: 'lazy',
+              widths: '80, 120, 160, 200, 320, 480, 600',
+              sizes: section.settings.logo_width | append: 'px',
+              class: 'site-footer__logo',
+              alt: shop.name
+            }}
+          {%- else -%}
+            <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy">
+          {%- endif -%}
+        </a>
         <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>
         {%- if section.settings.blurb != blank -%}
           <p class="site-footer__blurb">{{ section.settings.blurb | escape }}</p>

@@ -894,7 +894,8 @@ svg.icon { width: 20px; height: 20px; }
   background: transparent;
   margin-bottom: 20px;
 }
-.site-footer__logo { display: block; width: var(--logo-width, 140px); height: auto; max-width: 100%; margin-bottom: 20px; }
+.site-footer__logo-link { display: block; width: var(--logo-width, 140px); max-width: 100%; margin-bottom: 20px; }
+.site-footer__logo { display: block; width: 100%; height: auto; }
 
 /* --------------------------------------------------------------------------
    29. Interactive craft map (Story section)
