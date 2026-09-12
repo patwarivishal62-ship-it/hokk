@@ -156,8 +156,7 @@
   </script>
 </section>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Product",
   "class": "section-product",
   "settings": [
@@ -194,9 +193,18 @@
       "id": "layout",
       "label": "Layout",
       "options": [
-        { "value": "media-left", "label": "Media left" },
-        { "value": "media-right", "label": "Media right" },
-        { "value": "media-top", "label": "Media on top" }
+        {
+          "value": "media-left",
+          "label": "Media left"
+        },
+        {
+          "value": "media-right",
+          "label": "Media right"
+        },
+        {
+          "value": "media-top",
+          "label": "Media on top"
+        }
       ],
       "default": "media-left"
     },
@@ -215,11 +223,26 @@
       "id": "image_ratio",
       "label": "Image ratio",
       "options": [
-        { "value": "3/4", "label": "Portrait 3:4" },
-        { "value": "4/5", "label": "Portrait 4:5" },
-        { "value": "1/1", "label": "Square 1:1" },
-        { "value": "4/3", "label": "Landscape 4:3" },
-        { "value": "natural", "label": "Natural (no crop)" }
+        {
+          "value": "3/4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "1/1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "natural",
+          "label": "Natural (no crop)"
+        }
       ],
       "default": "3/4"
     },
@@ -291,6 +314,10 @@
       "label": "Shipping & returns text",
       "default": "<p>Dispatched within 2–3 business days from India. Free shipping on orders over ₹3,000. Easy 7-day returns on unworn pieces with tags intact.</p>"
     }
+  ],
+  "presets": [
+    {
+      "name": "Product"
+    }
   ]
-}
-{% endschema %}
+}{% endschema %}

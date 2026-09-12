@@ -43,8 +43,7 @@
   </div>
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Collection banner",
   "class": "section-collection-banner",
   "settings": [
@@ -75,9 +74,18 @@
       "id": "layout",
       "label": "Layout",
       "options": [
-        { "value": "image-right", "label": "Image right" },
-        { "value": "image-left", "label": "Image left" },
-        { "value": "text-only", "label": "Text only" }
+        {
+          "value": "image-right",
+          "label": "Image right"
+        },
+        {
+          "value": "image-left",
+          "label": "Image left"
+        },
+        {
+          "value": "text-only",
+          "label": "Text only"
+        }
       ],
       "default": "image-right"
     },
@@ -86,8 +94,14 @@
       "id": "text_alignment",
       "label": "Text alignment",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" }
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
       ],
       "default": "left"
     },
@@ -100,10 +114,22 @@
       "id": "image_ratio",
       "label": "Image ratio",
       "options": [
-        { "value": "4/3", "label": "Landscape 4:3" },
-        { "value": "16/9", "label": "Wide 16:9" },
-        { "value": "1/1", "label": "Square 1:1" },
-        { "value": "4/5", "label": "Portrait 4:5" }
+        {
+          "value": "4/3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "16/9",
+          "label": "Wide 16:9"
+        },
+        {
+          "value": "1/1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait 4:5"
+        }
       ],
       "default": "4/3"
     },
@@ -151,6 +177,10 @@
       "unit": "px",
       "default": 24
     }
+  ],
+  "presets": [
+    {
+      "name": "Collection banner"
+    }
   ]
-}
-{% endschema %}
+}{% endschema %}

@@ -29,8 +29,7 @@
   </div>
 {%- endif -%}
 
-{% schema %}
-{
+{% schema %}{
   "name": "Cart footer",
   "class": "section-cart-footer",
   "settings": [
@@ -46,6 +45,10 @@
       "label": "Show payment icons",
       "default": true
     }
+  ],
+  "presets": [
+    {
+      "name": "Cart footer"
+    }
   ]
-}
-{% endschema %}
+}{% endschema %}
