@@ -1,5 +1,6 @@
 {%- liquid
   assign footer_logo_sizes = section.settings.logo_width | append: 'px'
+  assign copyright_year = 'now' | date: '%Y'
 -%}
 
 <footer class="site-footer">
@@ -38,7 +39,7 @@
     </div>
 
     <div class="site-footer__bottom">
-      <p class="site-footer__copyright">{{ 'footer.copyright' | t: shop: shop.name }}</p>
+      <p class="site-footer__copyright">{{ 'footer.copyright' | t: shop: shop.name, year: copyright_year }}</p>
 
       {%- if section.settings.show_social -%}
         <ul class="site-footer__social">
