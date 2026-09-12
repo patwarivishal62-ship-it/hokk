@@ -1,6 +1,8 @@
 {
   "general": {
     "skip_to_content": "Skip to content",
+    "home": "Home",
+    "shop": "Shop",
     "continue_shopping": "Continue shopping",
     "close": "Close",
     "menu": "Menu",
@@ -165,6 +167,13 @@
   "sections": {
     "testimonials": {
       "go_to_review": "Go to review {{ number }}"
+    },
+    "collection": {
+      "filter": "Filter",
+      "sort": "Sort",
+      "apply": "Apply",
+      "clear_all": "Clear all",
+      "empty": "No products found in this collection."
     }
   },
   "footer": {

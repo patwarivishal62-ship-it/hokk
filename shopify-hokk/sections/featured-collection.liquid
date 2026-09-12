@@ -4,7 +4,7 @@
   assign columns = section.settings.columns
 -%}
 
-<div class="featured-collection featured-collection--align-{{ section.settings.card_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --fc-img-radius: {{ section.settings.image_radius }}px; --fc-gap: {{ section.settings.gap }}px;">
+<div class="featured-collection featured-collection--align-{{ section.settings.card_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --card-ratio: {{ section.settings.image_ratio }}; --fc-img-radius: {{ section.settings.image_radius }}px; --fc-gap: {{ section.settings.gap }}px;">
   <div class="container">
     <div class="featured-collection__head">
       <div>
@@ -139,6 +139,30 @@
       "id": "view_all_label",
       "label": "“View all” button text",
       "default": "View all"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Product image ratio",
+      "options": [
+        {
+          "value": "3/4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "1/1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape 4:3"
+        }
+      ],
+      "default": "3/4"
     },
     {
       "type": "range",

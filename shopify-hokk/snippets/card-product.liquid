@@ -1,6 +1,10 @@
 {%- comment -%}
-  Product card. Accepts `product`.
+  Product card. Accepts `product`, `show_vendor`, `show_price`, `show_secondary_image`.
 {%- endcomment -%}
+{%- liquid
+  assign card_show_price = show_price | default: true
+  assign card_show_secondary = show_secondary_image | default: true
+-%}
 <div class="card-product">
   <a href="{{ product.url }}" class="card-product__media media-hover" aria-label="{{ product.title | escape }}">
     {%- if product.featured_media -%}
@@ -11,7 +15,7 @@
         class: 'card-product__img',
         alt: product.featured_media.alt | escape
       }}
-      {%- if product.media[1] -%}
+      {%- if card_show_secondary and product.media[1] -%}
         {{ product.media[1] | image_url: width: 900 | image_tag:
           loading: 'lazy',
           widths: '360, 540, 720, 900',
@@ -38,6 +42,8 @@
     <h3 class="card-product__title">
       <a href="{{ product.url }}">{{ product.title | escape }}</a>
     </h3>
-    {%- render 'price', product: product -%}
+    {%- if card_show_price -%}
+      {%- render 'price', product: product -%}
+    {%- endif -%}
   </div>
 </div>

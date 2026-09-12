@@ -19,8 +19,16 @@
   endfor
 -%}
 
-<div class="collection-grid" data-section-id="{{ section.id }}">
+<div class="collection-grid collection-grid--align-{{ section.settings.card_alignment }}" data-section-id="{{ section.id }}"
+  style="
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --card-ratio: {{ section.settings.image_ratio }};
+    --cg-img-radius: {{ section.settings.image_radius }}px;
+    --cg-gap: {{ section.settings.gap }}px;
+  ">
   <div class="container">
+    {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
     <form class="facets" method="get" action="{{ collection.url }}" data-filter-form>
       <div class="facets__toolbar">
         <p class="facets__count">
@@ -29,29 +37,31 @@
         </p>
 
         <div class="facets__controls">
-          {%- if collection.filters.size > 0 -%}
+          {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
             <button type="button" class="btn btn--outline facets__toggle" data-filters-toggle>
-              Filter
+              {{ 'sections.collection.filter' | t }}
             </button>
           {%- endif -%}
 
-          <label class="facets__sort">
-            <span class="facets__sort-label">Sort</span>
-            <select name="sort_by" data-sort-select>
-              <option value="manual" {% if sort_by == 'manual' %}selected{% endif %}>Featured</option>
-              <option value="best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>Best selling</option>
-              <option value="title-ascending" {% if sort_by == 'title-ascending' %}selected{% endif %}>Alphabetically, A–Z</option>
-              <option value="title-descending" {% if sort_by == 'title-descending' %}selected{% endif %}>Alphabetically, Z–A</option>
-              <option value="price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>Price, low to high</option>
-              <option value="price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>Price, high to low</option>
-              <option value="created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>Date, new to old</option>
-              <option value="created-ascending" {% if sort_by == 'created-ascending' %}selected{% endif %}>Date, old to new</option>
-            </select>
-          </label>
+          {%- if section.settings.enable_sorting -%}
+            <label class="facets__sort">
+              <span class="facets__sort-label">{{ 'sections.collection.sort' | t }}</span>
+              <select name="sort_by" data-sort-select>
+                <option value="manual" {% if sort_by == 'manual' %}selected{% endif %}>Featured</option>
+                <option value="best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>Best selling</option>
+                <option value="title-ascending" {% if sort_by == 'title-ascending' %}selected{% endif %}>Alphabetically, A–Z</option>
+                <option value="title-descending" {% if sort_by == 'title-descending' %}selected{% endif %}>Alphabetically, Z–A</option>
+                <option value="price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>Price, low to high</option>
+                <option value="price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>Price, high to low</option>
+                <option value="created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>Date, new to old</option>
+                <option value="created-ascending" {% if sort_by == 'created-ascending' %}selected{% endif %}>Date, old to new</option>
+              </select>
+            </label>
+          {%- endif -%}
         </div>
       </div>
 
-      {%- if collection.filters.size > 0 -%}
+      {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
         <div class="facets__panel" data-filters-panel hidden>
           {%- for filter in collection.filters -%}
             <details class="facet" {% if filter.type == 'price_range' %}open{% endif %}>
@@ -109,22 +119,23 @@
           {%- endfor -%}
 
           <div class="facets__actions">
-            <button type="submit" class="btn btn--solid">Apply</button>
+            <button type="submit" class="btn btn--solid">{{ 'sections.collection.apply' | t }}</button>
             {%- if has_active_filters -%}
-              <a href="{{ collection.url }}" class="btn btn--text">Clear all</a>
+              <a href="{{ collection.url }}" class="btn btn--text">{{ 'sections.collection.clear_all' | t }}</a>
             {%- endif -%}
           </div>
         </div>
       {%- endif -%}
     </form>
+    {%- endif -%}
 
     {%- paginate collection.products by products_per_page -%}
       <div class="product-grid product-grid--{{ columns }}">
         {%- for product in collection.products -%}
-          {%- render 'card-product', product: product, show_vendor: false -%}
+          {%- render 'card-product', product: product, show_vendor: section.settings.show_vendor, show_price: section.settings.show_price, show_secondary_image: section.settings.show_secondary_image -%}
         {%- else -%}
           <div class="collection-grid__empty">
-            <p>No products found in this collection.</p>
+            <p>{{ 'sections.collection.empty' | t }}</p>
           </div>
         {%- endfor -%}
       </div>
@@ -158,6 +169,110 @@
         { "value": "4", "label": "4" }
       ],
       "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Product cards"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "3/4", "label": "Portrait 3:4" },
+        { "value": "4/5", "label": "Portrait 4:5" },
+        { "value": "1/1", "label": "Square 1:1" },
+        { "value": "4/3", "label": "Landscape 4:3" }
+      ],
+      "default": "3/4"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between cards",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "card_alignment",
+      "label": "Card text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show second image on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Toolbar"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable filtering",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Enable sorting",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
     }
   ]
 }
