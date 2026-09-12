@@ -1,0 +1,12 @@
+{%- comment -%}
+  One FAQ accordion row. Accepts: block, first, open_first
+{%- endcomment -%}
+<details class="faq__item" data-accordion {{ block.shopify_attributes }} {% if block.settings.open_by_default or (first and open_first) %}open{% endif %}>
+  <summary class="faq__summary">
+    <h3 class="faq__question">{{ block.settings.question | escape }}</h3>
+    <span class="faq__icon" aria-hidden="true">{%- render 'icon', name: 'plus', size: 17 -%}</span>
+  </summary>
+  <div class="faq__body" data-accordion-body>
+    <div class="faq__answer rte">{{ block.settings.answer }}</div>
+  </div>
+</details>

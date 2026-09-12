@@ -1,0 +1,48 @@
+{%- comment -%}
+  Predictive search form. Params:
+    id     – unique id for this instance
+    class  – extra classes
+    large  – render a bigger field (search page / hero)
+{%- endcomment -%}
+{%- if settings.predictive_search -%}
+  {%- assign uid = id | default: 'predictive' -%}
+  <predictive-form
+    class="predictive {{ class }}"
+    {% if large %}data-large="true"{% endif %}
+    data-predictive-search
+    data-predictive-limit="{{ settings.predictive_search_limit | default: 5 }}"
+  >
+    <form action="{{ routes.search_url }}" method="get" role="search" class="predictive__form">
+      <div class="predictive__field">
+        <span class="predictive__icon">{%- render 'icon', name: 'search', size: 18 -%}</span>
+        <input
+          id="{{ uid }}-input"
+          class="predictive__input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.search_placeholder' | t }}"
+          autocomplete="off"
+          role="combobox"
+          aria-expanded="false"
+          aria-controls="{{ uid }}-results"
+          aria-autocomplete="list"
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="predictive__submit btn btn--small">
+          {{ 'general.search.search' | t }}
+        </button>
+      </div>
+      <div class="predictive__results" id="{{ uid }}-results" data-search-results role="listbox" hidden></div>
+    </form>
+  </predictive-form>
+{%- else -%}
+  <form action="{{ routes.search_url }}" method="get" role="search" class="predictive {{ class }}">
+    <div class="predictive__field">
+      <span class="predictive__icon">{%- render 'icon', name: 'search', size: 18 -%}</span>
+      <input class="predictive__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search_placeholder' | t }}">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" class="predictive__submit btn btn--small">{{ 'general.search.search' | t }}</button>
+    </div>
+  </form>
+{%- endif -%}

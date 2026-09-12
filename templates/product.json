@@ -1,0 +1,126 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "color_scheme": "1",
+        "show_full_description_below": true
+      },
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "settings": {
+            "show_vendor": true
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_sale_badge": true
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "buttons",
+            "show_selected_value": true,
+            "show_size_guide": false
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
+            "default_quantity": 1
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "full_width": true,
+            "show_pickup_note": false
+          }
+        },
+        "inventory_status": {
+          "type": "inventory_status",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "truncate": 0
+          }
+        },
+        "acc_care": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Details & care",
+            "open_by_default": true
+          }
+        },
+        "acc_ship": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shipping & returns"
+          }
+        },
+        "acc_maker": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Who made this"
+          }
+        },
+        "icons": {
+          "type": "icons",
+          "settings": {
+            "icon_1": "hand",
+            "text_1": "Handmade by one maker",
+            "icon_2": "leaf",
+            "text_2": "Natural dyes",
+            "icon_3": "truck",
+            "text_3": "Ships in 48 hours"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "rating",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "inventory_status",
+        "description",
+        "acc_care",
+        "acc_ship",
+        "acc_maker",
+        "icons",
+        "share"
+      ]
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "limit": 4
+      }
+    }
+  },
+  "order": [
+    "main",
+    "recommendations"
+  ]
+}

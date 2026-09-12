@@ -1,0 +1,10 @@
+{%- if settings.back_to_top -%}
+  <button
+    type="button"
+    class="back-to-top"
+    data-back-to-top
+    aria-label="{{ 'accessibility.back_to_top' | t }}"
+  >
+    {%- render 'icon', name: 'arrow-up', size: 20 -%}
+  </button>
+{%- endif -%}

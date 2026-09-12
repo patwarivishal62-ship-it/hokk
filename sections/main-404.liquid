@@ -1,0 +1,71 @@
+<div class="section not-found color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container container--narrow">
+    <div class="not-found__inner">
+      {%- if section.settings.show_motif and settings.motif_enable -%}
+        <div class="motif-row">{%- render 'motif', style: settings.motif_style -%}</div>
+      {%- endif -%}
+      <p class="not-found__code">{{ section.settings.code | escape }}</p>
+      <h1 class="not-found__title">
+        {%- if section.settings.heading != blank -%}{{ section.settings.heading | escape }}{%- else -%}{{ 'general.404.title' | t }}{%- endif -%}
+      </h1>
+      <div class="not-found__text rte">
+        {%- if section.settings.text != blank -%}
+          {{ section.settings.text }}
+        {%- else -%}
+          <p>{{ 'general.404.subtext' | t }}</p>
+        {%- endif -%}
+      </div>
+      <div class="not-found__actions">
+        <a class="btn" href="{{ routes.all_products_collection_url }}">
+          {%- if section.settings.button_label != blank -%}{{ section.settings.button_label | escape }}{%- else -%}{{ 'general.404.continue' | t }}{%- endif -%}
+        </a>
+        <a class="btn btn--outline" href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+      </div>
+      {%- if section.settings.show_search -%}
+        <div class="not-found__search">
+          <p class="eyebrow eyebrow--center">{{ 'general.404.search_title' | t }}</p>
+          {%- render 'predictive-search', id: 'notfound-search' -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.not-found { padding-block: clamp(3rem, 2rem + 6vw, 7rem); text-align: center; }
+.not-found__code { font-family: var(--font-heading); font-size: clamp(3rem, 2rem + 6vw, 6rem); line-height: 1; margin: 0; color: var(--accent); opacity: 0.9; }
+.not-found__title { margin: 0.4rem 0 0.8rem; }
+.not-found__text { max-width: 46ch; margin-inline: auto; color: var(--text-muted); }
+.not-found__actions { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-top: 1.8rem; }
+.not-found__search { margin-top: clamp(2.4rem, 1.6rem + 3vw, 4rem); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "404 page",
+  "tag": "section",
+  "class": "not-found-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "text", "id": "code", "label": "Big number", "default": "404" },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "This page has wandered off" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Continue shopping" },
+    { "type": "checkbox", "id": "show_search", "label": "Show a search field", "default": true }
+  ]
+}
+{% endschema %}

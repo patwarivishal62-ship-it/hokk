@@ -1,0 +1,76 @@
+{%- comment -%}
+  Blog article card. Params: article, blog, index, ratio, show_excerpt, show_date, show_author, show_image
+{%- endcomment -%}
+{%- liquid
+  assign a = article
+  assign ratio_css = '3 / 2'
+  assign r = ratio | default: 'landscape'
+  case r
+    when 'square'
+      assign ratio_css = '1 / 1'
+    when 'portrait'
+      assign ratio_css = '4 / 5'
+    when 'landscape'
+      assign ratio_css = '3 / 2'
+    when 'wide'
+      assign ratio_css = '16 / 9'
+  endcase
+  assign delay = 0
+  if index
+    assign mod = index | modulo: 6
+    assign delay = mod | times: 70
+  endif
+-%}
+<article class="article-card card card--editorial" {% if delay > 0 %}style="--anim-delay: {{ delay }}ms"{% endif %}>
+  {%- if show_image != false -%}
+    <a class="article-card__media media" href="{{ a.url }}" style="--ratio: {{ ratio_css }}; aspect-ratio: {{ ratio_css }};">
+      {%- if a.image != blank -%}
+        <img
+          src="{{ a.image | image_url: width: 700 }}"
+          srcset="{{ a.image | image_url: width: 360 }} 360w, {{ a.image | image_url: width: 700 }} 700w, {{ a.image | image_url: width: 1000 }} 1000w"
+          sizes="(max-width: 749px) 92vw, (max-width: 989px) 46vw, 30vw"
+          alt="{{ a.image.alt | default: a.title | escape }}"
+          width="{{ a.image.width }}"
+          height="{{ a.image.height }}"
+          {% if settings.lazy_images %}loading="lazy"{% else %}loading="eager"{% endif %}
+        >
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </a>
+  {%- endif -%}
+
+  <div class="card__body">
+    <div class="article-card__meta">
+      {%- if show_date != false -%}
+        <time datetime="{{ a.published_at | date: '%Y-%m-%d' }}">{{ a.published_at | date: '%e %B %Y' | strip }}</time>
+      {%- endif -%}
+      {%- if show_author != false and a.author != blank -%}
+        <span class="article-card__dot" aria-hidden="true"></span>
+        <span>{{ a.author }}</span>
+      {%- endif -%}
+      {%- if a.tags.size > 0 and show_date != false -%}
+        <span class="article-card__dot" aria-hidden="true"></span>
+        <a class="article-card__tag" href="{{ blog.url }}/tagged/{{ a.tags.first | handleize }}">{{ a.tags.first }}</a>
+      {%- endif -%}
+    </div>
+
+    <h3 class="article-card__title h4">
+      <a href="{{ a.url }}">{{ a.title | escape }}</a>
+    </h3>
+
+    {%- if show_excerpt != false -%}
+      <div class="article-card__excerpt text-muted">
+        {%- if a.excerpt.size > 0 -%}
+          {{ a.excerpt | strip_html | truncatewords: 28 }}
+        {%- else -%}
+          {{ a.content | strip_html | truncatewords: 28 }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <a class="link-arrow article-card__link" href="{{ a.url }}">
+      {{ 'blogs.article.read_more' | t }} {%- render 'icon', name: 'arrow-right', size: 14 -%}
+    </a>
+  </div>
+</article>

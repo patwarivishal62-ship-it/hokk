@@ -1,0 +1,103 @@
+{%- comment -%}
+  Related / complementary product recommendations.
+  Works both as a template section and as the fetch target for the
+  Product Recommendations API (routes.product_recommendations_url).
+{%- endcomment -%}
+{%- liquid
+  assign limit = section.settings.limit | default: 4
+  assign intent = section.settings.intent | default: 'related'
+  assign pid = product.id
+  if pid == blank
+    assign pid = recommendations.product_id
+  endif
+-%}
+<product-recommendations
+  class="section recommendations-section color-scheme-{{ section.settings.color_scheme }}"
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ pid }}&limit={{ limit }}&intent={{ intent }}"
+>
+  {%- if recommendations.performed -%}
+    {%- if recommendations.products_count > 0 -%}
+      <div class="container">
+        {%- render 'section-header',
+          eyebrow: section.settings.eyebrow,
+          title: section.settings.heading,
+          text: section.settings.text,
+          align: section.settings.alignment,
+          show_motif: section.settings.show_motif
+        -%}
+        <div class="grid" style="--cols: {{ limit }}; --cols-tablet: 3; --cols-mobile: 2;">
+          {%- for product in recommendations.products -%}
+            <div class="grid__item" data-animate>
+              {%- render 'product-card', product: product, index: forloop.index -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</product-recommendations>
+
+{% schema %}
+{
+  "name": "Recommendations",
+  "tag": "section",
+  "class": "product-recommendations-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Recommendations come from Shopify's own engine and improve over time. Add this section to product and cart templates."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "intent",
+      "label": "Recommendation type",
+      "options": [
+        { "value": "related", "label": "Related products" },
+        { "value": "complementary", "label": "Complementary products" }
+      ],
+      "default": "related"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Maximum products to show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "You may also like" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made to go with this" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "split", "label": "Split" }
+      ],
+      "default": "center"
+    },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": false }
+  ],
+  "presets": [
+    { "name": "Product recommendations" }
+  ]
+}
+{% endschema %}

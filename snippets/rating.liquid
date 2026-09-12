@@ -1,0 +1,32 @@
+{%- comment -%}
+  Product rating. Reads the standard reviews.rating app metafield.
+  Params: product, show_count
+{%- endcomment -%}
+{%- if settings.product_rating -%}
+  {%- liquid
+    assign rating = product.metafields.reviews.rating.value
+    assign count = product.metafields.reviews.rating_count.value | default: 0
+  -%}
+  {%- if rating != blank and rating.rating != blank -%}
+    <div class="rating">
+      <span class="rating__stars" role="img" aria-label="{{ rating.rating }} out of {{ rating.scale_max }} stars">
+        {%- assign value = rating.rating | times: 1.0 -%}
+        {%- assign max = rating.scale_max | default: 5 | times: 1.0 -%}
+        {%- assign normalized = value | divided_by: max | times: 5 -%}
+        {%- for i in (1..5) -%}
+          {%- assign half = i | minus: 0.5 -%}
+          {%- if normalized >= i -%}
+            {%- render 'icon', name: 'star', size: 14 -%}
+          {%- elsif normalized >= half -%}
+            {%- render 'icon', name: 'star-half', size: 14 -%}
+          {%- else -%}
+            <span class="is-empty">{%- render 'icon', name: 'star', size: 14 -%}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </span>
+      {%- if show_count and count > 0 -%}
+        <span class="rating__count">({{ count }})</span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}

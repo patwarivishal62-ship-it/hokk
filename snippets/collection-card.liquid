@@ -1,0 +1,65 @@
+{%- comment -%}
+  Collection card. Params: collection, index, ratio, style (cover|split|arch), show_count
+{%- endcomment -%}
+{%- liquid
+  assign c = collection
+  assign look = style | default: 'cover'
+  assign ratio_css = '4 / 5'
+  assign r = ratio | default: 'portrait'
+  case r
+    when 'square'
+      assign ratio_css = '1 / 1'
+    when 'portrait'
+      assign ratio_css = '4 / 5'
+    when 'landscape'
+      assign ratio_css = '3 / 2'
+    when 'wide'
+      assign ratio_css = '16 / 9'
+  endcase
+  assign delay = 0
+  if index
+    assign mod = index | modulo: 6
+    assign delay = mod | times: 70
+  endif
+  assign image = c.featured_image
+  if image == blank and c.products.first.featured_image != blank
+    assign image = c.products.first.featured_image
+  endif
+-%}
+<a
+  class="collection-card card card--{{ look }} collection-card--{{ look }}"
+  href="{{ c.url | default: routes.all_products_collection_url }}"
+  style="--ratio: {{ ratio_css }};{% if delay > 0 %} --anim-delay: {{ delay }}ms;{% endif %}"
+>
+  <span class="collection-card__media">
+    {%- if image != blank -%}
+      <img
+        src="{{ image | image_url: width: 600 }}"
+        srcset="{{ image | image_url: width: 300 }} 300w, {{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 900 }} 900w"
+        sizes="(max-width: 749px) 88vw, (max-width: 989px) 44vw, 28vw"
+        alt="{{ image.alt | default: c.title | escape }}"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+        {% if settings.lazy_images %}loading="lazy"{% else %}loading="eager"{% endif %}
+      >
+    {%- else -%}
+      <span class="collection-card__placeholder">{{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}</span>
+    {%- endif -%}
+    {%- if settings.overlay_dark_images -%}<span class="media-overlay"></span>{%- endif -%}
+  </span>
+
+  <span class="collection-card__body">
+    <span class="collection-card__title h3">
+      {%- if c.title != blank -%}{{ c.title | escape }}{%- else -%}{{ 'onboarding.collection_title' | t }}{%- endif -%}
+    </span>
+    {%- if show_count and c.all_products_count > 0 -%}
+      <span class="collection-card__count">{{ 'collections.general.products_with_count' | t: count: c.all_products_count }}</span>
+    {%- endif -%}
+    {%- if c.description != blank and look == 'split' -%}
+      <span class="collection-card__description rte">{{ c.description | strip_html | truncatewords: 22 }}</span>
+    {%- endif -%}
+    <span class="collection-card__cta link-arrow">
+      {{ 'collections.general.view_all' | t }} {%- render 'icon', name: 'arrow-right', size: 14 -%}
+    </span>
+  </span>
+</a>

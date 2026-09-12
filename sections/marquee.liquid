@@ -1,0 +1,229 @@
+{%- comment -%}
+  Marquee — an endlessly scrolling strip of words, separated by a motif.
+{%- endcomment -%}
+{%- liquid
+  assign direction = section.settings.direction
+  assign speed = 60 | minus: section.settings.speed | times: 1
+  if speed < 8
+    assign speed = 8
+  endif
+-%}
+<div
+  class="marquee-section color-scheme-{{ section.settings.color_scheme }} marquee--{{ direction }}{% if section.settings.full_width %} marquee--flush{% endif %}"
+  data-section-id="{{ section.id }}"
+  data-marquee
+  style="--marquee-duration: {{ speed }}s;"
+>
+  {%- if section.settings.show_border -%}<span class="marquee__rule marquee__rule--top" aria-hidden="true"></span>{%- endif -%}
+
+  <div class="marquee__viewport" aria-hidden="{% if section.settings.hide_from_screen_readers %}true{% else %}false{% endif %}">
+    <div class="marquee__track" data-marquee-track>
+      {%- for pass in (1..2) -%}
+        <span class="marquee__group"{% if pass == 2 %} aria-hidden="true"{% endif %}>
+          {%- for block in section.blocks -%}
+            <span class="marquee__item"{% if pass == 1 %} {{ block.shopify_attributes }}{% endif %}>
+              {%- if block.settings.icon != 'none' -%}{%- render 'icon', name: block.settings.icon, size: block.settings.icon_size -%}{%- endif -%}
+              {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>{%- else -%}{{ block.settings.text | escape }}{%- endif -%}
+            </span>
+            <span class="marquee__separator" aria-hidden="true">
+              {%- if section.settings.separator == 'motif' -%}
+                {%- render 'motif', style: settings.motif_style -%}
+              {%- elsif section.settings.separator == 'dot' -%}
+                <span class="marquee__dot"></span>
+              {%- elsif section.settings.separator == 'star' -%}
+                {%- render 'icon', name: 'star', size: 14 -%}
+              {%- elsif section.settings.separator == 'none' -%}
+              {%- else -%}
+                <span class="marquee__pipe">/</span>
+              {%- endif -%}
+            </span>
+          {%- endfor -%}
+        </span>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_border -%}<span class="marquee__rule marquee__rule--bottom" aria-hidden="true"></span>{%- endif -%}
+</div>
+
+{% stylesheet %}
+.marquee-section {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(0.9rem, 2vw, 1.6rem);
+  --marquee-gap: clamp(1.4rem, 4vw, 3rem);
+}
+.marquee--flush { padding-inline: 0; }
+
+.marquee__viewport { overflow: hidden; width: 100%; }
+
+.marquee__track {
+  display: flex;
+  align-items: center;
+  gap: var(--marquee-gap);
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 30s) linear infinite;
+}
+.marquee__group { display: flex; align-items: center; gap: inherit; flex: none; }
+.marquee--reverse .marquee__track { animation-direction: reverse; }
+
+.marquee-section:hover .marquee__track { animation-play-state: paused; }
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 0.9rem + 0.9vw, 1.6rem);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.marquee__item a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: var(--transition); }
+.marquee__item a:hover { color: var(--accent); border-color: currentColor; }
+.marquee__item .icon { color: var(--accent); }
+
+.marquee__separator { display: inline-flex; align-items: center; color: var(--accent); opacity: 0.75; }
+.marquee__separator .motif { width: 20px; height: 20px; }
+.marquee__dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; display: block; }
+.marquee__pipe { font-family: var(--font-heading); opacity: 0.6; }
+
+.marquee__rule { display: block; height: var(--border-width); background: var(--border); }
+.marquee__rule--top { margin-bottom: clamp(0.7rem, 2vw, 1.2rem); }
+.marquee__rule--bottom { margin-top: clamp(0.7rem, 2vw, 1.2rem); }
+
+@keyframes marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-1 * var(--marquee-shift, 50%)), 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; flex-wrap: wrap; width: 100%; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Scrolling text",
+  "tag": "section",
+  "class": "marquee-wrapper-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Speed",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction",
+      "options": [
+        { "value": "left", "label": "Scroll left" },
+        { "value": "reverse", "label": "Scroll right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "Separator",
+      "options": [
+        { "value": "motif", "label": "Motif" },
+        { "value": "star", "label": "Star" },
+        { "value": "dot", "label": "Dot" },
+        { "value": "slash", "label": "Slash" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "motif"
+    },
+    { "type": "checkbox", "id": "show_border", "label": "Show hairline borders", "default": true },
+    { "type": "checkbox", "id": "full_width", "label": "Full width (no side padding)", "default": true },
+    { "type": "checkbox", "id": "hide_from_screen_readers", "label": "Hide from screen readers", "info": "Recommended for decorative strips", "default": true },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Handmade in Jaipur" },
+        { "type": "url", "id": "link", "label": "Link" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "hand", "label": "Handmade" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "lotus", "label": "Lotus" },
+            { "value": "elephant", "label": "Elephant" },
+            { "value": "star", "label": "Star" },
+            { "value": "loom", "label": "Loom" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 12,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "default": 18
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling text",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Handmade in Jaipur", "icon": "hand" } },
+        { "type": "item", "settings": { "text": "Natural dyes only", "icon": "leaf" } },
+        { "type": "item", "settings": { "text": "Free shipping over ₹5,000", "icon": "truck" } },
+        { "type": "item", "settings": { "text": "Since 1974", "icon": "sparkle" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,519 @@
+{%- comment -%}
+  Slideshow — full-width rotating panels. Each slide is a block.
+{%- endcomment -%}
+{%- liquid
+  assign height = section.settings.height
+  assign autoplay = section.settings.autoplay
+  assign nav = section.settings.navigation
+  assign slide_count = section.blocks.size
+-%}
+
+<div
+  class="slideshow section slideshow--{{ height }} color-scheme-{{ section.settings.color_scheme }}"
+  data-section-id="{{ section.id }}"
+  data-slider
+  data-per-view="1"
+  {% if section.settings.loop %}data-loop="true"{% endif %}
+  {% if autoplay and slide_count > 1 %}data-autoplay="true" data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 }}"{% endif %}
+>
+  <div class="slideshow__viewport" data-slider-track>
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign pos = block.settings.content_position | default: section.settings.content_position
+        assign align = block.settings.text_alignment | default: section.settings.text_alignment
+        assign ov = block.settings.overlay_opacity | default: section.settings.overlay_opacity | divided_by: 100.0
+        assign tone = block.settings.text_tone
+      -%}
+      <div class="slideshow__slide slideshow__slide--{{ pos }} slideshow__slide--align-{{ align }}{% if tone != 'auto' %} slideshow__slide--{{ tone }}{% endif %}" data-slide style="--banner-overlay: {{ ov }};" {{ block.shopify_attributes }}>
+        <div class="slideshow__media">
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 1500 }}"
+              srcset="
+                {%- if block.settings.image.width >= 550 -%}{{ block.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+                {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if block.settings.image.width >= 2200 -%}{{ block.settings.image | image_url: width: 2200 }} 2200w{%- endif -%}
+              "
+              sizes="100vw"
+              alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              {% if forloop.first %}fetchpriority="high"{% endif %}
+              decoding="async"
+            >
+          {%- elsif block.settings.mobile_image != blank -%}
+            <img src="{{ block.settings.mobile_image | image_url: width: 900 }}" alt="{{ block.settings.heading | escape }}" loading="lazy" width="900">
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          <span class="slideshow__overlay" aria-hidden="true"></span>
+        </div>
+
+        {%- if block.settings.mobile_image != blank and block.settings.image != blank -%}
+          <div class="slideshow__media slideshow__media--mobile">
+            <img
+              src="{{ block.settings.mobile_image | image_url: width: 900 }}"
+              srcset="{{ block.settings.mobile_image | image_url: width: 480 }} 480w, {{ block.settings.mobile_image | image_url: width: 900 }} 900w"
+              sizes="100vw"
+              alt="{{ block.settings.mobile_image.alt | default: block.settings.heading | escape }}"
+              loading="lazy"
+              width="{{ block.settings.mobile_image.width }}"
+              height="{{ block.settings.mobile_image.height }}"
+            >
+            <span class="slideshow__overlay" aria-hidden="true"></span>
+          </div>
+        {%- endif -%}
+
+        <div class="slideshow__content">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h2 class="slideshow__heading">{{ block.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if block.settings.subheading != blank -%}
+            <p class="slideshow__subheading">{{ block.settings.subheading | escape }}</p>
+          {%- endif -%}
+          {%- if settings.motif_enable and block.settings.show_motif -%}
+            <div class="motif-row slideshow__motif">{%- render 'motif', style: settings.motif_style -%}</div>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="slideshow__text rte">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.button_label_1 != blank or block.settings.button_label_2 != blank -%}
+            <div class="slideshow__actions">
+              {%- if block.settings.button_label_1 != blank -%}
+                <a class="btn{% if block.settings.button_style_1 == 'outline' %} btn--outline{% endif %}{% if block.settings.button_style_1 == 'ghost' %} btn--ghost{% endif %}" href="{{ block.settings.button_link_1 | default: routes.all_products_collection_url }}">{{ block.settings.button_label_1 | escape }}</a>
+              {%- endif -%}
+              {%- if block.settings.button_label_2 != blank -%}
+                <a class="btn{% if block.settings.button_style_2 == 'outline' %} btn--outline{% endif %}{% if block.settings.button_style_2 == 'ghost' %} btn--ghost{% endif %}" href="{{ block.settings.button_link_2 | default: routes.root_url }}">{{ block.settings.button_label_2 | escape }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if slide_count > 1 -%}
+    {%- if nav == 'arrows' or nav == 'both' -%}
+      <button type="button" class="slider__arrow slider__arrow--prev" data-slider-prev aria-label="{{ 'general.accessibility.previous' | t }}">{%- render 'icon', name: 'chevron-left', size: 20 -%}</button>
+      <button type="button" class="slider__arrow slider__arrow--next" data-slider-next aria-label="{{ 'general.accessibility.next' | t }}">{%- render 'icon', name: 'chevron-right', size: 20 -%}</button>
+    {%- endif -%}
+
+    <div class="slideshow__footer">
+      {%- if nav == 'dots' or nav == 'both' -%}
+        <div class="slider__dots" data-slider-dots></div>
+      {%- endif -%}
+      {%- if nav == 'counter' -%}
+        <div class="slideshow__counter">
+          <span class="slideshow__counter-current">01</span>
+          <span class="slideshow__counter-total">{{ slide_count | prepend: '0' | slice: -2, 2 }}</span>
+        </div>
+      {%- endif -%}
+      {%- if autoplay and section.settings.show_progress -%}
+        <span class="slideshow__progress" style="--progress-duration: {{ section.settings.autoplay_speed }}s;"></span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.slideshow {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: var(--slide-height, 78vh);
+  background: var(--color-ink);
+  color: #fff;
+}
+.slideshow--small { --slide-height: 52vh; }
+.slideshow--medium { --slide-height: 68vh; }
+.slideshow--large { --slide-height: 84vh; }
+.slideshow--full { --slide-height: 100svh; }
+.slideshow--adapt { --slide-height: auto; }
+
+.slideshow__viewport { height: 100%; }
+.slideshow__slide {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--slide-height, 78vh);
+  padding-block: clamp(4rem, 14vh, 8rem);
+  overflow: hidden;
+}
+
+.slideshow__media { position: absolute; inset: 0; z-index: -1; }
+.slideshow__media img,
+.slideshow__media .placeholder-svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slideshow__media--mobile { display: none; }
+
+.slideshow__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(26, 22, 19, calc(var(--banner-overlay) * 1.15)) 0%, rgba(26, 22, 19, calc(var(--banner-overlay) * 0.5)) 55%, rgba(26, 22, 19, calc(var(--banner-overlay) * 0.2)) 100%);
+}
+
+.slideshow__content { width: 100%; max-width: var(--page-width); margin-inline: auto; padding-inline: var(--gutter); }
+.slideshow__content > * { max-width: 42rem; }
+
+.slideshow__heading {
+  font-size: clamp(2rem, 1rem + 4.6vw, calc(var(--h1) * 1.08));
+  line-height: 1.06;
+  margin: 0 0 0.35em;
+  text-wrap: balance;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.slideshow__subheading {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.05rem, 0.9rem + 0.9vw, 1.5rem);
+  color: var(--color-gold);
+  margin: 0 0 1rem;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease) 0.08s, transform 0.7s var(--ease) 0.08s;
+}
+.slideshow__text { opacity: 0; transform: translateY(14px); transition: opacity 0.7s var(--ease) 0.16s, transform 0.7s var(--ease) 0.16s; max-width: 52ch; }
+.slideshow__actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.9rem; opacity: 0; transform: translateY(14px); transition: opacity 0.7s var(--ease) 0.24s, transform 0.7s var(--ease) 0.24s; }
+.slideshow__motif { justify-content: flex-start; }
+.slideshow__motif::before { display: none; }
+.slideshow__motif svg { color: var(--color-gold); }
+
+.slideshow__slide.is-active .slideshow__heading,
+.slideshow__slide.is-active .slideshow__subheading,
+.slideshow__slide.is-active .slideshow__text,
+.slideshow__slide.is-active .slideshow__actions { opacity: 1; transform: none; }
+
+/* tone overrides */
+.slideshow__slide--light { color: var(--color-ink); }
+.slideshow__slide--light .slideshow__overlay { background: linear-gradient(100deg, rgba(250, 246, 239, 0.9) 0%, rgba(250, 246, 239, 0.55) 60%, rgba(250, 246, 239, 0.2) 100%); }
+.slideshow__slide--light .slideshow__subheading { color: var(--color-terracotta); }
+.slideshow__slide--light .btn--outline { border-color: var(--color-ink); color: var(--color-ink); }
+.slideshow__slide--light .btn--outline:hover { background: var(--color-ink); color: var(--color-ivory); }
+.slideshow__slide--dark .btn--outline { border-color: rgba(255, 255, 255, 0.7); color: #fff; }
+.slideshow__slide--dark .btn--outline:hover { background: #fff; color: var(--color-ink); }
+
+/* positions */
+.slideshow__slide--center-center .slideshow__content,
+.slideshow__slide--top-center .slideshow__content,
+.slideshow__slide--bottom-center .slideshow__content { text-align: center; }
+.slideshow__slide--center-center .slideshow__content > *,
+.slideshow__slide--top-center .slideshow__content > *,
+.slideshow__slide--bottom-center .slideshow__content > * { margin-inline: auto; }
+.slideshow__slide--center-right .slideshow__content,
+.slideshow__slide--top-right .slideshow__content,
+.slideshow__slide--bottom-right .slideshow__content { text-align: right; }
+.slideshow__slide--center-right .slideshow__content > *,
+.slideshow__slide--top-right .slideshow__content > *,
+.slideshow__slide--bottom-right .slideshow__content > * { margin-inline: auto 0; }
+.slideshow__slide--top-left, .slideshow__slide--top-center, .slideshow__slide--top-right { align-items: flex-start; }
+.slideshow__slide--bottom-left, .slideshow__slide--bottom-center, .slideshow__slide--bottom-right { align-items: flex-end; }
+.slideshow__slide--align-center .slideshow__actions, .slideshow__slide--align-center .slideshow__motif { justify-content: center; }
+.slideshow__slide--align-right .slideshow__actions, .slideshow__slide--align-right .slideshow__motif { justify-content: flex-end; }
+
+.slideshow__footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 1.1rem var(--gutter);
+  pointer-events: none;
+}
+.slideshow__footer .slider__dots { pointer-events: auto; margin-top: 0; }
+.slideshow .slider__dot { border-color: rgba(255, 255, 255, 0.8); background: rgba(255, 255, 255, 0.35); }
+.slideshow .slider__dot.is-active { background: #fff; }
+
+.slideshow__counter { display: flex; align-items: baseline; gap: 0.3rem; font-family: var(--font-heading); font-size: 1.1rem; }
+.slideshow__counter-total { font-size: 0.75rem; opacity: 0.65; }
+
+.slideshow__progress { display: block; width: 60px; height: 2px; background: rgba(255, 255, 255, 0.3); overflow: hidden; }
+.slideshow__progress::after {
+  content: '';
+  display: block;
+  height: 100%;
+  background: #fff;
+  animation: slideshow-progress var(--progress-duration, 6s) linear infinite;
+}
+@keyframes slideshow-progress { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+
+@media (max-width: 749px) {
+  .slideshow { min-height: var(--slide-height-mobile, 74vh); }
+  .slideshow--small { --slide-height-mobile: 62vh; }
+  .slideshow--medium { --slide-height-mobile: 74vh; }
+  .slideshow--large { --slide-height-mobile: 84vh; }
+  .slideshow__slide { min-height: var(--slide-height-mobile, 74vh); }
+  .slideshow__media--mobile { display: block; }
+  .slideshow__media:not(.slideshow__media--mobile) { display: none; }
+  .slideshow .slider__arrow { width: 38px; height: 38px; }
+  .slideshow__actions .btn { flex: 1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slideshow__heading, .slideshow__subheading, .slideshow__text, .slideshow__actions { opacity: 1; transform: none; transition: none; }
+  .slideshow__progress::after { animation: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+/* slideshow slide counter (runs once per page, handles every slideshow) */
+(function () {
+  function pad(n) { return String(n + 1).length < 2 ? '0' + (n + 1) : String(n + 1); }
+  function initCounter(root) {
+    if (root.dataset.counterInit) return;
+    var counter = root.querySelector('.slideshow__counter-current');
+    var track = root.querySelector('[data-slider-track]');
+    if (!counter || !track) return;
+    root.dataset.counterInit = 'true';
+    var sync = function () {
+      var i = parseInt(root.getAttribute('data-index') || '0', 10);
+      counter.textContent = pad(i);
+    };
+    sync();
+    track.addEventListener('scroll', function () { window.setTimeout(sync, 80); }, { passive: true });
+  }
+  function initAll() {
+    document.querySelectorAll('.slideshow').forEach(initCounter);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll);
+  else initAll();
+  window.setTimeout(initAll, 600);
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Slideshow",
+  "tag": "section",
+  "class": "slideshow-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Slide height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full screen" },
+        { "value": "adapt", "label": "Adapt to content" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" }
+      ],
+      "default": "2"
+    },
+    { "type": "header", "content": "Slide defaults" },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "top-left", "label": "Top left" },
+        { "value": "top-center", "label": "Top centre" },
+        { "value": "top-right", "label": "Top right" },
+        { "value": "center-left", "label": "Middle left" },
+        { "value": "center-center", "label": "Middle centre" },
+        { "value": "center-right", "label": "Middle right" },
+        { "value": "bottom-left", "label": "Bottom left" },
+        { "value": "bottom-center", "label": "Bottom centre" },
+        { "value": "bottom-right", "label": "Bottom right" }
+      ],
+      "default": "center-left"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
+    { "type": "header", "content": "Rotation" },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate slides", "default": true },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Change slides every",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    { "type": "checkbox", "id": "loop", "label": "Loop back to the first slide", "default": true },
+    {
+      "type": "select",
+      "id": "navigation",
+      "label": "Navigation",
+      "options": [
+        { "value": "dots", "label": "Dots" },
+        { "value": "arrows", "label": "Arrows" },
+        { "value": "both", "label": "Dots and arrows" },
+        { "value": "counter", "label": "Slide counter" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "both"
+    },
+    { "type": "checkbox", "id": "show_progress", "label": "Show auto-rotate progress bar", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New season" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "The Indigo Room" },
+        { "type": "text", "id": "subheading", "label": "Italic subheading", "default": "block-printed by hand in Bagru" },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Nine passes of natural indigo, dried in the Rajasthan sun.</p>"
+        },
+        { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+        { "type": "text", "id": "button_label_1", "label": "First button label", "default": "Shop the collection" },
+        { "type": "url", "id": "button_link_1", "label": "First button link" },
+        {
+          "type": "select",
+          "id": "button_style_1",
+          "label": "First button style",
+          "options": [
+            { "value": "solid", "label": "Solid" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "ghost", "label": "Text" }
+          ],
+          "default": "solid"
+        },
+        { "type": "text", "id": "button_label_2", "label": "Second button label" },
+        { "type": "url", "id": "button_link_2", "label": "Second button link" },
+        {
+          "type": "select",
+          "id": "button_style_2",
+          "label": "Second button style",
+          "options": [
+            { "value": "solid", "label": "Solid" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "ghost", "label": "Text" }
+          ],
+          "default": "outline"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "options": [
+            { "value": "", "label": "Use section default" },
+            { "value": "top-left", "label": "Top left" },
+            { "value": "top-center", "label": "Top centre" },
+            { "value": "top-right", "label": "Top right" },
+            { "value": "center-left", "label": "Middle left" },
+            { "value": "center-center", "label": "Middle centre" },
+            { "value": "center-right", "label": "Middle right" },
+            { "value": "bottom-left", "label": "Bottom left" },
+            { "value": "bottom-center", "label": "Bottom centre" },
+            { "value": "bottom-right", "label": "Bottom right" }
+          ],
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Text alignment",
+          "options": [
+            { "value": "", "label": "Use section default" },
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Centre" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "text_tone",
+          "label": "Text tone",
+          "options": [
+            { "value": "auto", "label": "Auto (light text)" },
+            { "value": "light", "label": "Dark text on a light wash" },
+            { "value": "dark", "label": "Light text (forced)" }
+          ],
+          "default": "auto"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay opacity",
+          "min": 0,
+          "max": 90,
+          "step": 5,
+          "unit": "%",
+          "default": 45
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slideshow",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "House of Kala Katha",
+            "heading": "Objects that carry a story",
+            "subheading": "handmade in Jaipur since 1974",
+            "text": "<p>Block-printed textiles, cast brass and slow pottery from families we have worked with for three generations.</p>",
+            "button_label_1": "Shop the house",
+            "button_label_2": "Our story"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "The festive edit",
+            "heading": "Made by hand, meant to last",
+            "subheading": "natural dyes · reclaimed wood · solid brass",
+            "text": "<p>A small-batch collection for the season of gathering.</p>",
+            "button_label_1": "Shop the edit",
+            "content_position": "center-center",
+            "text_alignment": "center"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

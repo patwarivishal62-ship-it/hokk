@@ -1,0 +1,46 @@
+{%- comment -%}
+  A single piece of product media (image, video, external video or 3D model).
+  Params: media, ratio, zoom, lightbox
+{%- endcomment -%}
+{%- liquid
+  assign is_image = false
+  if media.media_type == 'image'
+    assign is_image = true
+  endif
+  assign style = ''
+  if is_image and ratio != blank and ratio != 'auto'
+    assign style = 'aspect-ratio: ' | append: ratio | append: ';'
+  endif
+-%}
+<figure
+  class="product-media__figure{% if style != blank %} product-media__figure--ratio{% endif %}"
+  style="{{ style }}"
+  {% if zoom and is_image %}data-zoom="true"{% endif %}
+>
+  {%- case media.media_type -%}
+    {%- when 'image' -%}
+      <img
+        src="{{ media | image_url: width: 900 }}"
+        srcset="{{ media | image_url: width: 480 }} 480w, {{ media | image_url: width: 720 }} 720w, {{ media | image_url: width: 1080 }} 1080w, {{ media | image_url: width: 1440 }} 1440w"
+        sizes="(max-width: 989px) 92vw, 52vw"
+        alt="{{ media.alt | escape }}"
+        width="{{ media.width }}"
+        height="{{ media.height }}"
+        {% if lightbox %}data-lightbox="{{ media | image_url: width: 2048 }}" data-lightbox-alt="{{ media.alt | escape }}"{% endif %}
+        {% if settings.lazy_images %}loading="lazy"{% else %}loading="eager"{% endif %}
+        decoding="async"
+      >
+    {%- when 'video' -%}
+      {{ media | media_tag: image_size: '1200x', controls: true, muted: false, loop: false, playsinline: true }}
+    {%- when 'external_video' -%}
+      {{ media | external_video_tag: loading: 'lazy' }}
+    {%- when 'model' -%}
+      {{ media | model_viewer_tag: image_size: '1200x', reveal: 'interaction', toggleable: true, interactive: true }}
+    {%- else -%}
+      {{ media | media_tag }}
+  {%- endcase -%}
+
+  {%- if zoom and is_image -%}
+    <span class="product-media__zoom-hint" aria-hidden="true">{%- render 'icon', name: 'zoom', size: 16 -%}</span>
+  {%- endif -%}
+</figure>

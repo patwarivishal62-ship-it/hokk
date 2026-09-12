@@ -1,0 +1,392 @@
+{%- comment -%}
+  Image banner — full-bleed image with an overlay headline and calls to action.
+{%- endcomment -%}
+{%- liquid
+  assign height = section.settings.height
+  assign overlay = section.settings.overlay_opacity | divided_by: 100.0
+  assign align = section.settings.text_alignment
+-%}
+
+<div
+  class="banner section banner--{{ height }} banner--{{ section.settings.content_position }} banner--align-{{ align }}{% if section.settings.arch_image %} banner--arch{% endif %}"
+  data-section-id="{{ section.id }}"
+  style="--banner-overlay: {{ overlay }}; --banner-text-width: {{ section.settings.text_width }}%;"
+>
+  <div class="banner__media">
+    {%- if section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 1500 }}"
+        srcset="
+          {%- if section.settings.image.width >= 375 -%}{{ section.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+          {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if section.settings.image.width >= 1100 -%}{{ section.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+          {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if section.settings.image.width >= 2200 -%}{{ section.settings.image | image_url: width: 2200 }} 2200w{%- endif -%}
+        "
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        loading="{% if section.settings.lazy_load %}lazy{% else %}eager{% endif %}"
+        {% unless section.settings.lazy_load %}fetchpriority="high"{% endunless %}
+        decoding="async"
+      >
+    {%- elsif section.settings.mobile_image != blank -%}
+      <img src="{{ section.settings.mobile_image | image_url: width: 1100 }}" alt="{{ section.settings.heading | escape }}" loading="lazy" width="1100">
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+    <span class="banner__overlay" aria-hidden="true"></span>
+  </div>
+
+  {%- if section.settings.mobile_image != blank and section.settings.image != blank -%}
+    <div class="banner__media banner__media--mobile">
+      <img
+        src="{{ section.settings.mobile_image | image_url: width: 900 }}"
+        srcset="{{ section.settings.mobile_image | image_url: width: 480 }} 480w, {{ section.settings.mobile_image | image_url: width: 900 }} 900w"
+        sizes="100vw"
+        alt="{{ section.settings.mobile_image.alt | default: section.settings.heading | escape }}"
+        loading="{% if section.settings.lazy_load %}lazy{% else %}eager{% endif %}"
+        width="{{ section.settings.mobile_image.width }}"
+        height="{{ section.settings.mobile_image.height }}"
+      >
+      <span class="banner__overlay" aria-hidden="true"></span>
+    </div>
+  {%- endif -%}
+
+  <div class="banner__inner">
+    <div class="banner__content{% if section.settings.content_box %} banner__content--boxed color-scheme-{{ section.settings.box_scheme }}{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        {%- if section.settings.heading_tag == 'h1' -%}
+          <h1 class="banner__heading">{{ section.settings.heading | escape }}</h1>
+        {%- else -%}
+          <h2 class="banner__heading">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if settings.motif_enable and section.settings.show_motif -%}
+        <div class="motif-row banner__motif">{%- render 'motif', style: settings.motif_style -%}</div>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="banner__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+        <div class="banner__actions">
+          {%- if section.settings.button_label_1 != blank -%}
+            <a class="btn{% if section.settings.button_style_1 == 'outline' %} btn--outline{% endif %}{% if section.settings.button_style_1 == 'ghost' %} btn--ghost{% endif %}" href="{{ section.settings.button_link_1 | default: routes.all_products_collection_url }}">
+              {{ section.settings.button_label_1 | escape }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a class="btn{% if section.settings.button_style_2 == 'outline' %} btn--outline{% endif %}{% if section.settings.button_style_2 == 'ghost' %} btn--ghost{% endif %}" href="{{ section.settings.button_link_2 | default: routes.root_url }}">
+              {{ section.settings.button_label_2 | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_scroll_cue -%}
+    <span class="banner__scroll-cue" aria-hidden="true">
+      <span class="banner__scroll-line"></span>
+      {{ 'general.accessibility.scroll' | t }}
+    </span>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background: var(--color-ink);
+  min-height: var(--banner-height, 60vh);
+}
+
+.banner--arch {
+  width: min(100% - 2rem, var(--page-width));
+  margin-inline: auto;
+  border-radius: calc(var(--image-radius) * 2.2);
+  border: var(--border-width) solid rgba(var(--color-gold-rgb), 0.35);
+}
+
+.banner--small { --banner-height: 44vh; }
+.banner--medium { --banner-height: 62vh; }
+.banner--large { --banner-height: 82vh; }
+.banner--full { --banner-height: 100svh; }
+.banner--adapt { --banner-height: auto; }
+
+.banner__media { position: absolute; inset: 0; z-index: -1; }
+.banner__media img,
+.banner__media .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.banner__media--mobile { display: none; }
+
+.banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(26, 22, 19, calc(var(--banner-overlay) * 0.55)) 0%, rgba(26, 22, 19, var(--banner-overlay)) 100%);
+}
+
+.banner__inner {
+  width: 100%;
+  padding-block: clamp(3.5rem, 12vh, 8rem);
+  display: flex;
+}
+.banner--adapt .banner__inner { padding-block: clamp(4rem, 14vh, 9rem); }
+
+.banner__content { width: 100%; max-width: var(--banner-text-width, 60%); }
+
+.banner--boxed .banner__content,
+.banner__content--boxed {
+  max-width: min(var(--banner-text-width, 60%), 620px);
+  padding: clamp(1.6rem, 4vw, 2.8rem);
+  background: rgba(var(--color-ivory-rgb), 0.94);
+  backdrop-filter: blur(6px);
+  border: var(--border-width) solid rgba(var(--color-gold-rgb), 0.4);
+  border-radius: var(--image-radius);
+  color: var(--text);
+}
+
+.banner__heading {
+  font-size: clamp(2rem, 1rem + 4.4vw, calc(var(--h1) * 1.05));
+  line-height: 1.08;
+  margin: 0 0 0.4em;
+  text-wrap: balance;
+}
+
+.banner__motif { justify-content: flex-start; }
+.banner__motif::before { display: none; }
+.banner__motif svg { color: var(--color-gold); }
+
+.banner__text { max-width: 56ch; opacity: 0.92; font-size: calc(var(--body-size) * 1.04); }
+.banner__content--boxed .banner__text { opacity: 1; color: var(--text-muted); }
+
+.banner__actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.9rem; }
+.banner .btn--outline { border-color: rgba(255, 255, 255, 0.7); color: #fff; }
+.banner .btn--outline:hover { background: #fff; color: var(--color-ink); border-color: #fff; }
+.banner .btn--ghost { color: #fff; }
+.banner__content--boxed .btn--outline { border-color: var(--border-strong); color: var(--text); }
+.banner__content--boxed .btn--outline:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.banner__content--boxed .btn--ghost { color: var(--text-muted); }
+
+/* content position */
+.banner--top-left .banner__inner { align-items: flex-start; }
+.banner--top-left .banner__content { margin-inline: 0 auto; text-align: left; }
+.banner--top-center .banner__inner { align-items: flex-start; justify-content: center; }
+.banner--top-center .banner__content { margin-inline: auto; }
+.banner--top-right .banner__inner { align-items: flex-start; justify-content: flex-end; }
+.banner--top-right .banner__content { margin-inline: auto 0; }
+.banner--center-left .banner__content { margin-inline: 0 auto; }
+.banner--center-center .banner__content { margin-inline: auto; }
+.banner--center-right .banner__content { margin-inline: auto 0; }
+.banner--bottom-left .banner__inner { align-items: flex-end; }
+.banner--bottom-left .banner__content { margin-inline: 0 auto; }
+.banner--bottom-center .banner__inner { align-items: flex-end; justify-content: center; }
+.banner--bottom-center .banner__content { margin-inline: auto; }
+.banner--bottom-right .banner__inner { align-items: flex-end; justify-content: flex-end; }
+.banner--bottom-right .banner__content { margin-inline: auto 0; }
+
+.banner--align-center .banner__content { text-align: center; }
+.banner--align-center .banner__actions,
+.banner--align-center .banner__motif { justify-content: center; }
+.banner--align-right .banner__content { text-align: right; }
+.banner--align-right .banner__actions,
+.banner--align-right .banner__motif { justify-content: flex-end; }
+
+.banner__scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 1.2rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-eyebrow);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.banner__scroll-line { width: 1px; height: 34px; background: currentColor; animation: banner-scroll 2.4s ease-in-out infinite; }
+
+@keyframes banner-scroll {
+  0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+@media (max-width: 749px) {
+  .banner { min-height: var(--banner-height-mobile, var(--banner-height)); }
+  .banner--small { --banner-height-mobile: 52vh; }
+  .banner--medium { --banner-height-mobile: 66vh; }
+  .banner--large { --banner-height-mobile: 84vh; }
+  .banner__content,
+  .banner__content--boxed { max-width: 100%; }
+  .banner__media--mobile { display: block; }
+  .banner__media--mobile + .banner__media,
+  .banner__media:not(.banner__media--mobile) { display: none; }
+  .banner__actions .btn { flex: 1 1 100%; }
+  .banner__scroll-cue { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner__scroll-line { animation: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Image banner",
+  "tag": "section",
+  "class": "banner-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+    { "type": "checkbox", "id": "lazy_load", "label": "Lazy load the image", "default": false },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "adapt", "label": "Adapt to content" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full screen" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    { "type": "checkbox", "id": "arch_image", "label": "Inset with arched corners", "info": "Turns the full-bleed banner into a framed arch panel", "default": false },
+    { "type": "header", "content": "Content" },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "top-left", "label": "Top left" },
+        { "value": "top-center", "label": "Top centre" },
+        { "value": "top-right", "label": "Top right" },
+        { "value": "center-left", "label": "Middle left" },
+        { "value": "center-center", "label": "Middle centre" },
+        { "value": "center-right", "label": "Middle right" },
+        { "value": "bottom-left", "label": "Bottom left" },
+        { "value": "bottom-center", "label": "Bottom centre" },
+        { "value": "bottom-right", "label": "Bottom right" }
+      ],
+      "default": "center-left"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Content width",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The festive edit" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made by hand, meant to last" },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading size",
+      "options": [
+        { "value": "h1", "label": "Page heading (H1)" },
+        { "value": "h2", "label": "Section heading (H2)" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Natural dyes, reclaimed wood and brass that ages with you.</p>"
+    },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "header", "content": "Content card" },
+    { "type": "checkbox", "id": "content_box", "label": "Place the content on a card", "default": false },
+    {
+      "type": "select",
+      "id": "box_scheme",
+      "label": "Card colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_label_1", "label": "First button label", "default": "Shop now" },
+    { "type": "url", "id": "button_link_1", "label": "First button link" },
+    {
+      "type": "select",
+      "id": "button_style_1",
+      "label": "First button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "ghost", "label": "Text" }
+      ],
+      "default": "solid"
+    },
+    { "type": "text", "id": "button_label_2", "label": "Second button label" },
+    { "type": "url", "id": "button_link_2", "label": "Second button link" },
+    {
+      "type": "select",
+      "id": "button_style_2",
+      "label": "Second button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "ghost", "label": "Text" }
+      ],
+      "default": "outline"
+    },
+    { "type": "checkbox", "id": "show_scroll_cue", "label": "Show scroll cue", "default": true }
+  ],
+  "presets": [
+    { "name": "Image banner" }
+  ]
+}
+{% endschema %}

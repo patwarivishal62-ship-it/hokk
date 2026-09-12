@@ -1,0 +1,45 @@
+{%- comment -%}
+  Shared section heading. Params:
+    eyebrow, title, text, align (left|center|right|split),
+    action_label, action_link, action_label_2, action_link_2,
+    show_motif (bool), title_tag (h2|h3), size (default|large|small)
+{%- endcomment -%}
+{%- liquid
+  assign alignment = align | default: 'left'
+  assign tag = title_tag | default: 'h2'
+  assign heading_size = size | default: 'default'
+  assign has_content = false
+  if eyebrow != blank or title != blank or text != blank or action_label != blank
+    assign has_content = true
+  endif
+-%}
+{%- if has_content -%}
+  <div class="section-header section-header--{{ alignment }}{% if heading_size != 'default' %} section-header--{{ heading_size }}{% endif %}"{% if animate %} data-animate{% endif %}>
+    <div class="section-header__copy">
+      {%- if eyebrow != blank -%}
+        <p class="eyebrow{% if alignment == 'center' %} eyebrow--center{% endif %}">{{ eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if title != blank -%}
+        <{{ tag }} class="section-header__title">{{ title }}</{{ tag }}>
+      {%- endif -%}
+
+      {%- if show_motif and settings.motif_enable -%}
+        <div class="motif-row section-header__motif">{%- render 'motif', style: settings.motif_style -%}</div>
+      {%- endif -%}
+
+      {%- if text != blank -%}
+        <div class="section-header__text rte">{{ text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if action_label != blank and action_link != blank -%}
+      <div class="section-header__actions">
+        <a class="btn btn--outline btn--small" href="{{ action_link }}">{{ action_label }}</a>
+        {%- if action_label_2 != blank and action_link_2 != blank -%}
+          <a class="link-arrow" href="{{ action_link_2 }}">{{ action_label_2 }} {%- render 'icon', name: 'arrow-right', size: 14 -%}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

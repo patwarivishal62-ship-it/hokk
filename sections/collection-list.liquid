@@ -1,0 +1,241 @@
+{%- comment -%}
+  Collection list — a row of collection cards (grid or carousel).
+{%- endcomment -%}
+{%- liquid
+  assign per_row = section.settings.columns_desktop
+  assign cols_tablet = 2
+  if per_row < 3
+    assign cols_tablet = per_row
+  endif
+  assign cols_mobile = 1
+  if section.settings.columns_mobile == '2'
+    assign cols_mobile = 2
+  endif
+  assign list = section.settings.collections
+  assign limit = section.settings.collections_to_show
+  assign header_action = ''
+  if section.settings.view_all_position == 'header'
+    assign header_action = section.settings.view_all_label
+  endif
+  assign shown = 0
+  if list != blank
+    assign shown = list.size
+    if shown > limit
+      assign shown = limit
+    endif
+  else
+    assign shown = limit
+  endif
+-%}
+
+<div class="collection-list section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'section-header',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.heading,
+      text: section.settings.text,
+      align: section.settings.header_alignment,
+      action_label: header_action,
+      action_link: routes.collections_url,
+      show_motif: section.settings.show_motif,
+      animate: true
+    -%}
+
+    {%- if section.settings.layout == 'carousel' -%}
+      <div class="slider collection-list__slider" data-slider data-per-view="{{ per_row }}">
+        <div class="slider__viewport grid collections-grid" style="--cols: {{ per_row }}; --cols-tablet: {{ cols_tablet }}; --cols-mobile: {{ cols_mobile }}; --gutter: {{ section.settings.spacing }}px;">
+          {%- if list != blank -%}
+            {%- for c in list limit: limit -%}
+              <div class="grid__item slider__slide" data-slide style="flex-basis: calc((100% - (var(--gutter) * (var(--cols) - 1))) / var(--cols));">
+                {%- render 'collection-card', collection: c, ratio: section.settings.image_ratio, style: section.settings.card_style, show_count: section.settings.show_count, index: forloop.index -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..limit) -%}
+              <div class="grid__item slider__slide" data-slide style="flex-basis: calc((100% - (var(--gutter) * (var(--cols) - 1))) / var(--cols));">
+                {%- render 'collection-card', collection: nil, ratio: section.settings.image_ratio, style: section.settings.card_style, show_count: section.settings.show_count, index: i -%}
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        {%- if shown > per_row -%}
+          <div class="slider__controls">
+            <button type="button" class="slider__btn" data-slider-prev aria-label="{{ 'general.accessibility.previous' | t }}">{%- render 'icon', name: 'chevron-left', size: 18 -%}</button>
+            <div class="slider__dots" data-slider-dots></div>
+            <button type="button" class="slider__btn" data-slider-next aria-label="{{ 'general.accessibility.next' | t }}">{%- render 'icon', name: 'chevron-right', size: 18 -%}</button>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="grid collections-grid" style="--cols: {{ per_row }}; --cols-tablet: {{ cols_tablet }}; --cols-mobile: {{ cols_mobile }}; --gutter: {{ section.settings.spacing }}px;">
+        {%- if list != blank -%}
+          {%- for c in list limit: limit -%}
+            <div class="grid__item" data-load-item data-animate>
+              {%- render 'collection-card', collection: c, ratio: section.settings.image_ratio, style: section.settings.card_style, show_count: section.settings.show_count, index: forloop.index -%}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..limit) -%}
+            <div class="grid__item" data-load-item data-animate>
+              {%- render 'collection-card', collection: nil, ratio: section.settings.image_ratio, style: section.settings.card_style, show_count: section.settings.show_count, index: i -%}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.view_all_label != blank and section.settings.view_all_position == 'bottom' -%}
+      <div class="collection-list__footer">
+        <a class="btn btn--outline" href="{{ routes.collections_url }}">{{ section.settings.view_all_label | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.collection-list .grid { margin-top: 2.4rem; }
+.collection-list__slider .grid { margin-top: 0; display: flex; }
+.collection-list__slider .slider__controls { margin-top: 1.8rem; }
+.collection-list__footer { display: flex; justify-content: center; margin-top: 2.6rem; }
+
+@media (max-width: 749px) {
+  .collection-list__slider .grid > .grid__item { flex-basis: calc((100% - var(--gutter)) / 1.35) !important; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection list",
+  "tag": "section",
+  "class": "collection-list-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Browse by craft" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Six rooms of the house" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "split", "label": "Split" }
+      ],
+      "default": "center"
+    },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "header", "content": "Collections" },
+    {
+      "type": "collection_list",
+      "id": "collections",
+      "label": "Collections",
+      "limit": 16
+    },
+    {
+      "type": "range",
+      "id": "collections_to_show",
+      "label": "Maximum collections to show",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "cover", "label": "Image with overlay text" },
+        { "value": "arch", "label": "Arched image" },
+        { "value": "split", "label": "Image above, text below" }
+      ],
+      "default": "arch"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "tall", "label": "Tall" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "adapt", "label": "Adapt to image" }
+      ],
+      "default": "tall"
+    },
+    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": true },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Space between cards",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    { "type": "header", "content": "View all" },
+    { "type": "text", "id": "view_all_label", "label": "Label", "default": "All collections" },
+    {
+      "type": "select",
+      "id": "view_all_position",
+      "label": "Position",
+      "options": [
+        { "value": "header", "label": "In the header" },
+        { "value": "bottom", "label": "Button below the grid" },
+        { "value": "none", "label": "Hidden" }
+      ],
+      "default": "bottom"
+    }
+  ],
+  "presets": [
+    { "name": "Collection list" }
+  ]
+}
+{% endschema %}

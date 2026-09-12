@@ -1,0 +1,294 @@
+{%- comment -%}
+  Announcement bar — belongs to the header group.
+  Every announcement is a block, so merchants can add as many as they like.
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.blocks.size == 0
+    assign show = false
+  endif
+-%}
+
+{%- if show -%}
+  <div
+    class="announcement color-scheme-{{ section.settings.color_scheme }}{% if section.settings.full_width_border %} announcement--bordered{% endif %}{% if section.settings.hide_on_mobile %} announcement--hide-mobile{% endif %}"
+    style="--announce-padding: {{ section.settings.padding }}px;"
+    data-section-id="{{ section.id }}"
+  >
+    <div class="announcement__inner container{% if section.settings.rotate %} announcement__inner--rotating{% endif %}">
+      {%- if section.settings.rotate and section.blocks.size > 1 -%}
+        <div class="announcement__stack">
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign slide_class = 'announcement__slide'
+          unless section.settings.rotate and section.blocks.size > 1
+            assign slide_class = slide_class | append: ' is-active announcement__slide--static'
+          endunless
+        -%}
+        <div class="{{ slide_class }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != 'none' -%}
+            <span class="announcement__icon">{%- render 'icon', name: block.settings.icon, size: 16 -%}</span>
+          {%- endif -%}
+
+          {%- if block.settings.text != blank -%}
+            <span class="announcement__text">
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" {% if block.settings.open_new %}target="_blank" rel="noopener"{% endif %}>{{ block.settings.text }}</a>
+              {%- else -%}
+                {{ block.settings.text }}
+              {%- endif -%}
+            </span>
+          {%- endif -%}
+
+          {%- if block.settings.show_countdown and block.settings.countdown_date != blank -%}
+            <span class="announcement__countdown" data-countdown="{{ block.settings.countdown_date }}" data-finished-text="{{ block.settings.countdown_finished | escape }}">
+              <span class="cd-cell"><span data-cd-value="days">00</span><small>d</small></span>
+              <span class="cd-cell"><span data-cd-value="hours">00</span><small>h</small></span>
+              <span class="cd-cell"><span data-cd-value="minutes">00</span><small>m</small></span>
+              <span class="cd-cell"><span data-cd-value="seconds">00</span><small>s</small></span>
+            </span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if section.settings.rotate and section.blocks.size > 1 -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_social -%}
+        {%- render 'social-links', class: 'announcement__social' -%}
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+.announcement {
+  position: relative;
+  z-index: 30;
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--body-size-small);
+  letter-spacing: 0.04em;
+}
+
+.announcement--bordered { border-bottom: var(--border-width) solid var(--border); }
+
+.announcement__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  min-height: 2.6rem;
+  padding-block: calc(var(--announce-padding, 8px) * 0.5);
+  text-align: center;
+}
+
+.announcement__stack {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 1.5em;
+  width: 100%;
+}
+
+.announcement__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.announcement__inner--rotating .announcement__slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease), visibility 0.55s;
+}
+
+.announcement__inner--rotating .announcement__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.announcement__slide--static { opacity: 1; visibility: visible; }
+
+.announcement__text a { text-decoration: underline; text-underline-offset: 3px; }
+.announcement__text a:hover { color: var(--accent); }
+
+.announcement__icon { display: inline-flex; color: var(--accent); }
+
+.announcement__countdown {
+  display: inline-flex;
+  gap: 0.4rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.announcement__countdown .cd-cell {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  background: rgba(var(--text-rgb), 0.08);
+}
+
+.announcement__countdown small { font-size: 0.72em; opacity: 0.7; }
+
+.announcement__social { display: flex; gap: 0.9rem; }
+.announcement__social a { opacity: 0.85; }
+.announcement__social a:hover { opacity: 1; color: var(--accent); }
+
+.announcement--hide-mobile { display: block; }
+
+@media (max-width: 749px) {
+  .announcement__social { display: none; }
+  .announcement__inner { gap: 0.6rem; }
+  .announcement--hide-mobile { display: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "tag": "section",
+  "class": "announcement-bar-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "rotate",
+      "label": "Rotate announcements automatically",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_border",
+      "label": "Show bottom border",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Vertical padding",
+      "min": 4,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons",
+      "info": "Uses the accounts set in Theme settings → Social media.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on mobile",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Complimentary shipping on orders over ₹5,000 · Handmade in small batches"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new",
+          "label": "Open link in a new window",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "brush", "label": "Brush" },
+            { "value": "hand", "label": "Handmade" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "header",
+          "content": "Countdown"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_countdown",
+          "label": "Show countdown timer",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "countdown_date",
+          "label": "Countdown ends at",
+          "info": "Use the format 2026-12-31T23:59. Leave the year ahead so it never expires unexpectedly.",
+          "default": "2027-12-31T23:59"
+        },
+        {
+          "type": "text",
+          "id": "countdown_finished",
+          "label": "Text after the countdown ends",
+          "default": "Offer ended"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "blocks": [
+        { "type": "announcement" }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

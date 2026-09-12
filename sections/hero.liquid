@@ -1,0 +1,343 @@
+{%- comment -%}
+  Split hero — the signature Kala Katha opening: an arch-masked image with an
+  overlapping detail shot, paired with a display headline and calls to action.
+{%- endcomment -%}
+{%- liquid
+  assign scheme = section.settings.color_scheme
+  assign flip = ''
+  if section.settings.image_position == 'left'
+    assign flip = ' hero--flip'
+  endif
+  assign content_width = section.settings.content_width
+-%}
+
+<div class="hero section color-scheme-{{ scheme }}{{ flip }} section--banner" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="hero__grid" style="--hero-text: {{ content_width }}%;">
+      <div class="hero__content" data-animate>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h1 class="hero__title">{{ section.settings.heading | escape }}</h1>
+        {%- endif -%}
+
+        {%- if section.settings.heading_2 != blank -%}
+          <p class="hero__title hero__title--script">{{ section.settings.heading_2 | escape }}</p>
+        {%- endif -%}
+
+        {%- if settings.motif_enable and section.settings.show_motif -%}
+          <div class="motif-row hero__motif">{%- render 'motif', style: settings.motif_style -%}</div>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="hero__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        <div class="hero__actions">
+          {%- if section.settings.button_label_1 != blank -%}
+            <a class="btn{% if section.settings.button_style_1 == 'outline' %} btn--outline{% endif %}" href="{{ section.settings.button_link_1 | default: routes.all_products_collection_url }}">
+              {{ section.settings.button_label_1 | escape }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a class="btn{% if section.settings.button_style_2 == 'solid' %}{% else %} btn--outline{% endif %}" href="{{ section.settings.button_link_2 | default: routes.root_url }}">
+              {{ section.settings.button_label_2 | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.meta_text != blank -%}
+          <p class="hero__meta">
+            {%- render 'icon', name: section.settings.meta_icon, size: 16 -%}
+            {{ section.settings.meta_text | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      <div class="hero__media" data-animate>
+        <div class="hero__media-main media{% if section.settings.arch %} arch{% endif %}" style="aspect-ratio: {{ section.settings.image_ratio }};">
+          {%- if section.settings.image != blank -%}
+            <img
+              src="{{ section.settings.image | image_url: width: 900 }}"
+              srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1600 }} 1600w"
+              sizes="(max-width: 749px) 92vw, 50vw"
+              alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            >
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.image_2 != blank -%}
+          <div class="hero__media-sub media{% if section.settings.arch_2 %} arch{% endif %}">
+            <img
+              src="{{ section.settings.image_2 | image_url: width: 500 }}"
+              srcset="{{ section.settings.image_2 | image_url: width: 300 }} 300w, {{ section.settings.image_2 | image_url: width: 500 }} 500w, {{ section.settings.image_2 | image_url: width: 700 }} 700w"
+              sizes="(max-width: 749px) 34vw, 18vw"
+              alt="{{ section.settings.image_2.alt | escape }}"
+              width="{{ section.settings.image_2.width }}"
+              height="{{ section.settings.image_2.height }}"
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.caption != blank -%}
+          <div class="hero__caption">
+            {%- render 'icon', name: 'sparkle', size: 15 -%}
+            <span>{{ section.settings.caption | escape }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_frame -%}<span class="hero__frame" aria-hidden="true"></span>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.hero { overflow: hidden; }
+.hero .container { position: relative; }
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, var(--hero-text, 46%)) minmax(0, 1fr);
+  gap: clamp(1.8rem, 1rem + 4vw, 5rem);
+  align-items: center;
+}
+
+.hero--flip .hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, var(--hero-text, 46%)); }
+.hero--flip .hero__content { order: 2; }
+.hero--flip .hero__media { order: 1; }
+
+.hero__title {
+  font-size: clamp(2.2rem, 1.2rem + 4.6vw, var(--h1));
+  margin: 0 0 0.35em;
+  line-height: var(--heading-line-height);
+}
+
+.hero__title--script {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.3rem, 0.9rem + 1.8vw, calc(var(--h2) * 0.72));
+  color: var(--accent);
+  margin: 0 0 0.6em;
+}
+
+.hero__motif { justify-content: flex-start; margin: 1.1rem 0; }
+.hero__motif::before { display: none; }
+
+.hero__text { color: var(--text-muted); max-width: 52ch; font-size: calc(var(--body-size) * 1.03); }
+
+.hero__actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.9rem; }
+
+.hero__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 1.8rem 0 0;
+  padding-top: 1.2rem;
+  border-top: var(--border-width) solid var(--border);
+  font-family: var(--font-eyebrow);
+  font-size: var(--eyebrow-size);
+  letter-spacing: var(--eyebrow-letter-spacing);
+  text-transform: var(--eyebrow-case);
+  color: var(--text-muted);
+}
+.hero__meta .icon { color: var(--accent); }
+
+.hero__media { position: relative; }
+
+.hero__media-main { display: block; width: 100%; overflow: hidden; }
+.hero__media-main img { width: 100%; height: 100%; object-fit: cover; }
+
+.hero__media-sub {
+  position: absolute;
+  left: -2.4rem;
+  bottom: 8%;
+  width: 34%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 6px solid var(--bg);
+  border-radius: var(--image-radius);
+  box-shadow: var(--card-shadow-hover);
+}
+.hero__media-sub img { width: 100%; height: 100%; object-fit: cover; }
+.hero--flip .hero__media-sub { left: auto; right: -2.4rem; }
+
+.hero__caption {
+  position: absolute;
+  top: 1.2rem;
+  right: -1rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  background: var(--bg);
+  color: var(--text);
+  border: var(--border-width) solid var(--border);
+  border-radius: 999px;
+  font-size: var(--body-size-small);
+  box-shadow: var(--card-shadow);
+}
+.hero__caption .icon { color: var(--color-gold); }
+.hero--flip .hero__caption { right: auto; left: -1rem; }
+
+.hero__frame {
+  position: absolute;
+  inset: 1.6rem -1.6rem -1.6rem 1.6rem;
+  border: var(--border-width) solid rgba(var(--color-gold-rgb), 0.5);
+  border-radius: var(--image-radius);
+  z-index: -1;
+  pointer-events: none;
+}
+.hero--flip .hero__frame { inset: 1.6rem 1.6rem -1.6rem -1.6rem; }
+
+@media (max-width: 989px) {
+  .hero__grid,
+  .hero--flip .hero__grid { grid-template-columns: 1fr; gap: 2.4rem; }
+  .hero--flip .hero__content { order: 2; }
+  .hero--flip .hero__media { order: 1; }
+  .hero__media-sub { width: 30%; left: -1rem; bottom: -1.4rem; }
+  .hero--flip .hero__media-sub { right: -1rem; }
+  .hero__caption { right: 0.6rem; top: 0.6rem; }
+  .hero--flip .hero__caption { left: 0.6rem; }
+  .hero__frame { display: none; }
+}
+
+@media (max-width: 549px) {
+  .hero__media-sub { display: none; }
+  .hero__actions .btn { flex: 1 1 100%; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Split hero",
+  "tag": "section",
+  "class": "hero-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "House of Kala Katha" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Objects that carry a story" },
+    { "type": "text", "id": "heading_2", "label": "Second line (italic)", "default": "handmade in Jaipur since 1974" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Block-printed textiles, cast brass and slow pottery — made by families we have worked with for three generations. Each piece is signed by the hand that finished it.</p>"
+    },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_label_1", "label": "First button label", "default": "Shop the house" },
+    { "type": "url", "id": "button_link_1", "label": "First button link" },
+    {
+      "type": "select",
+      "id": "button_style_1",
+      "label": "First button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "solid"
+    },
+    { "type": "text", "id": "button_label_2", "label": "Second button label", "default": "Our story" },
+    { "type": "url", "id": "button_link_2", "label": "Second button link" },
+    {
+      "type": "select",
+      "id": "button_style_2",
+      "label": "Second button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "outline"
+    },
+    { "type": "header", "content": "Trust line" },
+    { "type": "text", "id": "meta_text", "label": "Text", "default": "Complimentary shipping over ₹5,000 · 14-day returns" },
+    {
+      "type": "select",
+      "id": "meta_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "truck", "label": "Truck" },
+        { "value": "hand", "label": "Handmade" },
+        { "value": "leaf", "label": "Leaf" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "returns", "label": "Returns" },
+        { "value": "sparkle", "label": "Sparkle" },
+        { "value": "star", "label": "Star" },
+        { "value": "pin", "label": "Pin" },
+        { "value": "clock", "label": "Clock" },
+        { "value": "gift", "label": "Gift" }
+      ],
+      "default": "truck"
+    },
+    { "type": "header", "content": "Images" },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "right", "label": "Right" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Text column width",
+      "min": 34,
+      "max": 62,
+      "step": 2,
+      "unit": "%",
+      "default": 46
+    },
+    { "type": "image_picker", "id": "image", "label": "Main image" },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Main image ratio",
+      "options": [
+        { "value": "3 / 4", "label": "Tall 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "2 / 3", "label": "Very tall 2:3" },
+        { "value": "16 / 9", "label": "Wide 16:9" }
+      ],
+      "default": "3 / 4"
+    },
+    { "type": "checkbox", "id": "arch", "label": "Arch mask on the main image", "default": true },
+    { "type": "image_picker", "id": "image_2", "label": "Overlapping detail image" },
+    { "type": "checkbox", "id": "arch_2", "label": "Arch mask on the detail image", "default": true },
+    { "type": "checkbox", "id": "show_frame", "label": "Show the golden outline frame", "default": true },
+    { "type": "text", "id": "caption", "label": "Floating caption", "default": "Limited winter run" }
+  ],
+  "presets": [
+    { "name": "Split hero" }
+  ]
+}
+{% endschema %}

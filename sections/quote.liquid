@@ -1,0 +1,206 @@
+{%- comment -%}
+  Quote — a single statement, optionally with a portrait.
+{%- endcomment -%}
+<div class="quote-section section color-scheme-{{ section.settings.color_scheme }} quote-style--{{ section.settings.style }} quote-align--{{ section.settings.text_alignment }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- if section.settings.background_image != blank -%}
+      <div class="quote-section__bg" aria-hidden="true">
+        <img src="{{ section.settings.background_image | image_url: width: 1400 }}" alt="" loading="lazy" width="1400">
+        <span class="quote-section__bg-overlay"></span>
+      </div>
+    {%- endif -%}
+
+    <div class="quote-section__inner">
+      {%- if section.settings.show_motif and settings.motif_enable -%}
+        <div class="motif-row">{%- render 'motif', style: settings.motif_style -%}</div>
+      {%- endif -%}
+
+      {%- if section.settings.image != blank and section.settings.style == 'portrait' -%}
+        <div class="quote-section__portrait media arch">
+          <img src="{{ section.settings.image | image_url: width: 400 }}" srcset="{{ section.settings.image | image_url: width: 200 }} 200w, {{ section.settings.image | image_url: width: 400 }} 400w" sizes="160px" alt="{{ section.settings.image.alt | default: section.settings.author | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy">
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_quote_mark -%}
+        <span class="quote-section__mark" aria-hidden="true">{%- render 'icon', name: 'quote', size: 42 -%}</span>
+      {%- endif -%}
+
+      <blockquote class="quote-section__text">
+        <p>{{ section.settings.quote | escape }}</p>
+      </blockquote>
+
+      {%- if section.settings.author != blank or section.settings.role != blank -%}
+        <footer class="quote-section__byline">
+          {%- if section.settings.image != blank and section.settings.style != 'portrait' -%}
+            <span class="quote-section__avatar media">
+              <img src="{{ section.settings.image | image_url: width: 120 }}" alt="{{ section.settings.author | escape }}" width="60" height="60" loading="lazy">
+            </span>
+          {%- endif -%}
+          <span class="quote-section__meta">
+            {%- if section.settings.author != blank -%}<strong>{{ section.settings.author | escape }}</strong>{%- endif -%}
+            {%- if section.settings.role != blank -%}<span>{{ section.settings.role | escape }}</span>{%- endif -%}
+          </span>
+        </footer>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <p class="quote-section__action">
+          <a class="btn{% if section.settings.button_style == 'outline' %} btn--outline{% endif %}{% if section.settings.button_style == 'ghost' %} btn--ghost{% endif %}" href="{{ section.settings.button_link | default: routes.root_url }}">{{ section.settings.button_label | escape }}</a>
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.quote-section { position: relative; overflow: hidden; }
+.quote-section__inner { position: relative; max-width: 60rem; margin-inline: auto; text-align: center; }
+
+.quote-section__bg { position: absolute; inset: 0; z-index: 0; }
+.quote-section__bg img { width: 100%; height: 100%; object-fit: cover; }
+.quote-section__bg-overlay { position: absolute; inset: 0; background: var(--bg); opacity: 0.86; }
+.quote-section .container { position: relative; z-index: 1; }
+
+.quote-section__text { margin: 0; }
+.quote-section__text p {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.35rem, 1rem + 2.2vw, 2.5rem);
+  line-height: 1.32;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.quote-section__mark { display: inline-flex; color: var(--accent); opacity: 0.5; margin-bottom: 0.8rem; }
+
+.quote-section__portrait { width: 150px; height: 150px; margin: 0 auto 1.6rem; overflow: hidden; }
+.quote-section__portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+.quote-section__byline { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin-top: 1.8rem; }
+.quote-section__avatar { width: 54px; height: 54px; border-radius: 999px; overflow: hidden; flex: none; }
+.quote-section__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.quote-section__meta { display: flex; flex-direction: column; text-align: left; }
+.quote-section__meta strong { font-family: var(--font-heading); font-size: 1.02rem; }
+.quote-section__meta span { font-size: var(--body-size-small); color: var(--text-muted); }
+
+.quote-section__action { margin-top: 2rem; }
+
+.quote-align--left .quote-section__inner { text-align: left; margin-inline: 0; }
+.quote-align--left .quote-section__byline { justify-content: flex-start; }
+.quote-align--right .quote-section__inner { text-align: right; margin-inline: auto 0; }
+.quote-align--right .quote-section__byline { justify-content: flex-end; }
+
+.quote-style--card .quote-section__inner {
+  padding: clamp(1.8rem, 5vw, 3.4rem);
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+}
+.quote-style--card .quote-section__inner::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(var(--color-gold-rgb), 0.4);
+  border-radius: calc(var(--card-radius) - 6px);
+  pointer-events: none;
+}
+.quote-style--card .quote-section__inner { position: relative; }
+
+.quote-style--bordered .quote-section__inner { padding: 2rem 0; border-top: var(--border-width) solid var(--border); border-bottom: var(--border-width) solid var(--border); }
+
+@media (max-width: 549px) {
+  .quote-section__portrait { width: 110px; height: 110px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Quote",
+  "tag": "section",
+  "class": "quote-wrapper-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "We are not selling objects. We are asking you to keep a piece of someone's life's work in your home." },
+    { "type": "text", "id": "author", "label": "Author", "default": "Ananya Kala" },
+    { "type": "text", "id": "role", "label": "Role or attribution", "default": "Founder, House of Kala Katha" },
+    { "type": "image_picker", "id": "image", "label": "Portrait" },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "plain", "label": "Plain" },
+        { "value": "card", "label": "Card" },
+        { "value": "bordered", "label": "Bordered" },
+        { "value": "portrait", "label": "Large portrait above" }
+      ],
+      "default": "plain"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "center", "label": "Centre" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    { "type": "checkbox", "id": "show_quote_mark", "label": "Show the quote mark", "default": true },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "image_picker", "id": "background_image", "label": "Background image (behind a wash of the colour scheme)" },
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "ghost", "label": "Text" }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 180,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 180,
+      "step": 8,
+      "unit": "px",
+      "default": 88
+    }
+  ],
+  "presets": [
+    { "name": "Quote" }
+  ]
+}
+{% endschema %}

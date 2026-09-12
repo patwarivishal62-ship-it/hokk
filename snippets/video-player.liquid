@@ -1,0 +1,66 @@
+{%- comment -%}
+  Renders either a Shopify-hosted video or a click-to-load YouTube / Vimeo embed.
+  Accepts: section_settings, ratio
+{%- endcomment -%}
+{%- liquid
+  assign s = section_settings
+  assign arch_class = ''
+  if s.arch
+    assign arch_class = ' video-frame--arch'
+  endif
+
+  assign poster = s.poster | default: s.video.preview_image
+  assign embed_url = ''
+  assign embed_title = s.heading | default: 'Video'
+  if s.video == blank and s.video_url != blank
+    assign video_id = s.video_url.id
+    if s.video_url.type == 'youtube'
+      assign embed_url = 'https://www.youtube.com/embed/' | append: video_id | append: '?rel=0'
+    else
+      assign embed_url = 'https://player.vimeo.com/video/' | append: video_id
+    endif
+  endif
+-%}
+<div class="video-frame{{ arch_class }}" style="--video-ratio: {{ ratio | default: '16 / 9' }};">
+  {%- if s.video != blank -%}
+    {{ s.video | video_tag: image_size: '1200x', controls: s.controls, autoplay: s.autoplay, muted: s.muted, loop: s.loop, playsinline: true }}
+
+  {%- elsif embed_url != blank -%}
+    <button
+      type="button"
+      class="video-facade"
+      data-video-facade="{{ embed_url }}"
+      data-video-title="{{ embed_title | escape }}"
+      aria-label="{{ 'general.accessibility.play_video' | t }}"
+    >
+      {%- if poster != blank -%}
+        <img
+          src="{{ poster | image_url: width: 1200 }}"
+          srcset="{{ poster | image_url: width: 600 }} 600w, {{ poster | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 989px) 92vw, 60vw"
+          alt="{{ poster.alt | default: embed_title | escape }}"
+          loading="lazy"
+          width="{{ poster.width }}"
+          height="{{ poster.height }}"
+        >
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+      <span class="video-facade__play">{%- render 'icon', name: 'play', size: 26 -%}</span>
+    </button>
+
+  {%- elsif poster != blank -%}
+    <img
+      src="{{ poster | image_url: width: 1400 }}"
+      srcset="{{ poster | image_url: width: 600 }} 600w, {{ poster | image_url: width: 1000 }} 1000w, {{ poster | image_url: width: 1400 }} 1400w"
+      sizes="100vw"
+      alt="{{ poster.alt | default: embed_title | escape }}"
+      loading="lazy"
+      width="{{ poster.width }}"
+      height="{{ poster.height }}"
+    >
+
+  {%- else -%}
+    {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+</div>

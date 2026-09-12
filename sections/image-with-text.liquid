@@ -1,0 +1,465 @@
+{%- comment -%}
+  Image with text — editorial two-column block. Text column is built from
+  reorderable blocks: caption, heading, text, stat, list, rating, button.
+{%- endcomment -%}
+{%- liquid
+  assign ratio = section.settings.image_ratio
+  assign flip = ''
+  if section.settings.image_position == 'left'
+    assign flip = ' iwt--flip'
+  endif
+  assign gap = section.settings.spacing
+-%}
+
+<div class="image-with-text section color-scheme-{{ section.settings.color_scheme }}{{ flip }}" data-section-id="{{ section.id }}" style="--iwt-gap: {{ gap }}px; --iwt-split: {{ section.settings.image_width }}%;">
+  <div class="container">
+    <div class="iwt__grid">
+      <div class="iwt__media" data-animate>
+        <div class="iwt__image media{% if section.settings.arch %} arch{% endif %}{% if section.settings.rounded %} media--rounded{% endif %}" style="aspect-ratio: {{ ratio }};">
+          {%- if section.settings.image != blank -%}
+            <img
+              src="{{ section.settings.image | image_url: width: 900 }}"
+              srcset="{{ section.settings.image | image_url: width: 450 }} 450w, {{ section.settings.image | image_url: width: 700 }} 700w, {{ section.settings.image | image_url: width: 1000 }} 1000w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+              sizes="(max-width: 749px) 92vw, 46vw"
+              alt="{{ section.settings.image.alt | escape }}"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.image_2 != blank -%}
+          <div class="iwt__image-sub media">
+            <img
+              src="{{ section.settings.image_2 | image_url: width: 460 }}"
+              srcset="{{ section.settings.image_2 | image_url: width: 240 }} 240w, {{ section.settings.image_2 | image_url: width: 460 }} 460w"
+              sizes="(max-width: 749px) 26vw, 13vw"
+              alt="{{ section.settings.image_2.alt | escape }}"
+              width="{{ section.settings.image_2.width }}"
+              height="{{ section.settings.image_2.height }}"
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.badge != blank -%}
+          <span class="iwt__badge">{{ section.settings.badge | escape }}</span>
+        {%- endif -%}
+      </div>
+
+      <div class="iwt__content" data-animate>
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'caption' -%}
+              <p class="eyebrow iwt__caption" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+
+            {%- when 'heading' -%}
+              <{{ block.settings.tag }} class="iwt__heading iwt__heading--{{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</{{ block.settings.tag }}>
+
+            {%- when 'text' -%}
+              <div class="iwt__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+            {%- when 'stat' -%}
+              <div class="iwt__stat" {{ block.shopify_attributes }}>
+                <span class="iwt__stat-value">{{ block.settings.value | escape }}</span>
+                <span class="iwt__stat-label">{{ block.settings.label | escape }}</span>
+              </div>
+
+            {%- when 'list' -%}
+              <ul class="iwt__list" {{ block.shopify_attributes }}>
+                {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
+                {%- for item in items -%}
+                  {%- assign trimmed = item | strip -%}
+                  {%- if trimmed != blank -%}
+                    <li>{%- render 'icon', name: block.settings.icon, size: 16 -%}<span>{{ trimmed | escape }}</span></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+
+            {%- when 'rating' -%}
+              {%- assign r = block.settings.rating | times: 1.0 -%}
+              <div class="iwt__rating" {{ block.shopify_attributes }}>
+                <span class="rating-stars" role="img" aria-label="{{ r }} out of 5 stars">
+                  {%- for i in (1..5) -%}
+                    {%- assign half = i | minus: 0.5 -%}
+                    {%- if r >= i -%}
+                      <span class="rating-stars__star">{%- render 'icon', name: 'star', size: 15 -%}</span>
+                    {%- elsif r >= half -%}
+                      <span class="rating-stars__star">{%- render 'icon', name: 'star-half', size: 15 -%}</span>
+                    {%- else -%}
+                      <span class="rating-stars__star rating-stars__star--empty">{%- render 'icon', name: 'star', size: 15 -%}</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </span>
+                {%- if block.settings.count != blank -%}<strong class="iwt__rating-count">{{ block.settings.count | escape }}</strong>{%- endif -%}
+                {%- if block.settings.label != blank -%}<span class="iwt__rating-label">{{ block.settings.label | escape }}</span>{%- endif -%}
+              </div>
+
+            {%- when 'quote' -%}
+              <blockquote class="iwt__quote" {{ block.shopify_attributes }}>
+                <p>{{ block.settings.text | escape }}</p>
+                {%- if block.settings.attribution != blank -%}<cite>{{ block.settings.attribution | escape }}</cite>{%- endif -%}
+              </blockquote>
+
+            {%- when 'button' -%}
+              <div class="iwt__action" {{ block.shopify_attributes }}>
+                <a class="btn{% if block.settings.style == 'outline' %} btn--outline{% endif %}{% if block.settings.style == 'ghost' %} btn--ghost{% endif %}" href="{{ block.settings.link | default: routes.all_products_collection_url }}">{{ block.settings.label | escape }}</a>
+                {%- if block.settings.label_2 != blank -%}
+                  <a class="link-arrow" href="{{ block.settings.link_2 | default: routes.root_url }}">{{ block.settings.label_2 | escape }} {%- render 'icon', name: 'arrow-right', size: 14 -%}</a>
+                {%- endif -%}
+              </div>
+
+            {%- when 'spacer' -%}
+              <div class="iwt__spacer" style="height: {{ block.settings.height }}px;" {{ block.shopify_attributes }}></div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.iwt__grid {
+  display: grid;
+  grid-template-columns: minmax(0, var(--iwt-split, 52%)) minmax(0, 1fr);
+  gap: var(--iwt-gap, 48px);
+  align-items: center;
+}
+.iwt--flip .iwt__grid { grid-template-columns: minmax(0, 1fr) minmax(0, var(--iwt-split, 52%)); }
+.iwt--flip .iwt__media { order: 2; }
+.iwt--flip .iwt__content { order: 1; }
+
+.iwt__media { position: relative; }
+.iwt__image { display: block; width: 100%; overflow: hidden; }
+.iwt__image img,
+.iwt__image .placeholder-svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.iwt__image img { transition: transform 0.8s var(--ease); }
+.iwt__media:hover .iwt__image img { transform: scale(1.03); }
+
+.iwt__image-sub {
+  position: absolute;
+  right: -1.8rem;
+  bottom: -1.8rem;
+  width: 32%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 6px solid var(--bg);
+  box-shadow: var(--card-shadow-hover);
+}
+.iwt__image-sub img { width: 100%; height: 100%; object-fit: cover; }
+.iwt--flip .iwt__image-sub { right: auto; left: -1.8rem; }
+
+.iwt__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(var(--color-ivory-rgb), 0.94);
+  color: var(--color-ink);
+  font-family: var(--font-eyebrow);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: var(--card-shadow);
+}
+
+.iwt__content > * + * { margin-top: 1.15rem; }
+.iwt__caption { margin: 0; }
+
+.iwt__heading { margin: 0; line-height: 1.14; text-wrap: balance; }
+.iwt__heading--large { font-size: clamp(1.9rem, 1.2rem + 2.6vw, var(--h1)); }
+.iwt__heading--medium { font-size: clamp(1.6rem, 1.1rem + 2vw, var(--h2)); }
+.iwt__heading--small { font-size: var(--h3); }
+
+.iwt__text { color: var(--text-muted); }
+
+.iwt__stat { display: flex; flex-direction: column; gap: 0.15rem; }
+.iwt__stat-value { font-family: var(--font-heading); font-size: clamp(2.2rem, 1.4rem + 2.6vw, 3.4rem); line-height: 1; color: var(--accent); }
+.iwt__stat-label { font-family: var(--font-eyebrow); font-size: var(--eyebrow-size); letter-spacing: var(--eyebrow-letter-spacing); text-transform: var(--eyebrow-case); color: var(--text-muted); }
+
+.iwt__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.65rem; }
+.iwt__list li { display: flex; align-items: flex-start; gap: 0.65rem; color: var(--text-muted); font-size: var(--body-size-small); }
+.iwt__list .icon { color: var(--accent); flex: none; margin-top: 0.15em; }
+
+.iwt__rating { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+.iwt__rating-count { font-family: var(--font-heading); font-size: 1.05rem; }
+
+.iwt__rating-label { font-size: var(--body-size-small); color: var(--text-muted); }
+
+.iwt__quote { margin: 0; padding-left: 1.2rem; border-left: 2px solid rgba(var(--color-gold-rgb), 0.6); }
+.iwt__quote p { font-family: var(--font-heading); font-style: italic; font-size: 1.15rem; margin: 0 0 0.4rem; }
+.iwt__quote cite { font-style: normal; font-size: var(--body-size-small); color: var(--text-muted); }
+
+.iwt__action { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; margin-top: 1.6rem; }
+.iwt__spacer { margin: 0 !important; }
+
+@media (max-width: 989px) {
+  .iwt__grid, .iwt--flip .iwt__grid { grid-template-columns: 1fr; gap: 2.2rem; }
+  .iwt--flip .iwt__media { order: 0; }
+  .iwt--flip .iwt__content { order: 0; }
+  .iwt__image-sub { width: 24%; right: 0.6rem; bottom: -1rem; }
+  .iwt--flip .iwt__image-sub { left: 0.6rem; }
+}
+@media (max-width: 549px) {
+  .iwt__image-sub { display: none; }
+  .iwt__action .btn { flex: 1 1 100%; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Image with text",
+  "tag": "section",
+  "class": "image-with-text-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "image", "label": "Main image" },
+    { "type": "image_picker", "id": "image_2", "label": "Overlapping round image" },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 5", "label": "Portrait" },
+        { "value": "3 / 4", "label": "Tall" },
+        { "value": "2 / 3", "label": "Very tall" },
+        { "value": "16 / 9", "label": "Wide" }
+      ],
+      "default": "4 / 5"
+    },
+    { "type": "checkbox", "id": "arch", "label": "Arch mask", "default": true },
+    { "type": "checkbox", "id": "rounded", "label": "Rounded corners (ignored when arch is on)", "default": false },
+    { "type": "text", "id": "badge", "label": "Corner badge", "default": "Est. 1974" },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image column width",
+      "min": 36,
+      "max": 66,
+      "step": 2,
+      "unit": "%",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Space between columns",
+      "min": 16,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "caption",
+      "name": "Caption",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "The workshop" }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Heading", "default": "Printed one pass, one colour at a time" },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            { "value": "large", "label": "Large" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "small", "label": "Small" }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "select",
+          "id": "tag",
+          "label": "Heading level",
+          "options": [
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "p", "label": "Paragraph" }
+          ],
+          "default": "h2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>A single Bagru print can need nine separate blocks and nine days of drying. We keep the count honest — you can see the registration marks on the reverse of every length.</p>"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "40+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "artisan families" }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "Bullet list",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Items (one per line)",
+          "default": "Natural dyes, no azo pigments\nFair rates paid weekly\nMaker's name stamped on every piece\nRepair service for life"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Bullet icon",
+          "options": [
+            { "value": "check", "label": "Check" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "star", "label": "Star" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "minus", "label": "Dash" }
+          ],
+          "default": "check"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 0.5,
+          "default": 5
+        },
+        { "type": "text", "id": "count", "label": "Number of reviews", "default": "1,240" },
+        { "type": "text", "id": "label", "label": "Label", "default": "from verified buyers" }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Quote", "default": "The cloth remembers the hand that printed it." },
+        { "type": "text", "id": "attribution", "label": "Attribution", "default": "Ramesh Chhipa, master printer" }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Button label", "default": "Explore the craft" },
+        { "type": "url", "id": "link", "label": "Button link" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Button style",
+          "options": [
+            { "value": "solid", "label": "Solid" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "ghost", "label": "Text" }
+          ],
+          "default": "solid"
+        },
+        { "type": "text", "id": "label_2", "label": "Secondary link label", "default": "Meet the makers" },
+        { "type": "url", "id": "link_2", "label": "Secondary link" }
+      ]
+    },
+    {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": [
+        {
+          "type": "range",
+          "id": "height",
+          "label": "Height",
+          "min": 8,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 24
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text",
+      "blocks": [
+        { "type": "caption", "settings": { "text": "The workshop" } },
+        { "type": "heading", "settings": { "text": "Printed one pass, one colour at a time" } },
+        { "type": "text", "settings": {} },
+        { "type": "list", "settings": {} },
+        { "type": "button", "settings": {} }
+      ]
+    }
+  ]
+}
+{% endschema %}

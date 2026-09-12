@@ -1,0 +1,85 @@
+<div class="section customer-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container container--narrow">
+    <div class="customer-card">
+      <h1 class="customer-card__title h2">{{ 'customer.register.title' | t }}</h1>
+
+      {%- form 'create_customer', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}
+          <div class="form-message form-message--error" role="alert">
+            <p>{{ 'contact.form.error_heading' | t }}</p>
+            <ul>
+              {%- for field in form.errors -%}
+                <li>
+                  {%- if field == 'form' -%}
+                    {{ form.errors.messages[field] }}
+                  {%- else -%}
+                    {{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        <div class="customer-form-grid">
+          <div class="field field--float">
+            <input type="text" name="customer[first_name]" id="RegisterFirstName" placeholder=" " value="{{ form.first_name }}" autocomplete="given-name">
+            <label class="field__label" for="RegisterFirstName">{{ 'customer.register.first_name' | t }}</label>
+          </div>
+          <div class="field field--float">
+            <input type="text" name="customer[last_name]" id="RegisterLastName" placeholder=" " value="{{ form.last_name }}" autocomplete="family-name">
+            <label class="field__label" for="RegisterLastName">{{ 'customer.register.last_name' | t }}</label>
+          </div>
+          <div class="field field--float field--full">
+            <input type="email" name="customer[email]" id="RegisterEmail" placeholder=" " value="{{ form.email }}" autocomplete="email" required>
+            <label class="field__label" for="RegisterEmail">{{ 'customer.register.email' | t }}</label>
+          </div>
+          <div class="field field--float field--full">
+            <input type="password" name="customer[password]" id="RegisterPassword" placeholder=" " autocomplete="new-password" required minlength="5">
+            <label class="field__label" for="RegisterPassword">{{ 'customer.register.password' | t }}</label>
+          </div>
+        </div>
+
+        {%- if section.settings.accepts_marketing -%}
+          <label class="checkbox">
+            <input type="checkbox" name="customer[accepts_marketing]" value="true" checked>
+            <span>{{ section.settings.marketing_text | escape }}</span>
+          </label>
+        {%- endif -%}
+
+        <button type="submit" class="btn btn--full">{{ 'customer.register.submit' | t }}</button>
+        <p class="customer-links" style="justify-content: center;">
+          <a class="link-plain text-small" href="{{ routes.account_login_url }}">{{ 'customer.login_page.sign_in' | t }}</a>
+          <span class="text-small text-muted">·</span>
+          <a class="link-plain text-small" href="{{ routes.root_url }}">{{ 'customer.register.cancel' | t }}</a>
+        </p>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Register",
+  "tag": "section",
+  "class": "customer-register-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "checkbox", "id": "accepts_marketing", "label": "Show a marketing opt-in checkbox", "default": true },
+    { "type": "text", "id": "marketing_text", "label": "Marketing opt-in text", "default": "Send me studio notes, new drops and early access." }
+  ]
+}
+{% endschema %}

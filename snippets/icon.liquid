@@ -1,0 +1,143 @@
+{%- comment -%}
+  Inline SVG icon set for the Kala Katha theme. No icon fonts, no image files.
+  Usage: {% render 'icon', name: 'cart' %}   |   {% render 'icon', name: 'cart', size: 28 %}
+{%- endcomment -%}
+{%- liquid
+  assign stroke = settings.icon_weight
+  if stroke == blank
+    assign stroke = 1.5
+  endif
+  assign size = size | default: settings.icon_size | default: 22
+-%}
+<span class="icon icon--{{ name }}" style="--icon-size: {{ size }}px" aria-hidden="true" focusable="false">
+  {%- case name -%}
+  {%- when 'cart' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.6l2.2 11.2a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 2-1.5L21 7H6"/></svg>
+  {%- when 'bag' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 2.5h11.6l2.2 4v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-13l2.2-4Z"/><path d="M4 6.5h16"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+  {%- when 'search' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.2-4.2"/></svg>
+  {%- when 'user' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-1.6A4.4 4.4 0 0 0 15.6 15H8.4A4.4 4.4 0 0 0 4 19.4V21"/><circle cx="12" cy="7.2" r="4.2"/></svg>
+  {%- when 'menu' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  {%- when 'close' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 5.5 5.5 18.5M5.5 5.5l13 13"/></svg>
+  {%- when 'chevron-down' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9.5 6 6 6-6"/></svg>
+  {%- when 'chevron-up' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14.5 6-6 6 6"/></svg>
+  {%- when 'chevron-left' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 5.5-6 6.5 6 6.5"/></svg>
+  {%- when 'chevron-right' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6 6.5-6 6.5"/></svg>
+  {%- when 'arrow-right' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+  {%- when 'arrow-left' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5M11 18l-6-6 6-6"/></svg>
+  {%- when 'arrow-up' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V5M6 11l6-6 6 6"/></svg>
+  {%- when 'arrow-down' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg>
+  {%- when 'plus' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+  {%- when 'minus' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+  {%- when 'check' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6.5-11 11-5-5"/></svg>
+  {%- when 'check-circle' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="m8 12.2 2.7 2.7L16.2 9.4"/></svg>
+  {%- when 'heart' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 5.6a5.2 5.2 0 0 0-7.4 0L12 6.8l-1.2-1.2a5.2 5.2 0 1 0-7.4 7.4l1.2 1.2L12 21.4l7.4-7.2 1.2-1.2a5.2 5.2 0 0 0 0-7.4Z"/></svg>
+  {%- when 'truck' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 5.5h12.4v10.8H1.8z"/><path d="M14.2 9h3.9l3.1 3.2v4.1h-7"/><circle cx="6" cy="18.2" r="2"/><circle cx="17.4" cy="18.2" r="2"/></svg>
+  {%- when 'returns' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.5v5.2h-5.2"/><path d="M20.4 14.6a8.6 8.6 0 1 1-2-8.4l3.1 3.1"/></svg>
+  {%- when 'shield' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s7.6-3.7 7.6-9.6V5.4L12 2.6 4.4 5.4v6.5c0 5.9 7.6 9.6 7.6 9.6Z"/><path d="m9.2 11.8 2 2 3.6-3.8"/></svg>
+  {%- when 'leaf' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20.5A7.5 7.5 0 0 1 9.6 6C15.4 4.9 17 4.3 19 2c1 2.1 2 4.4 2 8.3 0 5.7-4.9 10.2-10 10.2Z"/><path d="M2.5 21.5c0-3.1 2-5.6 5.3-6.3 2.4-.5 4.9-2 6-3.2"/></svg>
+  {%- when 'sparkle' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5 12.9 8.6 19 10.5 12.9 12.4 11 18.5 9.1 12.4 3 10.5 9.1 8.6 11 2.5Z"/><path d="m18.4 15.6.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9.9-2.6Z"/></svg>
+  {%- when 'phone' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 16.9v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6 2 2 0 0 1 2-2.1h2.8a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L7.6 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+  {%- when 'mail' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><rect x="2.2" y="4.4" width="19.6" height="15.2" rx="2.2"/><path d="m2.6 7.2 9.4 5.9 9.4-5.9"/></svg>
+  {%- when 'pause' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 5v14M15.5 5v14"/></svg>
+  {%- when 'zoom' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8.2v5.6M8.2 11h5.6"/></svg>
+  {%- when 'quote' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 5.5C6.4 6.9 4.5 9.9 4.5 13.4c0 3 1.7 5.1 4.2 5.1 2.1 0 3.7-1.5 3.7-3.6 0-2-1.4-3.4-3.3-3.4-.4 0-.8 0-1 .2.3-1.7 1.6-3.3 3.4-4.2l-1.9-2Zm9 0c-3.2 1.4-5.1 4.4-5.1 7.9 0 3 1.7 5.1 4.2 5.1 2.1 0 3.7-1.5 3.7-3.6 0-2-1.4-3.4-3.3-3.4-.4 0-.8 0-1 .2.3-1.7 1.6-3.3 3.4-4.2l-1.9-2Z"/></svg>
+  {%- when 'gift' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="8.2" width="18.4" height="4" rx="1"/><path d="M4.6 12.2V21h14.8v-8.8M12 8.2V21"/><path d="M12 8.2S10.6 3.2 8.1 3.2a2.5 2.5 0 0 0 0 5H12Zm0 0s1.4-5 3.9-5a2.5 2.5 0 0 1 0 5H12Z"/></svg>
+  {%- when 'package' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.4 9 4.8v9.6l-9 4.8-9-4.8V7.2l9-4.8Z"/><path d="m3.3 7.4 8.7 4.7 8.7-4.7M12 12.1v9.5"/></svg>
+  {%- when 'clock' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 6.8V12l3.6 2.1"/></svg>
+  {%- when 'pin' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 10.2c0 5.8-8.8 11.6-8.8 11.6s-8.8-5.8-8.8-11.6a8.8 8.8 0 1 1 17.6 0Z"/><circle cx="12" cy="10" r="3.1"/></svg>
+  {%- when 'card' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><rect x="2.2" y="5" width="19.6" height="14" rx="2.2"/><path d="M2.2 10h19.6M6 14.8h3.4"/></svg>
+  {%- when 'lock' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><rect x="4.2" y="10.4" width="15.6" height="10.8" rx="2"/><path d="M8 10.4V7.2a4 4 0 0 1 8 0v3.2"/></svg>
+  {%- when 'trash' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.2h17M8.5 6.2V4h7v2.2M6.2 6.2 7.3 21h9.4l1.1-14.8"/></svg>
+  {%- when 'share' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5.4" r="2.8"/><circle cx="6" cy="12" r="2.8"/><circle cx="18" cy="18.6" r="2.8"/><path d="m8.5 10.7 7-4M8.5 13.3l7 4"/></svg>
+  {%- when 'info' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 16.4v-5M12 8.1h.01"/></svg>
+  {%- when 'alert' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 2.2 20.4h19.6L12 3.2Z"/><path d="M12 9.6v4.2M12 17.2h.01"/></svg>
+  {%- when 'grid' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="3.2" width="7.4" height="7.4" rx="1.2"/><rect x="13.4" y="3.2" width="7.4" height="7.4" rx="1.2"/><rect x="3.2" y="13.4" width="7.4" height="7.4" rx="1.2"/><rect x="13.4" y="13.4" width="7.4" height="7.4" rx="1.2"/></svg>
+  {%- when 'list' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 6.2h12M8.5 12h12M8.5 17.8h12M3.6 6.2h.01M3.6 12h.01M3.6 17.8h.01"/></svg>
+  {%- when 'eye' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M2.2 12S5.9 5.2 12 5.2 21.8 12 21.8 12 18.1 18.8 12 18.8 2.2 12 2.2 12Z"/><circle cx="12" cy="12" r="3.2"/></svg>
+  {%- when 'sort' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.2v15.6M7 19.8 4 16.8M7 19.8l3-3M17 19.8V4.2M17 4.2l-3 3M17 4.2l3 3"/></svg>
+  {%- when 'filter' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M3.2 5h17.6l-6.9 8v6.2l-3.8 1.8V13L3.2 5Z"/></svg>
+  {%- when 'external' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M14.2 3.8h6v6"/><path d="M20.2 3.8 11 13"/><path d="M18 14.2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2h5"/></svg>
+  {%- when 'chat' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.6a7.9 7.9 0 0 1-8.4 7.9 9.5 9.5 0 0 1-2.7-.4L4 21l1.5-4.2A7.8 7.8 0 0 1 3.6 11 7.9 7.9 0 0 1 12 3.7a7.9 7.9 0 0 1 9 7.9Z"/></svg>
+  {%- when 'ruler' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 3.2 6.1 6.1L10.9 19.2 4.8 13.1 14.7 3.2Z"/><path d="m8.4 9.5 1.8 1.8M11.2 6.7 13 8.5M5.6 12.3l1.8 1.8"/></svg>
+  {%- when 'brush' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M17.6 3.4a2.6 2.6 0 0 1 3.6 3.6L11 17.2l-4.4.8.8-4.4L17.6 3.4Z"/><path d="M6.6 19.2c0 1.3-1.1 2.4-2.4 2.4H3"/></svg>
+  {%- when 'scissors' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><path d="M20 4 8.6 15.4M8.6 8.6 20 20M8.6 8.6H6M6 15.4h2.6"/></svg>
+  {%- when 'globe' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.4 2.6 3.6 5.7 3.6 9.2s-1.2 6.6-3.6 9.2c-2.4-2.6-3.6-5.7-3.6-9.2S9.6 5.4 12 2.8Z"/></svg>
+  {%- when 'instagram' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+  {%- when 'pinterest' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.4"/><path d="M9.9 20.2c-.6-1 .1-2.4.3-3.3l.9-3.7c-.2-.5-.3-1-.2-1.6.1-1.2 1.1-2.1 2.2-2 1 0 1.5.7 1.5 1.6 0 1.1-.6 2.6-.9 4-.2.8.2 1.5 1.1 1.5 1.6 0 2.7-2 2.7-4.3 0-1.8-1.3-3.2-3.5-3.2-2.5 0-4.1 1.8-4.1 3.8 0 .7.2 1.2.5 1.6.1.2.2.3.1.5l-.2.7c0 .2-.2.3-.4.2-1.1-.5-1.6-1.8-1.6-3.2 0-2.5 2-5.4 6.1-5.4 3.2 0 5.4 2.3 5.4 4.8 0 3.3-1.9 5.7-4.6 5.7-.9 0-1.8-.5-2.1-1.1l-.6 2.2c-.2.8-.6 1.6-1 2.2Z"/></svg>
+  {%- when 'youtube' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><rect x="2.2" y="5.2" width="19.6" height="13.6" rx="4"/><path d="m10.2 9.2 5 2.8-5 2.8V9.2Z"/></svg>
+  {%- when 'linkedin' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3.4"/><path d="M7.6 10.4v6.2M7.6 7.5v.1M11.4 16.6v-3.4c0-1 .6-1.8 1.6-1.8s1.5.8 1.5 1.8v3.4M11.4 16.6v-6.2"/></svg>
+  {%- when 'hand' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.6a1.4 1.4 0 0 1 2.8 0V11m0-.6V4.4a1.4 1.4 0 0 1 2.8 0v6m0-.6V6.2a1.4 1.4 0 0 1 2.8 0v8.4c0 3.6-2.4 6.6-6 6.6s-6-2.6-6-6v-3a1.4 1.4 0 0 1 2.6-.7L9 13"/></svg>
+  {%- when 'loom' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v16H3z"/><path d="M7 4v16M12 4v16M17 4v16M3 9h18M3 15h18"/></svg>
+  {%- when 'star' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2.2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 18l-6.2 3.3L7 14.4l-5-4.9 6.9-1L12 2.2Z"/></svg>
+  {%- when 'star-half' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2.2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 18l-6.2 3.3L7 14.4l-5-4.9 6.9-1L12 2.2Zm0 0v15.8l-6.2 3.3" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+  {%- when 'play' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M6.5 3.6v16.8L20.5 12 6.5 3.6Z"/></svg>
+  {%- when 'whatsapp' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.05 2.5a9.4 9.4 0 0 0-8.1 14.2L2.5 21.5l4.9-1.4a9.4 9.4 0 1 0 4.65-17.6Zm0 1.7a7.7 7.7 0 1 1-4 14.3l-.3-.2-2.9.8.8-2.8-.2-.3a7.7 7.7 0 0 1 6.6-11.8Zm-2.6 3.4c-.2 0-.5.1-.7.4-.3.3-.9 1-.9 2.3 0 1.4 1 2.7 1.1 2.9.2.2 2 3.1 4.9 4.2 2.4.9 2.9.7 3.4.7.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4l-1.9-.9c-.2-.1-.4-.1-.6.1l-.8 1c-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.3-1.5-1.5-1.8-.1-.2 0-.4.1-.5l.4-.5c.2-.2.2-.3.3-.5v-.5c-.1-.1-.6-1.5-.8-2-.2-.5-.4-.5-.6-.5h-.5Z"/></svg>
+  {%- when 'facebook' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M13.5 21.5v-7.8h2.6l.4-3h-3V8.8c0-.9.3-1.5 1.5-1.5h1.6V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.1H7.5v3h2.7v7.8h3.3Z"/></svg>
+  {%- when 'tiktok' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16.2 2.5h-2.9v12.2c0 1.4-1.1 2.5-2.5 2.5s-2.5-1.1-2.5-2.5 1.1-2.5 2.5-2.5c.3 0 .5 0 .8.1V9.2c-.3 0-.5-.1-.8-.1a5.4 5.4 0 1 0 5.4 5.4V9.1c1 .7 2.3 1.1 3.6 1.1V7.3c-1.9 0-3.6-1.6-3.6-3.6V2.5Z"/></svg>
+  {%- when 'twitter' -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.2l-4.9-6.4L5.1 21H2l7.3-8.3L2.4 3h6.4l4.4 5.8L17.5 3Zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3Z"/></svg>
+  {%- else -%}
+    <svg class="icon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ stroke }}" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+  {%- endcase -%}
+</span>

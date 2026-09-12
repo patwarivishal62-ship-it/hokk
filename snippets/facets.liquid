@@ -1,0 +1,141 @@
+{%- comment -%}
+  Storefront filtering facets. Everything is rendered as links so filtering
+  works with JavaScript disabled.
+  Params: collection, layout (sidebar|drawer|horizontal)
+{%- endcomment -%}
+{%- liquid
+  assign filters = collection.filters
+  assign style = layout | default: 'sidebar'
+  assign active_count = 0
+  for filter in filters
+    for value in filter.values
+      if value.active
+        assign active_count = active_count | plus: 1
+      endif
+    endfor
+  endfor
+-%}
+{%- if filters.size > 0 -%}
+  <div class="facets facets--{{ style }}">
+    <div class="facets__head">
+      <h2 class="facets__title">
+        {{ 'collections.filters.title' | t }}
+        {%- if active_count > 0 -%}<span class="facets__count">{{ active_count }}</span>{%- endif -%}
+      </h2>
+      {%- if active_count > 0 -%}
+        <a class="facets__clear" href="{{ collection.url }}">
+          {{ 'collections.filters.clear_all' | t }} {%- render 'icon', name: 'close', size: 13 -%}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- for filter in filters -%}
+      {%- case filter.type -%}
+        {%- when 'price_range' -%}
+          {%- liquid
+            assign range_max = filter.range_max
+            if range_max == blank
+              assign range_max = filter.max_value.value
+            endif
+          -%}
+          <details class="facet" open>
+            <summary class="facet__summary">
+              <span class="facet__label">{{ filter.label | escape }}</span>
+              {%- render 'icon', name: 'chevron-down', size: 15 -%}
+            </summary>
+            <div class="facet__body">
+              <form class="facet__price-form" action="{{ collection.url }}" method="get">
+                {%- for other in filters -%}
+                  {%- if other.type == 'list' -%}
+                    {%- for value in other.values -%}
+                      {%- if value.active -%}
+                        <input type="hidden" name="{{ value.param_name }}" value="{{ value.value }}">
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if collection.sort_by != blank -%}
+                  <input type="hidden" name="sort_by" value="{{ collection.sort_by | escape }}">
+                {%- endif -%}
+
+                <div class="facet__price-inputs">
+                  <span class="facet__price-field">
+                    <span class="facet__currency">{{ cart.currency.symbol }}</span>
+                    <input
+                      type="number"
+                      min="0"
+                      inputmode="numeric"
+                      name="{{ filter.min_value.param_name }}"
+                      id="FacetPriceMin-{{ forloop.index }}"
+                      placeholder="0"
+                      {% if filter.min_value.value != blank %}value="{{ filter.min_value.value | money_without_currency | remove: ',' | remove: '.' }}"{% endif %}
+                      aria-label="{{ 'collections.filters.from' | t }}"
+                    >
+                  </span>
+                  <span class="facet__price-sep">–</span>
+                  <span class="facet__price-field">
+                    <span class="facet__currency">{{ cart.currency.symbol }}</span>
+                    <input
+                      type="number"
+                      min="0"
+                      inputmode="numeric"
+                      name="{{ filter.max_value.param_name }}"
+                      id="FacetPriceMax-{{ forloop.index }}"
+                      placeholder="{{ range_max | money_without_currency | remove: ',' }}"
+                      {% if filter.max_value.value != blank %}value="{{ filter.max_value.value | money_without_currency | remove: ',' | remove: '.' }}"{% endif %}
+                      aria-label="{{ 'collections.filters.to' | t }}"
+                    >
+                  </span>
+                </div>
+                <button class="btn btn--outline btn--small" type="submit">{{ 'collections.filters.apply' | t }}</button>
+              </form>
+              <p class="facet__range text-small text-muted">
+                {{ 0 | money }} – {{ range_max | money }}
+              </p>
+            </div>
+          </details>
+
+        {%- when 'list' -%}
+          <details class="facet" open>
+            <summary class="facet__summary">
+              <span class="facet__label">{{ filter.label | escape }}</span>
+              {%- render 'icon', name: 'chevron-down', size: 15 -%}
+            </summary>
+            <div class="facet__body">
+              <ul class="facet__list" role="list" data-facet-list>
+                {%- for value in filter.values -%}
+                  {%- liquid
+                    assign href = value.url_to_add
+                    if value.active
+                      assign href = value.url_to_remove
+                    endif
+                    assign hidden = false
+                    if forloop.index > 8
+                      assign hidden = true
+                    endif
+                  -%}
+                  <li class="facet__item{% if hidden and value.active == false %} facet__item--extra{% endif %}">
+                    <a class="facet__link{% if value.active %} is-active{% endif %}{% if value.count == 0 and value.active == false %} is-empty{% endif %}" href="{{ href }}">
+                      <span class="facet__checkbox" aria-hidden="true">
+                        {%- if value.active -%}{%- render 'icon', name: 'check', size: 12 -%}{%- endif -%}
+                      </span>
+                      <span class="facet__value">{{ value.label | escape }}</span>
+                      <span class="facet__num">{{ value.count }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+
+              {%- if filter.values.size > 8 -%}
+                <button type="button" class="facet__more link-plain" data-facet-more
+                  data-more-label="{{ 'collections.filters.show_more' | t }}"
+                  data-less-label="{{ 'collections.filters.show_less' | t }}">
+                  {{ 'collections.filters.show_more' | t }}
+                </button>
+              {%- endif -%}
+            </div>
+          </details>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

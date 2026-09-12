@@ -1,0 +1,128 @@
+{%- comment -%}
+  Collections list template section.
+{%- endcomment -%}
+<div class="section list-collections color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    <header class="page-header page-header--center">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow eyebrow--center">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="page-header__title">
+        {%- if section.settings.heading != blank -%}{{ section.settings.heading | escape }}{%- else -%}{{ 'collections.general.title' | t }}{%- endif -%}
+      </h1>
+      {%- if section.settings.text != blank -%}
+        <div class="page-header__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.show_motif and settings.motif_enable -%}
+        <div class="motif-row">{%- render 'motif', style: settings.motif_style -%}</div>
+      {%- endif -%}
+    </header>
+
+    {%- paginate collections by section.settings.collections_per_page -%}
+      <div class="grid collections-grid" style="--cols: {{ section.settings.columns }}; --cols-tablet: 2; --cols-mobile: {% if section.settings.columns > 2 %}2{% else %}1{% endif %};">
+        {%- liquid
+          case section.settings.sort
+            when 'products_high'
+              assign sorted = collections | sort: 'all_products_count' | reverse
+            when 'date'
+              assign sorted = collections | sort: 'published_at' | reverse
+            when 'date_ascending'
+              assign sorted = collections | sort: 'published_at'
+            else
+              assign sorted = collections | sort: 'title'
+          endcase
+        -%}
+        {%- for collection in sorted -%}
+          <div class="grid__item" data-load-item data-animate>
+            {%- render 'collection-card', collection: collection, index: forloop.index, ratio: section.settings.image_ratio, style: section.settings.card_style, show_count: section.settings.show_count -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- render 'pagination', paginate: paginate, style: 'numbers' -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "tag": "section",
+  "class": "list-collections-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The house" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "All collections" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    {
+      "type": "select",
+      "id": "sort",
+      "label": "Sort collections by",
+      "options": [
+        { "value": "alphabetical", "label": "Alphabetically" },
+        { "value": "products_high", "label": "Product count, high to low" },
+        { "value": "date", "label": "Date published, new to old" },
+        { "value": "date_ascending", "label": "Date published, old to new" }
+      ],
+      "default": "alphabetical"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "range",
+      "id": "collections_per_page",
+      "label": "Collections per page",
+      "min": 3,
+      "max": 36,
+      "step": 3,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "cover", "label": "Text over image" },
+        { "value": "split", "label": "Text below image" },
+        { "value": "arch", "label": "Arch over image" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "wide", "label": "Wide" }
+      ],
+      "default": "portrait"
+    },
+    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": true }
+  ]
+}
+{% endschema %}

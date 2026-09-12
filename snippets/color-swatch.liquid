@@ -1,0 +1,53 @@
+{%- comment -%}
+  Renders a colour dot for a variant option value.
+  Params: value (string), image (optional image object), size (px)
+  Falls back to the variant image when the colour name is not recognised.
+{%- endcomment -%}
+{%- liquid
+  assign v = value | downcase | strip
+  assign bg = ''
+  case v
+    when 'white', 'ivory', 'off white', 'off-white', 'natural', 'unbleached'
+      assign bg = '#F6F1E7'
+    when 'cream', 'beige', 'sand', 'oat', 'bone', 'linen'
+      assign bg = '#E7D9C0'
+    when 'black', 'ink', 'charcoal'
+      assign bg = '#1E1712'
+    when 'grey', 'gray', 'silver', 'ash', 'stone'
+      assign bg = '#9A9A97'
+    when 'red', 'madder', 'scarlet', 'crimson'
+      assign bg = '#B03028'
+    when 'maroon', 'burgundy', 'wine', 'oxblood'
+      assign bg = '#6B2233'
+    when 'pink', 'rose', 'blush'
+      assign bg = '#E3A7B0'
+    when 'orange', 'terracotta', 'rust', 'copper', 'clay'
+      assign bg = '#C2643C'
+    when 'mustard', 'gold', 'yellow', 'marigold', 'saffron', 'ochre'
+      assign bg = '#E0A33E'
+    when 'green', 'leaf', 'olive', 'sage', 'moss'
+      assign bg = '#4C6B3C'
+    when 'teal', 'peacock', 'turquoise'
+      assign bg = '#2A7A78'
+    when 'blue', 'indigo', 'navy', 'cobalt'
+      assign bg = '#2C4A7C'
+    when 'sky', 'powder blue', 'light blue'
+      assign bg = '#9CC3E0'
+    when 'purple', 'violet', 'aubergine', 'plum'
+      assign bg = '#6A3D7A'
+    when 'brown', 'chocolate', 'tan', 'camel', 'coffee'
+      assign bg = '#7A5230'
+    when 'multicolour', 'multi', 'mixed', 'assorted', 'print'
+      assign bg = 'linear-gradient(135deg, #C2643C 0%, #E0A33E 34%, #2F5D50 67%, #243A5E 100%)'
+  endcase
+  assign dim = size | default: 15
+-%}
+{%- if bg != blank -%}
+  <span class="product-card__swatch" style="width: {{ dim }}px; height: {{ dim }}px; background: {{ bg }};" title="{{ value | escape }}" aria-hidden="true"></span>
+{%- elsif image != blank -%}
+  <span class="product-card__swatch" style="width: {{ dim }}px; height: {{ dim }}px;" title="{{ value | escape }}" aria-hidden="true">
+    <img src="{{ image | image_url: width: 40 }}" alt="" width="{{ dim }}" height="{{ dim }}" loading="lazy">
+  </span>
+{%- else -%}
+  <span class="product-card__swatch product-card__swatch--text" style="width: {{ dim | times: 1.5 }}px; height: {{ dim }}px;" title="{{ value | escape }}" aria-hidden="true">{{ value | truncate: 1, '' }}</span>
+{%- endif -%}

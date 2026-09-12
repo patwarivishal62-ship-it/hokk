@@ -1,0 +1,108 @@
+<div class="section customer-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'breadcrumb' -%}
+
+    <header class="page-header page-header--split" style="display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;">
+      <div>
+        <p class="eyebrow">{{ 'customer.account.title' | t }}</p>
+        <h1 class="page-header__title">
+          {%- if customer.first_name != blank -%}
+            {{ 'customer.account.welcome' | t: first_name: customer.first_name }}
+          {%- else -%}
+            {{ customer.email }}
+          {%- endif -%}
+        </h1>
+      </div>
+      <div class="customer-links">
+        <a class="btn btn--outline btn--small" href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t }}</a>
+        <a class="btn btn--ghost btn--small" href="{{ routes.account_logout_url }}">{{ 'customer.account.log_out' | t }}</a>
+      </div>
+    </header>
+
+    <div class="customer-account-grid">
+      <section class="customer-card">
+        <h2 class="customer-card__title h3">{{ 'customer.orders.title' | t }}</h2>
+
+        {%- if customer.orders.size > 0 -%}
+          {%- paginate customer.orders by 10 -%}
+          <div class="table-wrap">
+            <table class="customer-table">
+              <thead>
+                <tr>
+                  <th>{{ 'customer.orders.order_number' | t }}</th>
+                  <th>{{ 'customer.orders.date' | t }}</th>
+                  <th>{{ 'customer.orders.payment_status' | t }}</th>
+                  <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                  <th class="text-right">{{ 'customer.orders.total' | t }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td><a class="link-plain" href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                    <td>{{ order.created_at | date: '%e %B %Y' | strip }}</td>
+                    <td><span class="customer-status">{{ order.financial_status_label }}</span></td>
+                    <td>{{ order.fulfillment_status_label }}</td>
+                    <td class="text-right">{{ order.total_price | money }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+          {%- render 'pagination', paginate: paginate, style: 'numbers' -%}
+          {%- endpaginate -%}
+        {%- else -%}
+          <p class="text-muted">{{ 'customer.orders.none' | t }}</p>
+          <a class="btn btn--outline btn--small" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
+        {%- endif -%}
+      </section>
+
+      <aside class="customer-card">
+        <h2 class="customer-card__title h3">{{ 'customer.account.details' | t }}</h2>
+        {%- assign default_address = customer.default_address -%}
+        <address class="customer-address-block text-small text-muted">
+          {{ default_address | format_address }}
+        </address>
+        <div class="customer-links">
+          <a class="link-plain text-small" href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t }}</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.customer-account-grid { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: 1.4rem; align-items: start; }
+@media (max-width: 989px) { .customer-account-grid { grid-template-columns: 1fr; } }
+.table-wrap { overflow-x: auto; }
+.customer-address-block { font-style: normal; line-height: 1.7; }
+.text-right { text-align: right; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Account",
+  "tag": "section",
+  "class": "customer-account-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "paragraph",
+      "content": "Order history is paginated automatically."
+    }
+  ]
+}
+{% endschema %}

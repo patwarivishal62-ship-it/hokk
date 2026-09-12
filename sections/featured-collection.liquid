@@ -1,0 +1,265 @@
+{%- comment -%}
+  Featured collection — a product rail or grid pulled from one collection.
+{%- endcomment -%}
+{%- liquid
+  assign collection = section.settings.collection
+  assign limit = section.settings.products_to_show
+  assign per_row = section.settings.columns_desktop
+  assign layout = section.settings.layout
+  assign cols_tablet = 3
+  if per_row < 3
+    assign cols_tablet = per_row
+  endif
+  assign cols_mobile = 2
+  if per_row < 2
+    assign cols_mobile = 1
+  endif
+  if section.settings.columns_mobile == '1'
+    assign cols_mobile = 1
+  endif
+  assign ratio = section.settings.image_ratio
+  assign header_action = ''
+  if section.settings.view_all_style == 'header'
+    assign header_action = section.settings.view_all_label
+  endif
+  assign count = 0
+  if collection != blank
+    assign count = collection.products_count | default: 0
+    if count > limit
+      assign count = limit
+    endif
+  else
+    assign count = limit
+  endif
+-%}
+
+<div class="featured-collection section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'section-header',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.heading,
+      text: section.settings.text,
+      align: section.settings.header_alignment,
+      action_label: header_action,
+      action_link: collection.url,
+      show_motif: section.settings.show_motif,
+      animate: true
+    -%}
+
+    {%- if layout == 'carousel' -%}
+      <div class="slider featured-collection__slider" data-slider data-per-view="{{ per_row }}">
+        <div class="slider__viewport grid product-grid" style="--cols: {{ per_row }}; --cols-tablet: {{ cols_tablet }}; --cols-mobile: {{ cols_mobile }}; --gutter: {{ section.settings.spacing }}px;">
+          {%- if collection != blank -%}
+            {%- for product in collection.products limit: limit -%}
+              <div class="grid__item slider__slide" data-slide style="flex-basis: calc((100% - (var(--gutter) * (var(--cols) - 1))) / var(--cols));">
+                {%- render 'product-card', product: product, ratio: ratio, index: forloop.index, quick_add: section.settings.quick_add -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..limit) -%}
+              <div class="grid__item slider__slide" data-slide style="flex-basis: calc((100% - (var(--gutter) * (var(--cols) - 1))) / var(--cols));">
+                {%- render 'product-card', product: nil, ratio: ratio, index: i -%}
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        {%- if count > per_row -%}
+          <div class="slider__controls">
+            <button type="button" class="slider__btn" data-slider-prev aria-label="{{ 'general.accessibility.previous' | t }}">{%- render 'icon', name: 'chevron-left', size: 18 -%}</button>
+            <div class="slider__dots" data-slider-dots></div>
+            <button type="button" class="slider__btn" data-slider-next aria-label="{{ 'general.accessibility.next' | t }}">{%- render 'icon', name: 'chevron-right', size: 18 -%}</button>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="grid product-grid" style="--cols: {{ per_row }}; --cols-tablet: {{ cols_tablet }}; --cols-mobile: {{ cols_mobile }}; --gutter: {{ section.settings.spacing }}px;">
+        {%- if collection != blank -%}
+          {%- for product in collection.products limit: limit -%}
+            <div class="grid__item" data-load-item data-animate>
+              {%- render 'product-card', product: product, ratio: ratio, index: forloop.index, quick_add: section.settings.quick_add -%}
+            </div>
+          {%- endfor -%}
+          {%- if collection.products_count == 0 -%}
+            <p class="text-muted">{{ 'collections.general.no_products' | t }}</p>
+          {%- endif -%}
+        {%- else -%}
+          {%- for i in (1..limit) -%}
+            <div class="grid__item" data-load-item data-animate>
+              {%- render 'product-card', product: nil, ratio: ratio, index: i -%}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.view_all_label != blank and section.settings.view_all_style == 'button' -%}
+      <div class="featured-collection__footer">
+        <a class="btn btn--outline" href="{{ collection.url | default: routes.all_products_collection_url }}">{{ section.settings.view_all_label | escape }}</a>
+        {%- if section.settings.show_count and collection != blank -%}
+          <span class="text-small text-muted">{{ 'collections.general.products_with_count' | t: count: collection.products_count }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.featured-collection .grid { margin-top: 2.4rem; }
+.featured-collection__slider .grid { margin-top: 0; display: flex; }
+.featured-collection__slider .slider__controls { margin-top: 1.8rem; }
+
+.featured-collection__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-top: 2.6rem;
+}
+
+@media (max-width: 749px) {
+  .featured-collection__slider .grid > .grid__item { flex-basis: calc((100% - var(--gutter)) / 1.55) !important; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "class": "featured-collection-section",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The block-print table" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "split", "label": "Split" }
+      ],
+      "default": "split"
+    },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "header", "content": "Products" },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Maximum products to show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "tall", "label": "Tall" },
+        { "value": "landscape", "label": "Landscape" }
+      ],
+      "default": "portrait"
+    },
+    { "type": "checkbox", "id": "quick_add", "label": "Enable quick add", "default": true },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Space between cards",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    { "type": "header", "content": "View all" },
+    { "type": "text", "id": "view_all_label", "label": "Label", "default": "View the whole collection" },
+    {
+      "type": "select",
+      "id": "view_all_style",
+      "label": "Style",
+      "options": [
+        { "value": "button", "label": "Button below the grid" },
+        { "value": "header", "label": "Link in the header" },
+        { "value": "none", "label": "Hidden" }
+      ],
+      "default": "button"
+    },
+    { "type": "checkbox", "id": "show_count", "label": "Show the product count", "default": true },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    { "name": "Featured collection" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+{%- comment -%}
+  Share buttons. Params: title, url, image
+{%- endcomment -%}
+{%- if settings.share_buttons -%}
+  {%- liquid
+    assign share_url = url | default: shop.url
+    assign share_title = title | default: shop.name | url_param_escape
+  -%}
+  <div class="share-buttons">
+    <span class="share-buttons__label">{{ 'general.share.label' | t }}</span>
+    <div class="share-buttons__list">
+      <a href="https://www.facebook.com/sharer.php?u={{ share_url | url_param_escape }}" target="_blank" rel="noopener" aria-label="{{ 'general.share.facebook' | t }}">
+        {%- render 'icon', name: 'facebook', size: 17 -%}
+      </a>
+      <a href="https://twitter.com/intent/tweet?text={{ share_title }}&amp;url={{ share_url | url_param_escape }}" target="_blank" rel="noopener" aria-label="{{ 'general.share.twitter' | t }}">
+        {%- render 'icon', name: 'twitter', size: 17 -%}
+      </a>
+      <a href="https://pinterest.com/pin/create/button/?url={{ share_url | url_param_escape }}&amp;description={{ share_title }}{%- if image != blank -%}&amp;media={{ image | image_url: width: 1000 | prepend: 'https:' | url_param_escape }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ 'general.share.pinterest' | t }}">
+        {%- render 'icon', name: 'pinterest', size: 17 -%}
+      </a>
+      <a href="https://wa.me/?text={{ share_title | append: ' ' | append: share_url | url_param_escape }}" target="_blank" rel="noopener" aria-label="{{ 'general.share.whatsapp' | t }}">
+        {%- render 'icon', name: 'whatsapp', size: 17 -%}
+      </a>
+      <button type="button" data-share-copy data-share-url="{{ share_url }}" aria-label="{{ 'general.share.copy_link' | t }}">
+        {%- render 'icon', name: 'share', size: 17 -%}
+        <span class="visually-hidden" data-share-label>{{ 'general.share.copy_link' | t }}</span>
+      </button>
+    </div>
+  </div>
+{%- endif -%}

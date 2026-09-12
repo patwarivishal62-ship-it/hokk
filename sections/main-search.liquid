@@ -1,0 +1,163 @@
+{%- comment -%}
+  Search results template section.
+{%- endcomment -%}
+{%- liquid
+  assign results_per_page = section.settings.results_per_page | default: 24
+  assign types = section.settings.search_types | default: 'product,article,page'
+-%}
+<div class="section search-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'breadcrumb' -%}
+
+    <header class="page-header page-header--center search-section__header">
+      <p class="eyebrow eyebrow--center">{{ 'general.search.search' | t }}</p>
+      {%- if search.performed -%}
+        <h1 class="page-header__title">{{ 'search.results_for' | t: terms: search.terms }}</h1>
+        <p class="text-muted">{{ 'search.results_with_count' | t: count: search.results_count, terms: search.terms }}</p>
+      {%- else -%}
+        <h1 class="page-header__title">{{ 'search.title' | t }}</h1>
+      {%- endif -%}
+    </header>
+
+    <div class="search-section__form container--narrow">
+      {%- render 'predictive-search', id: 'search-page', large: true -%}
+    </div>
+
+    {%- if search.performed -%}
+      {%- paginate search.results by results_per_page -%}
+        {%- if search.results_count == 0 -%}
+          <div class="collection-empty">
+            <span class="motif">{%- render 'motif', style: settings.motif_style -%}</span>
+            <h2 class="h3">{{ 'search.no_results' | t: terms: search.terms }}</h2>
+            <p class="text-muted container--narrow">{{ section.settings.no_results_text | escape }}</p>
+            <a class="btn btn--outline" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
+          </div>
+        {%- else -%}
+          <div class="grid search-grid" id="SearchGrid-{{ section.id }}" style="--cols: {{ section.settings.columns | default: 4 }}; --cols-tablet: 3; --cols-mobile: 2;">
+            {%- for item in search.results -%}
+              <div class="grid__item" data-load-item data-animate>
+                {%- case item.object_type -%}
+                  {%- when 'product' -%}
+                    {%- render 'product-card', product: item, index: forloop.index -%}
+                  {%- when 'article' -%}
+                    {%- render 'article-card', article: item, blog: item.blog, index: forloop.index, ratio: 'landscape' -%}
+                  {%- else -%}
+                    <article class="article-card card card--editorial search-page-card">
+                      <div class="card__body">
+                        <p class="eyebrow eyebrow--no-rule">{{ 'search.pages' | t }}</p>
+                        <h3 class="article-card__title h4"><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
+                        {%- if item.content != blank -%}
+                          <div class="article-card__excerpt text-muted">{{ item.content | strip_html | truncatewords: 26 }}</div>
+                        {%- endif -%}
+                        <a class="link-arrow" href="{{ item.url }}">{{ 'collections.general.view_all' | t }} {%- render 'icon', name: 'arrow-right', size: 14 -%}</a>
+                      </div>
+                    </article>
+                {%- endcase -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {%- assign search_grid_id = '#SearchGrid-' | append: section.id -%}
+          {%- render 'pagination', paginate: paginate, style: 'numbers', grid_id: search_grid_id -%}
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      <div class="search-section__suggest container--narrow">
+        {%- if section.settings.suggestions != blank -%}
+          <p class="eyebrow eyebrow--center">{{ section.settings.suggestions_heading | escape }}</p>
+          <div class="search-drawer__tags" style="justify-content: center;">
+            {%- assign tags = section.settings.suggestions | split: ',' -%}
+            {%- for tag in tags -%}
+              {%- assign clean = tag | strip -%}
+              {%- if clean != blank -%}
+                <a class="chip" href="{{ routes.search_url }}?q={{ clean | url_encode }}">{{ clean | escape }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.featured_collection != blank and section.settings.featured_collection.products_count > 0 -%}
+          <div class="search-section__featured">
+            {%- render 'section-header', title: section.settings.featured_heading, align: 'center' -%}
+            <div class="grid" style="--cols: 4; --cols-tablet: 3; --cols-mobile: 2;">
+              {%- for product in section.settings.featured_collection.products limit: 4 -%}
+                <div class="grid__item" data-animate>{%- render 'product-card', product: product, index: forloop.index -%}</div>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.search-section__header { margin-bottom: 1.6rem; }
+.search-section__form { margin-bottom: clamp(2rem, 1.4rem + 2vw, 3.4rem); }
+.search-section__form .predictive__submit { display: none; }
+.search-section__suggest { text-align: center; }
+.search-section__featured { margin-top: clamp(2.4rem, 1.6rem + 3vw, 4rem); }
+.search-page-card { border: var(--card-border) solid var(--border); border-radius: var(--card-radius); padding: 0.4rem; height: 100%; }
+.search-page-card .card__body { padding: 1rem; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "section",
+  "class": "search-results-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Results per row",
+      "options": [
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "range",
+      "id": "results_per_page",
+      "label": "Results per page",
+      "min": 6,
+      "max": 48,
+      "step": 6,
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "no_results_text",
+      "label": "No results text",
+      "default": "Try a different word, or browse the whole house below."
+    },
+    { "type": "header", "content": "Before searching" },
+    { "type": "text", "id": "suggestions_heading", "label": "Suggestions heading", "default": "Popular searches" },
+    {
+      "type": "text",
+      "id": "suggestions",
+      "label": "Suggestions",
+      "info": "Comma separated.",
+      "default": "Block print, Brass, Indigo, Table linen, Diwali gifts"
+    },
+    { "type": "collection", "id": "featured_collection", "label": "Featured collection" },
+    { "type": "text", "id": "featured_heading", "label": "Featured heading", "default": "Loved by the house" }
+  ]
+}
+{% endschema %}

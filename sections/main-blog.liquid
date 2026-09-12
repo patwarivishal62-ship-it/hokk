@@ -1,0 +1,169 @@
+{%- comment -%}
+  Blog (journal) template section: featured post, tag filter, article grid.
+{%- endcomment -%}
+<div class="section blog-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'breadcrumb' -%}
+
+    <header class="page-header page-header--center">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow eyebrow--center">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="page-header__title">{{ blog.title | escape }}</h1>
+      {%- if section.settings.text != blank -%}
+        <div class="page-header__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.show_motif and settings.motif_enable -%}
+        <div class="motif-row">{%- render 'motif', style: settings.motif_style -%}</div>
+      {%- endif -%}
+    </header>
+
+    {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+      <div class="blog-tags">
+        <a class="chip{% if current_tags.size == 0 %} is-active{% endif %}" href="{{ blog.url }}">{{ 'blogs.article.all_topics' | t }}</a>
+        {%- for tag in blog.all_tags -%}
+          <a class="chip{% if current_tags contains tag %} is-active{% endif %}" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag | escape }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- paginate blog.articles by section.settings.articles_per_page -%}
+      {%- if section.settings.feature_first and current_tags.size == 0 and paginate.current_page == 1 and blog.articles.size > 0 -%}
+        {%- assign feature = blog.articles.first -%}
+        <a class="blog-feature" href="{{ feature.url }}">
+          <span class="blog-feature__media media media--3-2">
+            {%- if feature.image != blank -%}
+              <img src="{{ feature.image | image_url: width: 1200 }}" srcset="{{ feature.image | image_url: width: 600 }} 600w, {{ feature.image | image_url: width: 1200 }} 1200w" sizes="100vw" alt="{{ feature.image.alt | default: feature.title | escape }}" loading="{% if settings.lazy_images %}lazy{% else %}eager{% endif %}">
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            <span class="media-overlay"></span>
+          </span>
+          <span class="blog-feature__body container">
+            <span class="blog-feature__meta">
+              <time datetime="{{ feature.published_at | date: '%Y-%m-%d' }}">{{ feature.published_at | date: '%e %B %Y' | strip }}</time>
+              {%- if feature.tags.size > 0 -%}<span>· {{ feature.tags.first | escape }}</span>{%- endif -%}
+            </span>
+            <span class="blog-feature__title h2">{{ feature.title | escape }}</span>
+            <span class="blog-feature__excerpt">
+              {%- if feature.excerpt.size > 0 -%}{{ feature.excerpt | strip_html | truncatewords: 34 }}
+              {%- else -%}{{ feature.content | strip_html | truncatewords: 34 }}{%- endif -%}
+            </span>
+            <span class="blog-feature__cta link-arrow">{{ 'blogs.article.read_more' | t }} {%- render 'icon', name: 'arrow-right', size: 14 -%}</span>
+          </span>
+        </a>
+        {%- assign skip_first = true -%}
+      {%- endif -%}
+
+      {%- if blog.articles.size == 0 -%}
+        <div class="collection-empty">
+          <h2 class="h3">{{ 'onboarding.blog_title' | t }}</h2>
+          <p class="text-muted container--narrow">{{ 'onboarding.blog_excerpt' | t }}</p>
+        </div>
+      {%- else -%}
+        <div class="grid blog-grid" style="--cols: {{ section.settings.columns }}; --cols-tablet: 2; --cols-mobile: 1;">
+          {%- for article in blog.articles -%}
+            {%- if skip_first and forloop.first -%}{%- continue -%}{%- endif -%}
+            <div class="grid__item" data-load-item data-animate>
+              {%- render 'article-card', article: article, blog: blog, index: forloop.index, ratio: section.settings.image_ratio, show_excerpt: section.settings.show_excerpt, show_date: section.settings.show_date, show_author: section.settings.show_author -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- render 'pagination', paginate: paginate, style: section.settings.pagination_style -%}
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.blog-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: clamp(1.6rem, 1rem + 2vw, 2.6rem); }
+
+.blog-feature { display: block; position: relative; margin-bottom: clamp(2rem, 1.4rem + 3vw, 3.6rem); border-radius: var(--card-radius); overflow: hidden; }
+.blog-feature__media { display: block; aspect-ratio: 21 / 9; }
+.blog-feature__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.blog-feature:hover .blog-feature__media img { transform: scale(1.04); }
+.blog-feature__body { position: absolute; inset: auto 0 0 0; z-index: 2; color: #fff; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; padding-block: clamp(3rem, 1rem + 8vw, 7rem) clamp(1.4rem, 1rem + 1.6vw, 2.6rem); }
+.blog-feature__meta { display: flex; gap: 0.5rem; font-family: var(--font-eyebrow); font-size: var(--eyebrow-size); letter-spacing: var(--eyebrow-letter-spacing); text-transform: var(--eyebrow-case); opacity: 0.85; }
+.blog-feature__title { margin: 0; color: #fff; max-width: 22ch; }
+.blog-feature__excerpt { font-size: var(--body-size-small); max-width: 60ch; opacity: 0.9; }
+.blog-feature__cta { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+@media (max-width: 749px) {
+  .blog-feature__excerpt { display: none; }
+  .blog-feature__media { aspect-ratio: 4 / 5; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Journal",
+  "tag": "section",
+  "class": "blog-template-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stories from the studio" },
+    { "type": "richtext", "id": "text", "label": "Description" },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "checkbox", "id": "show_tags", "label": "Show topic filter", "default": true },
+    { "type": "checkbox", "id": "feature_first", "label": "Feature the newest post", "default": true },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "label": "Posts per page",
+      "min": 3,
+      "max": 36,
+      "step": 3,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "wide", "label": "Wide" }
+      ],
+      "default": "landscape"
+    },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show date and topic", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    {
+      "type": "select",
+      "id": "pagination_style",
+      "label": "Pagination",
+      "options": [
+        { "value": "numbers", "label": "Numbered" },
+        { "value": "load_more", "label": "Load more button" }
+      ],
+      "default": "numbers"
+    }
+  ]
+}
+{% endschema %}

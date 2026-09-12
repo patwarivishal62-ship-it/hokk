@@ -1,0 +1,337 @@
+{%- comment -%}
+  Collage — an editorial mosaic of images, video, products, collections and text.
+{%- endcomment -%}
+{%- liquid
+  assign columns = section.settings.columns
+  assign blocks_size = section.blocks.size
+-%}
+
+<div class="collage section color-scheme-{{ section.settings.color_scheme }} collage--{{ section.settings.height }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+      {%- render 'section-header',
+        eyebrow: section.settings.eyebrow,
+        title: section.settings.heading,
+        text: section.settings.text,
+        align: section.settings.header_alignment,
+        action_label: section.settings.action_label,
+        action_link: section.settings.action_link,
+        show_motif: section.settings.show_motif
+      -%}
+    {%- endif -%}
+
+    <div class="collage__grid" style="--collage-columns: {{ columns }}; --collage-gap: {{ section.settings.spacing }}px;">
+      {%- for block in section.blocks -%}
+        {%- assign is_large = false -%}
+        {%- if section.settings.large_first and forloop.first -%}{%- assign is_large = true -%}{%- endif -%}
+        {%- if block.settings.span_large -%}{%- assign is_large = true -%}{%- endif -%}
+
+        <div class="collage__item collage__item--{{ block.type }}{% if is_large %} collage__item--large{% endif %}" {{ block.shopify_attributes }}>
+          {%- case block.type -%}
+            {%- when 'image' -%}
+              <a class="collage__media{% if block.settings.arch %} arch{% endif %}" {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="presentation"{% endif %}>
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 900 }}"
+                    srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 700 }} 700w, {{ block.settings.image | image_url: width: 1100 }} 1100w"
+                    sizes="(max-width: 749px) 92vw, 40vw"
+                    alt="{{ block.settings.image.alt | default: block.settings.caption | escape }}"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+                {%- if block.settings.caption != blank -%}<span class="collage__caption">{{ block.settings.caption | escape }}</span>{%- endif -%}
+              </a>
+
+            {%- when 'video' -%}
+              <div class="collage__media collage__video{% if block.settings.arch %} arch{% endif %}">
+                {%- if block.settings.video != blank -%}
+                  {{ block.settings.video | video_tag: image_size: '900x', controls: block.settings.controls, autoplay: block.settings.autoplay, muted: true, loop: block.settings.loop }}
+                {%- elsif block.settings.video_url != blank -%}
+                  {{ block.settings.video_url | external_video_tag: class: 'collage__iframe' }}
+                {%- else -%}
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+
+            {%- when 'product' -%}
+              {%- if block.settings.product != blank -%}
+                {%- render 'product-card', product: block.settings.product, ratio: section.settings.product_ratio, quick_add: section.settings.quick_add, index: forloop.index -%}
+              {%- else -%}
+                {%- render 'product-card', product: nil, ratio: section.settings.product_ratio, index: forloop.index -%}
+              {%- endif -%}
+
+            {%- when 'collection' -%}
+              {%- if block.settings.collection != blank -%}
+                {%- render 'collection-card', collection: block.settings.collection, ratio: section.settings.product_ratio, show_count: true -%}
+              {%- else -%}
+                {%- render 'collection-card', collection: nil, ratio: section.settings.product_ratio -%}
+              {%- endif -%}
+
+            {%- when 'text' -%}
+              <div class="collage__panel color-scheme-{{ block.settings.panel_scheme }}{% if block.settings.arch %} arch{% endif %}">
+                {%- if block.settings.eyebrow != blank -%}<p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>{%- endif -%}
+                {%- if block.settings.heading != blank -%}<h3 class="collage__panel-title">{{ block.settings.heading | escape }}</h3>{%- endif -%}
+                {%- if block.settings.text != blank -%}<div class="collage__panel-text rte">{{ block.settings.text }}</div>{%- endif -%}
+                {%- if block.settings.button_label != blank -%}
+                  <a class="btn btn--outline btn--small" href="{{ block.settings.button_link | default: routes.all_products_collection_url }}">{{ block.settings.button_label | escape }}</a>
+                {%- endif -%}
+              </div>
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.collage__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--collage-columns, 3), minmax(0, 1fr));
+  grid-auto-rows: var(--collage-row, 220px);
+  grid-auto-flow: dense;
+  gap: var(--collage-gap, 16px);
+  margin-top: 2.6rem;
+}
+.collage--small { --collage-row: 170px; }
+.collage--medium { --collage-row: 230px; }
+.collage--large { --collage-row: 300px; }
+
+.collage__item { min-width: 0; grid-row: span 2; }
+.collage__item--large { grid-column: span 2; grid-row: span 3; }
+.collage__item--text { grid-row: span 2; }
+
+.collage__media {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--image-radius);
+  background: var(--bg-card);
+  text-decoration: none;
+}
+.collage__media img,
+.collage__media .placeholder-svg,
+.collage__media video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s var(--ease); }
+.collage__media:hover img { transform: scale(1.05); }
+
+.collage__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.6rem 1rem 0.9rem;
+  color: #fff;
+  font-family: var(--font-eyebrow);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(26, 22, 19, 0) 0%, rgba(26, 22, 19, 0.72) 100%);
+}
+
+.collage__video video,
+.collage__video iframe { width: 100%; height: 100%; border: 0; }
+.collage__video .video-js,
+.collage__video .shopify-section-video { height: 100%; }
+
+.collage__panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--image-radius);
+}
+.collage__panel-title { font-size: var(--h3); margin: 0; line-height: 1.2; }
+.collage__panel-text { color: var(--text-muted); font-size: var(--body-size-small); margin: 0; }
+.collage__panel .btn { align-self: flex-start; margin-top: 0.4rem; }
+
+.collage__item > .product-card,
+.collage__item > .collection-card { height: 100%; }
+
+@media (max-width: 989px) {
+  .collage__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 180px; }
+  .collage__item--large { grid-column: span 2; grid-row: span 2; }
+}
+@media (max-width: 549px) {
+  .collage__grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
+  .collage__item, .collage__item--large { grid-column: span 1; grid-row: span 1; }
+  .collage__item--image, .collage__item--video { grid-row: span 1; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collage",
+  "tag": "section",
+  "class": "collage-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The house archive" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Rooms, rituals and makers" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "split", "label": "Split" }
+      ],
+      "default": "split"
+    },
+    { "type": "text", "id": "action_label", "label": "Header button label" },
+    { "type": "url", "id": "action_link", "label": "Header button link" },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Row height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    { "type": "checkbox", "id": "large_first", "label": "Make the first block larger", "default": true },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Gap between blocks",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "product_ratio",
+      "label": "Product / collection image ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "tall", "label": "Tall" }
+      ],
+      "default": "portrait"
+    },
+    { "type": "checkbox", "id": "quick_add", "label": "Enable quick add on product blocks", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Caption" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "checkbox", "id": "arch", "label": "Arch mask", "default": false },
+        { "type": "checkbox", "id": "span_large", "label": "Make this block larger", "default": false }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Shopify-hosted video" },
+        { "type": "video_url", "id": "video_url", "label": "Or embed from YouTube / Vimeo", "accept": ["youtube", "vimeo"] },
+        { "type": "checkbox", "id": "controls", "label": "Show controls", "default": true },
+        { "type": "checkbox", "id": "autoplay", "label": "Autoplay (muted)", "default": false },
+        { "type": "checkbox", "id": "loop", "label": "Loop", "default": false },
+        { "type": "checkbox", "id": "arch", "label": "Arch mask", "default": false },
+        { "type": "checkbox", "id": "span_large", "label": "Make this block larger", "default": false }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "checkbox", "id": "span_large", "label": "Make this block larger", "default": false }
+      ]
+    },
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "checkbox", "id": "span_large", "label": "Make this block larger", "default": false }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text panel",
+      "settings": [
+        {
+          "type": "select",
+          "id": "panel_scheme",
+          "label": "Panel colour scheme",
+          "options": [
+            { "value": "5", "label": "Scheme 5 — Marigold" },
+            { "value": "3", "label": "Scheme 3 — Terracotta" },
+            { "value": "4", "label": "Scheme 4 — Indigo" },
+            { "value": "6", "label": "Scheme 6 — Leaf" },
+            { "value": "2", "label": "Scheme 2 — Ink" },
+            { "value": "1", "label": "Scheme 1 — Ivory" }
+          ],
+          "default": "5"
+        },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Since 1974" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "A house, not a factory" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Forty artisan families, three states, one standard.</p>" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Read our story" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "checkbox", "id": "arch", "label": "Arch mask", "default": false },
+        { "type": "checkbox", "id": "span_large", "label": "Make this block larger", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collage",
+      "blocks": [
+        { "type": "image", "settings": { "caption": "The Bagru print yard", "arch": true } },
+        { "type": "text", "settings": {} },
+        { "type": "image", "settings": { "caption": "Brass casting, Moradabad" } },
+        { "type": "collection", "settings": {} },
+        { "type": "image", "settings": { "caption": "Drying in the sun" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

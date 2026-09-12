@@ -1,0 +1,285 @@
+{%- comment -%}
+  Story timeline — the house's history as a vertical, alternating timeline.
+{%- endcomment -%}
+<div class="timeline section color-scheme-{{ section.settings.color_scheme }} timeline--{{ section.settings.layout }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'section-header',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.heading,
+      text: section.settings.text,
+      align: section.settings.header_alignment,
+      action_label: section.settings.action_label,
+      action_link: section.settings.action_link,
+      show_motif: section.settings.show_motif,
+      animate: true
+    -%}
+
+    <ol class="timeline__list" style="--timeline-gap: {{ section.settings.spacing }}px;">
+      {%- for block in section.blocks -%}
+        <li class="timeline__item{% if block.settings.accent %} timeline__item--accent{% endif %}" {{ block.shopify_attributes }}>
+          <span class="timeline__marker" aria-hidden="true">
+            {%- if block.settings.icon != 'none' -%}
+              {%- render 'icon', name: block.settings.icon, size: 18 -%}
+            {%- else -%}
+              <span class="timeline__dot"></span>
+            {%- endif -%}
+          </span>
+
+          {%- if block.settings.image != blank -%}
+            <div class="timeline__media media{% if section.settings.arch %} arch{% endif %}" style="aspect-ratio: {{ section.settings.image_ratio }};">
+              <img
+                src="{{ block.settings.image | image_url: width: 700 }}"
+                srcset="{{ block.settings.image | image_url: width: 350 }} 350w, {{ block.settings.image | image_url: width: 700 }} 700w, {{ block.settings.image | image_url: width: 1000 }} 1000w"
+                sizes="(max-width: 749px) 92vw, 34vw"
+                alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+            </div>
+          {%- endif -%}
+
+          <div class="timeline__body">
+            {%- if block.settings.year != blank -%}<span class="timeline__year">{{ block.settings.year | escape }}</span>{%- endif -%}
+            {%- if block.settings.title != blank -%}<h3 class="timeline__title">{{ block.settings.title | escape }}</h3>{%- endif -%}
+            {%- if block.settings.text != blank -%}<div class="timeline__text rte">{{ block.settings.text }}</div>{%- endif -%}
+            {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+              <p class="timeline__link"><a class="link-arrow" href="{{ block.settings.link }}">{{ block.settings.link_label | escape }} {%- render 'icon', name: 'arrow-right', size: 14 -%}</a></p>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if section.settings.footer_text != blank or section.settings.footer_label != blank -%}
+      <div class="timeline__footer">
+        {%- if section.settings.footer_text != blank -%}<p class="timeline__footer-text">{{ section.settings.footer_text | escape }}</p>{%- endif -%}
+        {%- if section.settings.footer_label != blank -%}
+          <a class="btn btn--outline" href="{{ section.settings.footer_link | default: routes.root_url }}">{{ section.settings.footer_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.timeline__list {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  position: relative;
+}
+.timeline__list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--border-width);
+  background: linear-gradient(180deg, transparent, var(--border-strong) 8%, var(--border-strong) 92%, transparent);
+  transform: translateX(-50%);
+}
+.timeline--left .timeline__list::before { left: 22px; transform: none; }
+
+.timeline__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 64px 1fr;
+  align-items: center;
+  gap: 0;
+  padding-bottom: var(--timeline-gap, 48px);
+}
+.timeline__item:last-child { padding-bottom: 0; }
+
+.timeline__marker {
+  grid-column: 2;
+  justify-self: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  border: var(--border-width) solid var(--border-strong);
+  color: var(--accent);
+  z-index: 2;
+}
+.timeline__dot { width: 9px; height: 9px; border-radius: 999px; background: var(--accent); display: block; }
+.timeline__item--accent .timeline__marker { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.timeline__item--accent .timeline__dot { background: var(--bg); }
+
+.timeline__media { grid-column: 1; overflow: hidden; border-radius: var(--image-radius); width: 100%; }
+.timeline__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.timeline__body { grid-column: 3; padding-inline: clamp(0.4rem, 2vw, 1.6rem); }
+
+.timeline__item:nth-child(even) .timeline__media { grid-column: 3; grid-row: 1; }
+.timeline__item:nth-child(even) .timeline__body { grid-column: 1; grid-row: 1; text-align: right; }
+.timeline__item:nth-child(even) .timeline__link { justify-content: flex-end; }
+.timeline__item:nth-child(even) .timeline__link .link-arrow { flex-direction: row-reverse; }
+
+.timeline--left .timeline__item { grid-template-columns: 44px 1fr; gap: clamp(1rem, 3vw, 2rem); }
+.timeline--left .timeline__marker { grid-column: 1; grid-row: 1; justify-self: start; }
+.timeline--left .timeline__media,
+.timeline--left .timeline__item:nth-child(even) .timeline__media { grid-column: 2; grid-row: 2; width: min(100%, 26rem); }
+.timeline--left .timeline__body,
+.timeline--left .timeline__item:nth-child(even) .timeline__body { grid-column: 2; grid-row: 1; text-align: left; padding-inline: 0; }
+.timeline--left .timeline__item:nth-child(even) .timeline__link { justify-content: flex-start; }
+.timeline--left .timeline__item:nth-child(even) .timeline__link .link-arrow { flex-direction: row; }
+
+.timeline__year {
+  display: inline-block;
+  font-family: var(--font-eyebrow);
+  font-size: var(--eyebrow-size);
+  letter-spacing: var(--eyebrow-letter-spacing);
+  text-transform: var(--eyebrow-case);
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.timeline__title { font-size: var(--h3); margin: 0 0 0.5rem; line-height: 1.22; }
+.timeline__text { color: var(--text-muted); margin: 0; font-size: var(--body-size-small); }
+.timeline__link { display: flex; margin: 1rem 0 0; }
+
+.timeline__footer { display: flex; align-items: center; justify-content: center; gap: 1.4rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 2rem; border-top: var(--border-width) solid var(--border); }
+.timeline__footer-text { margin: 0; color: var(--text-muted); }
+
+@media (max-width: 989px) {
+  .timeline__list::before { left: 22px; transform: none; }
+  .timeline__item,
+  .timeline__item:nth-child(even) { grid-template-columns: 44px 1fr; gap: 1rem; }
+  .timeline__marker,
+  .timeline__item:nth-child(even) .timeline__marker { grid-column: 1; grid-row: 1; justify-self: start; }
+  .timeline__body,
+  .timeline__item:nth-child(even) .timeline__body { grid-column: 2; grid-row: 1; text-align: left; padding-inline: 0; }
+  .timeline__media,
+  .timeline__item:nth-child(even) .timeline__media { grid-column: 2; grid-row: 2; width: 100%; }
+  .timeline__item:nth-child(even) .timeline__link { justify-content: flex-start; }
+  .timeline__item:nth-child(even) .timeline__link .link-arrow { flex-direction: row; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Story timeline",
+  "tag": "section",
+  "class": "timeline-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Since 1974" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fifty years of keeping a craft alive" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>From one printing table in Chandpol Bazaar to forty artisan families across three states.</p>" },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "split", "label": "Split" }
+      ],
+      "default": "center"
+    },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "text", "id": "action_label", "label": "Header link label" },
+    { "type": "url", "id": "action_link", "label": "Header link" },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "center", "label": "Alternating, centre line" },
+        { "value": "left", "label": "Single column, line on the left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "4 / 3", "label": "Landscape 4:3" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 5", "label": "Portrait" },
+        { "value": "3 / 4", "label": "Tall" }
+      ],
+      "default": "4 / 3"
+    },
+    { "type": "checkbox", "id": "arch", "label": "Arch mask on images", "default": true },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Space between entries",
+      "min": 24,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 56
+    },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "footer_text", "label": "Text", "default": "The next fifty start with the makers we train today." },
+    { "type": "text", "id": "footer_label", "label": "Button label", "default": "Meet the makers" },
+    { "type": "url", "id": "footer_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        { "type": "text", "id": "year", "label": "Year or label", "default": "1974" },
+        { "type": "text", "id": "title", "label": "Title", "default": "One table, two blocks" },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Kala Devi begins printing lengths of cotton from a single table behind her family's shop in Chandpol Bazaar.</p>"
+        },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Marker icon",
+          "options": [
+            { "value": "none", "label": "Plain dot" },
+            { "value": "lotus", "label": "Lotus" },
+            { "value": "hand", "label": "Handmade" },
+            { "value": "loom", "label": "Loom" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "star", "label": "Star" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "leaf", "label": "Leaf" }
+          ],
+          "default": "none"
+        },
+        { "type": "checkbox", "id": "accent", "label": "Filled marker", "default": false },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story timeline",
+      "blocks": [
+        { "type": "milestone", "settings": { "year": "1974", "title": "One table, two blocks", "accent": true } },
+        { "type": "milestone", "settings": { "year": "1988", "title": "The first workshop", "text": "<p>Four printers join Kala Devi and the house moves into its own courtyard in Bagru.</p>" } },
+        { "type": "milestone", "settings": { "year": "2009", "title": "Natural dyes only", "text": "<p>Every synthetic pigment leaves the workshop. Indigo vats are rebuilt from scratch.</p>", "icon": "leaf" } },
+        { "type": "milestone", "settings": { "year": "2026", "title": "Forty families, one standard", "text": "<p>Kala Katha now works with brass casters, potters and weavers across three states.</p>", "icon": "globe" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

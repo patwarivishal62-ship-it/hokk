@@ -1,0 +1,60 @@
+{%- comment -%}
+  Pagination. Params:
+    paginate   – the paginate object
+    style      – numbers | load_more | infinite
+    grid_id    – CSS selector of the grid to append items into (load more)
+    item_selector – selector for a single item inside the grid
+{%- endcomment -%}
+{%- if paginate.pages > 1 or style == 'load_more' or style == 'infinite' -%}
+  {%- if style == 'numbers' or style == blank -%}
+    <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+      <ol class="pagination__list" role="list">
+        {%- if paginate.previous.is_link -%}
+          <li class="pagination__item">
+            <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
+              {%- render 'icon', name: 'chevron-left', size: 16 -%}
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <li class="pagination__item">
+              <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+            </li>
+          {%- else -%}
+            <li class="pagination__item{% if part.title == paginate.current_page %} is-current{% endif %}">
+              <span aria-current="{% if part.title == paginate.current_page %}page{% endif %}">{{ part.title }}</span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if paginate.next.is_link -%}
+          <li class="pagination__item">
+            <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
+              {%- render 'icon', name: 'chevron-right', size: 16 -%}
+            </a>
+          </li>
+        {%- endif -%}
+      </ol>
+    </nav>
+  {%- else -%}
+    <div class="load-more"{% if style == 'infinite' %} data-infinite-scroll{% endif %}>
+      {%- if paginate.next.is_link -%}
+        <button
+          type="button"
+          class="btn btn--outline"
+          data-load-more="{{ grid_id | default: '.grid' }}"
+          data-url="{{ paginate.next.url | split: '?page=' | first }}"
+          data-page="{{ paginate.current_page }}"
+        >
+          <span data-btn-label>{{ 'collections.general.view_all' | t }} · {{ 'general.pagination.page' | t: number: paginate.current_page }}</span>
+        </button>
+        <p class="load-more__count text-muted text-small">
+          {{ 'general.pagination.page' | t: number: paginate.current_page }}
+          {{ 'general.pagination.of' | t }} {{ paginate.pages }}
+        </p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}

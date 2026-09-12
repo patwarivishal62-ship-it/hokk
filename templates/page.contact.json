@@ -1,0 +1,194 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "settings": {
+        "eyebrow": "Write to us",
+        "heading": "We answer every message",
+        "text": "<p>Custom orders, trade enquiries, repairs, or a question about a piece you already own — tell us and we will reply within one working day.</p>",
+        "header_alignment": "center",
+        "info_title": "The house in Jaipur",
+        "info_phone": "+91 98765 43210",
+        "info_email": "hello@houseofkalakatha.com",
+        "show_social": true
+      },
+      "blocks": {
+        "name": {
+          "type": "text_field",
+          "settings": {
+            "label": "Name",
+            "name": "Name",
+            "type": "text",
+            "half_width": true,
+            "required": true
+          }
+        },
+        "email": {
+          "type": "text_field",
+          "settings": {
+            "label": "Email",
+            "name": "email",
+            "type": "email",
+            "half_width": true,
+            "required": true
+          }
+        },
+        "phone": {
+          "type": "text_field",
+          "settings": {
+            "label": "Phone",
+            "name": "Phone",
+            "type": "tel",
+            "half_width": true,
+            "required": false
+          }
+        },
+        "topic": {
+          "type": "select",
+          "settings": {
+            "label": "What is this about?",
+            "name": "Enquiry type",
+            "options": "A custom order, An existing order, A repair, Wholesale, Something else",
+            "placeholder": "Please choose"
+          }
+        },
+        "message": {
+          "type": "textarea",
+          "settings": {
+            "label": "Your message",
+            "name": "body",
+            "rows": 6,
+            "required": true
+          }
+        },
+        "send": {
+          "type": "submit",
+          "settings": {
+            "label": "Send message",
+            "style": "solid",
+            "note": "Or WhatsApp us on +91 98765 43210"
+          }
+        }
+      },
+      "block_order": [
+        "name",
+        "email",
+        "phone",
+        "topic",
+        "message",
+        "send"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "Good to know",
+        "heading": "Questions we are asked often",
+        "header_alignment": "center",
+        "layout": "single",
+        "open_first": true,
+        "help_text": "Still unsure about something?",
+        "help_label": "Read our shipping policy"
+      },
+      "blocks": {
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I wash block-printed cotton?",
+            "answer": "<p>Cold water, a mild liquid detergent and a short gentle cycle or hand wash. Dry in the shade — direct sun fades natural dyes faster than anything else.</p>",
+            "open_by_default": true
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will the colours run?",
+            "answer": "<p>Natural dyes settle after the first two washes. Wash separately in cold water until then.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders leave Jaipur within 48 hours. Metro delivery is 2–4 days; international is 5–9 days with DHL.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you repair pieces?",
+            "answer": "<p>Yes. Send anything back at any time and our makers will mend it.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I order in bulk for a hotel or restaurant?",
+            "answer": "<p>We do. Write to us with your quantities and timelines and we will match you with a workshop.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ]
+    },
+    "stores": {
+      "type": "store-info",
+      "settings": {
+        "eyebrow": "Visit us",
+        "heading": "Come and touch the cloth",
+        "text": "<p>Three rooms, three cities. Tea is always on.</p>",
+        "columns_desktop": 3,
+        "card_style": "card",
+        "image_ratio": "4 / 3"
+      },
+      "blocks": {
+        "s1": {
+          "type": "store",
+          "settings": {
+            "name": "Jaipur — the house",
+            "badge": "Flagship",
+            "phone": "+91 98765 43210",
+            "email": "jaipur@houseofkalakatha.com",
+            "button_label": "Book a viewing"
+          }
+        },
+        "s2": {
+          "type": "store",
+          "settings": {
+            "name": "Mumbai — Kala Room",
+            "badge": "Studio",
+            "address": "<p>2 Kala Ghoda Lane, Fort<br>Mumbai 400001</p>",
+            "hours": "<p>Tue – Sun, 11am – 8pm</p>",
+            "phone": "+91 98123 45678",
+            "email": "mumbai@houseofkalakatha.com"
+          }
+        },
+        "s3": {
+          "type": "store",
+          "settings": {
+            "name": "Delhi — by appointment",
+            "address": "<p>7 Lodhi Colony, New Delhi 110003</p>",
+            "hours": "<p>Appointment only</p>",
+            "phone": "+91 98000 11223",
+            "email": "delhi@houseofkalakatha.com"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "faq",
+    "stores"
+  ]
+}

@@ -1,0 +1,47 @@
+{%- comment -%}
+  Single column card for the multicolumn section.
+  Accepts: block, card, opts (section.settings)
+{%- endcomment -%}
+{%- liquid
+  assign media_type = opts.media_type
+  assign ratio = opts.image_ratio
+-%}
+<div class="multicolumn__card">
+  {%- if media_type == 'image' -%}
+    <div class="multicolumn__media" style="aspect-ratio: {{ ratio }};">
+      {%- if block.settings.image != blank -%}
+        <img
+          src="{{ block.settings.image | image_url: width: 600 }}"
+          srcset="{{ block.settings.image | image_url: width: 300 }} 300w, {{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 900 }} 900w"
+          sizes="(max-width: 749px) 92vw, (max-width: 989px) 44vw, 22vw"
+          alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    <span class="multicolumn__icon">{%- render 'icon', name: block.settings.icon, size: 22 -%}</span>
+  {%- endif -%}
+
+  {%- if block.settings.title != blank -%}
+    <h3 class="multicolumn__title">
+      {%- if block.settings.link != blank -%}
+        <a href="{{ block.settings.link }}">{{ block.settings.title | escape }}</a>
+      {%- else -%}
+        {{ block.settings.title | escape }}
+      {%- endif -%}
+    </h3>
+  {%- endif -%}
+
+  {%- if block.settings.text != blank -%}
+    <div class="multicolumn__text rte">{{ block.settings.text }}</div>
+  {%- endif -%}
+
+  {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+    <p class="multicolumn__link"><a class="link-plain" href="{{ block.settings.link }}">{{ block.settings.link_label | escape }} {%- render 'icon', name: 'arrow-right', size: 14 -%}</a></p>
+  {%- endif -%}
+</div>

@@ -1,0 +1,143 @@
+{%- comment -%}
+  Design tokens for the Kala Katha theme.
+  Renders the <style> block that turns Theme settings into CSS custom
+  properties. Used by layout/theme.liquid and layout/password.liquid so both
+  layouts stay visually identical.
+{%- endcomment -%}
+    {%- liquid
+      assign heading_font = settings.type_header_font
+      assign heading_font_bold = heading_font | font_modify: 'weight', 'bolder'
+      assign heading_font_italic = heading_font | font_modify: 'style', 'italic'
+      assign body_font = settings.type_body_font
+      assign body_font_bold = body_font | font_modify: 'weight', 'bolder'
+      assign body_font_italic = body_font | font_modify: 'style', 'italic'
+    -%}
+
+    {%- capture font_faces -%}
+      {{ heading_font | font_face: font_display: 'swap' }}
+      {{ heading_font_bold | font_face: font_display: 'swap' }}
+      {{ heading_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+    {%- endcapture -%}
+    <style>
+      /* ------------------------------------------------------------------
+         Kala Katha design tokens — every value is editable in
+         Theme settings. Do not hard-code colours in sections.
+      ------------------------------------------------------------------ */
+      {%- liquid
+        assign scale = settings.type_header_scale | divided_by: 100.0
+        assign body_scale = settings.type_body_scale | divided_by: 100.0
+        assign h1 = settings.type_h1_size | times: scale | round
+        assign h2 = settings.type_h2_size | times: scale | round
+        assign h3 = settings.type_h3_size | times: scale | round
+      -%}
+      :root {
+        /* palette */
+        --color-sale: {{ settings.color_sale }};
+        --color-new: {{ settings.color_new }};
+        --color-soldout: {{ settings.color_soldout }};
+        --color-rating: {{ settings.color_rating }};
+        --color-gold: {{ settings.color_gold }};
+        --color-gold-rgb: {{ settings.color_gold.red }}, {{ settings.color_gold.green }}, {{ settings.color_gold.blue }};
+
+        /* brand palette, derived from the six colour schemes */
+        --color-ink: {{ settings.color_scheme_2_bg }};
+        --color-ink-rgb: {{ settings.color_scheme_2_bg.red }}, {{ settings.color_scheme_2_bg.green }}, {{ settings.color_scheme_2_bg.blue }};
+        --color-ivory: {{ settings.color_scheme_1_bg }};
+        --color-ivory-rgb: {{ settings.color_scheme_1_bg.red }}, {{ settings.color_scheme_1_bg.green }}, {{ settings.color_scheme_1_bg.blue }};
+        --color-terracotta: {{ settings.color_scheme_3_bg }};
+        --color-terracotta-rgb: {{ settings.color_scheme_3_bg.red }}, {{ settings.color_scheme_3_bg.green }}, {{ settings.color_scheme_3_bg.blue }};
+        --color-indigo: {{ settings.color_scheme_4_bg }};
+        --color-marigold: {{ settings.color_scheme_5_bg }};
+        --color-leaf: {{ settings.color_scheme_6_bg }};
+
+        /* layout */
+        --page-width: {{ settings.page_width }}px;
+        --gutter: {{ settings.page_gutter }}px;
+        --section-space: {{ settings.section_spacing }}px;
+        --section-space-mobile: {{ settings.section_spacing_mobile }}px;
+        --grid-gap: {{ settings.grid_gap }}px;
+        --content-narrow: {{ settings.content_width_narrow }}px;
+        --box-padding: {{ settings.box_padding }}px;
+
+        /* typography */
+        --font-heading: {%- if settings.type_header_custom_family != blank %}'{{ settings.type_header_custom_family | escape }}', {% endif -%} {{ heading_font.family }}, {{ heading_font.fallback_families }};
+        --font-body: {%- if settings.type_body_custom_family != blank %}'{{ settings.type_body_custom_family | escape }}', {% endif -%} {{ body_font.family }}, {{ body_font.fallback_families }};
+        --font-heading-style: {{ heading_font.style }};
+        --font-body-style: {{ body_font.style }};
+        --font-eyebrow: {% if settings.type_eyebrow_font == 'heading' %}var(--font-heading){% else %}var(--font-body){% endif %};
+        --font-button: {% if settings.button_font == 'heading' %}var(--font-heading){% else %}var(--font-body){% endif %};
+        --h1: {{ h1 }}px;
+        --h2: {{ h2 }}px;
+        --h3: {{ h3 }}px;
+        --h4: calc(var(--h3) * 0.78);
+        --heading-line-height: {{ settings.type_header_line_height }};
+        --heading-letter-spacing: {{ settings.type_header_letter_spacing }}em;
+        --heading-case: {{ settings.type_header_case }};
+        --body-size: {{ 16 | times: body_scale | round }}px;
+        --body-size-small: {{ 14 | times: body_scale | round }}px;
+        --body-line-height: {{ settings.type_body_line_height }};
+        --body-letter-spacing: {{ settings.type_body_letter_spacing }}em;
+        --eyebrow-size: {{ settings.type_eyebrow_size }}px;
+        --eyebrow-letter-spacing: {{ settings.type_eyebrow_letter_spacing }}em;
+        --eyebrow-case: {% if settings.type_eyebrow_uppercase %}uppercase{% else %}none{% endif %};
+
+        /* buttons + inputs */
+        --btn-radius: {{ settings.button_radius }}px;
+        --btn-border: {{ settings.button_border_width }}px;
+        --btn-py: {{ settings.button_padding_y }}px;
+        --btn-px: {{ settings.button_padding_x }}px;
+        --btn-size: {{ settings.button_size }}px;
+        --btn-letter-spacing: {{ settings.button_letter_spacing }}em;
+        --btn-case: {{ settings.button_case }};
+        --input-radius: {{ settings.input_radius }}px;
+        --input-border: {{ settings.input_border_width }}px;
+
+        /* surfaces */
+        --card-radius: {{ settings.card_radius }}px;
+        --card-border: {{ settings.card_border_width }}px;
+        --image-radius: {{ settings.image_radius }}px;
+        --border-width: {{ settings.border_width }}px;
+
+        /* icons + motion */
+        --icon-size: {{ settings.icon_size }}px;
+        --icon-weight: {{ settings.icon_weight }};
+        --anim-speed: {{ settings.animations_speed }}ms;
+        --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+        --transition: all 0.35s var(--ease);
+
+        /* surfaces, borders and helpers (resolve against the active colour scheme) */
+        --bg-card: var(--soft);
+        --bg-secondary: var(--soft);
+        --border-strong: rgba(var(--text-rgb), 0.24);
+        --border-dashed: var(--border-width) dashed var(--border);
+        --header-height: 0px;
+        --min-col: 260px;
+        --stack-gap: var(--grid-gap);
+
+        /* misc */
+        --overlay-opacity: {{ settings.overlay_opacity | divided_by: 100.0 }};
+        --motif-size: {{ settings.motif_size }}px;
+        --texture-opacity: {{ settings.texture_opacity | divided_by: 100.0 }};
+      }
+
+      {%- render 'color-schemes' -%}
+
+      {{ font_faces }}
+
+      {%- case settings.card_shadow -%}
+        {%- when 'soft' -%}   :root { --card-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.05); --card-shadow-hover: 0 2px 6px rgba(0,0,0,0.06), 0 18px 40px rgba(0,0,0,0.10); }
+        {%- when 'medium' -%} :root { --card-shadow: 0 2px 6px rgba(0,0,0,0.07), 0 16px 34px rgba(0,0,0,0.09); --card-shadow-hover: 0 4px 10px rgba(0,0,0,0.09), 0 26px 52px rgba(0,0,0,0.14); }
+        {%- when 'lift' -%}   :root { --card-shadow: 0 12px 28px rgba(0,0,0,0.13), 0 30px 60px rgba(0,0,0,0.10); --card-shadow-hover: 0 18px 38px rgba(0,0,0,0.18), 0 40px 80px rgba(0,0,0,0.14); }
+        {%- else -%}          :root { --card-shadow: none; --card-shadow-hover: none; }
+      {%- endcase -%}
+
+      {%- if settings.button_shadow -%}
+        :root { --btn-shadow: 0 6px 18px rgba(0,0,0,0.14); }
+      {%- else -%}
+        :root { --btn-shadow: none; }
+      {%- endif -%}
+
+    </style>

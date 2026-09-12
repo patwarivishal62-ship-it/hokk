@@ -1,0 +1,40 @@
+{%- comment -%}
+  Breadcrumbs for product, collection, blog, article, page and search.
+{%- endcomment -%}
+{%- if settings.show_breadcrumbs -%}
+  {%- liquid
+    assign home = 'general.breadcrumbs.home' | t
+  -%}
+  <nav class="breadcrumbs container" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list" role="list">
+      <li><a href="{{ routes.root_url }}">{{ home }}</a></li>
+      {%- case request.page_type -%}
+        {%- when 'product' -%}
+          {%- if collection and collection.handle != blank -%}
+            <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<a href="{{ collection.url }}">{{ collection.title }}</a></li>
+          {%- else -%}
+            <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<a href="{{ routes.all_products_collection_url }}">{{ 'general.breadcrumbs.shop' | t }}</a></li>
+          {%- endif -%}
+          <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<span aria-current="page">{{ product.title }}</span></li>
+        {%- when 'collection' -%}
+          {%- if current_tags -%}
+            <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<a href="{{ collection.url }}">{{ collection.title }}</a></li>
+            <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<span aria-current="page">{{ current_tags | join: ', ' }}</span></li>
+          {%- else -%}
+            <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<span aria-current="page">{{ collection.title }}</span></li>
+          {%- endif -%}
+        {%- when 'blog' -%}
+          <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<span aria-current="page">{{ blog.title }}</span></li>
+        {%- when 'article' -%}
+          <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<a href="{{ blog.url }}">{{ blog.title }}</a></li>
+          <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<span aria-current="page">{{ article.title }}</span></li>
+        {%- when 'page' -%}
+          <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<span aria-current="page">{{ page.title }}</span></li>
+        {%- when 'search' -%}
+          <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<span aria-current="page">{{ 'search.title' | t }}</span></li>
+        {%- when 'cart' -%}
+          <li>{%- render 'icon', name: 'chevron-right', size: 12 -%}<span aria-current="page">{{ 'cart.general.title' | t }}</span></li>
+      {%- endcase -%}
+    </ol>
+  </nav>
+{%- endif -%}

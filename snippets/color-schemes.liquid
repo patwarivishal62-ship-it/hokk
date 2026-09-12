@@ -1,0 +1,144 @@
+{%- comment -%}
+  Generates the CSS custom properties for every colour scheme defined in
+  Theme settings -> Colours — Scheme 1..6. Rendered inside a <style> tag in
+  layout/theme.liquid. Scheme 1 is also mirrored onto :root so the whole
+  document has a sane default palette.
+{%- endcomment -%}
+/* Default palette (scheme 1 — Ivory) */
+:root, .color-scheme-1 {
+  --bg: {{ settings.color_scheme_1_bg }};
+  --bg-rgb: {{ settings.color_scheme_1_bg.red }}, {{ settings.color_scheme_1_bg.green }}, {{ settings.color_scheme_1_bg.blue }};
+  --text: {{ settings.color_scheme_1_text }};
+  --text-rgb: {{ settings.color_scheme_1_text.red }}, {{ settings.color_scheme_1_text.green }}, {{ settings.color_scheme_1_text.blue }};
+  --accent: {{ settings.color_scheme_1_accent }};
+  --accent-rgb: {{ settings.color_scheme_1_accent.red }}, {{ settings.color_scheme_1_accent.green }}, {{ settings.color_scheme_1_accent.blue }};
+  --on-accent: {{ settings.color_scheme_1_accent_text }};
+  --on-accent-rgb: {{ settings.color_scheme_1_accent_text.red }}, {{ settings.color_scheme_1_accent_text.green }}, {{ settings.color_scheme_1_accent_text.blue }};
+  --soft: {{ settings.color_scheme_1_soft }};
+  --soft-rgb: {{ settings.color_scheme_1_soft.red }}, {{ settings.color_scheme_1_soft.green }}, {{ settings.color_scheme_1_soft.blue }};
+  --border: {{ settings.color_scheme_1_border }};
+  --border-rgb: {{ settings.color_scheme_1_border.red }}, {{ settings.color_scheme_1_border.green }}, {{ settings.color_scheme_1_border.blue }};
+  --text-muted: rgba(var(--text-rgb), 0.66);
+  --text-faint: rgba(var(--text-rgb), 0.44);
+  --border-soft: rgba(var(--border-rgb), 0.62);
+  --surface-tint: rgba(var(--text-rgb), 0.04);
+  --hover-tint: rgba(var(--text-rgb), 0.06);
+}
+/* Scheme 2 — Ink */
+.color-scheme-2 {
+  --bg: {{ settings.color_scheme_2_bg }};
+  --bg-rgb: {{ settings.color_scheme_2_bg.red }}, {{ settings.color_scheme_2_bg.green }}, {{ settings.color_scheme_2_bg.blue }};
+  --text: {{ settings.color_scheme_2_text }};
+  --text-rgb: {{ settings.color_scheme_2_text.red }}, {{ settings.color_scheme_2_text.green }}, {{ settings.color_scheme_2_text.blue }};
+  --accent: {{ settings.color_scheme_2_accent }};
+  --accent-rgb: {{ settings.color_scheme_2_accent.red }}, {{ settings.color_scheme_2_accent.green }}, {{ settings.color_scheme_2_accent.blue }};
+  --on-accent: {{ settings.color_scheme_2_accent_text }};
+  --on-accent-rgb: {{ settings.color_scheme_2_accent_text.red }}, {{ settings.color_scheme_2_accent_text.green }}, {{ settings.color_scheme_2_accent_text.blue }};
+  --soft: {{ settings.color_scheme_2_soft }};
+  --soft-rgb: {{ settings.color_scheme_2_soft.red }}, {{ settings.color_scheme_2_soft.green }}, {{ settings.color_scheme_2_soft.blue }};
+  --border: {{ settings.color_scheme_2_border }};
+  --border-rgb: {{ settings.color_scheme_2_border.red }}, {{ settings.color_scheme_2_border.green }}, {{ settings.color_scheme_2_border.blue }};
+  --text-muted: rgba(var(--text-rgb), 0.66);
+  --text-faint: rgba(var(--text-rgb), 0.44);
+  --border-soft: rgba(var(--border-rgb), 0.62);
+  --surface-tint: rgba(var(--text-rgb), 0.04);
+  --hover-tint: rgba(var(--text-rgb), 0.06);
+}
+/* Scheme 3 — Terracotta */
+.color-scheme-3 {
+  --bg: {{ settings.color_scheme_3_bg }};
+  --bg-rgb: {{ settings.color_scheme_3_bg.red }}, {{ settings.color_scheme_3_bg.green }}, {{ settings.color_scheme_3_bg.blue }};
+  --text: {{ settings.color_scheme_3_text }};
+  --text-rgb: {{ settings.color_scheme_3_text.red }}, {{ settings.color_scheme_3_text.green }}, {{ settings.color_scheme_3_text.blue }};
+  --accent: {{ settings.color_scheme_3_accent }};
+  --accent-rgb: {{ settings.color_scheme_3_accent.red }}, {{ settings.color_scheme_3_accent.green }}, {{ settings.color_scheme_3_accent.blue }};
+  --on-accent: {{ settings.color_scheme_3_accent_text }};
+  --on-accent-rgb: {{ settings.color_scheme_3_accent_text.red }}, {{ settings.color_scheme_3_accent_text.green }}, {{ settings.color_scheme_3_accent_text.blue }};
+  --soft: {{ settings.color_scheme_3_soft }};
+  --soft-rgb: {{ settings.color_scheme_3_soft.red }}, {{ settings.color_scheme_3_soft.green }}, {{ settings.color_scheme_3_soft.blue }};
+  --border: {{ settings.color_scheme_3_border }};
+  --border-rgb: {{ settings.color_scheme_3_border.red }}, {{ settings.color_scheme_3_border.green }}, {{ settings.color_scheme_3_border.blue }};
+  --text-muted: rgba(var(--text-rgb), 0.66);
+  --text-faint: rgba(var(--text-rgb), 0.44);
+  --border-soft: rgba(var(--border-rgb), 0.62);
+  --surface-tint: rgba(var(--text-rgb), 0.04);
+  --hover-tint: rgba(var(--text-rgb), 0.06);
+}
+/* Scheme 4 — Indigo */
+.color-scheme-4 {
+  --bg: {{ settings.color_scheme_4_bg }};
+  --bg-rgb: {{ settings.color_scheme_4_bg.red }}, {{ settings.color_scheme_4_bg.green }}, {{ settings.color_scheme_4_bg.blue }};
+  --text: {{ settings.color_scheme_4_text }};
+  --text-rgb: {{ settings.color_scheme_4_text.red }}, {{ settings.color_scheme_4_text.green }}, {{ settings.color_scheme_4_text.blue }};
+  --accent: {{ settings.color_scheme_4_accent }};
+  --accent-rgb: {{ settings.color_scheme_4_accent.red }}, {{ settings.color_scheme_4_accent.green }}, {{ settings.color_scheme_4_accent.blue }};
+  --on-accent: {{ settings.color_scheme_4_accent_text }};
+  --on-accent-rgb: {{ settings.color_scheme_4_accent_text.red }}, {{ settings.color_scheme_4_accent_text.green }}, {{ settings.color_scheme_4_accent_text.blue }};
+  --soft: {{ settings.color_scheme_4_soft }};
+  --soft-rgb: {{ settings.color_scheme_4_soft.red }}, {{ settings.color_scheme_4_soft.green }}, {{ settings.color_scheme_4_soft.blue }};
+  --border: {{ settings.color_scheme_4_border }};
+  --border-rgb: {{ settings.color_scheme_4_border.red }}, {{ settings.color_scheme_4_border.green }}, {{ settings.color_scheme_4_border.blue }};
+  --text-muted: rgba(var(--text-rgb), 0.66);
+  --text-faint: rgba(var(--text-rgb), 0.44);
+  --border-soft: rgba(var(--border-rgb), 0.62);
+  --surface-tint: rgba(var(--text-rgb), 0.04);
+  --hover-tint: rgba(var(--text-rgb), 0.06);
+}
+/* Scheme 5 — Marigold */
+.color-scheme-5 {
+  --bg: {{ settings.color_scheme_5_bg }};
+  --bg-rgb: {{ settings.color_scheme_5_bg.red }}, {{ settings.color_scheme_5_bg.green }}, {{ settings.color_scheme_5_bg.blue }};
+  --text: {{ settings.color_scheme_5_text }};
+  --text-rgb: {{ settings.color_scheme_5_text.red }}, {{ settings.color_scheme_5_text.green }}, {{ settings.color_scheme_5_text.blue }};
+  --accent: {{ settings.color_scheme_5_accent }};
+  --accent-rgb: {{ settings.color_scheme_5_accent.red }}, {{ settings.color_scheme_5_accent.green }}, {{ settings.color_scheme_5_accent.blue }};
+  --on-accent: {{ settings.color_scheme_5_accent_text }};
+  --on-accent-rgb: {{ settings.color_scheme_5_accent_text.red }}, {{ settings.color_scheme_5_accent_text.green }}, {{ settings.color_scheme_5_accent_text.blue }};
+  --soft: {{ settings.color_scheme_5_soft }};
+  --soft-rgb: {{ settings.color_scheme_5_soft.red }}, {{ settings.color_scheme_5_soft.green }}, {{ settings.color_scheme_5_soft.blue }};
+  --border: {{ settings.color_scheme_5_border }};
+  --border-rgb: {{ settings.color_scheme_5_border.red }}, {{ settings.color_scheme_5_border.green }}, {{ settings.color_scheme_5_border.blue }};
+  --text-muted: rgba(var(--text-rgb), 0.66);
+  --text-faint: rgba(var(--text-rgb), 0.44);
+  --border-soft: rgba(var(--border-rgb), 0.62);
+  --surface-tint: rgba(var(--text-rgb), 0.04);
+  --hover-tint: rgba(var(--text-rgb), 0.06);
+}
+/* Scheme 6 — Leaf */
+.color-scheme-6 {
+  --bg: {{ settings.color_scheme_6_bg }};
+  --bg-rgb: {{ settings.color_scheme_6_bg.red }}, {{ settings.color_scheme_6_bg.green }}, {{ settings.color_scheme_6_bg.blue }};
+  --text: {{ settings.color_scheme_6_text }};
+  --text-rgb: {{ settings.color_scheme_6_text.red }}, {{ settings.color_scheme_6_text.green }}, {{ settings.color_scheme_6_text.blue }};
+  --accent: {{ settings.color_scheme_6_accent }};
+  --accent-rgb: {{ settings.color_scheme_6_accent.red }}, {{ settings.color_scheme_6_accent.green }}, {{ settings.color_scheme_6_accent.blue }};
+  --on-accent: {{ settings.color_scheme_6_accent_text }};
+  --on-accent-rgb: {{ settings.color_scheme_6_accent_text.red }}, {{ settings.color_scheme_6_accent_text.green }}, {{ settings.color_scheme_6_accent_text.blue }};
+  --soft: {{ settings.color_scheme_6_soft }};
+  --soft-rgb: {{ settings.color_scheme_6_soft.red }}, {{ settings.color_scheme_6_soft.green }}, {{ settings.color_scheme_6_soft.blue }};
+  --border: {{ settings.color_scheme_6_border }};
+  --border-rgb: {{ settings.color_scheme_6_border.red }}, {{ settings.color_scheme_6_border.green }}, {{ settings.color_scheme_6_border.blue }};
+  --text-muted: rgba(var(--text-rgb), 0.66);
+  --text-faint: rgba(var(--text-rgb), 0.44);
+  --border-soft: rgba(var(--border-rgb), 0.62);
+  --surface-tint: rgba(var(--text-rgb), 0.04);
+  --hover-tint: rgba(var(--text-rgb), 0.06);
+}
+
+{%- if settings.texture_enable -%}
+.color-scheme-1::before, .color-scheme-2::before, .color-scheme-3::before,
+.color-scheme-4::before, .color-scheme-5::before, .color-scheme-6::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--texture-opacity);
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23paper)' opacity='0.35'/%3E%3C/svg%3E");
+}
+.color-scheme-1, .color-scheme-2, .color-scheme-3,
+.color-scheme-4, .color-scheme-5, .color-scheme-6 { position: relative; }
+.color-scheme-1 > *, .color-scheme-2 > *, .color-scheme-3 > *,
+.color-scheme-4 > *, .color-scheme-5 > *, .color-scheme-6 > * { position: relative; z-index: 1; }
+{%- endif -%}

@@ -1,0 +1,222 @@
+{%- comment -%}
+  Video — Shopify-hosted video, or a click-to-load YouTube / Vimeo embed.
+{%- endcomment -%}
+{%- liquid
+  assign layout = section.settings.layout
+  assign ratio = '16 / 9'
+  case section.settings.ratio
+    when '4 / 5'
+      assign ratio = '4 / 5'
+    when '1 / 1'
+      assign ratio = '1 / 1'
+    when '21 / 9'
+      assign ratio = '21 / 9'
+  endcase
+-%}
+<div class="video-section section color-scheme-{{ section.settings.color_scheme }} video-section--{{ layout }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- if layout == 'split' -%}
+      <div class="video-section__split">
+        <div class="video-section__copy">
+          {%- render 'section-header',
+            eyebrow: section.settings.eyebrow,
+            title: section.settings.heading,
+            text: section.settings.text,
+            align: 'left',
+            action_label: section.settings.button_label,
+            action_link: section.settings.button_link,
+            show_motif: section.settings.show_motif
+          -%}
+        </div>
+        <div class="video-section__player">
+          {%- render 'video-player', section_settings: section.settings, ratio: ratio -%}
+        </div>
+      </div>
+    {%- else -%}
+      {%- if section.settings.heading != blank or section.settings.eyebrow != blank or section.settings.text != blank -%}
+        {%- render 'section-header',
+          eyebrow: section.settings.eyebrow,
+          title: section.settings.heading,
+          text: section.settings.text,
+          align: section.settings.header_alignment,
+          action_label: section.settings.button_label,
+          action_link: section.settings.button_link,
+          show_motif: section.settings.show_motif,
+          animate: true
+        -%}
+      {%- endif -%}
+
+      <div class="video-section__player video-section__player--wide">
+        {%- render 'video-player', section_settings: section.settings, ratio: ratio -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.caption != blank -%}
+      <p class="video-section__caption text-small">{{ section.settings.caption | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.video-section__player { margin-top: 2.4rem; }
+.video-section__player > * { width: 100%; }
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--video-ratio, 16 / 9);
+  overflow: hidden;
+  border-radius: var(--image-radius);
+  background: var(--color-ink);
+  isolation: isolate;
+}
+.video-frame video,
+.video-frame iframe,
+.video-frame img,
+.video-frame .placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  display: block;
+}
+.video-frame--arch { border-radius: 50% 50% var(--image-radius) var(--image-radius) / 22% 22% var(--image-radius) var(--image-radius); }
+
+.video-facade { position: absolute; inset: 0; border: 0; padding: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.video-facade::after { content: ''; position: absolute; inset: 0; background: rgba(26, 22, 19, 0.28); transition: var(--transition); }
+.video-facade:hover::after { background: rgba(26, 22, 19, 0.42); }
+.video-facade__play {
+  position: relative;
+  z-index: 2;
+  width: clamp(58px, 9vw, 86px);
+  height: clamp(58px, 9vw, 86px);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(var(--color-ivory-rgb), 0.94);
+  color: var(--color-ink);
+  box-shadow: var(--card-shadow-hover);
+  transition: transform 0.35s var(--ease);
+}
+.video-facade:hover .video-facade__play { transform: scale(1.08); }
+.video-facade__frame { border-radius: inherit; }
+
+.video-section__split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(1.8rem, 5vw, 4rem); align-items: center; }
+.video-section__split .video-section__player { margin-top: 0; }
+.video-section--split-reverse .video-section__copy { order: 2; }
+
+.video-section__caption { text-align: center; color: var(--text-muted); margin-top: 1.2rem; }
+
+@media (max-width: 989px) {
+  .video-section__split { grid-template-columns: 1fr; gap: 2rem; }
+  .video-section--split-reverse .video-section__copy { order: 0; }
+  .video-section__player { margin-top: 1.6rem; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Video",
+  "tag": "section",
+  "class": "video-wrapper-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Inside the workshop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Nine passes of indigo" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Watch a length of cloth move from raw cotton to finished indigo in forty seconds.</p>" },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "center"
+    },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    { "type": "header", "content": "Video" },
+    { "type": "video", "id": "video", "label": "Shopify-hosted video" },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Or embed from YouTube / Vimeo",
+      "accept": ["youtube", "vimeo"],
+      "info": "Loaded only when the visitor presses play"
+    },
+    { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "Shown before playback" },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Aspect ratio",
+      "options": [
+        { "value": "16 / 9", "label": "Wide 16:9" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "21 / 9", "label": "Cinema 21:9" }
+      ],
+      "default": "16 / 9"
+    },
+    { "type": "checkbox", "id": "arch", "label": "Arch mask", "default": false },
+    { "type": "checkbox", "id": "controls", "label": "Show controls (hosted video)", "default": true },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay (hosted video, muted)", "default": false },
+    { "type": "checkbox", "id": "loop", "label": "Loop (hosted video)", "default": false },
+    { "type": "checkbox", "id": "muted", "label": "Mute (hosted video)", "default": true },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "full", "label": "Text above, full-width video" },
+        { "value": "split", "label": "Text beside the video" },
+        { "value": "split-reverse", "label": "Video beside the text" }
+      ],
+      "default": "full"
+    },
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "caption", "label": "Caption below the video", "default": "Filmed in Bagru, Rajasthan" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    { "name": "Video" }
+  ]
+}
+{% endschema %}

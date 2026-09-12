@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "color_scheme": "1"
+      }
+    },
+    "recovery": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "While you are here",
+        "heading": "Pieces people come back for",
+        "header_alignment": "center",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "layout": "grid",
+        "view_all_label": "",
+        "view_all_style": "none"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "recovery"
+  ]
+}

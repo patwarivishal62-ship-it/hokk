@@ -1,0 +1,13 @@
+{%- comment -%}
+  One shared modal shell. Sections push content into [data-modal-content]
+  with the KkModal helper in assets/theme.js.
+{%- endcomment -%}
+<div class="modal" id="KkModal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+  <div class="overlay is-modal-overlay" data-modal-overlay></div>
+  <div class="modal__panel" role="document">
+    <button type="button" class="modal__close" data-modal-close aria-label="{{ 'accessibility.close' | t }}">
+      {%- render 'icon', name: 'close', size: 20 -%}
+    </button>
+    <div class="modal__content" data-modal-content></div>
+  </div>
+</div>

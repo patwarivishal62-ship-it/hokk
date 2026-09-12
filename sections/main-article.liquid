@@ -1,0 +1,249 @@
+{%- comment -%}
+  Article template section: hero, content, share, comments and related posts.
+{%- endcomment -%}
+{%- liquid
+  assign reading = article.content | number_of_words | divided_by: 200 | plus: 1
+-%}
+<article class="section article-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'breadcrumb' -%}
+
+    {%- if article.image != blank and section.settings.show_hero_image -%}
+      <div class="article-hero media{% if section.settings.hero_arch %} arch{% endif %}" style="aspect-ratio: {{ section.settings.hero_ratio }};">
+        <img
+          src="{{ article.image | image_url: width: 1400 }}"
+          srcset="{{ article.image | image_url: width: 700 }} 700w, {{ article.image | image_url: width: 1100 }} 1100w, {{ article.image | image_url: width: 1600 }} 1600w"
+          sizes="100vw"
+          alt="{{ article.image.alt | default: article.title | escape }}"
+          width="{{ article.image.width }}"
+          height="{{ article.image.height }}"
+        >
+      </div>
+    {%- endif -%}
+
+    <div class="article-body{% if section.settings.narrow %} container--narrow{% endif %}">
+      <header class="article-body__header">
+        {%- if section.settings.show_blog_name -%}
+          <a class="eyebrow" href="{{ blog.url }}">{{ blog.title | escape }}</a>
+        {%- endif -%}
+        <h1 class="article-body__title">{{ article.title | escape }}</h1>
+
+        <div class="article-body__meta">
+          {%- if section.settings.show_date -%}
+            <span>{%- render 'icon', name: 'clock', size: 14 -%} <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%e %B %Y' | strip }}</time></span>
+          {%- endif -%}
+          {%- if section.settings.show_author and article.author != blank -%}
+            <span>{%- render 'icon', name: 'user', size: 14 -%} {{ article.author | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.show_reading_time -%}
+            <span>{%- render 'icon', name: 'package', size: 14 -%} {{ reading }} min read</span>
+          {%- endif -%}
+          {%- if article.comments_count > 0 and blog.comments_enabled? -%}
+            <span>{%- render 'icon', name: 'chat', size: 14 -%} {{ 'blogs.article.comments' | t: count: article.comments_count }}</span>
+          {%- endif -%}
+        </div>
+      </header>
+
+      {%- if article.excerpt != blank and section.settings.show_excerpt -%}
+        <div class="article-body__excerpt rte">{{ article.excerpt }}</div>
+      {%- endif -%}
+
+      <div class="article-body__content rte" data-animate>
+        {{ article.content }}
+      </div>
+
+      {%- if article.tags.size > 0 and section.settings.show_tags -%}
+        <div class="article-body__tags">
+          <span class="eyebrow eyebrow--no-rule">{{ 'blogs.article.tags' | t }}</span>
+          <div class="search-drawer__tags">
+            {%- for tag in article.tags -%}
+              <a class="chip" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag | escape }}</a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- assign share_full_url = shop.url | append: article.url -%}
+      {%- render 'share-buttons', title: article.title, url: share_full_url, image: article.image -%}
+
+      {%- if section.settings.show_author_box and article.author != blank -%}
+        <aside class="author-box">
+          <span class="author-box__avatar">{%- render 'icon', name: 'brush', size: 22 -%}</span>
+          <div class="author-box__text">
+            <p class="eyebrow eyebrow--no-rule">{{ 'blogs.article.author' | t: author: article.author }}</p>
+            <p class="text-muted text-small">{{ section.settings.author_box_text | escape }}</p>
+          </div>
+        </aside>
+      {%- endif -%}
+
+      {%- if blog.comments_enabled? -%}
+        <section class="article-comments" id="Comments">
+          {%- if article.comments_count > 0 -%}
+            <h2 class="h3">{{ 'blogs.article.comments' | t: count: article.comments_count }}</h2>
+            <div class="article-comments__list">
+              {%- for comment in article.comments -%}
+                <div class="article-comment">
+                  <p class="article-comment__meta"><strong>{{ comment.author | escape }}</strong> · <time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">{{ comment.created_at | date: '%e %B %Y' | strip }}</time></p>
+                  <div class="article-comment__body rte">{{ comment.content }}</div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="article-comments__form">
+            <h2 class="h3">{{ 'blogs.article.comment_form_title' | t }}</h2>
+            {%- form 'new_comment', article -%}
+              {%- if form.errors -%}
+                <div class="form-message form-message--error" role="alert">
+                  <p>{{ 'blogs.article.moderated' | t }}</p>
+                  <ul>{%- for field in form.errors -%}<li>{{ form.errors.messages[field] }}</li>{%- endfor -%}</ul>
+                </div>
+              {%- elsif form.posted_successfully? -%}
+                <div class="form-message form-message--success" role="status">{{ 'blogs.article.success' | t }}</div>
+              {%- endif -%}
+
+              <div class="form-grid">
+                <div class="field field--float">
+                  <input type="text" id="CommentAuthor" name="comment[author]" value="{{ form.author }}" placeholder=" " autocomplete="name" required>
+                  <label class="field__label" for="CommentAuthor">{{ 'blogs.article.name' | t }}</label>
+                </div>
+                <div class="field field--float">
+                  <input type="email" id="CommentEmail" name="comment[email]" value="{{ form.email }}" placeholder=" " autocomplete="email" required>
+                  <label class="field__label" for="CommentEmail">{{ 'blogs.article.email' | t }}</label>
+                </div>
+              </div>
+              <div class="field field--float">
+                <textarea id="CommentBody" name="comment[body]" placeholder=" " required>{{ form.body }}</textarea>
+                <label class="field__label" for="CommentBody">{{ 'blogs.article.message' | t }}</label>
+              </div>
+              <button type="submit" class="btn">{{ 'blogs.article.post' | t }}</button>
+            {%- endform -%}
+          </div>
+        </section>
+      {%- endif -%}
+
+      <nav class="article-nav">
+        {%- if blog.previous_article -%}
+          <a class="article-nav__link" href="{{ blog.previous_article }}">
+            <span class="eyebrow eyebrow--no-rule">{%- render 'icon', name: 'arrow-left', size: 13 -%} {{ 'general.accessibility.previous' | t }}</span>
+            <span class="article-nav__title">{{ blog.previous_article.title | escape }}</span>
+          </a>
+        {%- endif -%}
+        {%- if blog.next_article -%}
+          <a class="article-nav__link article-nav__link--next" href="{{ blog.next_article }}">
+            <span class="eyebrow eyebrow--no-rule">{{ 'general.accessibility.next' | t }} {%- render 'icon', name: 'arrow-right', size: 13 -%}</span>
+            <span class="article-nav__title">{{ blog.next_article.title | escape }}</span>
+          </a>
+        {%- endif -%}
+      </nav>
+    </div>
+  </div>
+
+  {%- if section.settings.show_related -%}
+    <div class="container">
+      {%- render 'section-header', title: section.settings.related_heading, align: 'center' -%}
+      <div class="grid" style="--cols: 3; --cols-tablet: 2; --cols-mobile: 1;">
+        {%- assign count = 0 -%}
+        {%- for related_article in blog.articles -%}
+          {%- if related_article.id != article.id and count < 3 -%}
+            {%- assign count = count | plus: 1 -%}
+            <div class="grid__item" data-animate>
+              {%- render 'article-card', article: related_article, blog: blog, index: count, ratio: 'landscape' -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</article>
+
+{% stylesheet %}
+.article-hero { margin-bottom: clamp(1.6rem, 1rem + 2.4vw, 3rem); }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; }
+
+.article-body__header { text-align: center; margin-bottom: clamp(1.8rem, 1.2rem + 2vw, 3rem); }
+.article-body__title { margin: 0.4rem auto 0.8rem; max-width: 26ch; font-size: clamp(1.9rem, 1.3rem + 2.6vw, var(--h1)); }
+.article-body__meta { display: flex; gap: 1.1rem; justify-content: center; flex-wrap: wrap; font-size: var(--body-size-small); color: var(--text-muted); }
+.article-body__meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.article-body__meta .icon { color: var(--accent); }
+
+.article-body__excerpt { font-size: calc(var(--body-size) * 1.14); font-family: var(--font-heading); font-style: italic; color: var(--text-muted); text-align: center; margin-bottom: 2rem; }
+
+.article-body__content { font-size: calc(var(--body-size) * 1.02); }
+.article-body__content h2, .article-body__content h3 { margin-top: 1.8em; }
+.article-body__content img { border-radius: var(--image-radius); margin-block: 1.6rem; }
+
+.article-body__tags { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 2.4rem; padding-top: 1.4rem; border-top: var(--border-width) solid var(--border); }
+.article-body .share-buttons { margin-top: 1.8rem; padding-top: 1.4rem; border-top: var(--border-width) solid var(--border); justify-content: center; }
+
+.author-box { display: flex; gap: 1.1rem; align-items: flex-start; margin-top: 2.4rem; padding: 1.4rem; background: var(--soft); border-radius: var(--card-radius); border: var(--card-border) solid var(--border); }
+.author-box__avatar { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; background: rgba(var(--accent-rgb), 0.12); color: var(--accent); flex: none; }
+.author-box__text p { margin: 0 0 0.3rem; }
+
+.article-comments { margin-top: clamp(2.4rem, 1.6rem + 3vw, 4rem); padding-top: 2rem; border-top: var(--border-width) solid var(--border); }
+.article-comments__list { display: flex; flex-direction: column; gap: 1.4rem; margin: 1.4rem 0 2.4rem; }
+.article-comment { padding-bottom: 1.2rem; border-bottom: var(--border-width) solid var(--border); }
+.article-comment__meta { font-size: var(--body-size-small); color: var(--text-muted); margin: 0 0 0.4rem; }
+.article-comments__form .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+@media (max-width: 549px) { .article-comments__form .form-grid { grid-template-columns: 1fr; } }
+
+.article-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; margin-top: clamp(2.4rem, 1.6rem + 3vw, 4rem); padding-top: 2rem; border-top: var(--border-width) solid var(--border); }
+.article-nav__link { display: flex; flex-direction: column; gap: 0.4rem; padding: 1rem; border: var(--card-border) solid var(--border); border-radius: var(--card-radius); transition: border-color .3s var(--ease), transform .3s var(--ease); }
+.article-nav__link:hover { border-color: var(--accent); transform: translateY(-2px); }
+.article-nav__link--next { text-align: right; align-items: flex-end; }
+.article-nav__title { font-family: var(--font-heading); font-size: calc(var(--h3) * 0.78); }
+@media (max-width: 549px) { .article-nav { grid-template-columns: 1fr; } }
+
+.article-section .section-header { margin-top: clamp(2.4rem, 1.6rem + 3vw, 4rem); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "section",
+  "class": "article-template-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "checkbox", "id": "narrow", "label": "Narrow reading column", "default": true },
+    { "type": "checkbox", "id": "show_hero_image", "label": "Show the featured image", "default": true },
+    {
+      "type": "select",
+      "id": "hero_ratio",
+      "label": "Featured image ratio",
+      "options": [
+        { "value": "16 / 9", "label": "Wide 16:9" },
+        { "value": "21 / 9", "label": "Cinematic 21:9" },
+        { "value": "3 / 2", "label": "Landscape 3:2" },
+        { "value": "1 / 1", "label": "Square" }
+      ],
+      "default": "21 / 9"
+    },
+    { "type": "checkbox", "id": "hero_arch", "label": "Arch mask on the featured image", "default": false },
+    { "type": "checkbox", "id": "show_blog_name", "label": "Show the journal name", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "checkbox", "id": "show_reading_time", "label": "Show reading time", "default": true },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show the excerpt as a standfirst", "default": true },
+    { "type": "checkbox", "id": "show_tags", "label": "Show topics", "default": true },
+    { "type": "header", "content": "Author box" },
+    { "type": "checkbox", "id": "show_author_box", "label": "Show an author box", "default": false },
+    { "type": "textarea", "id": "author_box_text", "label": "Author box text", "default": "Writing from the studio in Jaipur, where every block, brush and loom has a name attached to it." },
+    { "type": "header", "content": "Related posts" },
+    { "type": "checkbox", "id": "show_related", "label": "Show related posts", "default": true },
+    { "type": "text", "id": "related_heading", "label": "Related heading", "default": "Keep reading" }
+  ]
+}
+{% endschema %}

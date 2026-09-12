@@ -1,0 +1,25 @@
+{%- comment -%}
+  A single logo (or typed name) for the logo-list section.
+  Accepts: block, opts (section.settings), editor (1 = render block attributes)
+{%- endcomment -%}
+<div class="logo-item"{% if editor == 1 %} {{ block.shopify_attributes }}{% endif %}>
+  {%- if block.settings.link != blank -%}
+    <a href="{{ block.settings.link }}" {% if block.settings.link contains 'http' %}target="_blank" rel="noopener"{% endif %}>
+      {%- if block.settings.image != blank -%}
+        <img src="{{ block.settings.image | image_url: width: 400 }}" srcset="{{ block.settings.image | image_url: width: 200 }} 200w, {{ block.settings.image | image_url: width: 400 }} 400w" sizes="200px" alt="{{ block.settings.image.alt | default: block.settings.text | default: 'Partner logo' | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+      {%- elsif block.settings.text != blank -%}
+        <span class="logo-item__text">{{ block.settings.text | escape }}</span>
+      {%- else -%}
+        <span class="logo-item__text">{{ 'onboarding.logo_text' | t }}</span>
+      {%- endif -%}
+    </a>
+  {%- else -%}
+    {%- if block.settings.image != blank -%}
+      <img src="{{ block.settings.image | image_url: width: 400 }}" srcset="{{ block.settings.image | image_url: width: 200 }} 200w, {{ block.settings.image | image_url: width: 400 }} 400w" sizes="200px" alt="{{ block.settings.image.alt | default: block.settings.text | default: 'Partner logo' | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+    {%- elsif block.settings.text != blank -%}
+      <span class="logo-item__text">{{ block.settings.text | escape }}</span>
+    {%- else -%}
+      <span class="logo-item__text">{{ 'onboarding.logo_text' | t }}</span>
+    {%- endif -%}
+  {%- endif -%}
+</div>

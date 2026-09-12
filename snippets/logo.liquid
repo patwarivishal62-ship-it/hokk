@@ -1,0 +1,32 @@
+{%- comment -%}
+  Store logo. Params: width (px), inverted (bool), class
+  Uses the image from Theme settings, or falls back to the store name as text.
+{%- endcomment -%}
+{%- liquid
+  assign w = width | default: settings.logo_width | default: 160
+  assign logo = settings.logo
+  if inverted and settings.logo_inverted != blank
+    assign logo = settings.logo_inverted
+  endif
+  assign wrapper = class | default: 'logo'
+-%}
+<span class="{{ wrapper }}" style="--logo-width: {{ w }}px">
+  {%- if logo != blank -%}
+    {%- assign double = w | times: 2 -%}
+    <img
+      class="logo__image"
+      src="{{ logo | image_url: width: w }}"
+      srcset="{{ logo | image_url: width: w }} 1x, {{ logo | image_url: width: double }} 2x"
+      width="{{ w }}"
+      alt="{{ shop.name | escape }}"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    >
+  {%- else -%}
+    <span class="logo__text">{{ settings.logo_text | default: shop.name | escape }}</span>
+    {%- if settings.brand_tagline != blank and show_tagline -%}
+      <span class="logo__tagline">{{ settings.brand_tagline | escape }}</span>
+    {%- endif -%}
+  {%- endif -%}
+</span>

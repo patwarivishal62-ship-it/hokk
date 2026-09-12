@@ -1,0 +1,438 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "settings": {
+        "height": "large",
+        "color_scheme": "2",
+        "content_position": "center-left",
+        "text_alignment": "left",
+        "overlay_opacity": 45,
+        "autoplay": true,
+        "autoplay_speed": 6,
+        "loop": true,
+        "navigation": "both",
+        "show_progress": true
+      },
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "House of Kala Katha",
+            "heading": "Objects that carry a story",
+            "subheading": "handmade in Jaipur since 1974",
+            "text": "<p>Block-printed textiles, cast brass and slow pottery from the families we have worked with for three generations.</p>",
+            "button_label_1": "Shop the house",
+            "button_style_1": "solid",
+            "button_label_2": "Our story",
+            "button_style_2": "outline",
+            "show_motif": true
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "The festive edit",
+            "heading": "Made by hand, meant to last",
+            "subheading": "natural dyes · reclaimed wood · solid brass",
+            "text": "<p>A small-batch collection for the season of gathering. Printed once, never reprinted.</p>",
+            "button_label_1": "Shop the edit",
+            "button_style_1": "solid",
+            "content_position": "center-center",
+            "text_alignment": "center",
+            "show_motif": true
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Winter 26",
+            "heading": "Nine dips of indigo",
+            "subheading": "dried in the Rajasthan sun",
+            "text": "<p>Every length is dipped by hand, oxidised in the open, and signed by the printer.</p>",
+            "button_label_1": "See the indigo room",
+            "button_style_1": "solid",
+            "content_position": "center-right",
+            "text_alignment": "right",
+            "text_tone": "auto"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ]
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {
+        "color_scheme": "5",
+        "speed": 30,
+        "direction": "left",
+        "separator": "motif",
+        "show_border": true,
+        "full_width": true
+      },
+      "blocks": {
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Handmade in Jaipur",
+            "icon": "hand"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Natural dyes only",
+            "icon": "leaf"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping over ₹5,000",
+            "icon": "truck"
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Maker named on every piece",
+            "icon": "sparkle"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ]
+    },
+    "collection_list": {
+      "type": "collection-list",
+      "settings": {
+        "eyebrow": "Browse by craft",
+        "heading": "Six rooms of the house",
+        "text": "<p>Textiles, brass, clay, wood, paper and the table — each room made by a different family of makers.</p>",
+        "header_alignment": "center",
+        "columns_desktop": 3,
+        "card_style": "arch",
+        "image_ratio": "tall",
+        "show_count": true,
+        "view_all_label": "All collections",
+        "view_all_position": "bottom"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Featured",
+        "heading": "The block-print table",
+        "text": "<p>Printed lengths, napkins and runners from the Bagru workshop.</p>",
+        "header_alignment": "split",
+        "products_to_show": 8,
+        "layout": "grid",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "portrait",
+        "quick_add": true,
+        "view_all_label": "View the whole collection",
+        "view_all_style": "button",
+        "show_count": true
+      }
+    },
+    "story": {
+      "type": "image-with-text",
+      "settings": {
+        "image_position": "left",
+        "image_width": 52,
+        "image_ratio": "4 / 5",
+        "arch": true,
+        "badge": "Est. 1974",
+        "spacing": 56,
+        "color_scheme": "1"
+      },
+      "blocks": {
+        "cap": {
+          "type": "caption",
+          "settings": {
+            "text": "The workshop"
+          }
+        },
+        "head": {
+          "type": "heading",
+          "settings": {
+            "text": "Printed one pass, one colour at a time",
+            "size": "medium",
+            "tag": "h2"
+          }
+        },
+        "body": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A single Bagru print can need nine separate blocks and nine days of drying. We keep the count honest — you can read the registration marks on the reverse of every length.</p>"
+          }
+        },
+        "stat": {
+          "type": "stat",
+          "settings": {
+            "value": "40+",
+            "label": "artisan families"
+          }
+        },
+        "list": {
+          "type": "list",
+          "settings": {
+            "items": "Natural dyes, no azo pigments\nFair rates paid weekly\nMaker’s name stamped underneath\nRepair service for life",
+            "icon": "check"
+          }
+        },
+        "cta": {
+          "type": "button",
+          "settings": {
+            "label": "Explore the craft",
+            "style": "solid",
+            "label_2": "Meet the makers"
+          }
+        }
+      },
+      "block_order": [
+        "cap",
+        "head",
+        "body",
+        "stat",
+        "list",
+        "cta"
+      ]
+    },
+    "usp": {
+      "type": "multicolumn",
+      "settings": {
+        "eyebrow": "Why Kala Katha",
+        "heading": "Four promises we keep",
+        "header_alignment": "center",
+        "layout": "grid",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "card_style": "box",
+        "media_type": "icon",
+        "text_alignment": "center",
+        "spacing": 24,
+        "color_scheme": "1"
+      },
+      "blocks": {
+        "u1": {
+          "type": "column",
+          "settings": {
+            "icon": "hand",
+            "title": "Made by one pair of hands",
+            "text": "<p>Every order names its maker. No assembly lines, no anonymous labour.</p>"
+          }
+        },
+        "u2": {
+          "type": "column",
+          "settings": {
+            "icon": "leaf",
+            "title": "Natural dyes only",
+            "text": "<p>Indigo, madder, pomegranate and iron — no azo pigments, ever.</p>"
+          }
+        },
+        "u3": {
+          "type": "column",
+          "settings": {
+            "icon": "truck",
+            "title": "Ships in 48 hours",
+            "text": "<p>Free across India above ₹5,000, worldwide with DHL.</p>"
+          }
+        },
+        "u4": {
+          "type": "column",
+          "settings": {
+            "icon": "returns",
+            "title": "14-day returns",
+            "text": "<p>Changed your mind? Send it back unwashed and we will refund.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "u1",
+        "u2",
+        "u3",
+        "u4"
+      ]
+    },
+    "lookbook": {
+      "type": "gallery",
+      "settings": {
+        "eyebrow": "Lookbook",
+        "heading": "Winter 26, shot in Jaipur",
+        "header_alignment": "split",
+        "layout": "regular",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "ratio": "3 / 4",
+        "spacing": 14,
+        "rounded": true,
+        "lightbox": true,
+        "show_product_link": true
+      },
+      "blocks": {
+        "g1": {
+          "type": "image",
+          "settings": {
+            "caption": "Indigo, ninth dip",
+            "tall": true,
+            "wide": true
+          }
+        },
+        "g2": {
+          "type": "image",
+          "settings": {
+            "caption": "Brass thali"
+          }
+        },
+        "g3": {
+          "type": "image",
+          "settings": {
+            "caption": "Block table, Bagru"
+          }
+        },
+        "g4": {
+          "type": "image",
+          "settings": {
+            "caption": "Drying yard",
+            "wide": true
+          }
+        },
+        "g5": {
+          "type": "image",
+          "settings": {
+            "caption": "Terracotta",
+            "tall": true
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5"
+      ]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "color_scheme": "5",
+        "eyebrow": "Kind words",
+        "heading": "What our customers keep",
+        "header_alignment": "center",
+        "layout": "grid",
+        "columns_desktop": 3,
+        "card_style": "card",
+        "show_quote_mark": true,
+        "footer_note": "Reviews collected from verified orders"
+      },
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The indigo throw is heavier and softer than I expected. You can feel the hand in it.",
+            "author": "Meera S.",
+            "role": "Mumbai",
+            "rating": 5,
+            "show_verified": true
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "It arrived wrapped in muslin with the maker’s name on the tag. It felt like a gift, not a parcel.",
+            "author": "Daniel R.",
+            "role": "London",
+            "rating": 5,
+            "show_verified": true
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Three years of daily use and the brass has only grown warmer. Worth every rupee.",
+            "author": "Ananya K.",
+            "role": "Bengaluru",
+            "rating": 5,
+            "show_verified": true
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ]
+    },
+    "quote": {
+      "type": "quote",
+      "settings": {
+        "color_scheme": "1",
+        "quote": "We are not selling objects. We are asking you to keep a piece of someone’s life’s work in your home.",
+        "author": "Ananya Kala",
+        "role": "Founder, House of Kala Katha",
+        "style": "portrait",
+        "text_alignment": "center",
+        "show_quote_mark": true,
+        "show_motif": true
+      }
+    },
+    "journal": {
+      "type": "blog-posts",
+      "settings": {
+        "eyebrow": "The journal",
+        "heading": "Stories from the workshops",
+        "header_alignment": "split",
+        "posts_to_show": 3,
+        "layout": "grid",
+        "columns_desktop": 3,
+        "image_ratio": "landscape",
+        "arch": true,
+        "show_excerpt": true,
+        "show_date": true,
+        "show_author": false,
+        "view_all_label": "Read the journal",
+        "view_all_position": "header"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "4",
+        "eyebrow": "The Kala Katha letter",
+        "heading": "Ten per cent off your first piece",
+        "text": "<p>One letter a month: new releases, the makers behind them, and first access to small runs.</p>",
+        "text_alignment": "center",
+        "form_style": "inline",
+        "button_label": "Subscribe",
+        "placeholder": "Your email address",
+        "note": "No spam. Unsubscribe in one click.",
+        "layout": "plain",
+        "show_motif": true
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "marquee",
+    "collection_list",
+    "featured_collection",
+    "story",
+    "usp",
+    "lookbook",
+    "testimonials",
+    "quote",
+    "journal",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,12 @@
+{%- if settings.whatsapp_floating and settings.contact_whatsapp != blank -%}
+  {%- assign number = settings.contact_whatsapp | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | remove: '+' -%}
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/{{ number | escape }}"
+    target="_blank"
+    rel="noopener"
+    aria-label="{{ 'general.social.whatsapp' | t }}"
+  >
+    {%- render 'icon', name: 'whatsapp', size: 24 -%}
+  </a>
+{%- endif -%}

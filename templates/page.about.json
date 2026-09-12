@@ -1,0 +1,223 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "House of Kala Katha",
+        "heading": "A house, not a factory",
+        "heading_2": "three generations of makers",
+        "text": "<p>We began with one printing table in Chandpol Bazaar in 1974. Fifty years later we still print by hand — we simply have more tables, and more families around them.</p>",
+        "button_label_1": "Shop the house",
+        "button_label_2": "Meet the makers",
+        "meta_text": "Jaipur · Bagru · Moradabad · Khurja",
+        "meta_icon": "pin",
+        "image_position": "right",
+        "content_width": 46,
+        "image_ratio": "3 / 4",
+        "arch": true,
+        "show_frame": true,
+        "caption": "Since 1974"
+      }
+    },
+    "timeline": {
+      "type": "story-timeline",
+      "settings": {
+        "eyebrow": "Since 1974",
+        "heading": "Fifty years of keeping a craft alive",
+        "text": "<p>From one printing table to forty artisan families across three states.</p>",
+        "header_alignment": "center",
+        "layout": "center",
+        "image_ratio": "4 / 3",
+        "arch": true,
+        "footer_text": "The next fifty start with the makers we train today.",
+        "footer_label": "Meet the makers"
+      },
+      "blocks": {
+        "y1": {
+          "type": "milestone",
+          "settings": {
+            "year": "1974",
+            "title": "One table, two blocks",
+            "text": "<p>Kala Devi begins printing lengths of cotton from a single table behind her family’s shop in Chandpol Bazaar.</p>",
+            "accent": true
+          }
+        },
+        "y2": {
+          "type": "milestone",
+          "settings": {
+            "year": "1988",
+            "title": "The first workshop",
+            "text": "<p>Four printers join Kala Devi and the house moves into its own courtyard in Bagru.</p>",
+            "icon": "loom"
+          }
+        },
+        "y3": {
+          "type": "milestone",
+          "settings": {
+            "year": "2009",
+            "title": "Natural dyes only",
+            "text": "<p>Every synthetic pigment leaves the workshop. The indigo vats are rebuilt from scratch.</p>",
+            "icon": "leaf"
+          }
+        },
+        "y4": {
+          "type": "milestone",
+          "settings": {
+            "year": "2018",
+            "title": "Brass, clay and wood",
+            "text": "<p>We begin working with casters in Moradabad and potters in Khurja.</p>",
+            "icon": "sparkle"
+          }
+        },
+        "y5": {
+          "type": "milestone",
+          "settings": {
+            "year": "2026",
+            "title": "Forty families, one standard",
+            "text": "<p>Kala Katha now trains twelve apprentices a year and repairs anything it has ever sold.</p>",
+            "icon": "globe"
+          }
+        }
+      },
+      "block_order": [
+        "y1",
+        "y2",
+        "y3",
+        "y4",
+        "y5"
+      ]
+    },
+    "process": {
+      "type": "video",
+      "settings": {
+        "eyebrow": "Inside the workshop",
+        "heading": "Nine passes of indigo",
+        "text": "<p>Watch a length of cloth move from raw cotton to finished indigo in forty seconds.</p>",
+        "header_alignment": "center",
+        "layout": "full",
+        "ratio": "16 / 9",
+        "caption": "Filmed in Bagru, Rajasthan"
+      }
+    },
+    "makers": {
+      "type": "multicolumn",
+      "settings": {
+        "eyebrow": "The workshops",
+        "heading": "Where each craft is made",
+        "header_alignment": "center",
+        "layout": "grid",
+        "columns_desktop": 3,
+        "card_style": "arch",
+        "media_type": "image",
+        "image_ratio": "1 / 1",
+        "text_alignment": "center"
+      },
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "title": "Bagru — block printing",
+            "text": "<p>Nine families, eleven tables, one indigo vat that has never been allowed to die.</p>"
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "title": "Moradabad — brass casting",
+            "text": "<p>Sand-cast, hand-finished, and left unlacquered so it ages with you.</p>"
+          }
+        },
+        "c3": {
+          "type": "column",
+          "settings": {
+            "title": "Khurja — pottery",
+            "text": "<p>Thrown on the wheel and fired twice, for glazes that do not craze.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ]
+    },
+    "quote": {
+      "type": "quote",
+      "settings": {
+        "color_scheme": "3",
+        "quote": "The cloth remembers the hand that printed it.",
+        "author": "Ramesh Chhipa",
+        "role": "Master printer, Bagru",
+        "style": "card",
+        "text_alignment": "center"
+      }
+    },
+    "press": {
+      "type": "logo-list",
+      "settings": {
+        "eyebrow": "As seen in",
+        "heading": "Written about, stocked and loved",
+        "header_alignment": "center",
+        "layout": "grid",
+        "columns_desktop": 4,
+        "treatment": "grayscale",
+        "logo_height": 34
+      },
+      "blocks": {
+        "p1": {
+          "type": "logo",
+          "settings": {
+            "text": "Vogue India"
+          }
+        },
+        "p2": {
+          "type": "logo",
+          "settings": {
+            "text": "Condé Nast Traveller"
+          }
+        },
+        "p3": {
+          "type": "logo",
+          "settings": {
+            "text": "Elle Decor"
+          }
+        },
+        "p4": {
+          "type": "logo",
+          "settings": {
+            "text": "The Hindu"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "color_scheme": "1",
+        "eyebrow": "Start here",
+        "heading": "Slow-made objects for everyday rituals",
+        "text": "<p>Everything we sell can be repaired, re-dyed or re-blocked by the family that made it. That is the whole business model.</p>",
+        "text_width": "narrow",
+        "text_alignment": "center",
+        "button_label": "Shop the house",
+        "button_style": "solid",
+        "show_motif": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "timeline",
+    "process",
+    "makers",
+    "quote",
+    "press",
+    "cta"
+  ]
+}

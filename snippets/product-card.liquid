@@ -1,0 +1,221 @@
+{%- comment -%}
+  Product card used by every product grid in the theme.
+  Params:
+    product       – the product (required)
+    index         – position in the grid, used for the stagger delay
+    ratio         – override the global image ratio
+    class         – extra classes on the article element
+    card_style    – override the global card style
+    quick_add     – override the global quick-add setting
+    product_url   – override the link (e.g. /collections/x/products/y)
+{%- endcomment -%}
+{%- liquid
+  assign p = product
+  assign style = card_style | default: settings.product_card_style
+  assign img_ratio = ratio | default: settings.product_image_ratio
+  assign show_quick = quick_add
+  if show_quick == nil
+    assign show_quick = settings.product_quick_add
+  endif
+  assign url = product_url | default: p.url
+  assign ratio_css = '4 / 5'
+  case img_ratio
+    when 'square'
+      assign ratio_css = '1 / 1'
+    when 'portrait'
+      assign ratio_css = '4 / 5'
+    when 'tall'
+      assign ratio_css = '3 / 4'
+    when 'landscape'
+      assign ratio_css = '5 / 4'
+    when 'adapt'
+      assign ratio_css = 'auto'
+  endcase
+
+  assign delay = 0
+  if index
+    assign mod = index | modulo: 6
+    assign delay = mod | times: 70
+  endif
+
+  assign hover_image = nil
+  if settings.product_secondary_image and p.images.size > 1
+    assign hover_image = p.images[1]
+  endif
+
+  assign first_variant = p.selected_or_first_available_variant
+  assign on_sale = false
+  if p.compare_at_price > p.price
+    assign on_sale = true
+  endif
+
+  assign badge_tag = ''
+  if settings.product_badge_tags
+    for tag in p.tags
+      assign down = tag | downcase | strip
+      if down contains 'badge:'
+        assign badge_tag = tag | split: ':' | last | strip
+      endif
+    endfor
+  endif
+
+  assign is_new = false
+  if settings.product_badge_new and p.published_at != blank
+    assign now_s = 'now' | date: '%s'
+    assign pub_s = p.published_at | date: '%s'
+    assign age = now_s | minus: pub_s | divided_by: 86400
+    if age <= settings.product_badge_new_days
+      assign is_new = true
+    endif
+  endif
+
+  assign swatch_option = nil
+  if settings.product_swatches
+    for option in p.options_with_values
+      assign oname = option.name | downcase
+      if oname == 'color' or oname == 'colour'
+        assign swatch_option = option
+      endif
+    endfor
+  endif
+-%}
+
+<article
+  class="product-card card card--{{ style }} {{ class }}"
+  {% if delay > 0 %}style="--anim-delay: {{ delay }}ms"{% endif %}
+  data-product-card
+>
+  <div class="product-card__media{% if ratio_css == 'auto' %} product-card__media--adapt{% endif %}"{% if ratio_css != 'auto' %} style="--ratio: {{ ratio_css }};"{% endif %}>
+    {%- if settings.product_badges -%}
+      <div class="product-card__badges" data-badge-position="{{ settings.product_badge_position }}">
+        {%- if badge_tag != blank -%}
+          <span class="badge badge--custom">{{ badge_tag | escape }}</span>
+        {%- endif -%}
+        {%- unless p.available -%}
+          {%- if settings.product_badge_soldout -%}
+            <span class="badge badge--soldout">{{ settings.product_badge_soldout_text | default: 'Sold out' | escape }}</span>
+          {%- endif -%}
+        {%- else -%}
+          {%- if on_sale and settings.product_badge_sale -%}
+            {%- assign saved = p.compare_at_price | minus: p.price -%}
+            {%- case settings.product_badge_sale_type -%}
+              {%- when 'percent' -%}
+                {%- assign pct = saved | times: 100.0 | divided_by: p.compare_at_price | round -%}
+                <span class="badge">&minus;{{ pct }}%</span>
+              {%- when 'amount' -%}
+                <span class="badge">{{ 'products.product.save' | t }} {{ saved | money }}</span>
+              {%- else -%}
+                <span class="badge">{{ settings.product_badge_sale_text | default: 'Sale' | escape }}</span>
+            {%- endcase -%}
+          {%- endif -%}
+          {%- if is_new -%}
+            <span class="badge badge--new">{{ settings.product_badge_new_text | default: 'New' | escape }}</span>
+          {%- endif -%}
+        {%- endunless -%}
+      </div>
+    {%- endif -%}
+
+    <a class="product-card__link" href="{{ url }}" aria-label="{{ p.title | escape }}">
+      {%- if p.featured_image != blank -%}
+        {%- liquid
+          assign w = 800
+          assign sizes = '(max-width: 749px) 46vw, (max-width: 989px) 32vw, 24vw'
+        -%}
+        <img
+          class="product-card__image product-card__image--primary{% if settings.arch_on_cards and settings.arch_enable %} arch{% endif %}"
+          src="{{ p.featured_image | image_url: width: 480 }}"
+          srcset="{{ p.featured_image | image_url: width: 240 }} 240w, {{ p.featured_image | image_url: width: 360 }} 360w, {{ p.featured_image | image_url: width: 540 }} 540w, {{ p.featured_image | image_url: width: 800 }} 800w"
+          sizes="{{ sizes }}"
+          alt="{{ p.featured_image.alt | default: p.title | escape }}"
+          width="{{ p.featured_image.width }}"
+          height="{{ p.featured_image.height }}"
+          {% if settings.lazy_images %}loading="lazy"{% else %}loading="eager"{% endif %}
+        >
+        {%- if hover_image != blank -%}
+          <img
+            class="product-card__image product-card__image--hover{% if settings.arch_on_cards and settings.arch_enable %} arch{% endif %}"
+            src="{{ hover_image | image_url: width: 480 }}"
+            srcset="{{ hover_image | image_url: width: 240 }} 240w, {{ hover_image | image_url: width: 360 }} 360w, {{ hover_image | image_url: width: 540 }} 540w, {{ hover_image | image_url: width: 800 }} 800w"
+            sizes="{{ sizes }}"
+            alt=""
+            aria-hidden="true"
+            width="{{ hover_image.width }}"
+            height="{{ hover_image.height }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+      {%- else -%}
+        <span class="product-card__image product-card__image--primary">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </span>
+      {%- endif -%}
+    </a>
+
+    {%- if show_quick and p.available -%}
+      {%- if settings.product_quick_add_style == 'overlay' -%}
+        <div class="product-card__quick-add">
+          {%- if p.has_only_default_variant or p.variants.size == 1 -%}
+            <button type="button" class="btn btn--small btn--full" data-quick-add="{{ first_variant.id }}">
+              <span data-btn-label>{{ 'products.product.add_to_cart' | t }}</span>
+            </button>
+          {%- else -%}
+            <a class="btn btn--small btn--full" href="{{ url }}">{{ 'products.product.choose_options' | t }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+
+  <div class="card__body">
+    {%- if settings.product_vendor and p.vendor != blank -%}
+      <span class="product-card__vendor">{{ p.vendor | escape }}</span>
+    {%- endif -%}
+
+    <h3 class="card__title">
+      <a href="{{ url }}">{{ p.title | escape }}</a>
+    </h3>
+
+    {%- render 'rating', product: p, show_count: false -%}
+
+    {%- if swatch_option != nil and swatch_option.values.size > 1 -%}
+      <div class="product-card__swatches" title="{{ swatch_option.name | escape }}">
+        {%- assign limit = settings.product_swatch_max | default: 5 -%}
+        {%- assign shown = 0 -%}
+        {%- for value in swatch_option.values -%}
+          {%- if shown < limit -%}
+            {%- assign matched_image = nil -%}
+            {%- for variant in p.variants -%}
+              {%- if variant.title contains value and variant.featured_image != blank and matched_image == nil -%}
+                {%- assign matched_image = variant.featured_image -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- render 'color-swatch', value: value, image: matched_image -%}
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign remaining = swatch_option.values.size | minus: limit -%}
+        {%- if remaining > 0 -%}
+          <span class="product-card__swatch-more">+{{ remaining }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if settings.product_price_position == 'below' -%}
+      {%- render 'price', product: p, show_badge: false, show_unit: false, class: 'product-card__price' -%}
+    {%- else -%}
+      {%- render 'price', product: p, show_badge: false, show_unit: false, class: 'product-card__price visually-hidden' -%}
+    {%- endif -%}
+
+    {%- if show_quick and p.available and settings.product_quick_add_style == 'button' -%}
+      <div class="product-card__action">
+        {%- if p.has_only_default_variant or p.variants.size == 1 -%}
+          <button type="button" class="btn btn--outline btn--small btn--full" data-quick-add="{{ first_variant.id }}">
+            <span data-btn-label>{{ 'products.product.add_to_cart' | t }}</span>
+          </button>
+        {%- else -%}
+          <a class="btn btn--outline btn--small btn--full" href="{{ url }}">{{ 'products.product.choose_options' | t }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>

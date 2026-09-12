@@ -1,0 +1,55 @@
+{%- comment -%}
+  Renders the social accounts configured in Theme settings → Social media.
+  Params:
+    class     – extra class on the <ul>
+    size      – icon size in px
+    show_text – render the label next to each icon
+{%- endcomment -%}
+{%- liquid
+  assign size = size | default: 20
+  assign wrapper = class | default: 'social-links'
+  assign links = ''
+  if settings.social_instagram_link != blank
+    assign links = links | append: 'instagram|' | append: settings.social_instagram_link | append: ','
+  endif
+  if settings.social_facebook_link != blank
+    assign links = links | append: 'facebook|' | append: settings.social_facebook_link | append: ','
+  endif
+  if settings.social_pinterest_link != blank
+    assign links = links | append: 'pinterest|' | append: settings.social_pinterest_link | append: ','
+  endif
+  if settings.social_youtube_link != blank
+    assign links = links | append: 'youtube|' | append: settings.social_youtube_link | append: ','
+  endif
+  if settings.social_tiktok_link != blank
+    assign links = links | append: 'tiktok|' | append: settings.social_tiktok_link | append: ','
+  endif
+  if settings.social_twitter_link != blank
+    assign links = links | append: 'twitter|' | append: settings.social_twitter_link | append: ','
+  endif
+  if settings.social_linkedin_link != blank
+    assign links = links | append: 'linkedin|' | append: settings.social_linkedin_link | append: ','
+  endif
+  if settings.contact_whatsapp != blank
+    assign number = settings.contact_whatsapp | remove: ' ' | remove: '-' | remove: '+' | remove: '(' | remove: ')'
+    assign wa = 'https://wa.me/' | append: number
+    assign links = links | append: 'whatsapp|' | append: wa | append: ','
+  endif
+-%}
+{%- if links != '' -%}
+  <ul class="{{ wrapper }}" role="list">
+    {%- assign pairs = links | split: ',' -%}
+    {%- for pair in pairs -%}
+      {%- if pair == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign bits = pair | split: '|' -%}
+      {%- assign network = bits[0] -%}
+      {%- assign url = bits[1] -%}
+      <li>
+        <a href="{{ url | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ 'general.social.links.' | append: network | t }}">
+          {%- render 'icon', name: network, size: size -%}
+          {%- if show_text -%}<span class="social-links__label">{{ 'general.social.links.' | append: network | t }}</span>{%- endif -%}
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

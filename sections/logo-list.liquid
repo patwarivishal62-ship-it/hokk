@@ -1,0 +1,216 @@
+{%- comment -%}
+  Logo list — press, stockists and partners.
+{%- endcomment -%}
+{%- liquid
+  assign per_row = section.settings.columns_desktop
+  assign layout = section.settings.layout
+-%}
+<div class="logo-list section color-scheme-{{ section.settings.color_scheme }} logo-list--{{ section.settings.treatment }} logo-list--{{ layout }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+      {%- render 'section-header',
+        eyebrow: section.settings.eyebrow,
+        title: section.settings.heading,
+        text: section.settings.text,
+        align: section.settings.header_alignment,
+        show_motif: section.settings.show_motif
+      -%}
+    {%- endif -%}
+
+    {%- if layout == 'marquee' -%}
+      <div class="logo-list__marquee" data-marquee>
+        <div class="logo-list__track" data-marquee-track>
+          {%- for pass in (1..2) -%}
+            <span class="logo-list__group"{% if pass == 2 %} aria-hidden="true"{% endif %}>
+              {%- for block in section.blocks -%}
+                {%- render 'logo-item', block: block, opts: section.settings, editor: pass -%}
+              {%- endfor -%}
+            </span>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="logo-list__grid" style="--cols: {{ per_row }}; --cols-mobile: {{ section.settings.columns_mobile }}; --logo-height: {{ section.settings.logo_height }}px;">
+        {%- for block in section.blocks -%}
+          {%- render 'logo-item', block: block, opts: section.settings, editor: 1 -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.logo-list__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.4rem);
+  align-items: center;
+  margin-top: 2.2rem;
+}
+
+.logo-list__marquee { overflow: hidden; margin-top: 2.2rem; }
+.logo-list__track { display: flex; align-items: center; gap: clamp(2rem, 6vw, 4.5rem); width: max-content; animation: logo-marquee 34s linear infinite; }
+.logo-list__group { display: flex; align-items: center; gap: inherit; flex: none; }
+.logo-list__marquee:hover .logo-list__track { animation-play-state: paused; }
+
+@keyframes logo-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-1 * var(--logo-shift, 50%)), 0, 0); }
+}
+
+.logo-item { display: flex; align-items: center; justify-content: center; }
+.logo-item a { display: flex; align-items: center; justify-content: center; text-decoration: none; color: inherit; width: 100%; }
+.logo-item img { height: var(--logo-height, 34px); width: auto; max-width: 100%; object-fit: contain; display: block; }
+.logo-item__text { font-family: var(--font-heading); font-size: 1.05rem; letter-spacing: 0.02em; text-align: center; }
+
+.logo-list--grayscale .logo-item img { filter: grayscale(1) opacity(0.62); transition: filter 0.4s var(--ease); }
+.logo-list--grayscale .logo-item:hover img { filter: grayscale(0) opacity(1); }
+.logo-list--framed .logo-item {
+  padding: clamp(0.8rem, 2vw, 1.4rem);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--card-radius);
+  background: var(--bg-card);
+}
+
+@media (max-width: 749px) {
+  .logo-list__grid { grid-template-columns: repeat(var(--cols-mobile, 2), minmax(0, 1fr)); gap: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-list__track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+/* seamless logo marquee: measure one group and set the shift distance */
+(function () {
+  function measure(el) {
+    var track = el.querySelector('[data-marquee-track]');
+    if (!track || track.children.length < 2) return;
+    var style = window.getComputedStyle(track);
+    var gap = parseFloat(style.columnGap || style.gap) || 0;
+    var width = track.children[0].getBoundingClientRect().width + gap;
+    track.style.setProperty('--logo-shift', Math.round(width) + 'px');
+  }
+  function initAll() {
+    document.querySelectorAll('.logo-list__marquee').forEach(measure);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll);
+  else initAll();
+  window.addEventListener('load', initAll);
+  window.addEventListener('resize', function () { window.setTimeout(initAll, 200); });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Logo list",
+  "tag": "section",
+  "class": "logo-list-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "As seen in" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Written about, stocked and loved" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "split", "label": "Split" }
+      ],
+      "default": "center"
+    },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": false },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "marquee", "label": "Scrolling row" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" },
+        { "value": "3", "label": "3 columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "treatment",
+      "label": "Treatment",
+      "options": [
+        { "value": "plain", "label": "Full colour" },
+        { "value": "grayscale", "label": "Greyscale, colour on hover" },
+        { "value": "framed", "label": "Framed cards" }
+      ],
+      "default": "grayscale"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 20,
+      "max": 90,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "text", "label": "Or type a name", "info": "Used when no image is chosen" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list",
+      "blocks": [
+        { "type": "logo", "settings": { "text": "Vogue India" } },
+        { "type": "logo", "settings": { "text": "Condé Nast Traveller" } },
+        { "type": "logo", "settings": { "text": "Elle Decor" } },
+        { "type": "logo", "settings": { "text": "The Hindu" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

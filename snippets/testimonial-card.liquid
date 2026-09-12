@@ -1,0 +1,46 @@
+{%- comment -%}
+  Single testimonial card. Accepts: block, opts (section.settings)
+{%- endcomment -%}
+<figure class="testimonial-card" {{ block.shopify_attributes }}>
+  {%- if opts.show_quote_mark -%}
+    <span class="testimonial-card__mark" aria-hidden="true">{%- render 'icon', name: 'quote', size: 26 -%}</span>
+  {%- endif -%}
+
+  {%- if block.settings.rating > 0 -%}
+    <span class="rating-stars" role="img" aria-label="{{ block.settings.rating }} out of 5 stars">
+      {%- assign r = block.settings.rating | times: 1 -%}
+      {%- for i in (1..5) -%}
+        {%- if r >= i -%}
+          <span class="rating-stars__star">{%- render 'icon', name: 'star', size: 14 -%}</span>
+        {%- else -%}
+          <span class="rating-stars__star rating-stars__star--empty">{%- render 'icon', name: 'star', size: 14 -%}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </span>
+  {%- endif -%}
+
+  <blockquote class="testimonial-card__quote">
+    <p>{{ block.settings.quote | escape }}</p>
+  </blockquote>
+
+  {%- if block.settings.author != blank or block.settings.image != blank -%}
+    <figcaption class="testimonial-card__meta">
+      {%- if block.settings.image != blank -%}
+        <span class="testimonial-card__avatar">
+          <img src="{{ block.settings.image | image_url: width: 120 }}" alt="{{ block.settings.author | escape }}" width="46" height="46" loading="lazy">
+        </span>
+      {%- endif -%}
+      <span class="testimonial-card__who">
+        <span class="testimonial-card__name">
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{{ block.settings.author | escape }}</a>
+          {%- elsif block.settings.product != blank -%}<a href="{{ block.settings.product.url }}">{{ block.settings.author | escape }}</a>
+          {%- else -%}{{ block.settings.author | escape }}{%- endif -%}
+        </span>
+        {%- if block.settings.role != blank -%}<span class="testimonial-card__role">{{ block.settings.role | escape }}</span>{%- endif -%}
+        {%- if block.settings.show_verified -%}
+          <span class="testimonial-card__verified">{%- render 'icon', name: 'check-circle', size: 13 -%} Verified buyer</span>
+        {%- endif -%}
+      </span>
+    </figcaption>
+  {%- endif -%}
+</figure>

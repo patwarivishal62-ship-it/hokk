@@ -1,0 +1,99 @@
+{%- comment -%}
+  Desktop navigation with dropdown + mega menu support.
+  Snippets cannot see `section`, so every setting is passed in explicitly:
+    {% render 'header-nav', menu: menu, mega_columns: 4, mega_menus: 'Shop,Collections',
+       show_menu_images: true, promo_image: image, promo_link: url,
+       promo_heading: 'text', promo_eyebrow: 'text' %}
+{%- endcomment -%}
+{%- liquid
+  assign nav = menu
+  if nav == nil
+    assign nav = linklists.main-menu
+  endif
+  assign wrap = class | default: 'header-nav'
+  assign cols = mega_columns | default: 4
+  assign mega_list = mega_menus | default: ''
+-%}
+<nav class="{{ wrap }}" aria-label="Primary">
+  <ul class="nav" role="list">
+    {%- for link in nav.links -%}
+      {%- liquid
+        assign has_children = false
+        if link.links.size > 0
+          assign has_children = true
+        endif
+        assign force_mega = false
+        if mega_list != blank and mega_list contains link.title
+          assign force_mega = true
+        endif
+        assign mega = false
+        if has_children and force_mega or link.links.size > 2
+          assign mega = true
+        endif
+      -%}
+      <li class="nav__item{% if has_children %} nav__item--children{% endif %}{% if mega %} nav__item--mega{% endif %}{% if link.active or link.child_active %} is-active{% endif %}">
+        <a class="nav__link" href="{{ link.url }}"{% if has_children %} aria-haspopup="true"{% endif %}>
+          <span>{{ link.title | escape }}</span>
+          {%- if has_children -%}{%- render 'icon', name: 'chevron-down', size: 13 -%}{%- endif -%}
+        </a>
+
+        {%- if has_children -%}
+          <div class="nav__panel{% if mega %} nav__panel--mega{% endif %}">
+            <div class="nav__panel-inner container">
+              <ul class="nav__columns" style="--nav-columns: {{ cols }};" role="list">
+                {%- for child in link.links -%}
+                  <li class="nav__column">
+                    {%- if child.links.size > 0 -%}
+                      <a class="nav__column-title" href="{{ child.url }}">{{ child.title | escape }}</a>
+                      <ul class="nav__sublist" role="list">
+                        {%- for grand in child.links -%}
+                          <li><a class="nav__sublink" href="{{ grand.url }}">{{ grand.title | escape }}</a></li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- else -%}
+                      <a class="nav__sublink nav__sublink--single" href="{{ child.url }}">{{ child.title | escape }}</a>
+                    {%- endif -%}
+
+                    {%- if show_menu_images -%}
+                      {%- liquid
+                        assign promo_image = blank
+                        if child.object.featured_image != blank
+                          assign promo_image = child.object.featured_image
+                        elsif child.object.image != blank
+                          assign promo_image = child.object.image
+                        elsif child.object.products.first.featured_image != blank
+                          assign promo_image = child.object.products.first.featured_image
+                        endif
+                      -%}
+                      {%- if promo_image != blank -%}
+                        <a class="nav__promo" href="{{ child.url }}" tabindex="-1" aria-hidden="true">
+                          <span class="nav__promo-media">
+                            <img src="{{ promo_image | image_url: width: 320 }}" width="160" alt="" loading="lazy">
+                          </span>
+                        </a>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+
+              {%- if promo_image != blank and mega -%}
+                <a class="nav__banner" href="{{ promo_link }}">
+                  <span class="nav__banner-media">
+                    <img src="{{ promo_image | image_url: width: 520 }}" alt="{{ promo_heading | default: promo_image.alt | escape }}" loading="lazy">
+                  </span>
+                  {%- if promo_heading != blank -%}
+                    <span class="nav__banner-text">
+                      {%- if promo_eyebrow != blank -%}<span class="eyebrow">{{ promo_eyebrow | escape }}</span>{%- endif -%}
+                      <span class="h4">{{ promo_heading | escape }}</span>
+                    </span>
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>

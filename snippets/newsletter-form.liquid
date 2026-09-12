@@ -1,0 +1,53 @@
+{%- comment -%}
+  Newsletter signup. Params: id (unique), button_label, placeholder, style
+{%- endcomment -%}
+{%- liquid
+  assign uid = id | default: 'newsletter'
+  assign label = button_label
+  if label == blank
+    assign label = 'general.newsletter.button' | t
+  endif
+  assign hint = placeholder
+  if hint == blank
+    assign hint = 'general.newsletter.email_placeholder' | t
+  endif
+  assign look = style | default: 'inline'
+  assign form_class = 'newsletter-form newsletter-form--' | append: look
+-%}
+{%- form 'customer', class: form_class, id: uid -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+
+  <div class="newsletter-form__row">
+    <div class="field field--float newsletter-form__field">
+      <input
+        class="newsletter-form__input"
+        type="email"
+        id="{{ uid }}-email"
+        name="contact[email]"
+        value="{{ form.email }}"
+        placeholder=" "
+        autocomplete="email"
+        required
+        aria-label="{{ hint | escape }}"
+      >
+      <label class="field__label" for="{{ uid }}-email">{{ hint | escape }}</label>
+    </div>
+    <button class="btn newsletter-form__button" type="submit">
+      <span data-btn-label>{{ label | escape }}</span>
+    </button>
+  </div>
+
+  {%- if form.posted_successfully? -%}
+    <p class="form-message form-message--success newsletter-form__message" role="status">
+      {%- render 'icon', name: 'check-circle', size: 16 -%}
+      {{ 'general.newsletter.success' | t }}
+    </p>
+  {%- endif -%}
+
+  {%- if form.errors -%}
+    <p class="form-message form-message--error newsletter-form__message" role="alert">
+      {%- render 'icon', name: 'alert', size: 16 -%}
+      {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+    </p>
+  {%- endif -%}
+{%- endform -%}

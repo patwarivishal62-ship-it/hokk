@@ -1,0 +1,62 @@
+<div class="section page-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'breadcrumb' -%}
+    <div class="page-layout page-layout--{{ section.settings.width }}">
+      <header class="page-header{% if section.settings.center_heading %} page-header--center{% endif %}">
+        {%- if section.settings.show_motif and settings.motif_enable and section.settings.center_heading -%}
+          <div class="motif-row">{%- render 'motif', style: settings.motif_style -%}</div>
+        {%- endif -%}
+        <h1 class="page-header__title">{{ page.title | escape }}</h1>
+      </header>
+      <div class="page-content rte" data-animate>
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.page-layout { padding-block: clamp(1rem, 0.6rem + 2vw, 2.6rem) 0; }
+.page-layout--narrow { max-width: var(--content-narrow); margin-inline: auto; }
+.page-layout--medium { max-width: 62rem; margin-inline: auto; }
+.page-layout--wide { max-width: none; }
+.page-content { font-size: calc(var(--body-size) * 1.02); }
+.page-content img { border-radius: var(--image-radius); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page",
+  "tag": "section",
+  "class": "page-template-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Content width",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "wide", "label": "Full" }
+      ],
+      "default": "narrow"
+    },
+    { "type": "checkbox", "id": "center_heading", "label": "Centre the heading", "default": false },
+    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true }
+  ]
+}
+{% endschema %}

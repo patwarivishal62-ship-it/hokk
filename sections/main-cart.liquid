@@ -1,0 +1,268 @@
+{%- comment -%}
+  Cart page section.
+{%- endcomment -%}
+<div class="section cart-section color-scheme-{{ section.settings.color_scheme }}" data-cart-section="{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- render 'breadcrumb' -%}
+
+    <header class="page-header page-header--center">
+      <h1 class="page-header__title">
+        {%- if section.settings.heading != blank -%}{{ section.settings.heading | escape }}{%- else -%}{{ 'cart.general.title' | t }}{%- endif -%}
+      </h1>
+      {%- if section.settings.text != blank -%}
+        <div class="page-header__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- if cart.item_count == 0 -%}
+      {%- liquid
+        assign empty_heading = settings.cart_empty_heading
+        if empty_heading == blank
+          assign empty_heading = 'cart.general.empty' | t
+        endif
+        assign empty_text = settings.cart_empty_text
+        if empty_text == blank
+          assign empty_text = 'cart.general.empty_text' | t
+        endif
+      -%}
+      <div class="cart-empty">
+        <span class="cart-empty__icon">{%- render 'icon', name: 'bag', size: 44 -%}</span>
+        <h2 class="h2">{{ empty_heading | escape }}</h2>
+        <div class="rte text-muted container--narrow">{{ empty_text }}</div>
+        <a class="btn" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
+      </div>
+
+      {%- if section.settings.show_featured_collection and section.settings.featured_collection != blank -%}
+        <div class="cart-recommendations">
+          {%- render 'section-header', eyebrow: section.settings.featured_eyebrow, title: section.settings.featured_heading, align: 'center' -%}
+          <div class="grid" style="--cols: 4; --cols-tablet: 3; --cols-mobile: 2;">
+            {%- for product in section.settings.featured_collection.products limit: 4 -%}
+              <div class="grid__item" data-animate>{%- render 'product-card', product: product, index: forloop.index -%}</div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-page-form">
+        <div class="cart-page">
+          <div class="cart-page__items" data-cart-items>
+            {%- for item in cart.items -%}
+              {%- render 'cart-item', item: item, index: forloop.index -%}
+            {%- endfor -%}
+          </div>
+
+          <aside class="cart-page__summary">
+            <h2 class="cart-page__summary-title h3">{{ 'cart.general.order_summary' | t }}</h2>
+
+            {%- if settings.cart_free_shipping_threshold > 0 -%}
+              {%- liquid
+                assign threshold_cents = settings.cart_free_shipping_threshold | times: 100
+                assign remaining = threshold_cents | minus: cart.total_price
+                if remaining < 0
+                  assign remaining = 0
+                endif
+                assign percent = cart.total_price | times: 100 | divided_by: threshold_cents
+                if percent > 100
+                  assign percent = 100
+                endif
+              -%}
+              <div class="ship-bar" data-shipping-bar>
+                <p class="ship-bar__text" data-shipping-text>
+                  {%- if remaining > 0 -%}
+                    {{ 'cart.general.free_shipping_remaining' | t | replace: '[amount]', remaining | money }}
+                  {%- else -%}
+                    {{ 'cart.general.free_shipping_met' | t }}
+                  {%- endif -%}
+                </p>
+                <div class="ship-bar__track"><span class="ship-bar__fill" data-shipping-fill style="width: {{ percent }}%"></span></div>
+              </div>
+            {%- endif -%}
+
+            {%- if settings.cart_notes -%}
+              <div class="cart-page__note">
+                <label class="option-row__name" for="CartNote">{{ 'cart.general.note' | t }}</label>
+                <textarea id="CartNote" class="cart-note__input" name="note" data-cart-note placeholder="{{ 'cart.general.note_placeholder' | t }}">{{ cart.note }}</textarea>
+              </div>
+            {%- endif -%}
+
+            {%- if settings.cart_terms -%}
+              <label class="checkbox cart-terms">
+                <input type="checkbox" data-cart-terms>
+                <span>{{ settings.cart_terms_text }}</span>
+              </label>
+            {%- endif -%}
+
+            <div class="cart-drawer__totals">
+              <span class="cart-drawer__totals-label">{{ 'cart.general.subtotal' | t }}</span>
+              <span class="cart-drawer__totals-value" data-cart-subtotal>{{ cart.total_price | money }}</span>
+            </div>
+
+            <p class="cart-drawer__savings" hidden>
+              {{ 'cart.general.savings' | t }} <strong data-cart-total-savings>{{ 0 | money }}</strong>
+            </p>
+
+            <p class="cart-drawer__shipping-note">
+              {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+              {%- elsif cart.taxes_included -%}
+                {{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}
+              {%- elsif shop.shipping_policy.body != blank -%}
+                {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+              {%- else -%}
+                {{ 'cart.general.shipping_at_checkout' | t }}
+              {%- endif -%}
+            </p>
+
+            <button type="submit" name="checkout" class="btn btn--full" data-cart-checkout="form">
+              <span data-btn-label>{{ 'cart.general.checkout' | t }}</span>
+              {%- render 'icon', name: 'lock', size: 15 -%}
+            </button>
+
+            {%- if additional_checkout_buttons and section.settings.show_additional_checkout -%}
+              <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+            {%- endif -%}
+
+            <div class="cart-page__links">
+              <a class="link-arrow" href="{{ routes.all_products_collection_url }}">
+                {%- render 'icon', name: 'arrow-left', size: 14 -%} {{ 'general.continue_shopping' | t }}
+              </a>
+              <button type="submit" name="update" class="btn btn--ghost btn--small">{{ 'cart.general.update' | t }}</button>
+            </div>
+
+            {%- if section.settings.show_payment_icons -%}
+              <ul class="footer__payment cart-page__payment" role="list">
+                {%- for type in shop.enabled_payment_types -%}
+                  <li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </aside>
+        </div>
+      </form>
+
+      {%- if settings.cart_recommendations -%}
+        <div class="cart-recommendations" data-product-recommendations-wrapper>
+          <product-recommendations
+            class="product-recommendations"
+            data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ cart.items.first.product_id }}&limit=4&intent=related"
+          >
+            {%- if recommendations.performed and recommendations.products_count > 0 -%}
+              {%- render 'section-header', eyebrow: section.settings.recommendations_eyebrow, title: section.settings.recommendations_heading, align: 'center' -%}
+              <div class="grid" style="--cols: 4; --cols-tablet: 3; --cols-mobile: 2;">
+                {%- for product in recommendations.products -%}
+                  <div class="grid__item" data-animate>{%- render 'product-card', product: product, index: forloop.index -%}</div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </product-recommendations>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.cart-page-form { margin-top: 0.6rem; }
+.cart-page__summary-title { margin-bottom: 1.2rem; }
+.cart-page__note { margin-bottom: 1.2rem; }
+.cart-page__note .option-row__name { display: block; margin-bottom: 0.5rem; }
+.cart-page__note textarea { width: 100%; min-height: 6rem; font-size: var(--body-size-small); }
+.cart-page__payment { margin-top: 1.4rem; justify-content: center; }
+.cart-empty__icon { color: var(--text-faint); }
+.additional-checkout-buttons { margin-top: 0.9rem; }
+.page-header { margin-bottom: clamp(1.6rem, 1rem + 2vw, 2.8rem); }
+.page-header--center { text-align: center; }
+.page-header--center .page-header__text { margin-inline: auto; }
+.page-header__title { margin: 0 0 0.4rem; }
+.page-header__text { max-width: 62ch; color: var(--text-muted); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cart page",
+  "tag": "section",
+  "class": "cart-page-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your cart"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_additional_checkout",
+      "label": "Show additional checkout buttons",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Recommendations"
+    },
+    {
+      "type": "text",
+      "id": "recommendations_eyebrow",
+      "label": "Recommendations eyebrow",
+      "default": "You may also like"
+    },
+    {
+      "type": "text",
+      "id": "recommendations_heading",
+      "label": "Recommendations heading",
+      "default": "Made to go with this"
+    },
+    {
+      "type": "header",
+      "content": "Empty cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_collection",
+      "label": "Show a featured collection when the cart is empty",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured collection"
+    },
+    {
+      "type": "text",
+      "id": "featured_eyebrow",
+      "label": "Featured eyebrow",
+      "default": "Start here"
+    },
+    {
+      "type": "text",
+      "id": "featured_heading",
+      "label": "Featured heading",
+      "default": "Pieces our customers reach for first"
+    }
+  ]
+}
+{% endschema %}

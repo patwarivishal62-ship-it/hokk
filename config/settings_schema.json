@@ -1,0 +1,1741 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Kala Katha",
+    "theme_version": "1.0.0",
+    "theme_author": "House of Kala Katha",
+    "theme_documentation_url": "https://shopify.dev/docs/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "Brand identity",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 60,
+        "max": 400,
+        "step": 5,
+        "unit": "px",
+        "default": 180
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_inverted",
+        "label": "Logo on dark backgrounds",
+        "info": "Optional. Used when a dark colour scheme is applied to the header or footer."
+      },
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Store name as logo text",
+        "info": "Used when no logo image is selected.",
+        "default": "House of Kala Katha"
+      },
+      {
+        "type": "header",
+        "content": "Favicon"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 x 32px recommended. PNG or SVG."
+      },
+      {
+        "type": "header",
+        "content": "Brand story"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Tagline",
+        "default": "Objects that carry a story"
+      },
+      {
+        "type": "text",
+        "id": "brand_established",
+        "label": "Established line",
+        "info": "Shown in the footer and on the about sections.",
+        "default": "Est. 1974 · Jaipur"
+      },
+      {
+        "type": "image_picker",
+        "id": "default_social_image",
+        "label": "Default social share image",
+        "info": "1200 x 630px recommended. Used when a page has no image of its own."
+      }
+    ]
+  },
+  {
+    "name": "Colours — accents",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Accent colours are used for badges, stars, sale prices and highlights across the whole store."
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Sale / discount",
+        "default": "#B4552F"
+      },
+      {
+        "type": "color",
+        "id": "color_new",
+        "label": "New arrival",
+        "default": "#2F5D50"
+      },
+      {
+        "type": "color",
+        "id": "color_soldout",
+        "label": "Sold out",
+        "default": "#6B625A"
+      },
+      {
+        "type": "color",
+        "id": "color_rating",
+        "label": "Review stars",
+        "default": "#D9A03C"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Metallic accent",
+        "info": "Used for hairlines, motifs and decorative rules.",
+        "default": "#C9A227"
+      },
+      {
+        "type": "checkbox",
+        "id": "overlay_dark_images",
+        "label": "Darken images behind overlaid text",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "overlay_opacity",
+        "label": "Image overlay opacity",
+        "min": 0,
+        "max": 90,
+        "step": 5,
+        "unit": "%",
+        "default": 35
+      }
+    ]
+  },
+  {
+    "name": "Colours — Scheme 1",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Ivory — the default light scheme."
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_1_bg",
+        "label": "Background",
+        "default": "#FBF7F0"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_1_text",
+        "label": "Text",
+        "default": "#1E1712"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_1_accent",
+        "label": "Accent (buttons and links)",
+        "default": "#B4552F"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_1_accent_text",
+        "label": "Text on accent",
+        "default": "#FBF7F0"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_1_soft",
+        "label": "Soft surface (cards)",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_1_border",
+        "label": "Borders and dividers",
+        "default": "#E2D8C8"
+      }
+    ]
+  },
+  {
+    "name": "Colours — Scheme 2",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Ink — the default dark scheme."
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_2_bg",
+        "label": "Background",
+        "default": "#1E1712"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_2_text",
+        "label": "Text",
+        "default": "#F5EFE4"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_2_accent",
+        "label": "Accent (buttons and links)",
+        "default": "#E0A33E"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_2_accent_text",
+        "label": "Text on accent",
+        "default": "#1E1712"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_2_soft",
+        "label": "Soft surface (cards)",
+        "default": "#2A211A"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_2_border",
+        "label": "Borders and dividers",
+        "default": "#42382E"
+      }
+    ]
+  },
+  {
+    "name": "Colours — Scheme 3",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Terracotta."
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_3_bg",
+        "label": "Background",
+        "default": "#C2643C"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_3_text",
+        "label": "Text",
+        "default": "#FDF6EC"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_3_accent",
+        "label": "Accent (buttons and links)",
+        "default": "#FDF6EC"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_3_accent_text",
+        "label": "Text on accent",
+        "default": "#8C3F21"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_3_soft",
+        "label": "Soft surface (cards)",
+        "default": "#CE7449"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_3_border",
+        "label": "Borders and dividers",
+        "default": "#A9522F"
+      }
+    ]
+  },
+  {
+    "name": "Colours — Scheme 4",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Indigo."
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_4_bg",
+        "label": "Background",
+        "default": "#243A5E"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_4_text",
+        "label": "Text",
+        "default": "#EEF2F8"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_4_accent",
+        "label": "Accent (buttons and links)",
+        "default": "#E0A33E"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_4_accent_text",
+        "label": "Text on accent",
+        "default": "#1B2C48"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_4_soft",
+        "label": "Soft surface (cards)",
+        "default": "#2E4670"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_4_border",
+        "label": "Borders and dividers",
+        "default": "#41597F"
+      }
+    ]
+  },
+  {
+    "name": "Colours — Scheme 5",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Marigold."
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_5_bg",
+        "label": "Background",
+        "default": "#F3E4C6"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_5_text",
+        "label": "Text",
+        "default": "#3A2C14"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_5_accent",
+        "label": "Accent (buttons and links)",
+        "default": "#8C3F21"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_5_accent_text",
+        "label": "Text on accent",
+        "default": "#FBF7F0"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_5_soft",
+        "label": "Soft surface (cards)",
+        "default": "#FBF3E2"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_5_border",
+        "label": "Borders and dividers",
+        "default": "#DFCBA4"
+      }
+    ]
+  },
+  {
+    "name": "Colours — Scheme 6",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Leaf."
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_6_bg",
+        "label": "Background",
+        "default": "#2F5D50"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_6_text",
+        "label": "Text",
+        "default": "#F1F6F2"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_6_accent",
+        "label": "Accent (buttons and links)",
+        "default": "#F0D9A8"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_6_accent_text",
+        "label": "Text on accent",
+        "default": "#22453B"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_6_soft",
+        "label": "Soft surface (cards)",
+        "default": "#37695B"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_6_border",
+        "label": "Borders and dividers",
+        "default": "#4A7A6B"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading font",
+        "default": "playfair_display_n4"
+      },
+      {
+        "type": "range",
+        "id": "type_header_scale",
+        "label": "Heading size",
+        "min": 70,
+        "max": 160,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "type_header_line_height",
+        "label": "Heading line height",
+        "min": 0.8,
+        "max": 1.8,
+        "step": 0.05,
+        "default": 1.1
+      },
+      {
+        "type": "range",
+        "id": "type_header_letter_spacing",
+        "label": "Heading letter spacing",
+        "min": -0.06,
+        "max": 0.3,
+        "step": 0.005,
+        "default": -0.01
+      },
+      {
+        "type": "select",
+        "id": "type_header_case",
+        "label": "Heading capitalisation",
+        "options": [
+          { "value": "none", "label": "As typed" },
+          { "value": "uppercase", "label": "UPPERCASE" },
+          { "value": "capitalize", "label": "Capitalize Each Word" },
+          { "value": "lowercase", "label": "lowercase" }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "url",
+        "id": "type_header_custom_url",
+        "label": "Custom heading font stylesheet URL",
+        "info": "Optional. Paste a Google Fonts or Adobe Fonts CSS link to load a typeface outside the Shopify library."
+      },
+      {
+        "type": "text",
+        "id": "type_header_custom_family",
+        "label": "Custom heading font family name",
+        "info": "Exactly as written in the font stylesheet, e.g. Fraunces.",
+        "placeholder": "Fraunces"
+      },
+      {
+        "type": "header",
+        "content": "Body"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "range",
+        "id": "type_body_scale",
+        "label": "Body size",
+        "min": 80,
+        "max": 140,
+        "step": 2,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "type_body_line_height",
+        "label": "Body line height",
+        "min": 1.1,
+        "max": 2.4,
+        "step": 0.05,
+        "default": 1.65
+      },
+      {
+        "type": "range",
+        "id": "type_body_letter_spacing",
+        "label": "Body letter spacing",
+        "min": 0,
+        "max": 0.15,
+        "step": 0.005,
+        "default": 0.01
+      },
+      {
+        "type": "url",
+        "id": "type_body_custom_url",
+        "label": "Custom body font stylesheet URL",
+        "info": "Optional."
+      },
+      {
+        "type": "text",
+        "id": "type_body_custom_family",
+        "label": "Custom body font family name",
+        "placeholder": "Karla"
+      },
+      {
+        "type": "header",
+        "content": "Eyebrow labels"
+      },
+      {
+        "type": "paragraph",
+        "content": "The small uppercase labels shown above headings, on buttons and in navigation."
+      },
+      {
+        "type": "select",
+        "id": "type_eyebrow_font",
+        "label": "Eyebrow font",
+        "options": [
+          { "value": "body", "label": "Body font" },
+          { "value": "heading", "label": "Heading font" }
+        ],
+        "default": "body"
+      },
+      {
+        "type": "range",
+        "id": "type_eyebrow_size",
+        "label": "Eyebrow size",
+        "min": 9,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "type_eyebrow_letter_spacing",
+        "label": "Eyebrow letter spacing",
+        "min": 0,
+        "max": 0.5,
+        "step": 0.01,
+        "default": 0.18
+      },
+      {
+        "type": "checkbox",
+        "id": "type_eyebrow_uppercase",
+        "label": "Uppercase eyebrows",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Headline sizing"
+      },
+      {
+        "type": "range",
+        "id": "type_h1_size",
+        "label": "Largest headline (H1)",
+        "min": 28,
+        "max": 120,
+        "step": 2,
+        "unit": "px",
+        "default": 64
+      },
+      {
+        "type": "range",
+        "id": "type_h2_size",
+        "label": "Section heading (H2)",
+        "min": 22,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "type_h3_size",
+        "label": "Sub heading (H3)",
+        "min": 18,
+        "max": 52,
+        "step": 1,
+        "unit": "px",
+        "default": 26
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 1000,
+        "max": 1800,
+        "step": 20,
+        "unit": "px",
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "page_gutter",
+        "label": "Side padding",
+        "min": 8,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "label": "Space between sections",
+        "min": 0,
+        "max": 180,
+        "step": 4,
+        "unit": "px",
+        "default": 96
+      },
+      {
+        "type": "range",
+        "id": "section_spacing_mobile",
+        "label": "Space between sections on mobile",
+        "min": 0,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 56
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "label": "Grid gap",
+        "min": 0,
+        "max": 64,
+        "step": 2,
+        "unit": "px",
+        "default": 24
+      },
+      {
+        "type": "header",
+        "content": "Content width"
+      },
+      {
+        "type": "range",
+        "id": "content_width_narrow",
+        "label": "Narrow column width",
+        "info": "Used by rich text, quotes and forms.",
+        "min": 480,
+        "max": 1100,
+        "step": 20,
+        "unit": "px",
+        "default": 720
+      },
+      {
+        "type": "checkbox",
+        "id": "full_bleed_mobile",
+        "label": "Full-bleed images on mobile",
+        "info": "Removes the side padding around banners and heroes on small screens.",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Buttons and inputs",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_radius",
+        "label": "Corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "button_border_width",
+        "label": "Border width",
+        "min": 0,
+        "max": 4,
+        "step": 1,
+        "unit": "px",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "button_padding_y",
+        "label": "Vertical padding",
+        "min": 8,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "button_padding_x",
+        "label": "Horizontal padding",
+        "min": 12,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "default": 32
+      },
+      {
+        "type": "select",
+        "id": "button_font",
+        "label": "Button font",
+        "options": [
+          { "value": "body", "label": "Body font" },
+          { "value": "heading", "label": "Heading font" }
+        ],
+        "default": "body"
+      },
+      {
+        "type": "range",
+        "id": "button_size",
+        "label": "Button text size",
+        "min": 10,
+        "max": 22,
+        "step": 1,
+        "unit": "px",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "button_letter_spacing",
+        "label": "Button letter spacing",
+        "min": 0,
+        "max": 0.4,
+        "step": 0.01,
+        "default": 0.12
+      },
+      {
+        "type": "select",
+        "id": "button_case",
+        "label": "Button capitalisation",
+        "options": [
+          { "value": "none", "label": "As typed" },
+          { "value": "uppercase", "label": "UPPERCASE" },
+          { "value": "capitalize", "label": "Capitalize" }
+        ],
+        "default": "uppercase"
+      },
+      {
+        "type": "checkbox",
+        "id": "button_shadow",
+        "label": "Button shadow",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "button_hover",
+        "label": "Hover effect",
+        "options": [
+          { "value": "darken", "label": "Darken" },
+          { "value": "invert", "label": "Invert colours" },
+          { "value": "lift", "label": "Lift" },
+          { "value": "fill", "label": "Slide fill" }
+        ],
+        "default": "invert"
+      },
+      {
+        "type": "header",
+        "content": "Form fields"
+      },
+      {
+        "type": "range",
+        "id": "input_radius",
+        "label": "Field corner radius",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "input_border_width",
+        "label": "Field border width",
+        "min": 0,
+        "max": 3,
+        "step": 1,
+        "unit": "px",
+        "default": 1
+      },
+      {
+        "type": "checkbox",
+        "id": "input_floating_label",
+        "label": "Floating labels on text fields",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cards and borders",
+    "settings": [
+      {
+        "type": "range",
+        "id": "card_radius",
+        "label": "Card corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "card_border_width",
+        "label": "Card border width",
+        "min": 0,
+        "max": 4,
+        "step": 1,
+        "unit": "px",
+        "default": 1
+      },
+      {
+        "type": "select",
+        "id": "card_shadow",
+        "label": "Card shadow",
+        "options": [
+          { "value": "none", "label": "None" },
+          { "value": "soft", "label": "Soft" },
+          { "value": "medium", "label": "Medium" },
+          { "value": "lift", "label": "Lifted" }
+        ],
+        "default": "soft"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_shadow_on_hover",
+        "label": "Deepen shadow on hover",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "image_radius",
+        "label": "Image corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "border_width",
+        "label": "Hairline border width",
+        "info": "Used by dividers, tables and inputs.",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "unit": "px",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "box_padding",
+        "label": "Content box padding",
+        "min": 12,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 32
+      }
+    ]
+  },
+  {
+    "name": "Motifs and decoration",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Hand-crafted details inspired by Rajasthani block printing and temple arches."
+      },
+      {
+        "type": "checkbox",
+        "id": "motif_enable",
+        "label": "Show decorative dividers",
+        "info": "Draws a small motif between section heading and content.",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "motif_style",
+        "label": "Motif style",
+        "options": [
+          { "value": "lotus", "label": "Lotus" },
+          { "value": "sun", "label": "Sun burst" },
+          { "value": "jali", "label": "Jali lattice" },
+          { "value": "paisley", "label": "Paisley" },
+          { "value": "rule", "label": "Simple rule" }
+        ],
+        "default": "lotus"
+      },
+      {
+        "type": "range",
+        "id": "motif_size",
+        "label": "Motif size",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 56
+      },
+      {
+        "type": "header",
+        "content": "Arch mask"
+      },
+      {
+        "type": "checkbox",
+        "id": "arch_enable",
+        "label": "Arch-shaped images",
+        "info": "Rounds the top of featured images into a temple arch.",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "arch_shape",
+        "label": "Arch shape",
+        "options": [
+          { "value": "pointed", "label": "Pointed" },
+          { "value": "round", "label": "Round" },
+          { "value": "scalloped", "label": "Scalloped" },
+          { "value": "ogee", "label": "Ogee" }
+        ],
+        "default": "pointed"
+      },
+      {
+        "type": "checkbox",
+        "id": "arch_on_cards",
+        "label": "Apply arch to product and collection cards",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Borders"
+      },
+      {
+        "type": "checkbox",
+        "id": "print_border_enable",
+        "label": "Block-print page border",
+        "info": "Adds a thin patterned frame around the storefront.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "print_border_style",
+        "label": "Print border pattern",
+        "options": [
+          { "value": "dots", "label": "Dots" },
+          { "value": "chevron", "label": "Chevron" },
+          { "value": "waves", "label": "Waves" },
+          { "value": "solid", "label": "Solid line" }
+        ],
+        "default": "dots"
+      },
+      {
+        "type": "checkbox",
+        "id": "texture_enable",
+        "label": "Paper texture overlay",
+        "info": "Adds a subtle grain to coloured sections.",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "texture_opacity",
+        "label": "Texture strength",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 30
+      }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "select",
+        "id": "product_card_style",
+        "label": "Card style",
+        "options": [
+          { "value": "standard", "label": "Standard" },
+          { "value": "editorial", "label": "Editorial (no card surface)" },
+          { "value": "framed", "label": "Framed" }
+        ],
+        "default": "standard"
+      },
+      {
+        "type": "select",
+        "id": "product_image_ratio",
+        "label": "Image ratio",
+        "options": [
+          { "value": "adapt", "label": "Adapt to image" },
+          { "value": "square", "label": "Square 1:1" },
+          { "value": "portrait", "label": "Portrait 4:5" },
+          { "value": "tall", "label": "Tall 3:4" },
+          { "value": "landscape", "label": "Landscape 5:4" }
+        ],
+        "default": "portrait"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_secondary_image",
+        "label": "Show second image on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_vendor",
+        "label": "Show vendor or collection",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_rating",
+        "label": "Show product rating",
+        "info": "Requires a product rating app that provides the standard rating metafield.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_quick_add",
+        "label": "Quick add button",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "product_quick_add_style",
+        "label": "Quick add style",
+        "options": [
+          { "value": "button", "label": "Add to cart button" },
+          { "value": "overlay", "label": "Overlay button on image" }
+        ],
+        "default": "overlay"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_swatches",
+        "label": "Show colour swatches",
+        "info": "Uses a 'colour' or 'color' variant option.",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "product_swatch_max",
+        "label": "Maximum swatches shown",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "select",
+        "id": "product_price_position",
+        "label": "Price position",
+        "options": [
+          { "value": "below", "label": "Below the title" },
+          { "value": "corner", "label": "Overlaid on the image" }
+        ],
+        "default": "below"
+      },
+      {
+        "type": "select",
+        "id": "product_text_align",
+        "label": "Text alignment",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "center", "label": "Centre" },
+          { "value": "right", "label": "Right" }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "header",
+        "content": "Badges"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_badges",
+        "label": "Show badges",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "product_badge_shape",
+        "label": "Badge shape",
+        "options": [
+          { "value": "pill", "label": "Pill" },
+          { "value": "square", "label": "Square" },
+          { "value": "arch", "label": "Arch" },
+          { "value": "tag", "label": "Tag" }
+        ],
+        "default": "pill"
+      },
+      {
+        "type": "select",
+        "id": "product_badge_position",
+        "label": "Badge position",
+        "options": [
+          { "value": "top left", "label": "Top left" },
+          { "value": "top right", "label": "Top right" },
+          { "value": "bottom left", "label": "Bottom left" },
+          { "value": "bottom right", "label": "Bottom right" }
+        ],
+        "default": "top left"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_badge_sale",
+        "label": "Show sale badge",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "product_badge_sale_type",
+        "label": "Sale badge shows",
+        "options": [
+          { "value": "percent", "label": "Percentage off" },
+          { "value": "amount", "label": "Amount saved" },
+          { "value": "text", "label": "Text only" }
+        ],
+        "default": "percent"
+      },
+      {
+        "type": "text",
+        "id": "product_badge_sale_text",
+        "label": "Sale badge text",
+        "default": "Sale"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_badge_soldout",
+        "label": "Show sold out badge",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "product_badge_soldout_text",
+        "label": "Sold out badge text",
+        "default": "Sold out"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_badge_new",
+        "label": "Show new badge",
+        "info": "Products published within the number of days below.",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "product_badge_new_days",
+        "label": "Days a product counts as new",
+        "min": 5,
+        "max": 90,
+        "step": 5,
+        "default": 30
+      },
+      {
+        "type": "text",
+        "id": "product_badge_new_text",
+        "label": "New badge text",
+        "default": "New"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_badge_tags",
+        "label": "Show badge from product tag",
+        "info": "Any product tagged like 'badge: Bestseller' gets that badge.",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Product page",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "product_show_vendor",
+        "label": "Show vendor",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_sku",
+        "label": "Show SKU",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_quantity",
+        "label": "Show quantity selector",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_dynamic_checkout",
+        "label": "Show dynamic checkout button",
+        "info": "Shop Pay, PayPal and other accelerated checkouts.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_inventory_status",
+        "label": "Show inventory status",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "product_inventory_threshold",
+        "label": "Low inventory threshold",
+        "min": 1,
+        "max": 25,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_shipping_estimate",
+        "label": "Show delivery estimate",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "product_shipping_estimate_text",
+        "label": "Delivery estimate text",
+        "default": "Dispatched in 2–4 working days"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_sticky_column",
+        "label": "Sticky product information column",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_hide_variants_unavailable",
+        "label": "Grey out unavailable variants",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Media gallery"
+      },
+      {
+        "type": "select",
+        "id": "product_media_layout",
+        "label": "Gallery layout",
+        "options": [
+          { "value": "stacked", "label": "Stacked column" },
+          { "value": "thumbs_left", "label": "Thumbnails on the left" },
+          { "value": "thumbs_bottom", "label": "Thumbnails underneath" },
+          { "value": "slider", "label": "Swipe slider" }
+        ],
+        "default": "thumbs_left"
+      },
+      {
+        "type": "select",
+        "id": "product_media_ratio",
+        "label": "Media ratio",
+        "options": [
+          { "value": "adapt", "label": "Adapt to image" },
+          { "value": "square", "label": "Square 1:1" },
+          { "value": "portrait", "label": "Portrait 4:5" },
+          { "value": "tall", "label": "Tall 3:4" }
+        ],
+        "default": "portrait"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_zoom",
+        "label": "Enable zoom on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_lightbox",
+        "label": "Open images in a lightbox",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_first_image_wide",
+        "label": "Make the first image full width",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_variant_images",
+        "label": "Change gallery when a variant is selected",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Collection page",
+    "settings": [
+      {
+        "type": "select",
+        "id": "collection_products_per_row",
+        "label": "Products per row on desktop",
+        "options": [
+          { "value": "2", "label": "2" },
+          { "value": "3", "label": "3" },
+          { "value": "4", "label": "4" },
+          { "value": "5", "label": "5" }
+        ],
+        "default": "4"
+      },
+      {
+        "type": "select",
+        "id": "collection_products_per_page",
+        "label": "Products per page",
+        "options": [
+          { "value": "12", "label": "12" },
+          { "value": "16", "label": "16" },
+          { "value": "24", "label": "24" },
+          { "value": "36", "label": "36" },
+          { "value": "48", "label": "48" }
+        ],
+        "default": "24"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_filters_enable",
+        "label": "Enable filters",
+        "info": "Uses Search & Discovery filters configured in the Shopify admin.",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "collection_filters_layout",
+        "label": "Filter layout",
+        "options": [
+          { "value": "sidebar", "label": "Sidebar" },
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "horizontal", "label": "Horizontal pills" }
+        ],
+        "default": "sidebar"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_sorting_enable",
+        "label": "Enable sorting",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_count_enable",
+        "label": "Show product count",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "collection_pagination",
+        "label": "Pagination style",
+        "options": [
+          { "value": "numbers", "label": "Numbered" },
+          { "value": "load_more", "label": "Load more button" },
+          { "value": "infinite", "label": "Infinite scroll" }
+        ],
+        "default": "numbers"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_show_description",
+        "label": "Show collection description",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_show_banner",
+        "label": "Show collection banner image",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_show_subcollections",
+        "label": "Show subcollections above the grid",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" },
+          { "value": "both", "label": "Drawer, with page as fallback" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes",
+        "label": "Allow cart notes",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_terms",
+        "label": "Require terms checkbox before checkout",
+        "default": false
+      },
+      {
+        "type": "richtext",
+        "id": "cart_terms_text",
+        "label": "Terms text",
+        "default": "<p>I agree to the terms and conditions, including the custom-order and returns policy.</p>"
+      },
+      {
+        "type": "range",
+        "id": "cart_free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "info": "Set to 0 to hide the progress bar. Value is in your store currency.",
+        "min": 0,
+        "max": 50000,
+        "step": 500,
+        "default": 5000
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_heading",
+        "label": "Empty cart heading",
+        "default": "Your cart is empty"
+      },
+      {
+        "type": "richtext",
+        "id": "cart_empty_text",
+        "label": "Empty cart text",
+        "default": "<p>Every piece in the house is made in small batches. Start with a favourite and we will do the rest.</p>"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_recommendations",
+        "label": "Show recommended products in cart",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "predictive_search",
+        "label": "Enable predictive search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_collections",
+        "label": "Suggest collections",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_pages",
+        "label": "Suggest pages and articles",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "predictive_search_limit",
+        "label": "Number of suggestions",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "checkbox",
+        "id": "search_show_vendor",
+        "label": "Show vendor in results",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "animations_enable",
+        "label": "Reveal sections on scroll",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "animations_style",
+        "label": "Reveal style",
+        "options": [
+          { "value": "fade", "label": "Fade" },
+          { "value": "rise", "label": "Rise" },
+          { "value": "curtain", "label": "Curtain" },
+          { "value": "none", "label": "None" }
+        ],
+        "default": "rise"
+      },
+      {
+        "type": "range",
+        "id": "animations_speed",
+        "label": "Animation speed",
+        "min": 200,
+        "max": 1600,
+        "step": 100,
+        "unit": "ms",
+        "default": 700
+      },
+      {
+        "type": "checkbox",
+        "id": "animations_stagger",
+        "label": "Stagger grid items",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "image_hover_zoom",
+        "label": "Zoom images on hover",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "header_behavior",
+        "label": "Header behaviour on scroll",
+        "options": [
+          { "value": "static", "label": "Scrolls away" },
+          { "value": "sticky", "label": "Always sticky" },
+          { "value": "hide", "label": "Hide on scroll down, show on scroll up" }
+        ],
+        "default": "sticky"
+      },
+      {
+        "type": "checkbox",
+        "id": "back_to_top",
+        "label": "Show back to top button",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Icons",
+    "settings": [
+      {
+        "type": "select",
+        "id": "icon_weight",
+        "label": "Icon stroke weight",
+        "options": [
+          { "value": "1", "label": "Fine" },
+          { "value": "1.5", "label": "Regular" },
+          { "value": "2", "label": "Bold" }
+        ],
+        "default": "1.5"
+      },
+      {
+        "type": "range",
+        "id": "icon_size",
+        "label": "Icon size",
+        "min": 16,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "default": 22
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/houseofkalakatha"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "X (Twitter)"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin_link",
+        "label": "LinkedIn"
+      },
+      {
+        "type": "header",
+        "content": "Sharing"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_buttons",
+        "label": "Show share buttons on products and articles",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Contact and support",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Phone number",
+        "default": "+91 98765 43210"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Email address",
+        "default": "hello@houseofkalakatha.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_whatsapp",
+        "label": "WhatsApp number",
+        "info": "Digits only, including country code. Shows a floating WhatsApp button.",
+        "default": ""
+      },
+      {
+        "type": "checkbox",
+        "id": "whatsapp_floating",
+        "label": "Show floating WhatsApp button",
+        "default": false
+      },
+      {
+        "type": "textarea",
+        "id": "contact_address",
+        "label": "Studio address",
+        "default": "House of Kala Katha, Amer Road, Jaipur, Rajasthan 302002, India"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_hours",
+        "label": "Studio hours",
+        "default": "Monday to Saturday, 10:00 – 19:00 IST"
+      }
+    ]
+  },
+  {
+    "name": "Advanced",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "currency_code_enable",
+        "label": "Show currency codes",
+        "info": "For example ₹4,200 INR.",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "lazy_images",
+        "label": "Lazy load images",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "image_quality",
+        "label": "Image quality",
+        "min": 50,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 80
+      },
+      {
+        "type": "checkbox",
+        "id": "show_breadcrumbs",
+        "label": "Show breadcrumbs",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Custom code"
+      },
+      {
+        "type": "paragraph",
+        "content": "Paste analytics pixels, chat widgets or verification tags. They are added to the head of every page."
+      },
+      {
+        "type": "html",
+        "id": "custom_head_code",
+        "label": "Head code",
+        "info": "HTML and script tags are allowed."
+      },
+      {
+        "type": "html",
+        "id": "custom_body_code",
+        "label": "Body end code",
+        "info": "Added just before the closing body tag."
+      }
+    ]
+  }
+]

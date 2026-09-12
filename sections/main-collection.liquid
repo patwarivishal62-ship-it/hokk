@@ -1,0 +1,321 @@
+{%- comment -%}
+  Collection template section: banner, filters, sorting, product grid, pagination.
+{%- endcomment -%}
+{%- liquid
+  assign per_row = settings.collection_products_per_row | default: 4
+  assign per_page = settings.collection_products_per_page | default: 24
+  assign filter_layout = settings.collection_filters_layout | default: 'sidebar'
+  assign pagination_style = settings.collection_pagination | default: 'numbers'
+  assign has_filters = false
+  if settings.collection_filters_enable and collection.filters.size > 0
+    assign has_filters = true
+  endif
+  assign show_sidebar = false
+  if has_filters and filter_layout == 'sidebar'
+    assign show_sidebar = true
+  endif
+
+  assign sub_menu = ''
+  if section.settings.subcollection_menu != blank
+    assign sub_menu = linklists[section.settings.subcollection_menu]
+  else
+    assign sub_menu = linklists[collection.handle]
+  endif
+-%}
+
+<div class="section collection-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  {%- render 'breadcrumb' -%}
+
+  {%- if settings.collection_show_banner or collection.description != blank -%}
+    <header class="collection-banner">
+      {%- assign banner_image = section.settings.banner_image | default: collection.featured_image -%}
+      {%- if banner_image != blank and section.settings.show_banner_image -%}
+        <div class="collection-banner__media">
+          <img
+            src="{{ banner_image | image_url: width: 1200 }}"
+            srcset="{{ banner_image | image_url: width: 600 }} 600w, {{ banner_image | image_url: width: 1200 }} 1200w, {{ banner_image | image_url: width: 1800 }} 1800w"
+            sizes="100vw"
+            alt="{{ banner_image.alt | default: collection.title | escape }}"
+            width="{{ banner_image.width }}"
+            height="{{ banner_image.height }}"
+            {% if settings.lazy_images %}loading="lazy"{% else %}loading="eager"{% endif %}
+          >
+          {%- if settings.overlay_dark_images -%}<span class="media-overlay"></span>{%- endif -%}
+          <div class="collection-banner__content container">
+            <h1 class="collection-banner__title">{{ collection.title | escape }}</h1>
+            {%- if collection.description != blank and settings.collection_show_description -%}
+              <div class="collection-banner__description rte">{{ collection.description }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- else -%}
+        <div class="collection-banner__content container collection-banner__content--plain">
+          <h1 class="collection-banner__title">{{ collection.title | escape }}</h1>
+          {%- if collection.description != blank and settings.collection_show_description -%}
+            <div class="collection-banner__description rte">{{ collection.description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </header>
+  {%- endif -%}
+
+  <div class="container">
+    {%- if settings.collection_show_subcollections and sub_menu != blank and sub_menu.links.size > 0 -%}
+      <div class="collection-sublinks">
+        {%- for link in sub_menu.links -%}
+          <a class="chip{% if link.active or link.object.handle == collection.handle %} is-active{% endif %}" href="{{ link.url }}">{{ link.title | escape }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="collection-toolbar">
+      <div class="collection-toolbar__left">
+        {%- if settings.collection_count_enable -%}
+          <p class="collection-toolbar__count text-small text-muted">
+            {{ 'collections.general.products_with_count' | t: count: collection.products_count }}
+          </p>
+        {%- endif -%}
+
+        {%- if has_filters and filter_layout == 'drawer' -%}
+          <button type="button" class="btn btn--outline btn--small" data-panel-open="FilterDrawer-{{ section.id }}">
+            {%- render 'icon', name: 'filter', size: 15 -%}
+            {{ 'collections.filters.title' | t }}
+          </button>
+        {%- endif -%}
+      </div>
+
+      <div class="collection-toolbar__right">
+        {%- if section.settings.show_view_toggle -%}
+          <div class="view-toggle" role="group" aria-label="View">
+            <button type="button" class="view-toggle__btn is-active" data-view-toggle="grid" aria-label="Grid view">{%- render 'icon', name: 'grid', size: 16 -%}</button>
+            <button type="button" class="view-toggle__btn" data-view-toggle="list" aria-label="List view">{%- render 'icon', name: 'list', size: 16 -%}</button>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.collection_sorting_enable and collection.sort_options.size > 0 -%}
+          <div class="select-wrap collection-sort">
+            <label class="visually-hidden" for="SortBy-{{ section.id }}">{{ 'collections.sorting.title' | t }}</label>
+            <select id="SortBy-{{ section.id }}" name="sort_by" data-sort-select>
+              {%- for option in collection.sort_options -%}
+                <option value="{{ option.value | escape }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name | escape }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if has_filters and filter_layout == 'horizontal' -%}
+      <div class="collection-horizontal-facets">
+        {%- render 'facets', collection: collection, layout: 'horizontal' -%}
+      </div>
+    {%- endif -%}
+
+    <div class="collection-layout{% if show_sidebar %} collection-layout--sidebar{% endif %}">
+      {%- if show_sidebar -%}
+        <aside class="collection-sidebar" aria-label="{{ 'collections.filters.title' | t }}">
+          {%- render 'facets', collection: collection, layout: 'sidebar' -%}
+        </aside>
+      {%- endif -%}
+
+      <div class="collection-main">
+        {%- paginate collection.products by per_page -%}
+          {%- if collection.products.size == 0 -%}
+            <div class="collection-empty">
+              <span class="motif">{%- render 'motif', style: settings.motif_style -%}</span>
+              <h2 class="h3">{{ 'collections.general.empty_title' | t }}</h2>
+              <p class="text-muted">{{ 'collections.general.no_matches' | t }}</p>
+              {%- if has_filters -%}
+                <a class="btn btn--outline btn--small" href="{{ collection.url }}">{{ 'collections.filters.clear_all' | t }}</a>
+              {%- else -%}
+                <a class="btn btn--outline btn--small" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <div
+              class="grid collection-grid"
+              id="CollectionGrid-{{ section.id }}"
+              style="--cols: {{ per_row }}; --cols-tablet: {% if per_row > 3 %}3{% else %}{{ per_row }}{% endif %}; --cols-mobile: {% if per_row > 2 %}2{% else %}1{% endif %};"
+              data-collection-grid
+            >
+              {%- for product in collection.products -%}
+                <div class="grid__item" data-load-item data-animate>
+                  {%- render 'product-card', product: product, index: forloop.index -%}
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- render 'pagination',
+              paginate: paginate,
+              style: pagination_style,
+              grid_id: '#CollectionGrid-' | append: section.id
+            -%}
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- if has_filters and filter_layout == 'drawer' -%}
+  <div class="drawer drawer--left color-scheme-{{ section.settings.color_scheme }}" id="FilterDrawer-{{ section.id }}" role="dialog" aria-modal="true" aria-label="{{ 'collections.filters.title' | t }}" aria-hidden="true" tabindex="-1">
+    <div class="drawer__header">
+      <span class="drawer__title h3">{{ 'collections.filters.title' | t }}</span>
+      <button type="button" class="drawer__close" data-panel-close aria-label="{{ 'general.accessibility.close' | t }}">{%- render 'icon', name: 'close', size: 20 -%}</button>
+    </div>
+    <div class="drawer__body">
+      {%- render 'facets', collection: collection, layout: 'drawer' -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+.collection-banner__media { position: relative; }
+.collection-banner__media img { width: 100%; height: clamp(15rem, 12rem + 22vw, 30rem); object-fit: cover; display: block; }
+
+.collection-banner__content {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  color: #fff;
+  padding-block: clamp(1.4rem, 1rem + 2vw, 3rem);
+}
+
+.collection-banner__content--plain {
+  position: static;
+  color: inherit;
+  padding-block: clamp(1rem, 0.6rem + 2vw, 2rem) clamp(1.4rem, 1rem + 1.6vw, 2.4rem);
+}
+
+.collection-banner__title { margin: 0; font-size: clamp(1.9rem, 1.2rem + 3.4vw, var(--h1)); }
+.collection-banner__description { margin-top: 0.7rem; max-width: 62ch; font-size: var(--body-size-small); opacity: 0.92; }
+.collection-banner__content--plain .collection-banner__description { color: var(--text-muted); opacity: 1; }
+
+.collection-sublinks { display: flex; flex-wrap: wrap; gap: 0.5rem; padding-block: 1.2rem 0.4rem; }
+.chip.is-active { border-color: var(--accent); color: var(--accent); background: rgba(var(--accent-rgb), 0.08); }
+
+.collection-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-block: 1rem;
+  border-top: var(--border-width) solid var(--border);
+  border-bottom: var(--border-width) solid var(--border);
+  margin-bottom: 1.6rem;
+}
+
+.collection-toolbar__left,
+.collection-toolbar__right { display: flex; align-items: center; gap: 0.9rem; }
+.collection-toolbar__count { margin: 0; }
+
+.collection-sort select { min-width: 11rem; padding: 0.45em 2.4em 0.45em 0.8em; font-size: var(--body-size-small); }
+
+.view-toggle { display: flex; border: var(--border-width) solid var(--border); border-radius: var(--btn-radius); overflow: hidden; }
+.view-toggle__btn { padding: 0.45rem 0.6rem; color: var(--text-muted); transition: background-color .2s var(--ease), color .2s var(--ease); }
+.view-toggle__btn.is-active { background: var(--accent); color: var(--on-accent); }
+
+.collection-layout { display: block; }
+.collection-layout--sidebar { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(1.4rem, 1rem + 2vw, 3rem); align-items: start; }
+
+.collection-sidebar { position: sticky; top: calc(var(--header-height, 0px) + 1.4rem); max-height: calc(100vh - var(--header-height, 0px) - 3rem); overflow-y: auto; scrollbar-width: thin; }
+
+.collection-horizontal-facets { margin-bottom: 1rem; }
+.collection-horizontal-facets .facets { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.collection-horizontal-facets .facets__head { margin-right: 0.6rem; }
+.collection-horizontal-facets .facet { position: relative; }
+.collection-horizontal-facets .facet__summary { padding: 0.45em 0.9em; border: var(--border-width) solid var(--border); border-radius: 999px; }
+.collection-horizontal-facets .facet__body {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  z-index: 30;
+  min-width: 15rem;
+  background: var(--bg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow-hover);
+  padding: 0.9rem;
+}
+
+.collection-grid { padding-bottom: 0.4rem; }
+
+body.view-list .collection-grid { grid-template-columns: 1fr !important; gap: 1.4rem; }
+body.view-list .product-card { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 1.6rem; align-items: center; }
+body.view-list .product-card__media { --ratio: 4 / 5; }
+body.view-list .product-card .card__body { padding: 0.6rem 0; }
+body.view-list .product-card__title { font-size: calc(var(--body-size) * 1.15); }
+
+.collection-empty { text-align: center; padding: clamp(3rem, 2rem + 5vw, 6rem) 0; display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
+
+@media (max-width: 989px) {
+  .collection-layout--sidebar { grid-template-columns: 1fr; }
+  .collection-sidebar { position: static; max-height: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection products",
+  "tag": "section",
+  "class": "collection-products-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Columns, filters, sorting and pagination defaults come from Theme settings → Collection page."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        { "value": "1", "label": "Scheme 1 — Ivory" },
+        { "value": "2", "label": "Scheme 2 — Ink" },
+        { "value": "3", "label": "Scheme 3 — Terracotta" },
+        { "value": "4", "label": "Scheme 4 — Indigo" },
+        { "value": "5", "label": "Scheme 5 — Marigold" },
+        { "value": "6", "label": "Scheme 6 — Leaf" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner_image",
+      "label": "Use an image banner",
+      "info": "Falls back to the collection image.",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image",
+      "info": "Overrides the collection image when set."
+    },
+    {
+      "type": "header",
+      "content": "Toolbar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_toggle",
+      "label": "Show grid / list view toggle",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Subcollections"
+    },
+    {
+      "type": "link_list",
+      "id": "subcollection_menu",
+      "label": "Subcollection menu",
+      "info": "Leave blank to use a menu named with the same handle as this collection."
+    }
+  ]
+}
+{% endschema %}

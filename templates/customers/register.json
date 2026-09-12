@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-customers-register",
+      "settings": {
+        "color_scheme": "1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
