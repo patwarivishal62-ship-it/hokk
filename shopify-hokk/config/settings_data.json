@@ -1,0 +1,24 @@
+{
+  "current": {
+    "color_base": "#F3ECE1",
+    "color_base_text": "#211912",
+    "color_accent": "#A94A33",
+    "color_accent_text": "#F7F1E7",
+    "color_dark": "#211912",
+    "color_dark_text": "#F3ECE1",
+    "color_muted": "#7A6A58",
+    "color_line": "#D9CCB8",
+    "color_gold": "#B98A4E",
+    "type_header_font": "fraunces_n6",
+    "type_body_font": "inter_n4",
+    "body_scale": 100,
+    "page_width": 1400,
+    "buttons_radius": 0,
+    "cart_type": "drawer",
+    "social_instagram_link": "https://instagram.com/houseofkalakatha",
+    "social_facebook_link": "",
+    "social_pinterest_link": "",
+    "social_youtube_link": "",
+    "favicon": ""
+  }
+}

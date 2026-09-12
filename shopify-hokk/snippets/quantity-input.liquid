@@ -1,0 +1,20 @@
+{%- comment -%}
+  Quantity input. Accepts optional `name` (default "quantity"), `value`, `index`.
+{%- endcomment -%}
+<quantity-input class="quantity">
+  <button class="quantity__btn" name="minus" type="button" aria-label="Decrease quantity">
+    {%- render 'icon', icon: 'minus' -%}
+  </button>
+  <input
+    class="quantity__input"
+    type="number"
+    name="{{ name | default: 'quantity' }}"
+    value="{{ value | default: 1 }}"
+    min="1"
+    {% if index %}data-index="{{ index }}"{% endif %}
+    aria-label="Quantity"
+  >
+  <button class="quantity__btn" name="plus" type="button" aria-label="Increase quantity">
+    {%- render 'icon', icon: 'plus' -%}
+  </button>
+</quantity-input>

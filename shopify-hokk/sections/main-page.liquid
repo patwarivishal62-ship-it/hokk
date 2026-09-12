@@ -1,0 +1,29 @@
+<div class="page">
+  <div class="container">
+    <div class="page__inner page__inner--{{ section.settings.width }}">
+      <h1 class="page__title">{{ page.title | escape }}</h1>
+      <div class="rte">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "class": "section-page",
+  "settings": [
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Content width",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "wide", "label": "Wide" }
+      ],
+      "default": "narrow"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,53 @@
+{%- liquid
+  assign items = section.settings.items | split: '|'
+-%}
+
+{%- if items.size > 0 -%}
+  <div class="marquee" data-marquee style="--marquee-duration: {{ section.settings.speed }}s;">
+    <div class="marquee__track">
+      <div class="marquee__group">
+        {%- for item in items -%}
+          <span class="marquee__item">{{ item | strip }}</span>
+          <span class="marquee__dot" aria-hidden="true">✦</span>
+        {%- endfor -%}
+      </div>
+      <div class="marquee__group" aria-hidden="true">
+        {%- for item in items -%}
+          <span class="marquee__item">{{ item | strip }}</span>
+          <span class="marquee__dot">✦</span>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marquee",
+  "class": "section-marquee",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "items",
+      "label": "Items",
+      "info": "Separate each item with a vertical bar |",
+      "default": "HANDLOOM | IKAT | KALAMKARI | PATOLA | HERITAGE REIMAGINED | KALA · ART | KATHA · STORY | WOVEN IN INDIA"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Speed",
+      "min": 15,
+      "max": 80,
+      "step": 5,
+      "unit": "s",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee"
+    }
+  ]
+}
+{% endschema %}

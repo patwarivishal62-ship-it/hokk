@@ -1,0 +1,37 @@
+<div class="list-collections">
+  <div class="container">
+    <p class="eyebrow">The Wardrobe</p>
+    <h1 class="section-title">{{ 'general.continue_shopping' | t }}</h1>
+
+    <div class="collection-grid-list">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="category-card">
+          <div class="category-card__media">
+            {%- if collection.featured_image != blank -%}
+              {{ collection.featured_image | image_url: width: 900 | image_tag:
+                loading: 'lazy',
+                widths: '360, 540, 720, 900',
+                class: 'category-card__img',
+                alt: collection.title | escape
+              }}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'category-card__img category-card__img--placeholder' }}
+            {%- endif -%}
+          </div>
+          <div class="category-card__info">
+            <span class="category-card__title">{{ collection.title | escape }}</span>
+            <span class="category-card__arrow">{%- render 'icon', icon: 'arrow-right' -%}</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "class": "section-list-collections",
+  "settings": []
+}
+{% endschema %}

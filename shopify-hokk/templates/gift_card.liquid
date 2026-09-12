@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ 'Gift card' }} — {{ shop.name }}</title>
+    <meta name="description" content="Gift card from {{ shop.name }}">
+    {{ content_for_header }}
+    <style>
+      :root {
+        --color-base: #F3ECE1;
+        --color-base-text: #211912;
+        --color-accent: #A94A33;
+        --color-accent-text: #F7F1E7;
+        --font-heading: 'Georgia', 'Times New Roman', serif;
+        --font-body: 'Helvetica', 'Arial', sans-serif;
+      }
+      * { box-sizing: border-box; margin: 0; }
+      body { font-family: var(--font-body); background: #efe6d8; color: var(--color-base-text); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+      .gift-card { width: 100%; max-width: 560px; background: var(--color-base); border: 1px solid #D9CCB8; padding: 40px; text-align: center; }
+      .gift-card__brand { font-family: var(--font-heading); font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; }
+      .gift-card__amount { font-family: var(--font-heading); font-size: 52px; margin: 28px 0 8px; color: var(--color-accent); }
+      .gift-card__code { display: inline-block; font-family: monospace; letter-spacing: 0.2em; font-size: 18px; border: 1px dashed var(--color-accent); padding: 12px 18px; margin: 16px 0; }
+      .gift-card__actions { display: flex; gap: 12px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+      a.button { display: inline-block; background: var(--color-accent); color: var(--color-accent-text); text-decoration: none; padding: 12px 24px; font-size: 14px; letter-spacing: 0.04em; }
+      .gift-card__qr img { max-width: 140px; }
+    </style>
+  </head>
+  <body>
+    <div class="gift-card">
+      <p class="gift-card__brand">House of Kala Katha</p>
+      <p class="gift-card__amount">{{ gift_card.balance | money }}</p>
+      <p>Gift card code</p>
+      <p class="gift-card__code">{{ gift_card.code | format_code }}</p>
+      <p>Expires {{ gift_card.expires_on | date: '%d %b %Y' }}</p>
+
+      {%- if gift_card.enabled -%}
+        <div class="gift-card__actions">
+          <a href="{{ shop.url }}" class="button" target="_blank">Start shopping</a>
+          <a href="{{ gift_card.qr_identifier }}" class="button" download>Print / save as QR</a>
+        </div>
+      {%- else -%}
+        <p>This gift card is no longer active.</p>
+      {%- endif -%}
+    </div>
+  </body>
+</html>

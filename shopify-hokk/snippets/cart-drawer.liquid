@@ -1,0 +1,71 @@
+{%- comment -%}
+  Cart drawer. Rendered in layout/theme.liquid and re-rendered via the
+  Section Rendering API (`?sections=cart-drawer`).
+{%- endcomment -%}
+<cart-drawer id="CartDrawer" class="cart-drawer" tabindex="-1">
+  <div class="cart-drawer__overlay" data-cart-drawer-close></div>
+
+  <div class="cart-drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'cart.general.title' | t }}">
+    <div class="cart-drawer__head">
+      <h2 class="cart-drawer__title">{{ 'cart.general.title' | t }}</h2>
+      <span class="cart-drawer__count">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}</span>
+      <button type="button" class="cart-drawer__close" data-cart-drawer-close aria-label="{{ 'general.close' | t }}">
+        {%- render 'icon', icon: 'close' -%}
+      </button>
+    </div>
+
+    <div class="cart-drawer__body">
+      {%- if cart.item_count > 0 -%}
+        <form action="{{ routes.cart_url }}" method="post" id="CartDrawer-Form" class="cart-drawer__form">
+          <ul class="cart-drawer__items">
+            {%- for item in cart.items -%}
+              <li class="cart-drawer__item" data-cart-item data-index="{{ forloop.index }}">
+                <a href="{{ item.url }}" class="cart-drawer__img">
+                  {%- if item.image -%}
+                    {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100, 200', alt: item.product.title | escape }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'cart-drawer__img-placeholder' }}
+                  {%- endif -%}
+                </a>
+
+                <div class="cart-drawer__meta">
+                  <a href="{{ item.url }}" class="cart-drawer__item-title">{{ item.product.title | escape }}</a>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <p class="cart-drawer__variant">{{ item.variant.title | escape }}</p>
+                  {%- endunless -%}
+
+                  <div class="cart-drawer__qty-row">
+                    {%- render 'quantity-input', name: 'updates[]', value: item.quantity, index: forloop.index -%}
+                    <span class="cart-drawer__line-price">{{ item.final_line_price | money }}</span>
+                  </div>
+
+                  <a href="#" class="cart-drawer__remove" data-cart-remove data-index="{{ forloop.index }}">
+                    {{ 'cart.general.remove' | t }}
+                  </a>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <div class="cart-drawer__foot">
+            <p class="cart-drawer__subtotal">
+              <span>{{ 'cart.general.subtotal' | t }}</span>
+              <span class="cart-drawer__subtotal-value">{{ cart.total_price | money }}</span>
+            </p>
+            <p class="cart-drawer__note">{{ 'cart.general.taxes_note' | t }}</p>
+            <button type="submit" name="checkout" class="btn btn--solid btn--full" form="CartDrawer-Form">
+              {{ 'cart.general.checkout' | t }}
+            </button>
+            <a href="{{ routes.cart_url }}" class="btn btn--text btn--full">{{ 'cart.general.view_cart' | t }}</a>
+          </div>
+        </form>
+      {%- else -%}
+        <div class="cart-drawer__empty">
+          <p class="cart-drawer__empty-icon">{%- render 'icon', icon: 'bag' -%}</p>
+          <p>{{ 'cart.general.empty' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--solid">{{ 'general.continue_shopping' | t }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</cart-drawer>

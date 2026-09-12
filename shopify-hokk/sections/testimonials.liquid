@@ -1,0 +1,85 @@
+<div class="testimonials" data-reveal>
+  <div class="container">
+    <div class="testimonials__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="testimonials__grid">
+      {%- for block in section.blocks -%}
+        <figure class="testimonial" {{ block.shopify_attributes }}>
+          <div class="testimonial__stars" aria-hidden="true">
+            {%- for i in (1..5) -%}{%- render 'icon', icon: 'star' -%}{%- endfor -%}
+          </div>
+          <blockquote class="testimonial__quote">“{{ block.settings.quote | escape }}”</blockquote>
+          <figcaption class="testimonial__author">
+            <span class="testimonial__handle">{{ block.settings.handle | escape }}</span>
+            <span class="testimonial__role">{{ block.settings.role | escape }}</span>
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "class": "section-testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Worn by the Culture"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not Celebrities. Just Real Wardrobes."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "I didn't buy this because it was 'handloom'. I bought it because it's the best shirt in my closet."
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Handle",
+          "default": "@ananya.codes"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role / location",
+          "default": "Micro-creator, Hyderabad"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "I didn't buy this because it was 'handloom'. I bought it because it's the best shirt in my closet.", "handle": "@ananya.codes", "role": "Micro-creator, Hyderabad" } },
+        { "type": "testimonial", "settings": { "quote": "Wore the co-ord to a wedding and to work the next week. That's rare with anything 'ethnic'.", "handle": "@rohanwrites", "role": "Creator, Bengaluru" } },
+        { "type": "testimonial", "settings": { "quote": "Every piece comes with the story of who made it. That hits different once you know it.", "handle": "@meher.talks", "role": "Creator, Chennai" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,190 @@
+[
+  {
+    "name": "Theme information",
+    "settings": [
+      {
+        "type": "header",
+        "content": "House of Kala Katha"
+      },
+      {
+        "type": "paragraph",
+        "content": "An editorial, craft-first Shopify theme for House of Kala Katha — Indian craft, reimagined for everyday life. Built on Online Store 2.0 JSON templates."
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_base",
+        "label": "Page background",
+        "default": "#F3ECE1"
+      },
+      {
+        "type": "color",
+        "id": "color_base_text",
+        "label": "Text",
+        "default": "#211912"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#A94A33"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_text",
+        "label": "Accent text",
+        "default": "#F7F1E7"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Dark section background",
+        "default": "#211912"
+      },
+      {
+        "type": "color",
+        "id": "color_dark_text",
+        "label": "Dark section text",
+        "default": "#F3ECE1"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted / secondary text",
+        "default": "#7A6A58"
+      },
+      {
+        "type": "color",
+        "id": "color_line",
+        "label": "Borders and rules",
+        "default": "#D9CCB8"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Brass / gold accent",
+        "default": "#B98A4E"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading font",
+        "default": "fraunces_n6",
+        "info": "Used for headings and display type."
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "inter_n4",
+        "info": "Used for body copy and UI."
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "label": "Body text scale",
+        "min": 90,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 1000,
+        "max": 1600,
+        "step": 50,
+        "unit": "px",
+        "default": 1400
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "range",
+        "id": "buttons_radius",
+        "label": "Corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          },
+          {
+            "value": "page",
+            "label": "Page"
+          }
+        ],
+        "default": "drawer"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "default": "https://instagram.com/houseofkalakatha"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image"
+      }
+    ]
+  }
+]

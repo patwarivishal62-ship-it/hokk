@@ -1,0 +1,107 @@
+{%- liquid
+  assign layout = section.settings.layout
+-%}
+
+<div class="philosophy philosophy--{{ layout }}" data-reveal>
+  <div class="container">
+    <div class="philosophy__grid">
+      <div class="philosophy__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1400 | image_tag:
+            loading: 'lazy',
+            widths: '540, 720, 900, 1080, 1296',
+            class: 'philosophy__img',
+            alt: section.settings.image.alt | escape
+          }}
+        {%- else -%}
+          <img src="{{ 'craft-loom.jpg' | asset_url }}" alt="Artisan hands weaving on a traditional handloom" class="philosophy__img" loading="lazy" width="1000" height="1250">
+        {%- endif -%}
+      </div>
+
+      <div class="philosophy__body">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="rte philosophy__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.quote != blank -%}
+          <blockquote class="philosophy__quote">{{ section.settings.quote | escape }}</blockquote>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="btn btn--text">
+            {{ section.settings.button_label | escape }}
+            {%- render 'icon', icon: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Philosophy",
+  "class": "section-philosophy",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "image-left", "label": "Image left" },
+        { "value": "image-right", "label": "Image right" }
+      ],
+      "default": "image-left"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Philosophy"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Kala is the art. Katha is the story."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Every House of Kala Katha piece begins its life on a loom, in a village, in the hands of someone who has spent a lifetime perfecting a technique passed down through generations. We take that craft — the ikat, the kalamkari, the patola — and we re-cut it, re-imagine it, re-fit it for the life you actually live.</p>"
+    },
+    {
+      "type": "text",
+      "id": "quote",
+      "label": "Quote",
+      "default": "This isn't heritage you wear once a year. This is heritage that belongs in your everyday life."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Read the craft stories"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Philosophy"
+    }
+  ]
+}
+{% endschema %}

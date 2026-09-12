@@ -1,0 +1,57 @@
+{%- comment -%}
+  Address form fields. Accepts `form` (a customer_address form object).
+{%- endcomment -%}
+<div class="address-form__grid">
+  <label>
+    <span>First name</span>
+    <input type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name" required>
+  </label>
+  <label>
+    <span>Last name</span>
+    <input type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name" required>
+  </label>
+  <label class="address-form__span-2">
+    <span>Company (optional)</span>
+    <input type="text" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+  </label>
+  <label class="address-form__span-2">
+    <span>Address</span>
+    <input type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" required>
+  </label>
+  <label class="address-form__span-2">
+    <span>Apartment, suite, etc. (optional)</span>
+    <input type="text" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+  </label>
+  <label>
+    <span>City</span>
+    <input type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" required>
+  </label>
+  <label>
+    <span>State / Province</span>
+    <input type="text" name="address[province]" value="{{ form.province }}" autocomplete="address-level1">
+  </label>
+  <label>
+    <span>Postal / ZIP code</span>
+    <input type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code">
+  </label>
+  <label>
+    <span>Country</span>
+    <select name="address[country]" data-default="{{ form.country }}" autocomplete="country">
+      {{ all_country_option_tags }}
+    </select>
+  </label>
+  <label class="address-form__span-2">
+    <span>Phone</span>
+    <input type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+  </label>
+</div>
+
+<label class="address-form__checkbox">
+  <input
+    type="checkbox"
+    name="address[default]"
+    value="1"
+    {% if customer.default_address and form.id == customer.default_address.id %}checked{% endif %}
+  >
+  <span>Set as default address</span>
+</label>

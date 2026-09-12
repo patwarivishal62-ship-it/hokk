@@ -1,0 +1,14 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Node / tooling
+node_modules/
+.npm/
+.vscode/
+.idea/
+
+# Logs
+*.log

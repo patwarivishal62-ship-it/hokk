@@ -1,0 +1,174 @@
+{%- liquid
+  assign menu = section.settings.menu
+-%}
+
+<header-section class="site-header{% if section.settings.sticky %} site-header--sticky{% endif %}" data-sticky="{{ section.settings.sticky }}">
+  <div class="site-header__inner container">
+
+    <button type="button" class="site-header__burger" data-menu-open aria-label="{{ 'header.menu' | t }}">
+      {%- render 'icon', icon: 'menu' -%}
+    </button>
+
+    <div class="site-header__logo">
+      <a href="{{ routes.root_url }}" class="site-header__logo-link" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: section.settings.logo_width | image_tag:
+            loading: 'eager',
+            widths: '120, 200, 320, 480',
+            class: 'site-header__logo-img'
+          }}
+        {%- else -%}
+          <span class="wordmark">
+            <span class="wordmark__top">House of</span>
+            <span class="wordmark__name">Kala Katha</span>
+          </span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        {%- for link in linklists[menu].links -%}
+          <li class="site-nav__item{% if link.links != blank %} has-children{% endif %}{% if link.active or link.child_active %} is-active{% endif %}">
+            <a href="{{ link.url }}" class="site-nav__link" {% if link.active %}aria-current="page"{% endif %}>
+              {{ link.title }}
+              {%- if link.links != blank -%}
+                {%- render 'icon', icon: 'chevron-down' -%}
+              {%- endif -%}
+            </a>
+            {%- if link.links != blank -%}
+              <ul class="site-nav__dropdown">
+                {%- for child in link.links -%}
+                  <li class="site-nav__dropdown-item">
+                    <a href="{{ child.url }}">{{ child.title }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="site-header__icons">
+      <button type="button" class="site-header__icon" data-search-open aria-label="{{ 'header.search' | t }}">
+        {%- render 'icon', icon: 'search' -%}
+      </button>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="site-header__icon site-header__icon--account" aria-label="{{ 'general.account' | t }}">
+          {%- render 'icon', icon: 'account' -%}
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="site-header__icon site-header__icon--cart" data-cart-drawer-toggle aria-label="{{ 'header.cart' | t }}">
+        {%- render 'icon', icon: 'bag' -%}
+        <span class="site-header__cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  {%- comment -%} Mobile menu drawer {%- endcomment -%}
+  <div class="menu-drawer" data-menu-drawer>
+    <div class="menu-drawer__overlay" data-menu-close></div>
+    <div class="menu-drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'header.menu' | t }}">
+      <div class="menu-drawer__head">
+        <span class="menu-drawer__brand">Kala Katha</span>
+        <button type="button" class="menu-drawer__close" data-menu-close aria-label="{{ 'general.close' | t }}">
+          {%- render 'icon', icon: 'close' -%}
+        </button>
+      </div>
+      <nav class="menu-drawer__nav" aria-label="Mobile">
+        <ul class="menu-drawer__list">
+          {%- for link in linklists[menu].links -%}
+            <li class="menu-drawer__item">
+              <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+              {%- if link.links != blank -%}
+                <ul class="menu-drawer__sub">
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+          {%- if linklists[menu].links.size == 0 -%}
+            <li class="menu-drawer__item"><a href="{{ routes.root_url }}">Home</a></li>
+            <li class="menu-drawer__item"><a href="{{ routes.all_products_collection_url }}">Shop all</a></li>
+          {%- endif -%}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  {%- comment -%} Search drawer {%- endcomment -%}
+  <div class="search-drawer" data-search-drawer>
+    <div class="search-drawer__overlay" data-search-close></div>
+    <div class="search-drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'header.search' | t }}">
+      <div class="search-drawer__head">
+        <span class="search-drawer__label">{{ 'header.search' | t }}</span>
+        <button type="button" class="search-drawer__close" data-search-close aria-label="{{ 'general.close' | t }}">
+          {%- render 'icon', icon: 'close' -%}
+        </button>
+      </div>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-drawer__form">
+        <input type="hidden" name="type" value="product">
+        <input
+          class="search-drawer__input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'search.placeholder' | t }}"
+          autocomplete="off"
+          data-search-input
+        >
+        <button type="submit" class="btn btn--solid">{{ 'search.submit' | t }}</button>
+      </form>
+      {%- render 'predictive-search' -%}
+    </div>
+  </div>
+</header-section>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 320,
+      "step": 10,
+      "unit": "px",
+      "default": 180
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky header",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

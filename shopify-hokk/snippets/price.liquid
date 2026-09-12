@@ -1,0 +1,21 @@
+{%- comment -%}
+  Price snippet. Accepts `product`, optional `variant`, optional `use_variant`.
+{%- endcomment -%}
+{%- liquid
+  if use_variant
+    assign target = variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price
+-%}
+<div class="price">
+  {%- if compare_at_price > price -%}
+    <s class="price__compare">{{ compare_at_price | money }}</s>
+    <span class="price__current price__current--sale">{{ price | money }}</span>
+  {%- else -%}
+    <span class="price__current">{{ price | money }}</span>
+  {%- endif -%}
+</div>

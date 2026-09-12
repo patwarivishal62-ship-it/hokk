@@ -1,0 +1,164 @@
+{%- liquid
+  assign products_per_page = section.settings.products_per_page
+  assign columns = section.settings.columns
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+
+  assign has_active_filters = false
+  for filter in collection.filters
+    if filter.type == 'price_range'
+      if filter.min_value.value != nil or filter.max_value.value != nil
+        assign has_active_filters = true
+      endif
+    else
+      for value in filter.values
+        if value.active
+          assign has_active_filters = true
+        endif
+      endfor
+    endif
+  endfor
+-%}
+
+<div class="collection-grid" data-section-id="{{ section.id }}">
+  <div class="container">
+    <form class="facets" method="get" action="{{ collection.url }}" data-filter-form>
+      <div class="facets__toolbar">
+        <p class="facets__count">
+          {{ collection.products_count }}
+          {%- if collection.products_count == 1 -%} product{%- else -%} products{%- endif -%}
+        </p>
+
+        <div class="facets__controls">
+          {%- if collection.filters.size > 0 -%}
+            <button type="button" class="btn btn--outline facets__toggle" data-filters-toggle>
+              Filter
+            </button>
+          {%- endif -%}
+
+          <label class="facets__sort">
+            <span class="facets__sort-label">Sort</span>
+            <select name="sort_by" data-sort-select>
+              <option value="manual" {% if sort_by == 'manual' %}selected{% endif %}>Featured</option>
+              <option value="best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>Best selling</option>
+              <option value="title-ascending" {% if sort_by == 'title-ascending' %}selected{% endif %}>Alphabetically, A–Z</option>
+              <option value="title-descending" {% if sort_by == 'title-descending' %}selected{% endif %}>Alphabetically, Z–A</option>
+              <option value="price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>Price, low to high</option>
+              <option value="price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>Price, high to low</option>
+              <option value="created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>Date, new to old</option>
+              <option value="created-ascending" {% if sort_by == 'created-ascending' %}selected{% endif %}>Date, old to new</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      {%- if collection.filters.size > 0 -%}
+        <div class="facets__panel" data-filters-panel hidden>
+          {%- for filter in collection.filters -%}
+            <details class="facet" {% if filter.type == 'price_range' %}open{% endif %}>
+              <summary class="facet__summary">
+                {{ filter.label }}
+                {%- render 'icon', icon: 'chevron-down' -%}
+              </summary>
+              <div class="facet__body">
+                {%- case filter.type -%}
+                  {%- when 'boolean' or 'list' -%}
+                    {%- for value in filter.values -%}
+                      <label class="facet__value">
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          {% if value.active %}checked{% endif %}
+                          {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                          data-auto-submit
+                        >
+                        <span>{{ value.label }}</span>
+                        <small class="facet__count">{% if value.count > 0 %}{{ value.count }}{% endif %}</small>
+                      </label>
+                    {%- endfor -%}
+                  {%- when 'price_range' -%}
+                    <div class="facet__price">
+                      <label>
+                        <span>From</span>
+                        <input
+                          name="{{ filter.min_value.param_name }}"
+                          value="{{ filter.min_value.value }}"
+                          type="number"
+                          min="0"
+                          inputmode="decimal"
+                          placeholder="0"
+                          {% if filter.min_value.value == nil %}disabled{% endif %}
+                        >
+                      </label>
+                      <label>
+                        <span>To</span>
+                        <input
+                          name="{{ filter.max_value.param_name }}"
+                          value="{{ filter.max_value.value }}"
+                          type="number"
+                          min="0"
+                          inputmode="decimal"
+                          placeholder="∞"
+                          {% if filter.max_value.value == nil %}disabled{% endif %}
+                        >
+                      </label>
+                    </div>
+                {%- endcase -%}
+              </div>
+            </details>
+          {%- endfor -%}
+
+          <div class="facets__actions">
+            <button type="submit" class="btn btn--solid">Apply</button>
+            {%- if has_active_filters -%}
+              <a href="{{ collection.url }}" class="btn btn--text">Clear all</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </form>
+
+    {%- paginate collection.products by products_per_page -%}
+      <div class="product-grid product-grid--{{ columns }}">
+        {%- for product in collection.products -%}
+          {%- render 'card-product', product: product, show_vendor: false -%}
+        {%- else -%}
+          <div class="collection-grid__empty">
+            <p>No products found in this collection.</p>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product grid",
+  "class": "section-collection-product-grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,50 @@
+<div class="addresses">
+  <div class="container">
+    <h1 class="section-title">{{ 'customer.addresses.title' | t }}</h1>
+    <p><a href="{{ routes.account_url }}" class="btn btn--text">{%- render 'icon', icon: 'arrow-right' -%} Back to account</a></p>
+
+    <div class="addresses__grid">
+      {%- for address in customer.addresses -%}
+        <div class="addresses__card">
+          {%- if address == customer.default_address -%}
+            <span class="addresses__default">{{ 'customer.addresses.default' | t }}</span>
+          {%- endif -%}
+          {{ address | format_address }}
+
+          <details class="addresses__edit">
+            <summary class="btn btn--text">{{ 'customer.addresses.edit' | t }}</summary>
+            <div class="addresses__form-wrap">
+              {%- form 'customer_address', address, class: 'address-form' -%}
+                {%- render 'address-fields', form: form -%}
+                <div class="address-form__actions">
+                  <button type="submit" class="btn btn--solid">{{ 'customer.addresses.update' | t }}</button>
+                  <button type="reset" class="btn btn--text">{{ 'customer.addresses.cancel' | t }}</button>
+                </div>
+              {%- endform -%}
+              <form method="post" action="/account/addresses/{{ address.id }}" class="address-form address-form--delete">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn--text address-form__delete">{{ 'customer.addresses.delete' | t }}</button>
+              </form>
+            </div>
+          </details>
+        </div>
+      {%- endfor -%}
+
+      <div class="addresses__card addresses__card--new">
+        <h2>{{ 'customer.addresses.add_new' | t }}</h2>
+        {%- form 'customer_address', customer.new_address, class: 'address-form' -%}
+          {%- render 'address-fields', form: form -%}
+          <button type="submit" class="btn btn--solid">{{ 'customer.addresses.add' | t }}</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Addresses",
+  "class": "section-addresses",
+  "settings": []
+}
+{% endschema %}

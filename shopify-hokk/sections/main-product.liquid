@@ -1,0 +1,198 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<section class="product" data-section-id="{{ section.id }}">
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+      {%- if product.collections.first != blank -%}
+        <span aria-hidden="true">/</span>
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+      {%- endif -%}
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ product.title }}</span>
+    </nav>
+
+    <div class="product__grid">
+      <div class="product__media">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            <div class="product__media-item">
+              {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  {{ media | image_url: width: 1400 | image_tag:
+                    loading: 'eager',
+                    widths: '540, 720, 900, 1080, 1296',
+                    class: 'product__media-img',
+                    alt: media.alt | default: product.title | escape
+                  }}
+                {%- when 'external_video' -%}
+                  {{ media | external_video_tag }}
+                {%- when 'video' -%}
+                  {{ media | video_tag: controls: true }}
+                {%- when 'model' -%}
+                  {{ media | model_viewer_tag }}
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'product__media-img product__media-img--placeholder' }}
+        {%- endif -%}
+      </div>
+
+      <div class="product__info">
+        {%- if section.settings.show_vendor and product.vendor != blank -%}
+          <p class="product__vendor">{{ product.vendor }}</p>
+        {%- endif -%}
+
+        <h1 class="product__title">{{ product.title | escape }}</h1>
+
+        <div class="product__price" data-product-price>
+          {%- render 'price', product: product, variant: current_variant, use_variant: true -%}
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="product__save">
+              Save {{ current_variant.compare_at_price | minus: current_variant.price | money }}
+            </span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.show_sku and current_variant.sku != blank -%}
+          <p class="product__sku">{{ 'products.product.sku' | t }}: {{ current_variant.sku }}</p>
+        {%- endif -%}
+
+        {%- form 'product', product, id: 'product-form', class: 'product-form' -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-product-id>
+
+          {%- render 'variant-picker', product: product, section_id: section.id, form_id: 'product-form' -%}
+
+          <div class="product-form__actions">
+            {%- if section.settings.enable_quantity -%}
+              {%- render 'quantity-input', name: 'quantity', value: 1 -%}
+            {%- endif -%}
+
+            <button
+              type="submit"
+              name="add"
+              class="btn btn--solid product-form__add"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          </div>
+
+          {%- if section.settings.show_dynamic_checkout -%}
+            <div class="product-form__buy">
+              {{ form | payment_button }}
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+
+        {%- if product.description != blank -%}
+          <details class="product-accordion" open>
+            <summary class="product-accordion__summary">
+              {{ 'products.product.description' | t }}
+              {%- render 'icon', icon: 'chevron-down' -%}
+            </summary>
+            <div class="rte product-accordion__body">{{ product.description }}</div>
+          </details>
+        {%- endif -%}
+
+        {%- if section.settings.care_text != blank -%}
+          <details class="product-accordion">
+            <summary class="product-accordion__summary">
+              {{ 'products.product.care' | t }}
+              {%- render 'icon', icon: 'chevron-down' -%}
+            </summary>
+            <div class="rte product-accordion__body">{{ section.settings.care_text }}</div>
+          </details>
+        {%- endif -%}
+
+        {%- if section.settings.shipping_text != blank -%}
+          <details class="product-accordion">
+            <summary class="product-accordion__summary">
+              {{ 'products.product.shipping' | t }}
+              {%- render 'icon', icon: 'chevron-down' -%}
+            </summary>
+            <div class="rte product-accordion__body">{{ section.settings.shipping_text }}</div>
+          </details>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    {%- if product.featured_media -%}
+      "image": [{{ product.featured_media | image_url: width: 1200 | prepend: 'https:' | json }}],
+    {%- endif -%}
+    "description": {{ product.description | strip_html | json }},
+    {%- if product.vendor != blank -%}"brand": { "@type": "Brand", "name": {{ product.vendor | json }} },{%- endif -%}
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "price": {{ current_variant.price | divided_by: 100.00 | json }},
+      "availability": "{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+    }
+  }
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "class": "section-product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Show SKU",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quantity",
+      "label": "Enable quantity selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout",
+      "label": "Show dynamic checkout button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Accordion content"
+    },
+    {
+      "type": "richtext",
+      "id": "care_text",
+      "label": "Care text",
+      "default": "<p>Handloom fabrics are naturally textured. Hand wash cold with a gentle detergent, dry in shade, and iron warm on the reverse. Minor irregularities are the signature of the loom, not a flaw.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "shipping_text",
+      "label": "Shipping & returns text",
+      "default": "<p>Dispatched within 2–3 business days from India. Free shipping on orders over ₹3,000. Easy 7-day returns on unworn pieces with tags intact.</p>"
+    }
+  ]
+}
+{% endschema %}

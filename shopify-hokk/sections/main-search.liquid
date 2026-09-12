@@ -1,0 +1,45 @@
+<div class="search-page">
+  <div class="container">
+    <p class="eyebrow">Search</p>
+    <h1 class="section-title">{{ 'search.title' | t }}</h1>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-page__form">
+      <input type="hidden" name="type" value="product">
+      <input
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ 'search.placeholder' | t }}"
+        class="search-page__input"
+        aria-label="{{ 'search.title' | t }}"
+      >
+      <button type="submit" class="btn btn--solid">{{ 'search.submit' | t }}</button>
+    </form>
+
+    {%- if search.performed -%}
+      {%- if search.results_count == 0 -%}
+        <p class="search-page__empty">{{ 'search.no_results' | t: terms: search.terms }}</p>
+      {%- else -%}
+        <p class="search-page__count">{{ 'search.results_count' | t: count: search.results_count }}</p>
+        {%- paginate search.results by 16 -%}
+          <div class="product-grid product-grid--4">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {%- render 'card-product', product: item -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- render 'pagination', paginate: paginate -%}
+        {%- endpaginate -%}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Search",
+  "class": "section-search",
+  "settings": []
+}
+{% endschema %}
