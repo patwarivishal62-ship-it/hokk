@@ -1,27 +1,33 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
+  assign layout = section.settings.layout | default: 'media-left'
+  if section.settings.image_ratio == 'natural'
+    assign image_ratio_css = 'auto'
+  else
+    assign image_ratio_css = section.settings.image_ratio
+  endif
 -%}
 
-<section class="product product--{{ section.settings.layout }}" data-section-id="{{ section.id }}"
+<section class="product product--{{ layout }}" data-section-id="{{ section.id }}"
   style="
     --section-pad-top: {{ section.settings.padding_top }}px;
     --section-pad-bottom: {{ section.settings.padding_bottom }}px;
-    --p-img-ratio: {% if section.settings.image_ratio == 'natural' %}auto{% else %}{{ section.settings.image_ratio }}{% endif %};
+    --p-img-ratio: {{ image_ratio_css }};
     --p-img-radius: {{ section.settings.image_radius }}px;
   ">
   <div class="container">
     {%- if section.settings.show_breadcrumbs -%}
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="{{ routes.root_url }}">Home</a>
-      <span aria-hidden="true">/</span>
-      <a href="{{ routes.all_products_collection_url }}">Shop</a>
-      {%- if product.collections.first != blank -%}
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a>
         <span aria-hidden="true">/</span>
-        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
-      {%- endif -%}
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">{{ product.title }}</span>
-    </nav>
+        <a href="{{ routes.all_products_collection_url }}">{{ 'general.shop' | t }}</a>
+        {%- if product.collections.first != blank -%}
+          <span aria-hidden="true">/</span>
+          <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        {%- endif -%}
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ product.title }}</span>
+      </nav>
     {%- endif -%}
 
     <div class="product__grid">
@@ -156,7 +162,8 @@
   </script>
 </section>
 
-{% schema %}{
+{% schema %}
+{
   "name": "Product",
   "class": "section-product",
   "settings": [
@@ -320,4 +327,5 @@
       "name": "Product"
     }
   ]
-}{% endschema %}
+}
+{% endschema %}
