@@ -1189,6 +1189,30 @@ svg.icon { width: 20px; height: 20px; }
 .contact-form label > span { color: var(--sec-label, var(--color-muted)); }
 
 /* --------------------------------------------------------------------------
+   29f. Section background media (image / video)
+   -------------------------------------------------------------------------- */
+.section-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.section-bg--image { background-size: cover; background-position: center; }
+.section-bg__video, .section-bg video { width: 100%; height: 100%; object-fit: cover; }
+
+.philosophy, .categories, .lookbook, .featured-collection, .rich-text, .contact,
+.testimonials, .marquee {
+  position: relative;
+  overflow: hidden;
+}
+.philosophy > .container, .categories > .container, .lookbook > .container,
+.featured-collection > .container, .rich-text > .container, .contact > .container,
+.testimonials > .container {
+  position: relative;
+  z-index: 2;
+}
+.marquee > .marquee__track { position: relative; z-index: 2; }
+
+.story__overlay, .newsletter__overlay { z-index: 1; }
+.hero .section-bg--video { z-index: 1; }
+.hero__overlay { z-index: 2; }
+
+/* --------------------------------------------------------------------------
    30. Placeholder SVGs
    -------------------------------------------------------------------------- */
 .placeholder-svg { width: 100%; height: 100%; }

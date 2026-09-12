@@ -3,6 +3,8 @@
 -%}
 
 <div class="philosophy philosophy--{{ layout }} philosophy--align-{{ section.settings.alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --phil-img-ratio: {{ section.settings.image_ratio }}; --phil-img-radius: {{ section.settings.image_radius }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--phil-gap: {{ section.settings.gap }}px;">
+    {%- render 'section-background', bg_video: section.settings.background_video, bg_image: section.settings.background_image -%}
+
   <div class="container">
     <div class="philosophy__grid">
       <div class="philosophy__media">
@@ -251,6 +253,21 @@
       "id": "quote_color",
       "label": "Quote color",
       "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Background media"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Plays on loop, muted. Takes priority over the image."
     }
   ],
   "presets": [

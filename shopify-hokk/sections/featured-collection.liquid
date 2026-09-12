@@ -5,6 +5,8 @@
 -%}
 
 <div class="featured-collection featured-collection--align-{{ section.settings.card_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --card-ratio: {{ section.settings.image_ratio }}; --fc-img-radius: {{ section.settings.image_radius }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--fc-gap: {{ section.settings.gap }}px;{% if section.settings.card_title_color != blank %}--fc-title: {{ section.settings.card_title_color }};{% endif %}{% if section.settings.price_color != blank %}--fc-price: {{ section.settings.price_color }};{% endif %}">
+    {%- render 'section-background', bg_video: section.settings.background_video, bg_image: section.settings.background_image -%}
+
   <div class="container">
     <div class="featured-collection__head">
       <div>
@@ -249,6 +251,21 @@
       "id": "price_color",
       "label": "Price color",
       "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Background media"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Plays on loop, muted. Takes priority over the image."
     }
   ],
   "presets": [

@@ -6,6 +6,8 @@
 
 <div class="hero hero--{{ section.settings.height }} hero--{{ tone }} hero--align-{{ section.settings.alignment }}" data-reveal style="--hero-pad-top: {{ section.settings.content_padding_top }}px; --hero-pad-bottom: {{ section.settings.content_padding_bottom }}px;{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
   <div class="hero__media">
+    {%- render 'section-background', bg_video: section.settings.background_video -%}
+
     {%- if image != blank -%}
       {%- if image_mobile != blank -%}
         {{ image_mobile | image_url: width: 1200 | image_tag:
@@ -278,6 +280,12 @@
       "id": "subheading_color",
       "label": "Subheading color",
       "info": "Leave blank to use the default."
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Plays on loop, muted. Takes priority over the image."
     }
   ],
   "presets": [

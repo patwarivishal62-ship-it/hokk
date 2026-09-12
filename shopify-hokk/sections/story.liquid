@@ -8,6 +8,8 @@
 -%}
 
 <div class="story story--image" data-reveal style="--story-bg: url('{{ bg_url }}'); --section-pad-top: {{ section.settings.padding_top }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--section-pad-bottom: {{ section.settings.padding_bottom }}px;">
+    {%- render 'section-background', bg_video: section.settings.background_video -%}
+
   {%- if section.settings.overlay_opacity > 0 -%}
     <div class="story__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
   {%- endif -%}
@@ -217,6 +219,12 @@
       "id": "legend_name_color",
       "label": "Region name color",
       "info": "Leave blank to use the default."
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Plays on loop, muted. Takes priority over the image."
     }
   ],
   "blocks": [

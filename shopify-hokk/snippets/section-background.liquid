@@ -1,0 +1,17 @@
+{%- comment -%}
+  Section background media layer.
+  Pass: bg_video (video object), bg_image (image object),
+        bg_overlay (optional color string), bg_overlay_opacity (optional 0-100).
+  Video takes priority over image. The parent section must be position: relative
+  and its content must sit above z-index 2.
+{%- endcomment -%}
+{%- if bg_video != blank -%}
+  <div class="section-bg section-bg--video" aria-hidden="true">
+    {{ bg_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'section-bg__video' }}
+  </div>
+{%- elsif bg_image != blank -%}
+  <div class="section-bg section-bg--image" aria-hidden="true" style="background-image: url('{{ bg_image | image_url: width: 2400 }}');"></div>
+{%- endif -%}
+{%- if bg_overlay != blank and bg_overlay_opacity > 0 -%}
+  <div class="section-bg section-bg--overlay" aria-hidden="true" style="background: {{ bg_overlay }}; opacity: {{ bg_overlay_opacity | divided_by: 100.0 }};"></div>
+{%- endif -%}
