@@ -1,4 +1,4 @@
-<div class="categories categories--align-{{ section.settings.text_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --cat-img-ratio: {{ section.settings.image_ratio }}; --cat-img-radius: {{ section.settings.image_radius }}px; --cat-gap: {{ section.settings.gap }}px;">
+<div class="categories categories--align-{{ section.settings.text_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --cat-img-ratio: {{ section.settings.image_ratio }}; --cat-img-radius: {{ section.settings.image_radius }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--cat-gap: {{ section.settings.gap }}px;">
   <div class="container">
     <div class="categories__head">
       {%- if section.settings.eyebrow != blank -%}
@@ -195,6 +195,22 @@
         }
       ],
       "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
     }
   ],
   "blocks": [

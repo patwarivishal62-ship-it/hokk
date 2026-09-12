@@ -2,7 +2,7 @@
   assign layout = section.settings.layout
 -%}
 
-<div class="philosophy philosophy--{{ layout }} philosophy--align-{{ section.settings.alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --phil-img-ratio: {{ section.settings.image_ratio }}; --phil-img-radius: {{ section.settings.image_radius }}px; --phil-gap: {{ section.settings.gap }}px;">
+<div class="philosophy philosophy--{{ layout }} philosophy--align-{{ section.settings.alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --phil-img-ratio: {{ section.settings.image_ratio }}; --phil-img-radius: {{ section.settings.image_radius }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--phil-gap: {{ section.settings.gap }}px;">
   <div class="container">
     <div class="philosophy__grid">
       <div class="philosophy__media">
@@ -213,6 +213,22 @@
         }
       ],
       "default": "text"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
     }
   ],
   "presets": [

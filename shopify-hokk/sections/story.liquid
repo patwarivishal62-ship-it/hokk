@@ -7,7 +7,7 @@
   endif
 -%}
 
-<div class="story story--image" data-reveal style="--story-bg: url('{{ bg_url }}'); --section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
+<div class="story story--image" data-reveal style="--story-bg: url('{{ bg_url }}'); --section-pad-top: {{ section.settings.padding_top }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--section-pad-bottom: {{ section.settings.padding_bottom }}px;">
   {%- if section.settings.overlay_opacity > 0 -%}
     <div class="story__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
   {%- endif -%}
@@ -173,6 +173,22 @@
       "step": 4,
       "unit": "px",
       "default": 84
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
     }
   ],
   "blocks": [

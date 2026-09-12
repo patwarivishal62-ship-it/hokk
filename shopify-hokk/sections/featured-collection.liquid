@@ -4,7 +4,7 @@
   assign columns = section.settings.columns
 -%}
 
-<div class="featured-collection featured-collection--align-{{ section.settings.card_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --card-ratio: {{ section.settings.image_ratio }}; --fc-img-radius: {{ section.settings.image_radius }}px; --fc-gap: {{ section.settings.gap }}px;">
+<div class="featured-collection featured-collection--align-{{ section.settings.card_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --card-ratio: {{ section.settings.image_ratio }}; --fc-img-radius: {{ section.settings.image_radius }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--fc-gap: {{ section.settings.gap }}px;">
   <div class="container">
     <div class="featured-collection__head">
       <div>
@@ -199,6 +199,22 @@
         }
       ],
       "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
     }
   ],
   "presets": [

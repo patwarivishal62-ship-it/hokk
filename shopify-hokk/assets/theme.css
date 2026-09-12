@@ -1157,6 +1157,34 @@ svg.icon { width: 20px; height: 20px; }
 }
 
 /* --------------------------------------------------------------------------
+   29e. Section color overrides (editor: background + text)
+   -------------------------------------------------------------------------- */
+.philosophy,
+.categories,
+.lookbook,
+.featured-collection,
+.rich-text,
+.contact {
+  background: var(--sec-bg, transparent);
+  color: var(--sec-text, inherit);
+}
+.marquee {
+  background: var(--sec-bg, var(--color-dark));
+  color: var(--sec-text, var(--color-dark-text));
+}
+.story,
+.newsletter {
+  color: var(--sec-text, var(--color-dark-text));
+}
+.story .story__overlay,
+.newsletter .newsletter__overlay {
+  background: var(--sec-bg, var(--color-dark));
+}
+.testimonials {
+  color: var(--sec-text, inherit);
+}
+
+/* --------------------------------------------------------------------------
    30. Placeholder SVGs
    -------------------------------------------------------------------------- */
 .placeholder-svg { width: 100%; height: 100%; }

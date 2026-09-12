@@ -4,7 +4,7 @@
   assign tone = section.settings.tone
 -%}
 
-<div class="hero hero--{{ section.settings.height }} hero--{{ tone }} hero--align-{{ section.settings.alignment }}" data-reveal style="--hero-pad-top: {{ section.settings.content_padding_top }}px; --hero-pad-bottom: {{ section.settings.content_padding_bottom }}px;">
+<div class="hero hero--{{ section.settings.height }} hero--{{ tone }} hero--align-{{ section.settings.alignment }}" data-reveal style="--hero-pad-top: {{ section.settings.content_padding_top }}px; --hero-pad-bottom: {{ section.settings.content_padding_bottom }}px;{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
   <div class="hero__media">
     {%- if image != blank -%}
       {%- if image_mobile != blank -%}
@@ -25,7 +25,7 @@
       <img src="{{ 'hero.jpg' | asset_url }}" alt="House of Kala Katha handloom co-ord" class="hero__img" loading="eager" width="1200" height="1600">
     {%- endif -%}
     {%- if section.settings.overlay_opacity > 0 -%}
-      <div class="hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+      <div class="hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};{% if section.settings.background_color != blank %}background: {{ section.settings.background_color }};{% endif %}"></div>
     {%- endif -%}
   </div>
 
@@ -240,6 +240,22 @@
       "step": 4,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Overlay color",
+      "info": "Tints the overlay above the image. Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
     }
   ],
   "presets": [

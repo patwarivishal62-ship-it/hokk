@@ -1,4 +1,4 @@
-<div class="lookbook" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --lb-img-ratio: {{ section.settings.image_ratio }}; --lb-img-radius: {{ section.settings.image_radius }}px; --lb-gap: {{ section.settings.gap }}px; --lb-cols: {{ section.settings.columns }};">
+<div class="lookbook" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --lb-img-ratio: {{ section.settings.image_ratio }}; --lb-img-radius: {{ section.settings.image_radius }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--lb-gap: {{ section.settings.gap }}px; --lb-cols: {{ section.settings.columns }};">
   <div class="container">
     <div class="lookbook__head">
       {%- if section.settings.eyebrow != blank -%}
@@ -161,6 +161,22 @@
       "step": 4,
       "unit": "px",
       "default": 84
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
     }
   ],
   "blocks": [

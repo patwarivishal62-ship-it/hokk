@@ -17,6 +17,7 @@
     --tt-card-pad: {{ section.settings.card_padding }}px;
     --tt-avatar-size: {{ section.settings.avatar_size }}px;
     --tt-avatar-radius: {% if section.settings.avatar_shape == 'circle' %}50%{% else %}{{ section.settings.avatar_radius }}px{% endif %};
+    {% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}
   ">
   <div class="container">
     <div class="testimonials__head">
@@ -87,8 +88,7 @@
   </div>
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Testimonials",
   "class": "section-testimonials",
   "settings": [
@@ -110,8 +110,14 @@
       "label": "Layout",
       "info": "Slider keeps the section compact when you have many reviews.",
       "options": [
-        { "value": "slider", "label": "Slider (carousel)" },
-        { "value": "grid", "label": "Grid" }
+        {
+          "value": "slider",
+          "label": "Slider (carousel)"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
       ],
       "default": "slider"
     },
@@ -166,8 +172,14 @@
       "id": "alignment",
       "label": "Content alignment",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" }
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
       ],
       "default": "left"
     },
@@ -182,8 +194,14 @@
       "id": "columns",
       "label": "Columns (grid layout)",
       "options": [
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" }
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
       ],
       "default": "3"
     },
@@ -236,8 +254,14 @@
       "id": "avatar_shape",
       "label": "Avatar shape",
       "options": [
-        { "value": "circle", "label": "Circle" },
-        { "value": "square", "label": "Square" }
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
       ],
       "default": "circle"
     },
@@ -290,6 +314,16 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
     }
   ],
   "blocks": [
@@ -328,11 +362,31 @@
     {
       "name": "Testimonials",
       "blocks": [
-        { "type": "testimonial", "settings": { "quote": "I didn't buy this because it was 'handloom'. I bought it because it's the best shirt in my closet.", "handle": "@ananya.codes", "role": "Micro-creator, Hyderabad" } },
-        { "type": "testimonial", "settings": { "quote": "Wore the co-ord to a wedding and to work the next week. That's rare with anything 'ethnic'.", "handle": "@rohanwrites", "role": "Creator, Bengaluru" } },
-        { "type": "testimonial", "settings": { "quote": "Every piece comes with the story of who made it. That hits different once you know it.", "handle": "@meher.talks", "role": "Creator, Chennai" } }
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I didn't buy this because it was 'handloom'. I bought it because it's the best shirt in my closet.",
+            "handle": "@ananya.codes",
+            "role": "Micro-creator, Hyderabad"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Wore the co-ord to a wedding and to work the next week. That's rare with anything 'ethnic'.",
+            "handle": "@rohanwrites",
+            "role": "Creator, Bengaluru"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Every piece comes with the story of who made it. That hits different once you know it.",
+            "handle": "@meher.talks",
+            "role": "Creator, Chennai"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}
