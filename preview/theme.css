@@ -904,29 +904,35 @@ svg.icon { width: 20px; height: 20px; }
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
 }
-.craft-map__svg { width: 100%; height: auto; display: block; }
-.craft-map__outline { fill: none; stroke: var(--color-gold); stroke-width: 1.6; stroke-opacity: 0.65; }
+.craft-map__svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 14px 36px rgba(0, 0, 0, 0.45)); }
 
 .region { cursor: pointer; outline: none; }
-.region__shape { transition: fill 0.25s ease; }
-.region__shape { stroke: var(--color-dark); stroke-width: 2; }
+.region__shape {
+  transition: filter 0.25s ease, stroke 0.25s ease;
+  stroke: #1E160F;
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.region--north .region__shape { fill: #D8A55B; }
+.region--west .region__shape { fill: #C15F3D; }
+.region--east .region__shape { fill: #97A177; }
+.region--south .region__shape { fill: #6E8C9C; }
 .region:hover .region__shape,
-.region:focus .region__shape { fill: var(--color-accent); }
-.region--north .region__shape { fill: #E8DCC6; }
-.region--west .region__shape { fill: #CFA468; }
-.region--east .region__shape { fill: #B57C55; }
-.region--south .region__shape { fill: #A68B70; }
+.region:focus .region__shape { filter: brightness(1.14) saturate(1.1); stroke: #F3ECE1; stroke-width: 1.2; }
 .region__label {
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.18em;
-  fill: #3a2c20;
+  letter-spacing: 0.12em;
+  fill: #F7F1E7;
+  stroke: #1E160F;
+  stroke-width: 0.7;
+  paint-order: stroke;
   pointer-events: none;
   text-transform: uppercase;
 }
 .region:hover .region__label,
-.region:focus .region__label { fill: var(--color-accent-text); }
-.craft-map__divider { fill: none; stroke: var(--color-dark); stroke-width: 2.5; }
+.region:focus .region__label { fill: #ffffff; }
 
 .craft-map__hint {
   font-size: 1.3rem;
@@ -950,10 +956,10 @@ svg.icon { width: 20px; height: 20px; }
 .craft-map__legend-item:hover,
 .craft-map__legend-item:focus { border-color: var(--color-gold); background: rgba(243, 236, 225, 0.06); }
 .craft-map__legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-.craft-map__legend-dot--north { background: #E8DCC6; }
-.craft-map__legend-dot--west { background: #CFA468; }
-.craft-map__legend-dot--east { background: #B57C55; }
-.craft-map__legend-dot--south { background: #A68B70; }
+.craft-map__legend-dot--north { background: #D8A55B; }
+.craft-map__legend-dot--west { background: #C15F3D; }
+.craft-map__legend-dot--east { background: #97A177; }
+.craft-map__legend-dot--south { background: #6E8C9C; }
 .craft-map__legend-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
 .craft-map__legend-name { font-family: var(--font-heading-family); font-size: 1.9rem; font-weight: 600; line-height: 1.1; }
 .craft-map__legend-count { font-size: 1.2rem; letter-spacing: 0.06em; color: rgba(243, 236, 225, 0.6); }

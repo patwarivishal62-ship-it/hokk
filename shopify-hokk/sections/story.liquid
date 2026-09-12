@@ -28,32 +28,7 @@
     {%- comment -%} Interactive India craft map {%- endcomment -%}
     <div class="craft-map">
       <div class="craft-map__wrap">
-        <svg viewBox="0 0 360 440" role="img" aria-label="Interactive map of India's four craft regions" class="craft-map__svg">
-          <path class="craft-map__outline" d="M104,44 L148,26 L198,32 L232,54 L256,76 L270,100 L290,90 L320,102 L316,130 L296,146 L282,140 L266,150 L250,170 L260,208 L264,250 L248,300 L226,346 L200,392 L182,382 L170,348 L176,300 L170,266 L164,232 L156,206 L148,186 L136,170 L114,160 L92,154 L82,134 L68,120 L72,96 L86,76 Z" />
-
-          <g class="region region--north" data-region="north" tabindex="0" role="button" aria-label="North India">
-            <path class="region__shape" d="M104,44 L148,26 L198,32 L232,54 L256,76 L270,100 L240,128 L150,128 L86,76 Z" />
-            <text class="region__label" x="168" y="80" text-anchor="middle">NORTH</text>
-          </g>
-
-          <g class="region region--west" data-region="west" tabindex="0" role="button" aria-label="West and Central India">
-            <path class="region__shape" d="M150,128 L240,128 L214,180 L236,296 L170,266 L164,232 L156,206 L148,186 L136,170 L114,160 L92,154 L82,134 L68,120 L72,96 L86,76 Z" />
-            <text class="region__label" x="146" y="196" text-anchor="middle">WEST &amp;</text>
-            <text class="region__label" x="146" y="212" text-anchor="middle">CENTRAL</text>
-          </g>
-
-          <g class="region region--east" data-region="east" tabindex="0" role="button" aria-label="East India">
-            <path class="region__shape" d="M270,100 L290,90 L320,102 L316,130 L296,146 L282,140 L266,150 L250,170 L260,208 L264,250 L236,296 L214,180 L240,128 Z" />
-            <text class="region__label" x="238" y="200" text-anchor="middle">EAST</text>
-          </g>
-
-          <g class="region region--south" data-region="south" tabindex="0" role="button" aria-label="South India">
-            <path class="region__shape" d="M236,296 L264,250 L248,300 L226,346 L200,392 L182,382 L170,348 L176,300 L170,266 Z" />
-            <text class="region__label" x="210" y="330" text-anchor="middle">SOUTH</text>
-          </g>
-
-          <path class="craft-map__divider" d="M86,76 L150,128 M150,128 L240,128 M240,128 L214,180 L236,296 M270,100 L240,128 M236,296 L264,250 M236,296 L170,266" />
-        </svg>
+        {%- render 'craft-map' -%}
 
         <div class="craft-map__side">
           <p class="craft-map__hint">Hover, then click a region to read its katha.</p>
@@ -131,12 +106,6 @@
         </div>
       </div>
     {%- endfor -%}
-
-    {%- if section.settings.button_label != blank -%}
-      <a href="{{ section.settings.button_link }}" class="btn btn--{{ section.settings.button_style }}">
-        {{ section.settings.button_label | escape }}
-      </a>
-    {%- endif -%}
   </div>
 </div>
 
@@ -177,27 +146,6 @@
       "id": "text",
       "label": "Intro text",
       "default": "Four regions, hundreds of looms, thousands of hands. Hover over the map, click a region, and read its katha — the handloom cultures it carries and the speciality that makes it sing."
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "See it worn"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button style",
-      "options": [
-        { "value": "solid", "label": "Solid" },
-        { "value": "outline", "label": "Outline" }
-      ],
-      "default": "outline"
     },
     {
       "type": "paragraph",
