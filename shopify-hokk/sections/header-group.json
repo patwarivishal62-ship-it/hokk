@@ -1,1 +1,36 @@
-
+{
+  "name": "Header group",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "message",
+          "settings": {
+            "text": "Woven in India · Free shipping on orders over ₹3,000  ·  theme v2.3"
+          }
+        },
+        "announcement-bar-1": {
+          "type": "message",
+          "settings": {
+            "text": "New drop: The Pochampally Ikat co-ords are live"
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0",
+        "announcement-bar-1"
+      ],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}
