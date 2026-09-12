@@ -10,7 +10,7 @@
     </button>
 
     <div class="site-header__logo">
-      <a href="{{ routes.root_url }}" class="site-header__logo-link" aria-label="{{ shop.name }}">
+      <a href="{{ routes.root_url }}" class="site-header__logo-link" aria-label="{{ shop.name }}" style="--logo-width: {{ section.settings.logo_width }}px;">
         {%- if section.settings.logo != blank -%}
           {{ section.settings.logo | image_url: width: section.settings.logo_width | image_tag:
             loading: 'eager',

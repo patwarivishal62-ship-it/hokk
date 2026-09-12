@@ -1,5 +1,7 @@
 {%- liquid
   assign columns = section.settings.columns | default: 3
+  assign layout = section.settings.layout | default: 'slider'
+  assign per_view = section.settings.slides_per_view | default: 3
 -%}
 
 <div class="testimonials{% if section.settings.alignment == 'center' %} testimonials--align-center{% endif %}{% unless section.settings.show_stars %} testimonials--no-stars{% endunless %}" data-reveal
@@ -8,6 +10,7 @@
     --section-pad-bottom: {{ section.settings.padding_bottom }}px;
     --tt-bg: {{ section.settings.background }};
     --tt-cols: {{ columns }};
+    --tt-per-view: {{ per_view }};
     --tt-gap: {{ section.settings.gap }}px;
     --tt-card-bg: {{ section.settings.card_background }};
     --tt-card-radius: {{ section.settings.card_radius }}px;
@@ -25,7 +28,8 @@
       {%- endif -%}
     </div>
 
-    <div class="testimonials__grid">
+    <div class="testimonials__grid{% if layout == 'slider' %} testimonials__grid--slider{% endif %}"
+      {% if layout == 'slider' %}data-testimonial-slider data-autoplay="{{ section.settings.enable_autoplay }}" data-delay="{{ section.settings.autoplay_delay | times: 1000 }}"{% endif %}>
       {%- for block in section.blocks -%}
         {%- liquid
           assign initials = block.settings.handle | remove: '@' | slice: 0, 1 | upcase
@@ -61,6 +65,25 @@
         </figure>
       {%- endfor -%}
     </div>
+
+    {%- if layout == 'slider' and section.settings.show_arrows -%}
+      <div class="testimonials__nav">
+        <button type="button" class="testimonials__arrow testimonials__arrow--prev" data-slider-prev aria-label="{{ 'pagination.previous' | t }}">
+          {%- render 'icon', icon: 'arrow-left' -%}
+        </button>
+        <button type="button" class="testimonials__arrow testimonials__arrow--next" data-slider-next aria-label="{{ 'pagination.next' | t }}">
+          {%- render 'icon', icon: 'arrow-right' -%}
+        </button>
+      </div>
+    {%- endif -%}
+
+    {%- if layout == 'slider' and section.settings.show_dots -%}
+      <div class="testimonials__dots" data-slider-dots>
+        {%- for block in section.blocks -%}
+          <button type="button" class="testimonials__dot{% if forloop.first %} is-active{% endif %}" data-slider-dot="{{ forloop.index0 }}" aria-label="{{ 'sections.testimonials.go_to_review' | t: number: forloop.index }}"></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -83,6 +106,63 @@
     },
     {
       "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "info": "Slider keeps the section compact when you have many reviews.",
+      "options": [
+        { "value": "slider", "label": "Slider (carousel)" },
+        { "value": "grid", "label": "Grid" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "header",
+      "content": "Slider settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view",
+      "label": "Slides per view",
+      "info": "How many reviews are visible at once on desktop.",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrow buttons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show pagination dots",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Auto-rotate",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay",
+      "label": "Auto-rotate speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
       "id": "alignment",
       "label": "Content alignment",
       "options": [
@@ -100,7 +180,7 @@
     {
       "type": "select",
       "id": "columns",
-      "label": "Columns",
+      "label": "Columns (grid layout)",
       "options": [
         { "value": "2", "label": "2" },
         { "value": "3", "label": "3" }
@@ -243,7 +323,7 @@
       ]
     }
   ],
-  "max_blocks": 6,
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Testimonials",

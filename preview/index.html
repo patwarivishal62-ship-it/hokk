@@ -88,7 +88,7 @@
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg>
       </button>
       <div class="site-header__logo">
-        <a href="index.html" class="site-header__logo-link" aria-label="House of Kala Katha">
+        <a href="index.html" class="site-header__logo-link" aria-label="House of Kala Katha" style="--logo-width: 180px;">
           <img src="logo/logo.png" alt="House of Kala Katha" class="site-header__logo-img">
         </a>
       </div>
@@ -488,21 +488,22 @@
     <div class="lookbook" data-reveal id="lookbook">
       <div class="container">
         <div class="lookbook__head">
-          <p class="eyebrow">Field Notes</p>
-          <h2 class="section-title">Real Light. Real Streets. Real People.</h2>
-          <p class="lookbook__subheading">Shot in natural light, worn by the culture.</p>
+          <p class="eyebrow">The Lookbook</p>
+          <h2 class="section-title">Worn by the Culture</h2>
+          <p class="lookbook__subheading">From the street to the spotlight — real people, creators and friends of the house, shot in natural light. Add your own photos, celebrities included.</p>
         </div>
         <div class="lookbook__grid">
-          <figure class="lookbook__item lookbook__item--1">
+          <figure class="lookbook__item">
             <img src="images/lookbook-1.jpg" alt="Editorial lookbook shot in natural courtyard light" class="lookbook__img" loading="lazy">
-            <figcaption class="lookbook__caption">Golden hour, Hyderabad.</figcaption>
+            <figcaption class="lookbook__caption"><span class="lookbook__name">Ananya Rao</span><span class="lookbook__note">Golden hour, Hyderabad.</span></figcaption>
           </figure>
-          <figure class="lookbook__item lookbook__item--2">
+          <figure class="lookbook__item">
             <img src="images/category-jackets.jpg" alt="Street style editorial shot" class="lookbook__img" loading="lazy">
+            <figcaption class="lookbook__caption"><span class="lookbook__name">Kabir Anand</span><span class="lookbook__note">Street, Mumbai.</span></figcaption>
           </figure>
-          <figure class="lookbook__item lookbook__item--3">
+          <figure class="lookbook__item">
             <img src="images/lookbook-2.jpg" alt="Occasion wear editorial shot" class="lookbook__img" loading="lazy">
-            <figcaption class="lookbook__caption">Occasion, reimagined.</figcaption>
+            <figcaption class="lookbook__caption"><span class="lookbook__name">Meher Sethi</span><span class="lookbook__note">Occasion, reimagined.</span></figcaption>
           </figure>
         </div>
       </div>
@@ -515,7 +516,7 @@
           <p class="eyebrow">Worn by the Culture</p>
           <h2 class="section-title">Not Celebrities. Just Real Wardrobes.</h2>
         </div>
-        <div class="testimonials__grid">
+        <div class="testimonials__grid testimonials__grid--slider" data-testimonial-slider data-autoplay="false" data-delay="5000">
           <figure class="testimonial">
             <div class="testimonial__avatar"><span class="testimonial__avatar-initials">A</span></div>
             <div class="testimonial__stars" aria-hidden="true">★★★★★</div>
@@ -534,6 +535,19 @@
             <blockquote class="testimonial__quote">“Every piece comes with the story of who made it. That hits different once you know it.”</blockquote>
             <figcaption class="testimonial__author"><span class="testimonial__handle">@meher.talks</span><span class="testimonial__role">Creator, Chennai</span></figcaption>
           </figure>
+        </div>
+        <div class="testimonials__nav">
+          <button type="button" class="testimonials__arrow testimonials__arrow--prev" data-slider-prev aria-label="Previous">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="20" y1="12" x2="4" y2="12"></line><polyline points="11 5 4 12 11 19"></polyline></svg>
+          </button>
+          <button type="button" class="testimonials__arrow testimonials__arrow--next" data-slider-next aria-label="Next">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="13 5 20 12 13 19"></polyline></svg>
+          </button>
+        </div>
+        <div class="testimonials__dots" data-slider-dots>
+          <button type="button" class="testimonials__dot is-active" data-slider-dot="0" aria-label="Go to review 1"></button>
+          <button type="button" class="testimonials__dot" data-slider-dot="1" aria-label="Go to review 2"></button>
+          <button type="button" class="testimonials__dot" data-slider-dot="2" aria-label="Go to review 3"></button>
         </div>
       </div>
     </div>
@@ -621,7 +635,7 @@
     <div class="container">
       <div class="site-footer__top">
         <div class="site-footer__brand">
-          <img src="logo/logo-light.png" alt="House of Kala Katha" class="site-footer__logo" loading="lazy">
+          <img src="logo/logo-light.png" alt="House of Kala Katha" class="site-footer__logo" loading="lazy" style="--logo-width: 140px;">
           <p class="site-footer__tagline">Kala is the art. Katha is the story.</p>
           <p class="site-footer__blurb">Handloom, ikat, kalamkari and patola — heritage craft, re-cut for everyday life.</p>
         </div>

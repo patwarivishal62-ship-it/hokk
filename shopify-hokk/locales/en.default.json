@@ -162,6 +162,11 @@
     "previous": "Previous",
     "next": "Next"
   },
+  "sections": {
+    "testimonials": {
+      "go_to_review": "Go to review {{ number }}"
+    }
+  },
   "footer": {
     "copyright": "© {{ year }} {{ shop }} · Woven in India",
     "tagline": "Kala is the art. Katha is the story.",

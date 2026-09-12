@@ -14,9 +14,10 @@
             alt="{{ shop.name | escape }}"
             class="site-footer__logo"
             loading="lazy"
+            style="--logo-width: {{ section.settings.logo_width }}px;"
           >
         {%- else -%}
-          <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy">
+          <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy" style="--logo-width: {{ section.settings.logo_width }}px;">
         {%- endif -%}
         <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>
         {%- if section.settings.blurb != blank -%}

@@ -196,8 +196,8 @@ svg.icon { width: 20px; height: 20px; }
 }
 .site-header__burger { display: none; }
 .site-header__logo { margin-right: auto; }
-.site-header__logo-link { display: inline-block; text-decoration: none; }
-.site-header__logo-img { max-height: 46px; width: auto; }
+.site-header__logo-link { display: block; width: var(--logo-width, 180px); max-width: 100%; text-decoration: none; }
+.site-header__logo-img { display: block; width: 100%; height: auto; object-fit: contain; }
 
 .wordmark { display: inline-flex; flex-direction: column; line-height: 1; }
 .wordmark__top {
@@ -445,16 +445,14 @@ svg.icon { width: 20px; height: 20px; }
 .lookbook { padding: var(--space-section) 0; }
 .lookbook__head { max-width: 720px; margin-bottom: clamp(40px, 5vw, 72px); }
 .lookbook__subheading { color: var(--color-muted); font-size: 1.6rem; }
-.lookbook__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
-.lookbook__item { position: relative; }
-.lookbook__item--1 { grid-column: span 7; }
-.lookbook__item--2 { grid-column: span 5; margin-top: 72px; }
-.lookbook__item--3 { grid-column: span 4; margin-top: -40px; }
-.lookbook__item--4 { grid-column: span 8; }
+.lookbook__grid { display: grid; grid-template-columns: repeat(var(--lb-cols, 3), 1fr); gap: 24px; }
+.lookbook__item { position: relative; min-width: 0; }
 .lookbook__img, .lookbook__img--placeholder { width: 100%; aspect-ratio: var(--lb-img-ratio, 4/5); object-fit: cover; }
 .lookbook__caption {
   margin-top: 14px; font-size: 1.3rem; letter-spacing: 0.04em; color: var(--color-muted);
 }
+.lookbook__name { display: block; font-family: var(--font-heading-family); font-weight: 600; font-size: 1.5rem; color: var(--color-ink); }
+.lookbook__note { display: block; }
 
 /* --------------------------------------------------------------------------
    13. Testimonials
@@ -896,7 +894,7 @@ svg.icon { width: 20px; height: 20px; }
   background: transparent;
   margin-bottom: 20px;
 }
-.site-footer__logo { max-height: 60px; width: auto; margin-bottom: 20px; }
+.site-footer__logo { display: block; width: var(--logo-width, 140px); height: auto; max-width: 100%; margin-bottom: 20px; }
 
 /* --------------------------------------------------------------------------
    29. Interactive craft map (Story section)
@@ -1091,6 +1089,46 @@ svg.icon { width: 20px; height: 20px; }
 .testimonials--align-center .testimonial__avatar { margin-inline: auto; }
 .testimonials--align-center .testimonial__stars { justify-content: center; }
 .testimonials--no-stars .testimonial__stars { display: none; }
+.testimonials__grid--slider {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  position: relative;
+  gap: var(--tt-gap, 32px);
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.testimonials__grid--slider::-webkit-scrollbar { display: none; }
+.testimonials__grid--slider .testimonial {
+  flex: 0 0 calc((100% - (var(--tt-per-view, 3) - 1) * var(--tt-gap, 32px)) / var(--tt-per-view, 3));
+  scroll-snap-align: start;
+  min-width: 0;
+}
+.testimonials__nav { display: flex; justify-content: center; gap: 12px; margin-top: 28px; }
+.testimonials__arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.testimonials__arrow:hover { background: var(--color-ink); color: var(--color-cream); border-color: var(--color-ink); }
+.testimonials__arrow .icon { width: 18px; height: 18px; }
+.testimonials__dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+.testimonials__dot {
+  width: 8px; height: 8px; padding: 0;
+  border: 0; border-radius: 999px;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.testimonials__dot.is-active { background: var(--color-accent); transform: scale(1.25); }
 .testimonial__avatar {
   width: var(--tt-avatar-size, 56px);
   height: var(--tt-avatar-size, 56px);
@@ -1121,6 +1159,7 @@ svg.icon { width: 20px; height: 20px; }
   .site-header__burger { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; color: var(--color-base-text); }
   .site-nav { display: none; }
   .site-header__logo { margin-right: auto; }
+  .site-header__logo-link { width: min(var(--logo-width, 180px), 140px); }
 
   .hero__img--mobile { display: block; position: absolute; inset: 0; }
   .hero__img:not(.hero__img--mobile) { display: block; }
@@ -1136,8 +1175,8 @@ svg.icon { width: 20px; height: 20px; }
   .predictive-search__body { grid-template-columns: repeat(2, 1fr); }
 
   .story__grid { grid-template-columns: repeat(2, 1fr); }
-  .lookbook__item--1, .lookbook__item--2, .lookbook__item--3, .lookbook__item--4 { grid-column: span 6; margin: 0; }
-  .lookbook__item--2 { margin-top: 24px; }
+  .lookbook__grid { grid-template-columns: repeat(min(var(--lb-cols, 3), 2), 1fr); }
+  .testimonials__grid--slider .testimonial { flex-basis: calc((100% - var(--tt-gap, 32px)) / min(var(--tt-per-view, 3), 2)); }
 
   .site-footer__top { grid-template-columns: 1fr 1fr; }
   .cart-form__head { display: none; }
@@ -1157,7 +1196,8 @@ svg.icon { width: 20px; height: 20px; }
   .predictive-search__body { grid-template-columns: 1fr 1fr; }
   .product-grid { gap: 16px; }
   .story__grid { grid-template-columns: 1fr; }
-  .lookbook__item--1, .lookbook__item--2, .lookbook__item--3, .lookbook__item--4 { grid-column: span 12; }
+  .lookbook__grid { grid-template-columns: 1fr; }
+  .testimonials__grid--slider .testimonial { flex-basis: 100%; }
   .contact-form__fields, .comment-form__fields, .auth-form__row, .address-form__grid { grid-template-columns: 1fr; }
   .address-form__span-2 { grid-column: span 1; }
   .site-footer__top { grid-template-columns: 1fr; gap: 32px; }

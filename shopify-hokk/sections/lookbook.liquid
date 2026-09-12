@@ -1,4 +1,4 @@
-<div class="lookbook" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --lb-img-ratio: {{ section.settings.image_ratio }}; --lb-img-radius: {{ section.settings.image_radius }}px; --lb-gap: {{ section.settings.gap }}px;">
+<div class="lookbook" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --lb-img-ratio: {{ section.settings.image_ratio }}; --lb-img-radius: {{ section.settings.image_radius }}px; --lb-gap: {{ section.settings.gap }}px; --lb-cols: {{ section.settings.columns }};">
   <div class="container">
     <div class="lookbook__head">
       {%- if section.settings.eyebrow != blank -%}
@@ -15,7 +15,7 @@
     {%- assign lookbook_fallbacks = 'lookbook-1.jpg|category-jackets.jpg|lookbook-2.jpg' | split: '|' -%}
     <div class="lookbook__grid">
       {%- for block in section.blocks -%}
-        <figure class="lookbook__item lookbook__item--{{ forloop.index }}" {{ block.shopify_attributes }}>
+        <figure class="lookbook__item" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
             {{ block.settings.image | image_url: width: 1200 | image_tag:
               loading: 'lazy',
@@ -27,8 +27,15 @@
             {%- assign lb_idx = forloop.index0 | modulo: lookbook_fallbacks.size -%}
             <img src="{{ lookbook_fallbacks[lb_idx] | asset_url }}" alt="House of Kala Katha lookbook" class="lookbook__img" loading="lazy" width="1000" height="1250">
           {%- endif -%}
-          {%- if block.settings.caption != blank -%}
-            <figcaption class="lookbook__caption">{{ block.settings.caption | escape }}</figcaption>
+          {%- if block.settings.name != blank or block.settings.caption != blank -%}
+            <figcaption class="lookbook__caption">
+              {%- if block.settings.name != blank -%}
+                <span class="lookbook__name">{{ block.settings.name | escape }}</span>
+              {%- endif -%}
+              {%- if block.settings.caption != blank -%}
+                <span class="lookbook__note">{{ block.settings.caption | escape }}</span>
+              {%- endif -%}
+            </figcaption>
           {%- endif -%}
         </figure>
       {%- endfor -%}
@@ -44,43 +51,44 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Field Notes"
+      "default": "The Lookbook"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Real Light. Real Streets. Real People."
+      "default": "Worn by the Culture"
     },
     {
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Shot in natural light, worn by the culture."
+      "default": "From the street to the spotlight — real people, creators and friends of the house, shot in natural light. Add your own photos, celebrities included."
     },
     {
       "type": "header",
-      "content": "Section spacing"
+      "content": "Layout"
     },
     {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Top padding",
-      "min": 0,
-      "max": 140,
-      "step": 4,
-      "unit": "px",
-      "default": 84
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Bottom padding",
-      "min": 0,
-      "max": 140,
-      "step": 4,
-      "unit": "px",
-      "default": 84
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "info": "Images stay perfectly aligned in a clean grid.",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "3"
     },
     {
       "type": "select",
@@ -129,6 +137,30 @@
       "step": 4,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
     }
   ],
   "blocks": [
@@ -143,6 +175,13 @@
         },
         {
           "type": "text",
+          "id": "name",
+          "label": "Name / credit",
+          "info": "Who's in the photo — a creator, a customer, a celebrity.",
+          "default": "Ananya Rao"
+        },
+        {
+          "type": "text",
           "id": "caption",
           "label": "Caption",
           "default": "Golden hour, Hyderabad."
@@ -150,7 +189,7 @@
       ]
     }
   ],
-  "max_blocks": 4,
+  "max_blocks": 8,
   "presets": [
     {
       "name": "Lookbook",
@@ -158,6 +197,7 @@
         {
           "type": "image",
           "settings": {
+            "name": "Ananya Rao",
             "caption": "Golden hour, Hyderabad."
           }
         },
@@ -167,6 +207,7 @@
         {
           "type": "image",
           "settings": {
+            "name": "Meher Sethi",
             "caption": "Occasion, reimagined."
           }
         }

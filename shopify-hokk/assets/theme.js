@@ -525,6 +525,111 @@
   });
 
   /* ------------------------------------------------------------------ */
+  /* Testimonials slider                                                 */
+  /* ------------------------------------------------------------------ */
+  function initTestimonialSlider(track) {
+    if (!track || track.dataset.sliderInit) return;
+    track.dataset.sliderInit = 'true';
+
+    var wrap = track.closest('.testimonials');
+    var prev = wrap ? wrap.querySelector('[data-slider-prev]') : null;
+    var next = wrap ? wrap.querySelector('[data-slider-next]') : null;
+    var dots = wrap ? Array.prototype.slice.call(wrap.querySelectorAll('[data-slider-dot]')) : [];
+    var autoplay = track.getAttribute('data-autoplay') === 'true';
+    var delay = parseInt(track.getAttribute('data-delay'), 10) || 5000;
+    var timer = null;
+
+    function cardStep() {
+      var first = track.querySelector('.testimonial');
+      if (!first) return 0;
+      var gap = parseFloat(getComputedStyle(track).columnGap);
+      if (isNaN(gap)) gap = 0;
+      var basis = parseFloat(getComputedStyle(first).flexBasis);
+      if (!basis || isNaN(basis)) basis = first.offsetWidth;
+      return basis + gap;
+    }
+
+    function scrollBy(dir) {
+      var step = cardStep();
+      if (!step) return;
+      track.scrollBy({ left: dir * step, behavior: 'smooth' });
+    }
+
+    function goTo(i) {
+      var cards = track.querySelectorAll('.testimonial');
+      if (!cards.length) return;
+      i = Math.max(0, Math.min(i, cards.length - 1));
+      track.scrollTo({ left: cards[i].offsetLeft, behavior: 'smooth' });
+    }
+
+    function updateDots() {
+      var cards = track.querySelectorAll('.testimonial');
+      if (!dots.length || !cards.length) return;
+      var left = track.scrollLeft + 1;
+      var active = 0;
+      for (var i = 0; i < cards.length; i++) {
+        if (cards[i].offsetLeft <= left) active = i;
+      }
+      dots.forEach(function (d, idx) {
+        d.classList.toggle('is-active', idx === active);
+      });
+    }
+
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    function start() {
+      if (!autoplay) return;
+      stop();
+      timer = setInterval(function () {
+        var maxLeft = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxLeft - 4) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scrollBy(1);
+        }
+      }, delay);
+    }
+
+    if (prev) prev.addEventListener('click', function () { stop(); scrollBy(-1); });
+    if (next) next.addEventListener('click', function () { stop(); scrollBy(1); });
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        stop();
+        goTo(parseInt(dot.getAttribute('data-slider-dot'), 10) || 0);
+      });
+    });
+
+    track.addEventListener('scroll', debounce(updateDots, 60), { passive: true });
+
+    if (autoplay) {
+      track.addEventListener('pointerenter', stop);
+      track.addEventListener('pointerleave', start);
+      track.addEventListener('touchstart', stop, { passive: true });
+    }
+
+    updateDots();
+    start();
+  }
+
+  doc.querySelectorAll('[data-testimonial-slider]').forEach(initTestimonialSlider);
+
+  // Re-init when the section is re-rendered in the Shopify theme editor.
+  if ('MutationObserver' in window) {
+    var sliderObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType !== 1) return;
+          if (node.matches && node.matches('[data-testimonial-slider]')) initTestimonialSlider(node);
+          if (node.querySelectorAll) node.querySelectorAll('[data-testimonial-slider]').forEach(initTestimonialSlider);
+        });
+      });
+    });
+    sliderObserver.observe(doc.body, { childList: true, subtree: true });
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Recover password toggle                                             */
   /* ------------------------------------------------------------------ */
   doc.addEventListener('click', function (e) {
