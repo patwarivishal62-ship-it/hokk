@@ -15,13 +15,13 @@
   <div class="container">
     <div class="story__head">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <p class="eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+        <h2 class="section-title"{% if section.settings.heading_color != blank %} style="color: {{ section.settings.heading_color }};"{% endif %}>{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
       {%- if section.settings.text != blank -%}
-        <p class="story__intro">{{ section.settings.text | escape }}</p>
+        <p class="story__intro"{% if section.settings.intro_color != blank %} style="color: {{ section.settings.intro_color }};"{% endif %}>{{ section.settings.text | escape }}</p>
       {%- endif -%}
     </div>
 
@@ -47,7 +47,7 @@
               >
                 <span class="craft-map__legend-dot craft-map__legend-dot--{{ zone }}"></span>
                 <span class="craft-map__legend-text">
-                  <span class="craft-map__legend-name">{{ block.settings.title | escape }}</span>
+                  <span class="craft-map__legend-name"{% if section.settings.legend_name_color != blank %} style="color: {{ section.settings.legend_name_color }};"{% endif %}>{{ block.settings.title | escape }}</span>
                   {%- if block.settings.cultures != blank -%}
                     <span class="craft-map__legend-count">{{ cultures.size }} handloom traditions</span>
                   {%- endif -%}
@@ -188,6 +188,34 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Field colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "intro_color",
+      "label": "Intro text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "legend_name_color",
+      "label": "Region name color",
       "info": "Leave blank to use the default."
     }
   ],

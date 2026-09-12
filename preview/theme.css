@@ -1183,6 +1183,10 @@ svg.icon { width: 20px; height: 20px; }
 .testimonials {
   color: var(--sec-text, inherit);
 }
+/* Per-field color overrides (CSS-variable driven) */
+.featured-collection .card-product__title { color: var(--fc-title, inherit); }
+.featured-collection .price { color: var(--fc-price, inherit); }
+.contact-form label > span { color: var(--sec-label, var(--color-muted)); }
 
 /* --------------------------------------------------------------------------
    30. Placeholder SVGs

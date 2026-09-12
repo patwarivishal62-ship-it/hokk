@@ -2,13 +2,13 @@
   <div class="container">
     <div class="categories__head">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <p class="eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+        <h2 class="section-title"{% if section.settings.heading_color != blank %} style="color: {{ section.settings.heading_color }};"{% endif %}>{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
       {%- if section.settings.subheading != blank -%}
-        <p class="categories__subheading">{{ section.settings.subheading | escape }}</p>
+        <p class="categories__subheading"{% if section.settings.subheading_color != blank %} style="color: {{ section.settings.subheading_color }};"{% endif %}>{{ section.settings.subheading | escape }}</p>
       {%- endif -%}
     </div>
 
@@ -51,9 +51,9 @@
           </div>
           <div class="category-card__info">
             {%- if caption != blank -%}
-              <span class="category-card__caption">{{ caption | escape }}</span>
+              <span class="category-card__caption"{% if section.settings.caption_color != blank %} style="color: {{ section.settings.caption_color }};"{% endif %}>{{ caption | escape }}</span>
             {%- endif -%}
-            <span class="category-card__title">{{ title | escape }}</span>
+            <span class="category-card__title"{% if section.settings.title_color != blank %} style="color: {{ section.settings.title_color }};"{% endif %}>{{ title | escape }}</span>
             <span class="category-card__arrow">{%- render 'icon', icon: 'arrow-right' -%}</span>
           </div>
         </a>
@@ -210,6 +210,40 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Field colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Card title color",
       "info": "Leave blank to use the default."
     }
   ],

@@ -15,13 +15,13 @@
   <div class="container">
     <div class="newsletter__inner">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <p class="eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+        <h2 class="section-title"{% if section.settings.heading_color != blank %} style="color: {{ section.settings.heading_color }};"{% endif %}>{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
       {%- if section.settings.subheading != blank -%}
-        <p class="newsletter__subheading">{{ section.settings.subheading | escape }}</p>
+        <p class="newsletter__subheading"{% if section.settings.subheading_color != blank %} style="color: {{ section.settings.subheading_color }};"{% endif %}>{{ section.settings.subheading | escape }}</p>
       {%- endif -%}
 
       {%- form 'customer', class: 'newsletter-form' -%}
@@ -50,7 +50,7 @@
           {%- if form.errors -%}
             <p class="newsletter-form__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
           {%- endif -%}
-          <p class="newsletter-form__note">{{ 'newsletter.note' | t }}</p>
+          <p class="newsletter-form__note"{% if section.settings.note_color != blank %} style="color: {{ section.settings.note_color }};"{% endif %}>{{ 'newsletter.note' | t }}</p>
         {%- endif -%}
       {%- endform -%}
     </div>
@@ -138,6 +138,34 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Field colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "note_color",
+      "label": "Note color",
       "info": "Leave blank to use the default."
     }
   ],

@@ -20,16 +20,16 @@
 
       <div class="philosophy__body">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <p class="eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+          <h2 class="section-title"{% if section.settings.heading_color != blank %} style="color: {{ section.settings.heading_color }};"{% endif %}>{{ section.settings.heading | escape }}</h2>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
-          <div class="rte philosophy__text">{{ section.settings.text }}</div>
+          <div class="rte philosophy__text"{% if section.settings.text_color != blank %} style="color: {{ section.settings.text_color }};"{% endif %}>{{ section.settings.text }}</div>
         {%- endif -%}
         {%- if section.settings.quote != blank -%}
-          <blockquote class="philosophy__quote">{{ section.settings.quote | escape }}</blockquote>
+          <blockquote class="philosophy__quote"{% if section.settings.quote_color != blank %} style="color: {{ section.settings.quote_color }};"{% endif %}>{{ section.settings.quote | escape }}</blockquote>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
           <a href="{{ section.settings.button_link }}" class="btn btn--{{ section.settings.button_style }}">
@@ -228,6 +228,28 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Field colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote color",
       "info": "Leave blank to use the default."
     }
   ],

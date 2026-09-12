@@ -31,13 +31,13 @@
 
   <div class="hero__content container">
     {%- if section.settings.eyebrow != blank -%}
-      <p class="hero__eyebrow eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <p class="hero__eyebrow eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
     {%- endif -%}
     {%- if section.settings.heading != blank -%}
-      <h1 class="hero__heading">{{ section.settings.heading | escape }}</h1>
+      <h1 class="hero__heading"{% if section.settings.heading_color != blank %} style="color: {{ section.settings.heading_color }};"{% endif %}>{{ section.settings.heading | escape }}</h1>
     {%- endif -%}
     {%- if section.settings.subheading != blank -%}
-      <p class="hero__subheading">{{ section.settings.subheading | escape }}</p>
+      <p class="hero__subheading"{% if section.settings.subheading_color != blank %} style="color: {{ section.settings.subheading_color }};"{% endif %}>{{ section.settings.subheading | escape }}</p>
     {%- endif -%}
     {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
       <div class="hero__actions">
@@ -255,6 +255,28 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Field colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
       "info": "Leave blank to use the default."
     }
   ],

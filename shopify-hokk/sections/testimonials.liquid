@@ -22,10 +22,10 @@
   <div class="container">
     <div class="testimonials__head">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <p class="eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+        <h2 class="section-title"{% if section.settings.heading_color != blank %} style="color: {{ section.settings.heading_color }};"{% endif %}>{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
     </div>
 
@@ -53,15 +53,15 @@
           </div>
 
           {%- if section.settings.show_stars -%}
-            <div class="testimonial__stars" aria-hidden="true">
+            <div class="testimonial__stars" aria-hidden="true"{% if section.settings.stars_color != blank %} style="color: {{ section.settings.stars_color }};"{% endif %}>
               {%- for i in (1..5) -%}{%- render 'icon', icon: 'star' -%}{%- endfor -%}
             </div>
           {%- endif -%}
 
-          <blockquote class="testimonial__quote">“{{ block.settings.quote | escape }}”</blockquote>
+          <blockquote class="testimonial__quote"{% if section.settings.quote_color != blank %} style="color: {{ section.settings.quote_color }};"{% endif %}>“{{ block.settings.quote | escape }}”</blockquote>
           <figcaption class="testimonial__author">
-            <span class="testimonial__handle">{{ block.settings.handle | escape }}</span>
-            <span class="testimonial__role">{{ block.settings.role | escape }}</span>
+            <span class="testimonial__handle"{% if section.settings.handle_color != blank %} style="color: {{ section.settings.handle_color }};"{% endif %}>{{ block.settings.handle | escape }}</span>
+            <span class="testimonial__role"{% if section.settings.role_color != blank %} style="color: {{ section.settings.role_color }};"{% endif %}>{{ block.settings.role | escape }}</span>
           </figcaption>
         </figure>
       {%- endfor -%}
@@ -323,6 +323,46 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Field colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Star color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "handle_color",
+      "label": "Handle color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "Role color",
       "info": "Leave blank to use the default."
     }
   ],

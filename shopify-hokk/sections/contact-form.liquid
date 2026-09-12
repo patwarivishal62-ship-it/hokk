@@ -1,8 +1,8 @@
-<div class="contact" style="--section-pad-top: {{ section.settings.padding_top }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--section-pad-bottom: {{ section.settings.padding_bottom }}px;">
+<div class="contact" style="--section-pad-top: {{ section.settings.padding_top }}px; {% if section.settings.background_color != blank %}--sec-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--sec-text: {{ section.settings.text_color }};{% endif %}--section-pad-bottom: {{ section.settings.padding_bottom }}px;{% if section.settings.label_color != blank %}--sec-label: {{ section.settings.label_color }};{% endif %}">
   <div class="container">
     <div class="contact__inner">
       {%- if section.settings.heading != blank -%}
-        <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+        <h2 class="section-title"{% if section.settings.heading_color != blank %} style="color: {{ section.settings.heading_color }};"{% endif %}>{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
 
       {%- form 'contact', class: 'contact-form' -%}
@@ -85,6 +85,22 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "header",
+      "content": "Field colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
       "info": "Leave blank to use the default."
     }
   ],
