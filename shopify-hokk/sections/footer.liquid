@@ -16,7 +16,7 @@
             loading="lazy"
           >
         {%- else -%}
-          <span class="logo-placeholder logo-placeholder--footer">LOGO</span>
+          <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy">
         {%- endif -%}
         <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>
         {%- if section.settings.blurb != blank -%}

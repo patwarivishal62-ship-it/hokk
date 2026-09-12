@@ -18,7 +18,7 @@
             class: 'site-header__logo-img'
           }}
         {%- else -%}
-          <span class="logo-placeholder">LOGO</span>
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-header__logo-img" loading="eager">
         {%- endif -%}
       </a>
     </div>
