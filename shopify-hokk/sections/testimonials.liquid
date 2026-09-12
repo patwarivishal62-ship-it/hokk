@@ -1,4 +1,4 @@
-<div class="testimonials" data-reveal>
+<div class="testimonials" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="container">
     <div class="testimonials__head">
       {%- if section.settings.eyebrow != blank -%}
@@ -26,8 +26,7 @@
   </div>
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Testimonials",
   "class": "section-testimonials",
   "settings": [
@@ -42,6 +41,30 @@
       "id": "heading",
       "label": "Heading",
       "default": "Not Celebrities. Just Real Wardrobes."
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 64
     }
   ],
   "blocks": [
@@ -75,11 +98,31 @@
     {
       "name": "Testimonials",
       "blocks": [
-        { "type": "testimonial", "settings": { "quote": "I didn't buy this because it was 'handloom'. I bought it because it's the best shirt in my closet.", "handle": "@ananya.codes", "role": "Micro-creator, Hyderabad" } },
-        { "type": "testimonial", "settings": { "quote": "Wore the co-ord to a wedding and to work the next week. That's rare with anything 'ethnic'.", "handle": "@rohanwrites", "role": "Creator, Bengaluru" } },
-        { "type": "testimonial", "settings": { "quote": "Every piece comes with the story of who made it. That hits different once you know it.", "handle": "@meher.talks", "role": "Creator, Chennai" } }
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I didn't buy this because it was 'handloom'. I bought it because it's the best shirt in my closet.",
+            "handle": "@ananya.codes",
+            "role": "Micro-creator, Hyderabad"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Wore the co-ord to a wedding and to work the next week. That's rare with anything 'ethnic'.",
+            "handle": "@rohanwrites",
+            "role": "Creator, Bengaluru"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Every piece comes with the story of who made it. That hits different once you know it.",
+            "handle": "@meher.talks",
+            "role": "Creator, Chennai"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

@@ -4,7 +4,7 @@
   assign columns = section.settings.columns
 -%}
 
-<div class="featured-collection" data-reveal>
+<div class="featured-collection" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="container">
     <div class="featured-collection__head">
       <div>
@@ -48,8 +48,7 @@
   </div>
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Featured collection",
   "class": "section-featured-collection",
   "settings": [
@@ -90,9 +89,18 @@
       "id": "columns",
       "label": "Columns",
       "options": [
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" },
-        { "value": "4", "label": "4" }
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
       ],
       "default": "4"
     },
@@ -101,6 +109,30 @@
       "id": "show_view_all",
       "label": "Show “View all” button",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
     }
   ],
   "presets": [
@@ -108,5 +140,4 @@
       "name": "Featured collection"
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

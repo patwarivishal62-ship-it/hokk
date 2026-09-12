@@ -1,4 +1,4 @@
-<div class="categories" data-reveal>
+<div class="categories" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --cat-img-ratio: {{ section.settings.image_ratio }};">
   <div class="container">
     <div class="categories__head">
       {%- if section.settings.eyebrow != blank -%}
@@ -62,8 +62,7 @@
   </div>
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Categories",
   "class": "section-categories",
   "settings": [
@@ -90,11 +89,76 @@
       "id": "columns",
       "label": "Columns",
       "options": [
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" },
-        { "value": "4", "label": "4" }
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
       ],
       "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "3/4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "1/1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "16/9",
+          "label": "Wide 16:9"
+        }
+      ],
+      "default": "3/4"
     }
   ],
   "blocks": [
@@ -132,16 +196,63 @@
     {
       "name": "Categories",
       "blocks": [
-        { "type": "category", "settings": { "title": "Shirts", "caption": "Ikat & Handloom Cotton" } },
-        { "type": "category", "settings": { "title": "Co-ords", "caption": "Cut for Today" } },
-        { "type": "category", "settings": { "title": "Jackets", "caption": "Structured Heritage" } },
-        { "type": "category", "settings": { "title": "Tees", "caption": "Everyday Motifs" } },
-        { "type": "category", "settings": { "title": "Shorts & Pants", "caption": "Loomed Comfort" } },
-        { "type": "category", "settings": { "title": "Dresses & Separates", "caption": "Contemporary Cuts" } },
-        { "type": "category", "settings": { "title": "Occasion Pieces", "caption": "Refined Drama" } },
-        { "type": "category", "settings": { "title": "Traditional Silhouettes", "caption": "Reimagined" } }
+        {
+          "type": "category",
+          "settings": {
+            "title": "Shirts",
+            "caption": "Ikat & Handloom Cotton"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Co-ords",
+            "caption": "Cut for Today"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Jackets",
+            "caption": "Structured Heritage"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Tees",
+            "caption": "Everyday Motifs"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Shorts & Pants",
+            "caption": "Loomed Comfort"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Dresses & Separates",
+            "caption": "Contemporary Cuts"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Occasion Pieces",
+            "caption": "Refined Drama"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Traditional Silhouettes",
+            "caption": "Reimagined"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

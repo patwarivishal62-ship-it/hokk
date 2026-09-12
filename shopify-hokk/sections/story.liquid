@@ -7,7 +7,7 @@
   endif
 -%}
 
-<div class="story story--image" data-reveal style="--story-bg: url('{{ bg_url }}');">
+<div class="story story--image" data-reveal style="--story-bg: url('{{ bg_url }}'); --section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
   {%- if section.settings.overlay_opacity > 0 -%}
     <div class="story__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
   {%- endif -%}
@@ -109,8 +109,7 @@
   </div>
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Story",
   "class": "section-story",
   "settings": [
@@ -150,6 +149,30 @@
     {
       "type": "paragraph",
       "content": "Add one block per region — North, West & Central, East, South. Each block powers one clickable zone on the map and its popup."
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
     }
   ],
   "blocks": [
@@ -162,10 +185,22 @@
           "id": "zone",
           "label": "Map zone",
           "options": [
-            { "value": "north", "label": "North India" },
-            { "value": "west", "label": "West & Central India" },
-            { "value": "east", "label": "East India" },
-            { "value": "south", "label": "South India" }
+            {
+              "value": "north",
+              "label": "North India"
+            },
+            {
+              "value": "west",
+              "label": "West & Central India"
+            },
+            {
+              "value": "east",
+              "label": "East India"
+            },
+            {
+              "value": "south",
+              "label": "South India"
+            }
           ],
           "default": "north"
         },
@@ -245,5 +280,4 @@
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

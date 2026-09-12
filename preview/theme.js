@@ -155,19 +155,57 @@
   /* ------------------------------------------------------------------ */
   /* Reveal on scroll                                                    */
   /* ------------------------------------------------------------------ */
+  var revealObserver = null;
+  var isDesignMode = !!(window.Shopify && window.Shopify.designMode);
+
+  function revealElement(el) {
+    el.classList.add('is-visible');
+  }
+
   var revealEls = doc.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window && revealEls.length) {
-    var revealObserver = new IntersectionObserver(function (entries) {
+
+  if (isDesignMode) {
+    // Never hide content in the Shopify theme editor — sections must stay
+    // visible while the merchant is editing them.
+    revealEls.forEach(revealElement);
+  } else if ('IntersectionObserver' in window && revealEls.length) {
+    revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
+          revealElement(entry.target);
           revealObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(function (el) { revealObserver.observe(el); });
   } else {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    revealEls.forEach(revealElement);
+  }
+
+  // Shopify re-renders a section in place whenever the merchant changes a
+  // setting. Newly-inserted [data-reveal] nodes would otherwise stay at
+  // opacity:0 (a "blank" section), so keep them in sync with a MutationObserver.
+  if ('MutationObserver' in window) {
+    var revealMutationObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType !== 1) return;
+          var newlyAdded = [];
+          if (node.matches && node.matches('[data-reveal]')) newlyAdded.push(node);
+          if (node.querySelectorAll) {
+            node.querySelectorAll('[data-reveal]').forEach(function (el) { newlyAdded.push(el); });
+          }
+          newlyAdded.forEach(function (el) {
+            if (isDesignMode || !revealObserver) {
+              revealElement(el);
+            } else {
+              revealObserver.observe(el);
+            }
+          });
+        });
+      });
+    });
+    revealMutationObserver.observe(doc.body, { childList: true, subtree: true });
   }
 
   /* ------------------------------------------------------------------ */

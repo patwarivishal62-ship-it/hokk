@@ -2,7 +2,7 @@
   assign layout = section.settings.layout
 -%}
 
-<div class="philosophy philosophy--{{ layout }}" data-reveal>
+<div class="philosophy philosophy--{{ layout }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --phil-img-ratio: {{ section.settings.image_ratio }};">
   <div class="container">
     <div class="philosophy__grid">
       <div class="philosophy__media">
@@ -42,8 +42,7 @@
   </div>
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Philosophy",
   "class": "section-philosophy",
   "settings": [
@@ -57,8 +56,14 @@
       "id": "layout",
       "label": "Layout",
       "options": [
-        { "value": "image-left", "label": "Image left" },
-        { "value": "image-right", "label": "Image right" }
+        {
+          "value": "image-left",
+          "label": "Image left"
+        },
+        {
+          "value": "image-right",
+          "label": "Image right"
+        }
       ],
       "default": "image-left"
     },
@@ -96,6 +101,62 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "3/4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "1/1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "16/9",
+          "label": "Wide 16:9"
+        }
+      ],
+      "default": "4/5"
     }
   ],
   "presets": [
@@ -103,5 +164,4 @@
       "name": "Philosophy"
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

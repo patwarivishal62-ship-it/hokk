@@ -1,4 +1,4 @@
-<div class="rich-text rich-text--{{ section.settings.alignment }}" data-reveal>
+<div class="rich-text rich-text--{{ section.settings.alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="container">
     <div class="rich-text__inner">
       {%- if section.settings.eyebrow != blank -%}
@@ -17,8 +17,7 @@
   </div>
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Rich text",
   "class": "section-rich-text",
   "settings": [
@@ -27,8 +26,14 @@
       "id": "alignment",
       "label": "Alignment",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" }
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
       ],
       "default": "center"
     },
@@ -58,6 +63,30 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 56
     }
   ],
   "presets": [
@@ -65,5 +94,4 @@
       "name": "Rich text"
     }
   ]
-}
-{% endschema %}
+}{% endschema %}
