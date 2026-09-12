@@ -1,34 +1,20 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
-  assign layout = section.settings.layout | default: 'media-left'
-  if section.settings.image_ratio == 'natural'
-    assign image_ratio_css = 'auto'
-  else
-    assign image_ratio_css = section.settings.image_ratio
-  endif
 -%}
 
-<section class="product product--{{ layout }}" data-section-id="{{ section.id }}"
-  style="
-    --section-pad-top: {{ section.settings.padding_top }}px;
-    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
-    --p-img-ratio: {{ image_ratio_css }};
-    --p-img-radius: {{ section.settings.image_radius }}px;
-  ">
+<section class="product" data-section-id="{{ section.id }}">
   <div class="container">
-    {%- if section.settings.show_breadcrumbs -%}
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+      {%- if product.collections.first != blank -%}
         <span aria-hidden="true">/</span>
-        <a href="{{ routes.all_products_collection_url }}">{{ 'general.shop' | t }}</a>
-        {%- if product.collections.first != blank -%}
-          <span aria-hidden="true">/</span>
-          <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
-        {%- endif -%}
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">{{ product.title }}</span>
-      </nav>
-    {%- endif -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+      {%- endif -%}
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ product.title }}</span>
+    </nav>
 
     <div class="product__grid">
       <div class="product__media">
@@ -94,9 +80,9 @@
               {% unless current_variant.available %}disabled{% endunless %}
             >
               {%- if current_variant.available -%}
-                {%- if section.settings.button_label != blank -%}{{ section.settings.button_label | escape }}{%- else -%}{{ 'products.product.add_to_cart' | t }}{%- endif -%}
+                {{ 'products.product.add_to_cart' | t }}
               {%- else -%}
-                {%- if section.settings.sold_out_label != blank -%}{{ section.settings.sold_out_label | escape }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+                {{ 'products.product.sold_out' | t }}
               {%- endif -%}
             </button>
           </div>
@@ -108,7 +94,7 @@
           {%- endif -%}
         {%- endform -%}
 
-        {%- if section.settings.show_description and product.description != blank -%}
+        {%- if product.description != blank -%}
           <details class="product-accordion" open>
             <summary class="product-accordion__summary">
               {{ 'products.product.description' | t }}
@@ -193,120 +179,6 @@
     },
     {
       "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "select",
-      "id": "layout",
-      "label": "Layout",
-      "options": [
-        {
-          "value": "media-left",
-          "label": "Media left"
-        },
-        {
-          "value": "media-right",
-          "label": "Media right"
-        },
-        {
-          "value": "media-top",
-          "label": "Media on top"
-        }
-      ],
-      "default": "media-left"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_breadcrumbs",
-      "label": "Show breadcrumbs",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Media"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "label": "Image ratio",
-      "options": [
-        {
-          "value": "3/4",
-          "label": "Portrait 3:4"
-        },
-        {
-          "value": "4/5",
-          "label": "Portrait 4:5"
-        },
-        {
-          "value": "1/1",
-          "label": "Square 1:1"
-        },
-        {
-          "value": "4/3",
-          "label": "Landscape 4:3"
-        },
-        {
-          "value": "natural",
-          "label": "Natural (no crop)"
-        }
-      ],
-      "default": "3/4"
-    },
-    {
-      "type": "range",
-      "id": "image_radius",
-      "label": "Image corner radius",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Buy button"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Add to bag button text",
-      "info": "Leave blank to use the default “Add to bag”.",
-      "default": ""
-    },
-    {
-      "type": "text",
-      "id": "sold_out_label",
-      "label": "Sold out button text",
-      "info": "Leave blank to use the default “Sold out”.",
-      "default": ""
-    },
-    {
-      "type": "header",
-      "content": "Section spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Top padding",
-      "min": 0,
-      "max": 140,
-      "step": 4,
-      "unit": "px",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Bottom padding",
-      "min": 0,
-      "max": 140,
-      "step": 4,
-      "unit": "px",
-      "default": 96
-    },
-    {
-      "type": "header",
       "content": "Accordion content"
     },
     {
@@ -320,11 +192,6 @@
       "id": "shipping_text",
       "label": "Shipping & returns text",
       "default": "<p>Dispatched within 2–3 business days from India. Free shipping on orders over ₹3,000. Easy 7-day returns on unworn pieces with tags intact.</p>"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Product"
     }
   ]
 }

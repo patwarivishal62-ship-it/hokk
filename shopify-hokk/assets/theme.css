@@ -638,14 +638,11 @@ svg.icon { width: 20px; height: 20px; }
 /* --------------------------------------------------------------------------
    21. Product page
    -------------------------------------------------------------------------- */
-.product { padding-top: var(--section-pad-top, 0); padding-bottom: var(--section-pad-bottom, var(--space-section)); }
+.product { padding-bottom: var(--space-section); }
 .product__grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 6vw, 88px); align-items: start; }
 .product__media { display: flex; flex-direction: column; gap: 16px; }
 .product__media-item { background: #E9DEC9; }
-.product__media-img, .product__media-img--placeholder { width: 100%; aspect-ratio: var(--p-img-ratio, 3/4); object-fit: cover; border-radius: var(--p-img-radius, 0); }
-.product--media-right .product__media { order: 2; }
-.product--media-top .product__grid { grid-template-columns: 1fr; }
-.product--media-top .product__info { position: static; }
+.product__media-img, .product__media-img--placeholder { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
 .product__info { position: sticky; top: 100px; }
 .product__vendor { font-size: 1.2rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 12px; }
 .product__title { font-size: clamp(3rem, 4.6vw, 4.8rem); font-weight: 500; margin-bottom: 16px; }
