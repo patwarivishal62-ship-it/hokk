@@ -1,3 +1,7 @@
+{%- liquid
+  assign footer_logo_sizes = section.settings.logo_width | append: 'px'
+-%}
+
 <footer class="site-footer">
   <div class="container">
     <div class="site-footer__top">
@@ -7,7 +11,7 @@
             {{ section.settings.logo | image_url: width: 600 | image_tag:
               loading: 'lazy',
               widths: '80, 120, 160, 200, 320, 480, 600',
-              sizes: section.settings.logo_width | append: 'px',
+              sizes: footer_logo_sizes,
               class: 'site-footer__logo',
               alt: shop.name
             }}

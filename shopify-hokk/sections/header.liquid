@@ -1,5 +1,6 @@
 {%- liquid
   assign menu = section.settings.menu
+  assign logo_sizes = section.settings.logo_width | append: 'px'
 -%}
 
 <header-section class="site-header{% if section.settings.sticky %} site-header--sticky{% endif %}" data-sticky="{{ section.settings.sticky }}">
@@ -15,7 +16,7 @@
           {{ section.settings.logo | image_url: width: 800 | image_tag:
             loading: 'eager',
             widths: '80, 120, 160, 200, 320, 480, 640, 800',
-            sizes: section.settings.logo_width | append: 'px',
+            sizes: logo_sizes,
             class: 'site-header__logo-img',
             alt: shop.name
           }}
