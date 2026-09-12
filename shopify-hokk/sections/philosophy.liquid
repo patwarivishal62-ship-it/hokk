@@ -2,7 +2,7 @@
   assign layout = section.settings.layout
 -%}
 
-<div class="philosophy philosophy--{{ layout }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --phil-img-ratio: {{ section.settings.image_ratio }};">
+<div class="philosophy philosophy--{{ layout }} philosophy--align-{{ section.settings.alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --phil-img-ratio: {{ section.settings.image_ratio }}; --phil-img-radius: {{ section.settings.image_radius }}px; --phil-gap: {{ section.settings.gap }}px;">
   <div class="container">
     <div class="philosophy__grid">
       <div class="philosophy__media">
@@ -32,7 +32,7 @@
           <blockquote class="philosophy__quote">{{ section.settings.quote | escape }}</blockquote>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link }}" class="btn btn--text">
+          <a href="{{ section.settings.button_link }}" class="btn btn--{{ section.settings.button_style }}">
             {{ section.settings.button_label | escape }}
             {%- render 'icon', icon: 'arrow-right' -%}
           </a>
@@ -157,6 +157,62 @@
         }
       ],
       "default": "4/5"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between image and text",
+      "min": 24,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text link"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "text"
     }
   ],
   "presets": [

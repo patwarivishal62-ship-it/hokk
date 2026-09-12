@@ -4,7 +4,7 @@
   assign columns = section.settings.columns
 -%}
 
-<div class="featured-collection" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
+<div class="featured-collection featured-collection--align-{{ section.settings.card_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --fc-img-radius: {{ section.settings.image_radius }}px; --fc-gap: {{ section.settings.gap }}px;">
   <div class="container">
     <div class="featured-collection__head">
       <div>
@@ -20,7 +20,7 @@
       </div>
       {%- if section.settings.show_view_all and collection != blank -%}
         <a href="{{ collection.url }}" class="btn btn--text">
-          {{ 'general.view_all' | t }}
+          {%- if section.settings.view_all_label != blank -%}{{ section.settings.view_all_label | escape }}{%- else -%}{{ 'general.view_all' | t }}{%- endif -%}
           {%- render 'icon', icon: 'arrow-right' -%}
         </a>
       {%- endif -%}
@@ -133,6 +133,48 @@
       "step": 4,
       "unit": "px",
       "default": 84
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "“View all” button text",
+      "default": "View all"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Product image corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between cards",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "card_alignment",
+      "label": "Card text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
     }
   ],
   "presets": [

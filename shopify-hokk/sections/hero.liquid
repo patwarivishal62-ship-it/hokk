@@ -4,7 +4,7 @@
   assign tone = section.settings.tone
 -%}
 
-<div class="hero hero--{{ section.settings.height }} hero--{{ tone }} hero--align-{{ section.settings.alignment }}" data-reveal>
+<div class="hero hero--{{ section.settings.height }} hero--{{ tone }} hero--align-{{ section.settings.alignment }}" data-reveal style="--hero-pad-top: {{ section.settings.content_padding_top }}px; --hero-pad-bottom: {{ section.settings.content_padding_bottom }}px;">
   <div class="hero__media">
     {%- if image != blank -%}
       {%- if image_mobile != blank -%}
@@ -63,8 +63,7 @@
   {%- endif -%}
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Hero",
   "class": "section-hero",
   "settings": [
@@ -93,8 +92,14 @@
       "id": "tone",
       "label": "Text tone",
       "options": [
-        { "value": "light", "label": "Light" },
-        { "value": "dark", "label": "Dark" }
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
       ],
       "default": "light"
     },
@@ -103,9 +108,18 @@
       "id": "height",
       "label": "Height",
       "options": [
-        { "value": "full", "label": "Full screen" },
-        { "value": "large", "label": "Large" },
-        { "value": "medium", "label": "Medium" }
+        {
+          "value": "full",
+          "label": "Full screen"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        }
       ],
       "default": "full"
     },
@@ -114,8 +128,14 @@
       "id": "alignment",
       "label": "Content alignment",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" }
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
       ],
       "default": "left"
     },
@@ -153,8 +173,14 @@
       "id": "button_style_1",
       "label": "Button 1 style",
       "options": [
-        { "value": "solid", "label": "Solid" },
-        { "value": "outline", "label": "Outline" }
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
       ],
       "default": "solid"
     },
@@ -174,8 +200,14 @@
       "id": "button_style_2",
       "label": "Button 2 style",
       "options": [
-        { "value": "solid", "label": "Solid" },
-        { "value": "outline", "label": "Outline" }
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
       ],
       "default": "outline"
     },
@@ -184,6 +216,30 @@
       "id": "show_scroll",
       "label": "Show scroll indicator",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content spacing"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_top",
+      "label": "Content top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "content_padding_bottom",
+      "label": "Content bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     }
   ],
   "presets": [
@@ -191,5 +247,4 @@
       "name": "Hero"
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

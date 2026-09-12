@@ -1,4 +1,4 @@
-<div class="categories" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --cat-img-ratio: {{ section.settings.image_ratio }};">
+<div class="categories categories--align-{{ section.settings.text_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --cat-img-ratio: {{ section.settings.image_ratio }}; --cat-img-radius: {{ section.settings.image_radius }}px; --cat-gap: {{ section.settings.gap }}px;">
   <div class="container">
     <div class="categories__head">
       {%- if section.settings.eyebrow != blank -%}
@@ -159,6 +159,42 @@
         }
       ],
       "default": "3/4"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between cards",
+      "min": 16,
+      "max": 56,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
     }
   ],
   "blocks": [
