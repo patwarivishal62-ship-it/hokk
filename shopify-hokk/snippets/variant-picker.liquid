@@ -1,0 +1,40 @@
+{%- comment -%}
+  Variant picker. Accepts `product`, `section` (section id), `form_id`.
+{%- endcomment -%}
+{%- unless product.has_only_default_variant -%}
+  <variant-picker
+    class="variant-picker"
+    data-section="{{ section_id }}"
+    data-url="{{ product.url }}"
+    data-form="{{ form_id }}"
+  >
+    {%- for option in product.options_with_values -%}
+      <fieldset class="variant-picker__option">
+        <legend class="variant-picker__label">
+          <span class="variant-picker__name">{{ option.name }}</span>
+          <span class="variant-picker__value" data-option-value data-index="{{ forloop.index0 }}">{{ option.selected_value }}</span>
+        </legend>
+        <div class="variant-picker__values">
+          {%- for value in option.values -%}
+            {%- liquid
+              assign selected = false
+              if option.selected_value == value
+                assign selected = true
+              endif
+            -%}
+            <label class="variant-pill{% if selected %} is-selected{% endif %}" data-index="{{ forloop.parentloop.index0 }}" data-value="{{ value | escape }}">
+              <input
+                type="radio"
+                name="option-{{ option.name | handle }}-{{ section_id }}"
+                value="{{ value | escape }}"
+                {% if selected %}checked{% endif %}
+              >
+              <span>{{ value }}</span>
+            </label>
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    {%- endfor -%}
+    <script type="application/json" data-variant-json>{{ product.variants | json }}</script>
+  </variant-picker>
+{%- endunless -%}

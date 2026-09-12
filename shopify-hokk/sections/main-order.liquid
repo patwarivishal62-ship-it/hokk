@@ -1,0 +1,93 @@
+<div class="order">
+  <div class="container">
+    <div class="order__inner">
+      <h1 class="section-title">{{ 'customer.order.title' | t: name: order.name }}</h1>
+      <p class="order__date">{{ 'customer.order.date' | t: date: order.created_at | date: '%d %b %Y' }}</p>
+      <p><a href="{{ routes.account_url }}" class="btn btn--text">{%- render 'icon', icon: 'arrow-right' -%} Back to account</a></p>
+
+      <div class="order__status">
+        {%- if order.cancelled -%}
+          <p class="order__badge order__badge--cancelled">Cancelled</p>
+        {%- endif -%}
+        <p>{{ 'customer.order.payment_status' | t }}: <strong>{{ order.financial_status_label }}</strong></p>
+        <p>{{ 'customer.order.fulfillment_status' | t }}: <strong>{{ order.fulfillment_status_label }}</strong></p>
+      </div>
+
+      <table class="order__table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for line_item in order.line_items -%}
+            <tr>
+              <td>
+                <div class="order__product">
+                  {%- if line_item.image -%}
+                    {{ line_item.image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', class: 'order__thumb' }}
+                  {%- endif -%}
+                  <div>
+                    <p class="order__product-title">{{ line_item.title }}</p>
+                    {%- if line_item.variant_title != blank -%}
+                      <p class="order__variant">{{ line_item.variant_title }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </td>
+              <td>{{ line_item.quantity }}</td>
+              <td>{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">{{ 'customer.order.subtotal' | t }}</td>
+            <td>{{ order.line_items_subtotal_price | money }}</td>
+          </tr>
+          {%- for shipping_method in order.shipping_methods -%}
+            <tr>
+              <td colspan="2">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+              <td>{{ shipping_method.price | money }}</td>
+            </tr>
+          {%- endfor -%}
+          {%- for tax_line in order.tax_lines -%}
+            <tr>
+              <td colspan="2">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
+              <td>{{ tax_line.price | money }}</td>
+            </tr>
+          {%- endfor -%}
+          <tr class="order__total">
+            <td colspan="2">{{ 'customer.order.total' | t }}</td>
+            <td>{{ order.total_price | money }}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="order__addresses">
+        {%- if order.shipping_address -%}
+          <div>
+            <h2>{{ 'customer.order.shipping_address' | t }}</h2>
+            {{ order.shipping_address | format_address }}
+          </div>
+        {%- endif -%}
+        {%- if order.billing_address -%}
+          <div>
+            <h2>{{ 'customer.order.billing_address' | t }}</h2>
+            {{ order.billing_address | format_address }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Order",
+  "class": "section-order",
+  "settings": []
+}
+{% endschema %}

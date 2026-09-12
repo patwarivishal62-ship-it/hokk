@@ -1,0 +1,102 @@
+{
+  "name": "hokk",
+  "displayName": "House of Kala Katha",
+  "description": "House of Kala Katha — Shopify OS 2.0 theme product metadata. Heritage handloom apparel rooted in Indian craft clusters.",
+  "version": "1.0.0",
+  "repository": "https://github.com/patwarivishal62-ship-it/hokk",
+  "license": "UNLICENSED",
+  "author": "House of Kala Katha",
+  "brand": {
+    "name": "House of Kala Katha",
+    "tagline": "Woven Stories, Worn Today",
+    "story": "Contemporary silhouettes crafted from authentic handloom — Ikat, Ajrakh, Kalamkari, Banarasi and more. Each piece maps to a craft cluster of India."
+  },
+  "theme": {
+    "name": "house-of-kala-katha",
+    "type": "shopify-os2.0",
+    "structure": [
+      "assets/",
+      "config/",
+      "layout/",
+      "locales/",
+      "sections/",
+      "snippets/",
+      "templates/",
+      "templates/customers/",
+      "themes/"
+    ],
+    "templates": {
+      "product": "templates/product.json",
+      "collection": "templates/collection.json",
+      "index": "templates/index.json",
+      "cart": "templates/cart.json",
+      "search": "templates/search.json",
+      "404": "templates/404.json",
+      "article": "templates/article.json",
+      "blog": "templates/blog.json",
+      "page": "templates/page.json",
+      "list-collections": "templates/list-collections.json",
+      "customers/account": "templates/customers/account.json",
+      "customers/login": "templates/customers/login.json"
+    }
+  },
+  "products": {
+    "categories": [
+      "Shirts",
+      "Co-ords",
+      "Jackets",
+      "Tees",
+      "Shorts & Pants",
+      "Dresses & Separates",
+      "Occasion Pieces",
+      "Traditional Silhouettes"
+    ],
+    "crafts": [
+      "Pochampally Ikat - Telangana",
+      "Bandhani - Gujarat & Rajasthan",
+      "Patola - Patan",
+      "Ajrakh - Kutch",
+      "Bagru & Sanganeri - Rajasthan",
+      "Paithani - Maharashtra",
+      "Chanderi & Maheshwari - Madhya Pradesh",
+      "Kosa - Chhattisgarh",
+      "Sambalpuri & Bomkai - Odisha",
+      "Jamdani - Bengal",
+      "Kantha - Bengal",
+      "Muga & Eri - Assam",
+      "Kanjeevaram - Tamil Nadu",
+      "Kalamkari - Andhra",
+      "Pashmina & Kani - Kashmir",
+      "Phulkari - Punjab",
+      "Chikankari - Lucknow",
+      "Banarasi Brocade - Varanasi"
+    ],
+    "regions": {
+      "north": "Pashmina & Kani, Kullu, Phulkari, Chikankari, Banarasi",
+      "west": "Bandhani, Patola, Ajrakh, Bagru, Paithani, Chanderi, Maheshwari, Kosa",
+      "east": "Ikat Odisha, Sambalpuri, Jamdani, Kantha, Muga, Eri, Bhagalpuri Tussar",
+      "south": "Pochampally, Kanjeevaram, Uppada, Kalamkari, Mysore, Ilkal, Kasavu"
+    }
+  },
+  "shopify": {
+    "product_template": {
+      "type": "main-product",
+      "settings": {
+        "show_vendor": true,
+        "show_sku": false,
+        "enable_quantity": true,
+        "show_dynamic_checkout": true,
+        "layout": "media-left",
+        "image_ratio": "natural",
+        "show_breadcrumbs": true,
+        "show_description": true
+      }
+    },
+    "required_files": [
+      "templates/product.json",
+      "sections/main-product.liquid",
+      "snippets/price.liquid",
+      "snippets/variant-picker.liquid"
+    ]
+  }
+}

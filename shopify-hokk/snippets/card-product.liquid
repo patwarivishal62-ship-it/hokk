@@ -1,0 +1,49 @@
+{%- comment -%}
+  Product card. Accepts `product`, `show_vendor`, `show_price`, `show_secondary_image`.
+{%- endcomment -%}
+{%- liquid
+  assign card_show_price = show_price | default: true
+  assign card_show_secondary = show_secondary_image | default: true
+-%}
+<div class="card-product">
+  <a href="{{ product.url }}" class="card-product__media media-hover" aria-label="{{ product.title | escape }}">
+    {%- if product.featured_media -%}
+      {{ product.featured_media | image_url: width: 900 | image_tag:
+        loading: 'lazy',
+        widths: '360, 540, 720, 900',
+        sizes: '(min-width: 990px) 25vw, 50vw',
+        class: 'card-product__img',
+        alt: product.featured_media.alt | escape
+      }}
+      {%- if card_show_secondary and product.media[1] -%}
+        {{ product.media[1] | image_url: width: 900 | image_tag:
+          loading: 'lazy',
+          widths: '360, 540, 720, 900',
+          sizes: '(min-width: 990px) 25vw, 50vw',
+          class: 'card-product__img card-product__img--hover',
+          alt: product.media[1].alt | escape
+        }}
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'card-product__img card-product__img--placeholder' }}
+    {%- endif -%}
+
+    {%- if product.available == false -%}
+      <span class="badge badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+    {%- elsif product.compare_at_price > product.price -%}
+      <span class="badge badge--sale">{{ 'general.sale' | t }}</span>
+    {%- endif -%}
+  </a>
+
+  <div class="card-product__info">
+    {%- if show_vendor and product.vendor != blank -%}
+      <p class="card-product__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+    <h3 class="card-product__title">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h3>
+    {%- if card_show_price -%}
+      {%- render 'price', product: product -%}
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,221 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {}
+    },
+    "philosophy": {
+      "type": "philosophy",
+      "settings": {}
+    },
+    "categories": {
+      "type": "categories",
+      "blocks": {
+        "cat-1": {
+          "type": "category",
+          "settings": {
+            "title": "Shirts",
+            "caption": "Ikat & Handloom Cotton"
+          }
+        },
+        "cat-2": {
+          "type": "category",
+          "settings": {
+            "title": "Co-ords",
+            "caption": "Cut for Today"
+          }
+        },
+        "cat-3": {
+          "type": "category",
+          "settings": {
+            "title": "Jackets",
+            "caption": "Structured Heritage"
+          }
+        },
+        "cat-4": {
+          "type": "category",
+          "settings": {
+            "title": "Tees",
+            "caption": "Everyday Motifs"
+          }
+        },
+        "cat-5": {
+          "type": "category",
+          "settings": {
+            "title": "Shorts & Pants",
+            "caption": "Loomed Comfort"
+          }
+        },
+        "cat-6": {
+          "type": "category",
+          "settings": {
+            "title": "Dresses & Separates",
+            "caption": "Contemporary Cuts"
+          }
+        },
+        "cat-7": {
+          "type": "category",
+          "settings": {
+            "title": "Occasion Pieces",
+            "caption": "Refined Drama"
+          }
+        },
+        "cat-8": {
+          "type": "category",
+          "settings": {
+            "title": "Traditional Silhouettes",
+            "caption": "Reimagined"
+          }
+        }
+      },
+      "block_order": [
+        "cat-1",
+        "cat-2",
+        "cat-3",
+        "cat-4",
+        "cat-5",
+        "cat-6",
+        "cat-7",
+        "cat-8"
+      ],
+      "settings": {}
+    },
+    "story": {
+      "type": "story",
+      "blocks": {
+        "region-north": {
+          "type": "region",
+          "settings": {
+            "zone": "north",
+            "title": "North India",
+            "intro": "The cold mountains and royal plains of the north — where wool meets gold.",
+            "cultures": "Pashmina & Kani shawls — Kashmir | Kullu & Kinnauri shawls — Himachal | Phulkari embroidery — Punjab | Chikankari — Lucknow | Banarasi brocade — Varanasi",
+            "usp": "Luxe winter weaves and royal brocades. The north's story is fine wool, silk zari and the regal Banarasi loom."
+          }
+        },
+        "region-west": {
+          "type": "region",
+          "settings": {
+            "zone": "west",
+            "title": "West & Central India",
+            "intro": "The print-and-dye powerhouse of the country — from the deserts of Kutch to the looms of Paithan.",
+            "cultures": "Bandhani tie-dye — Gujarat & Rajasthan | Patola double ikat — Patan | Ajrakh block print — Kutch | Bagru & Sanganeri prints — Rajasthan | Paithani silk — Maharashtra | Chanderi & Maheshwari — Madhya Pradesh | Kosa silk — Chhattisgarh",
+            "usp": "The masters of resist-dye and block print. Home to the legendary Patola — one of the world's most complex weaves."
+          }
+        },
+        "region-east": {
+          "type": "region",
+          "settings": {
+            "zone": "east",
+            "title": "East India",
+            "intro": "Featherlight silks and narrative weaving, from the Ganges delta to the Northeast hills.",
+            "cultures": "Ikat of Odisha — single ikat | Sambalpuri & Bomkai — Odisha | Jamdani — Bengal | Kantha embroidery — Bengal | Bhagalpuri tussar — Bihar | Muga & Eri silk — Assam",
+            "usp": "Air-light muslins and golden Muga silk. The east weaves stories into every thread."
+          }
+        },
+        "region-south": {
+          "type": "region",
+          "settings": {
+            "zone": "south",
+            "title": "South India",
+            "intro": "Temple-town silks and the double-ikat heartland, from Pochampally to Kanchipuram.",
+            "cultures": "Pochampally & Puttapaka ikat — Telangana | Kanjeevaram silk — Tamil Nadu | Uppada jamdani — Andhra | Kalamkari art — Andhra | Mysore silk & Ilkal — Karnataka | Kasavu — Kerala",
+            "usp": "The seat of the double ikat. South India dresses temples and weddings in silk and gold zari."
+          }
+        }
+      },
+      "block_order": [
+        "region-north",
+        "region-west",
+        "region-east",
+        "region-south"
+      ],
+      "settings": {}
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "blocks": {
+        "img-1": {
+          "type": "image",
+          "settings": {
+            "caption": "Golden hour, Hyderabad."
+          }
+        },
+        "img-2": {
+          "type": "image",
+          "settings": {}
+        },
+        "img-3": {
+          "type": "image",
+          "settings": {
+            "caption": "Occasion, reimagined."
+          }
+        }
+      },
+      "block_order": [
+        "img-1",
+        "img-2",
+        "img-3"
+      ],
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I didn't buy this because it was 'handloom'. I bought it because it's the best shirt in my closet.",
+            "handle": "@ananya.codes",
+            "role": "Micro-creator, Hyderabad"
+          }
+        },
+        "t-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Wore the co-ord to a wedding and to work the next week. That's rare with anything 'ethnic'.",
+            "handle": "@rohanwrites",
+            "role": "Creator, Bengaluru"
+          }
+        },
+        "t-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Every piece comes with the story of who made it. That hits different once you know it.",
+            "handle": "@meher.talks",
+            "role": "Creator, Chennai"
+          }
+        }
+      },
+      "block_order": [
+        "t-1",
+        "t-2",
+        "t-3"
+      ],
+      "settings": {}
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "philosophy",
+    "categories",
+    "story",
+    "lookbook",
+    "testimonials",
+    "featured-collection",
+    "newsletter"
+  ]
+}

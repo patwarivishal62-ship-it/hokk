@@ -1,0 +1,73 @@
+<div class="cart-page">
+  <div class="container">
+    <p class="eyebrow">Your bag</p>
+    <h1 class="section-title">{{ 'cart.general.title' | t }}</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" id="cart-form" class="cart-form">
+        <div class="cart-form__head">
+          <span>{{ 'products.product.title' | t }}</span>
+          <span>{{ 'products.product.quantity' | t }}</span>
+          <span>Total</span>
+        </div>
+
+        <ul class="cart-form__items">
+          {%- for item in cart.items -%}
+            <li class="cart-form__item" data-cart-item>
+              <div class="cart-form__media">
+                <a href="{{ item.url }}">
+                  {%- if item.image -%}
+                    {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 240', alt: item.product.title | escape }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'cart-form__placeholder' }}
+                  {%- endif -%}
+                </a>
+              </div>
+
+              <div class="cart-form__meta">
+                <a href="{{ item.url }}" class="cart-form__title">{{ item.product.title | escape }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="cart-form__variant">{{ item.variant.title | escape }}</p>
+                {%- endunless -%}
+                <p class="cart-form__unit-price">{{ item.price | money }} each</p>
+                <a href="{{ item.url_to_remove }}" class="cart-form__remove">
+                  {{ 'cart.general.remove' | t }}
+                </a>
+              </div>
+
+              <div class="cart-form__qty">
+                {%- render 'quantity-input', name: 'updates[]', value: item.quantity, index: forloop.index -%}
+              </div>
+
+              <div class="cart-form__line-total">{{ item.final_line_price | money }}</div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="cart-form__actions">
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--text">
+            {%- render 'icon', icon: 'arrow-right' -%}
+            {{ 'general.continue_shopping' | t }}
+          </a>
+          <button type="submit" name="update" class="btn btn--outline">Update bag</button>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="cart-form__empty">
+        <p>{{ 'cart.general.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--solid">{{ 'general.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}{
+  "name": "Cart items",
+  "class": "section-cart-items",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Cart items"
+    }
+  ]
+}{% endschema %}

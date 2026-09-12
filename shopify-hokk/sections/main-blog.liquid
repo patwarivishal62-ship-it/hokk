@@ -1,0 +1,60 @@
+<div class="blog">
+  <div class="container">
+    <p class="eyebrow">The Katha</p>
+    <h1 class="section-title">{{ blog.title | escape }}</h1>
+
+    {%- paginate blog.articles by section.settings.posts_per_page -%}
+      <div class="blog__grid">
+        {%- for article in blog.articles -%}
+          <article class="blog-card">
+            <a href="{{ article.url }}" class="blog-card__media">
+              {%- if article.image -%}
+                {{ article.image | image_url: width: 900 | image_tag:
+                  loading: 'lazy',
+                  widths: '360, 540, 720, 900',
+                  class: 'blog-card__img',
+                  alt: article.title | escape
+                }}
+              {%- else -%}
+                {{ 'blog-apparel-1' | placeholder_svg_tag: 'blog-card__img blog-card__img--placeholder' }}
+              {%- endif -%}
+            </a>
+            <div class="blog-card__info">
+              <p class="blog-card__date">{{ article.published_at | date: '%d %b %Y' }}</p>
+              <h2 class="blog-card__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+              {%- if article.excerpt_or_content != blank -%}
+                <p class="blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>
+              {%- endif -%}
+              <a href="{{ article.url }}" class="btn btn--text">
+                {{ 'blogs.article.read_more' | t }}
+                {%- render 'icon', icon: 'arrow-right' -%}
+              </a>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}{
+  "name": "Blog",
+  "class": "section-blog",
+  "settings": [
+    {
+      "type": "range",
+      "id": "posts_per_page",
+      "label": "Posts per page",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 6
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog"
+    }
+  ]
+}{% endschema %}

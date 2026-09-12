@@ -1,0 +1,54 @@
+{%- if cart.item_count > 0 -%}
+  <div class="cart-footer">
+    <div class="container">
+      <div class="cart-footer__card">
+        <p class="cart-footer__subtotal">
+          <span>{{ 'cart.general.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money }}</span>
+        </p>
+        <p class="cart-footer__note">{{ 'cart.general.taxes_note' | t }}</p>
+
+        {%- if section.settings.show_note -%}
+          <label class="cart-footer__note-label" for="CartNote">Order note</label>
+          <textarea name="note" id="CartNote" form="cart-form" class="cart-footer__textarea" placeholder="Anything we should know?">{{ cart.note }}</textarea>
+        {%- endif -%}
+
+        <button type="submit" name="checkout" form="cart-form" class="btn btn--solid btn--full">
+          {{ 'cart.general.checkout' | t }}
+        </button>
+
+        {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+          <ul class="cart-footer__payments">
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}{
+  "name": "Cart footer",
+  "class": "section-cart-footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "Show order note",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart footer"
+    }
+  ]
+}{% endschema %}

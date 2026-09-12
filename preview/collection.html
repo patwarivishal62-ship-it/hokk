@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop — House of Kala Katha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body class="gradient template-collection">
+  <a class="skip-to-content-link visually-hidden" href="#MainContent">Skip to content</a>
+
+  <div class="announcement-bar" style="background-color:#211912; color:#F3ECE1;">
+    <div class="container"><div class="announcement-bar__track"><p class="announcement-bar__message is-active">Woven in India · Free shipping on orders over ₹3,000</p></div></div>
+  </div>
+
+  <header-section class="site-header site-header--sticky">
+    <div class="site-header__inner container">
+      <button type="button" class="site-header__burger" data-menu-open aria-label="Menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg></button>
+      <div class="site-header__logo">
+        <a href="index.html" class="site-header__logo-link" aria-label="House of Kala Katha"><img src="logo/logo.png" alt="House of Kala Katha" class="site-header__logo-img"></a>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <ul class="site-nav__list">
+          <li class="site-nav__item is-active"><a href="collection.html" class="site-nav__link" aria-current="page">Shop</a></li>
+          <li class="site-nav__item"><a href="index.html#story" class="site-nav__link">Craft Stories</a></li>
+          <li class="site-nav__item"><a href="index.html#lookbook" class="site-nav__link">Lookbook</a></li>
+          <li class="site-nav__item"><a href="index.html#philosophy" class="site-nav__link">Our Story</a></li>
+        </ul>
+      </nav>
+      <div class="site-header__icons">
+        <button type="button" class="site-header__icon" data-search-open aria-label="Search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"></circle><line x1="21" y1="21" x2="16.4" y2="16.4"></line></svg></button>
+        <a href="#" class="site-header__icon site-header__icon--account" aria-label="Account"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-3.9 3.6-6 8-6s8 2.1 8 6"></path></svg></a>
+        <a href="#" class="site-header__icon site-header__icon--cart" aria-label="Cart"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8h13l1 12.5a1 1 0 0 1-1 1.1h-13a1 1 0 0 1-1-1.1z"></path><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"></path></svg><span class="site-header__cart-count" data-cart-count>2</span></a>
+      </div>
+    </div>
+  </header-section>
+
+  <main id="MainContent" class="content-for-layout" role="main" tabindex="-1">
+    <div class="collection-banner">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span aria-hidden="true">/</span><a href="collection.html">Shop</a><span aria-hidden="true">/</span><span aria-current="page">Shirts</span>
+        </nav>
+        <div class="collection-banner__grid">
+          <div class="collection-banner__body">
+            <p class="eyebrow">The Wardrobe</p>
+            <h1 class="collection-banner__title">Shirts</h1>
+            <div class="rte collection-banner__description"><p>Ikat and handloom cotton, cut relaxed for the life you actually live.</p></div>
+          </div>
+          <div class="collection-banner__media"><img src="images/category-shirts.jpg" alt="Shirts" class="collection-banner__img"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-grid">
+      <div class="container">
+        <form class="facets" method="get" action="collection.html" data-filter-form>
+          <div class="facets__toolbar">
+            <p class="facets__count">24 products</p>
+            <div class="facets__controls">
+              <button type="button" class="btn btn--outline facets__toggle" data-filters-toggle>Filter</button>
+              <label class="facets__sort">
+                <span class="facets__sort-label">Sort</span>
+                <select name="sort_by" data-sort-select>
+                  <option value="manual" selected>Featured</option>
+                  <option value="best-selling">Best selling</option>
+                  <option value="price-ascending">Price, low to high</option>
+                  <option value="price-descending">Price, high to low</option>
+                  <option value="created-descending">Date, new to old</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="facets__panel" data-filters-panel hidden>
+            <details class="facet" open>
+              <summary class="facet__summary">Availability <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+              <div class="facet__body">
+                <label class="facet__value"><input type="checkbox" name="filter.v.availability" value="1"><span>In stock</span><small class="facet__count">24</small></label>
+                <label class="facet__value"><input type="checkbox" name="filter.v.availability" value="0"><span>Out of stock</span><small class="facet__count">0</small></label>
+              </div>
+            </details>
+            <details class="facet">
+              <summary class="facet__summary">Colour <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+              <div class="facet__body">
+                <label class="facet__value"><input type="checkbox" name="filter.v.option.colour" value="Terracotta"><span>Terracotta</span><small class="facet__count">10</small></label>
+                <label class="facet__value"><input type="checkbox" name="filter.v.option.colour" value="Indigo"><span>Indigo</span><small class="facet__count">9</small></label>
+                <label class="facet__value"><input type="checkbox" name="filter.v.option.colour" value="Ivory"><span>Ivory</span><small class="facet__count">5</small></label>
+              </div>
+            </details>
+            <details class="facet">
+              <summary class="facet__summary">Price <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+              <div class="facet__body">
+                <div class="facet__price">
+                  <label><span>From</span><input name="filter.v.price.gte" type="number" min="0" placeholder="0"></label>
+                  <label><span>To</span><input name="filter.v.price.lte" type="number" min="0" placeholder="∞"></label>
+                </div>
+              </div>
+            </details>
+            <div class="facets__actions">
+              <button type="submit" class="btn btn--solid">Apply</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="product-grid product-grid--4">
+          <div class="card-product">
+            <a href="product.html" class="card-product__media"><img src="images/category-shirts.jpg" class="card-product__img" alt="Pochampally Ikat Shirt" loading="lazy"><img src="images/lookbook-1.jpg" class="card-product__img card-product__img--hover" alt="" loading="lazy"></a>
+            <div class="card-product__info"><h3 class="card-product__title"><a href="product.html">Pochampally Ikat Shirt</a></h3><div class="price"><span class="price__current">₹2,499</span></div></div>
+          </div>
+          <div class="card-product">
+            <a href="product.html" class="card-product__media"><img src="images/category-jackets.jpg" class="card-product__img" alt="Indigo Heritage Jacket" loading="lazy"><img src="images/lookbook-2.jpg" class="card-product__img card-product__img--hover" alt="" loading="lazy"></a>
+            <div class="card-product__info"><h3 class="card-product__title"><a href="product.html">Indigo Heritage Jacket</a></h3><div class="price"><span class="price__current">₹5,490</span></div></div>
+          </div>
+          <div class="card-product">
+            <a href="product.html" class="card-product__media"><img src="images/lookbook-1.jpg" class="card-product__img" alt="Kalamkari Everyday Tee" loading="lazy"><img src="images/category-shirts.jpg" class="card-product__img card-product__img--hover" alt="" loading="lazy"></a>
+            <div class="card-product__info"><h3 class="card-product__title"><a href="product.html">Kalamkari Everyday Tee</a></h3><div class="price"><span class="price__current">₹1,899</span></div></div>
+          </div>
+          <div class="card-product">
+            <a href="product.html" class="card-product__media"><img src="images/lookbook-2.jpg" class="card-product__img" alt="Patola Occasion Co-ord" loading="lazy"><img src="images/category-jackets.jpg" class="card-product__img card-product__img--hover" alt="" loading="lazy"><span class="badge badge--sale">Sale</span></a>
+            <div class="card-product__info"><h3 class="card-product__title"><a href="product.html">Patola Occasion Co-ord</a></h3><div class="price"><s class="price__compare">₹7,990</s><span class="price__current price__current--sale">₹6,390</span></div></div>
+          </div>
+          <div class="card-product">
+            <a href="product.html" class="card-product__media"><img src="images/category-shirts.jpg" class="card-product__img" alt="Ikat Camp Collar Shirt" loading="lazy"><img src="images/lookbook-1.jpg" class="card-product__img card-product__img--hover" alt="" loading="lazy"></a>
+            <div class="card-product__info"><h3 class="card-product__title"><a href="product.html">Ikat Camp Collar Shirt</a></h3><div class="price"><span class="price__current">₹2,790</span></div></div>
+          </div>
+          <div class="card-product">
+            <a href="product.html" class="card-product__media"><img src="images/category-jackets.jpg" class="card-product__img" alt="Handloom Chore Jacket" loading="lazy"><img src="images/lookbook-2.jpg" class="card-product__img card-product__img--hover" alt="" loading="lazy"></a>
+            <div class="card-product__info"><h3 class="card-product__title"><a href="product.html">Handloom Chore Jacket</a></h3><div class="price"><span class="price__current">₹4,990</span></div></div>
+          </div>
+          <div class="card-product">
+            <a href="product.html" class="card-product__media"><img src="images/lookbook-1.jpg" class="card-product__img" alt="Chowka Motif Tee" loading="lazy"><img src="images/category-shirts.jpg" class="card-product__img card-product__img--hover" alt="" loading="lazy"></a>
+            <div class="card-product__info"><h3 class="card-product__title"><a href="product.html">Chowka Motif Tee</a></h3><div class="price"><span class="price__current">₹1,499</span></div></div>
+          </div>
+          <div class="card-product">
+            <a href="product.html" class="card-product__media"><img src="images/lookbook-2.jpg" class="card-product__img" alt="Kalamkari Over-Shirt" loading="lazy"><img src="images/category-jackets.jpg" class="card-product__img card-product__img--hover" alt="" loading="lazy"><span class="badge badge--sold-out">Sold out</span></a>
+            <div class="card-product__info"><h3 class="card-product__title"><a href="product.html">Kalamkari Over-Shirt</a></h3><div class="price"><span class="price__current">₹3,290</span></div></div>
+          </div>
+        </div>
+
+        <nav class="pagination" role="navigation" aria-label="Pagination">
+          <div class="pagination__pages">
+            <span class="pagination__item is-current" aria-current="page">1</span>
+            <a href="#" class="pagination__item">2</a>
+            <a href="#" class="pagination__item">3</a>
+          </div>
+          <a href="#" class="pagination__item pagination__item--arrow"><span>Next</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="13 5 20 12 13 19"></polyline></svg></a>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <img src="logo/logo-light.png" alt="House of Kala Katha" class="site-footer__logo" loading="lazy">
+          <p class="site-footer__tagline">Kala is the art. Katha is the story.</p>
+        </div>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Shop</p>
+          <ul class="site-footer__list"><li><a href="collection.html">New Arrivals</a></li><li><a href="collection.html">Shirts</a></li><li><a href="collection.html">Co-ords</a></li><li><a href="collection.html">Jackets</a></li></ul>
+        </div>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">House of Kala Katha</p>
+          <ul class="site-footer__list"><li><a href="index.html#philosophy">Our Story</a></li><li><a href="index.html#story">Craft Stories</a></li><li><a href="index.html#lookbook">Lookbook</a></li><li><a href="#">Journal</a></li></ul>
+        </div>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Care</p>
+          <ul class="site-footer__list"><li><a href="#">Shipping &amp; Returns</a></li><li><a href="#">Garment Care</a></li><li><a href="#">Size Guide</a></li><li><a href="#">Contact</a></li></ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <p class="site-footer__copyright">© 2026 House of Kala Katha · Woven in India</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>window.shopUrl = ''; window.routes = {}; window.moneyFormat = '₹{{amount}}';</script>
+  <script src="theme.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<div class="collection-banner collection-banner--{{ section.settings.layout }} collection-banner--align-{{ section.settings.text_alignment }}"
+  style="
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --cb-img-ratio: {{ section.settings.image_ratio }};
+    --cb-img-radius: {{ section.settings.image_radius }}px;
+    --cb-gap: {{ section.settings.gap }}px;
+  ">
+  <div class="container">
+    {%- if section.settings.show_breadcrumbs -%}
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a>
+        <span aria-hidden="true">/</span>
+        <a href="{{ routes.all_products_collection_url }}">{{ 'general.shop' | t }}</a>
+        {%- if collection.title != blank -%}
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{{ collection.title }}</span>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
+
+    <div class="collection-banner__grid">
+      <div class="collection-banner__body">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h1 class="collection-banner__title">{{ collection.title | default: shop.name }}</h1>
+        {%- if section.settings.show_description and collection.description != blank -%}
+          <div class="rte collection-banner__description">{{ collection.description }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.layout != 'text-only' and collection.featured_image != blank -%}
+        <div class="collection-banner__media">
+          {{ collection.featured_image | image_url: width: 1400 | image_tag:
+            loading: 'eager',
+            widths: '540, 720, 900, 1080, 1296',
+            class: 'collection-banner__img',
+            alt: collection.title | escape
+          }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}{
+  "name": "Collection banner",
+  "class": "section-collection-banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Wardrobe"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show collection description",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "image-right",
+          "label": "Image right"
+        },
+        {
+          "value": "image-left",
+          "label": "Image left"
+        },
+        {
+          "value": "text-only",
+          "label": "Text only"
+        }
+      ],
+      "default": "image-right"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "4/3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "16/9",
+          "label": "Wide 16:9"
+        },
+        {
+          "value": "1/1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait 4:5"
+        }
+      ],
+      "default": "4/3"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between text and image",
+      "min": 24,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection banner"
+    }
+  ]
+}{% endschema %}

@@ -1,0 +1,67 @@
+<div class="account-login">
+  <div class="container">
+    <div class="account-login__inner">
+      <div class="account-login__panel">
+        <h1 class="section-title">{{ 'customer.login.title' | t }}</h1>
+
+        {%- form 'customer_login', id: 'CustomerLoginForm', class: 'auth-form' -%}
+          {%- if form.errors -%}
+            <p class="auth-form__error" role="alert">
+              {%- render 'icon', icon: 'error' -%}
+              {{ form.errors | default_errors }}
+            </p>
+          {%- endif -%}
+
+          <label>
+            <span>{{ 'customer.login.email' | t }}</span>
+            <input type="email" name="customer[email]" value="{{ form.email }}" required autocomplete="email">
+          </label>
+
+          {%- if form.password_needed -%}
+            <label>
+              <span>{{ 'customer.login.password' | t }}</span>
+              <input type="password" name="customer[password]" required autocomplete="current-password">
+            </label>
+          {%- endif -%}
+
+          <button type="submit" class="btn btn--solid btn--full">{{ 'customer.login.submit' | t }}</button>
+
+          <a href="#recover" class="auth-form__recover" data-recover-toggle>{{ 'customer.login.forgot_password' | t }}</a>
+        {%- endform -%}
+
+        <div id="recover" hidden>
+          {%- form 'recover_customer_password', class: 'auth-form auth-form--recover' -%}
+            <h2 class="auth-form__title">{{ 'customer.login.recover' | t }}</h2>
+            {%- if form.posted_successfully? -%}
+              <p class="auth-form__success">We've sent you an email with a link to update your password.</p>
+            {%- endif -%}
+            <label>
+              <span>{{ 'customer.login.email' | t }}</span>
+              <input type="email" name="email" required autocomplete="email">
+            </label>
+            <button type="submit" class="btn btn--solid btn--full">{{ 'customer.login.recover' | t }}</button>
+            <button type="button" class="btn btn--text" data-recover-close>{{ 'general.close' | t }}</button>
+          {%- endform -%}
+        </div>
+      </div>
+
+      <div class="account-login__aside">
+        <h2 class="account-login__aside-title">{{ 'customer.login.register_title' | t }}</h2>
+        <p>{{ 'customer.login.register_text' | t }}</p>
+        <a href="{{ routes.account_register_url }}" class="btn btn--outline">{{ 'customer.register.title' | t }}</a>
+
+        <h2 class="account-login__aside-title">{{ 'customer.login.guest_title' | t }}</h2>
+        <p>{{ 'customer.login.guest_text' | t }}</p>
+        <a href="{{ routes.root_url }}" class="btn btn--text">{{ 'general.continue_shopping' | t }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Login",
+  "class": "section-login",
+  "settings": []
+}
+{% endschema %}

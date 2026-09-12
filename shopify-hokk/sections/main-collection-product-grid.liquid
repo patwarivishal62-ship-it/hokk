@@ -1,0 +1,309 @@
+{%- liquid
+  assign products_per_page = section.settings.products_per_page
+  assign columns = section.settings.columns
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+
+  assign has_active_filters = false
+  for filter in collection.filters
+    if filter.type == 'price_range'
+      if filter.min_value.value != nil or filter.max_value.value != nil
+        assign has_active_filters = true
+      endif
+    else
+      for value in filter.values
+        if value.active
+          assign has_active_filters = true
+        endif
+      endfor
+    endif
+  endfor
+-%}
+
+<div class="collection-grid collection-grid--align-{{ section.settings.card_alignment }}" data-section-id="{{ section.id }}"
+  style="
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --card-ratio: {{ section.settings.image_ratio }};
+    --cg-img-radius: {{ section.settings.image_radius }}px;
+    --cg-gap: {{ section.settings.gap }}px;
+  ">
+  <div class="container">
+    {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+    <form class="facets" method="get" action="{{ collection.url }}" data-filter-form>
+      <div class="facets__toolbar">
+        <p class="facets__count">
+          {{ collection.products_count }}
+          {%- if collection.products_count == 1 -%} product{%- else -%} products{%- endif -%}
+        </p>
+
+        <div class="facets__controls">
+          {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
+            <button type="button" class="btn btn--outline facets__toggle" data-filters-toggle>
+              {{ 'sections.collection.filter' | t }}
+            </button>
+          {%- endif -%}
+
+          {%- if section.settings.enable_sorting -%}
+            <label class="facets__sort">
+              <span class="facets__sort-label">{{ 'sections.collection.sort' | t }}</span>
+              <select name="sort_by" data-sort-select>
+                <option value="manual" {% if sort_by == 'manual' %}selected{% endif %}>Featured</option>
+                <option value="best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>Best selling</option>
+                <option value="title-ascending" {% if sort_by == 'title-ascending' %}selected{% endif %}>Alphabetically, A–Z</option>
+                <option value="title-descending" {% if sort_by == 'title-descending' %}selected{% endif %}>Alphabetically, Z–A</option>
+                <option value="price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>Price, low to high</option>
+                <option value="price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>Price, high to low</option>
+                <option value="created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>Date, new to old</option>
+                <option value="created-ascending" {% if sort_by == 'created-ascending' %}selected{% endif %}>Date, old to new</option>
+              </select>
+            </label>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
+        <div class="facets__panel" data-filters-panel hidden>
+          {%- for filter in collection.filters -%}
+            <details class="facet" {% if filter.type == 'price_range' %}open{% endif %}>
+              <summary class="facet__summary">
+                {{ filter.label }}
+                {%- render 'icon', icon: 'chevron-down' -%}
+              </summary>
+              <div class="facet__body">
+                {%- case filter.type -%}
+                  {%- when 'boolean' or 'list' -%}
+                    {%- for value in filter.values -%}
+                      <label class="facet__value">
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          {% if value.active %}checked{% endif %}
+                          {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                          data-auto-submit
+                        >
+                        <span>{{ value.label }}</span>
+                        <small class="facet__count">{% if value.count > 0 %}{{ value.count }}{% endif %}</small>
+                      </label>
+                    {%- endfor -%}
+                  {%- when 'price_range' -%}
+                    <div class="facet__price">
+                      <label>
+                        <span>From</span>
+                        <input
+                          name="{{ filter.min_value.param_name }}"
+                          value="{{ filter.min_value.value }}"
+                          type="number"
+                          min="0"
+                          inputmode="decimal"
+                          placeholder="0"
+                          {% if filter.min_value.value == nil %}disabled{% endif %}
+                        >
+                      </label>
+                      <label>
+                        <span>To</span>
+                        <input
+                          name="{{ filter.max_value.param_name }}"
+                          value="{{ filter.max_value.value }}"
+                          type="number"
+                          min="0"
+                          inputmode="decimal"
+                          placeholder="∞"
+                          {% if filter.max_value.value == nil %}disabled{% endif %}
+                        >
+                      </label>
+                    </div>
+                {%- endcase -%}
+              </div>
+            </details>
+          {%- endfor -%}
+
+          <div class="facets__actions">
+            <button type="submit" class="btn btn--solid">{{ 'sections.collection.apply' | t }}</button>
+            {%- if has_active_filters -%}
+              <a href="{{ collection.url }}" class="btn btn--text">{{ 'sections.collection.clear_all' | t }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </form>
+    {%- endif -%}
+
+    {%- paginate collection.products by products_per_page -%}
+      <div class="product-grid product-grid--{{ columns }}">
+        {%- for product in collection.products -%}
+          {%- render 'card-product', product: product, show_vendor: section.settings.show_vendor, show_price: section.settings.show_price, show_secondary_image: section.settings.show_secondary_image -%}
+        {%- else -%}
+          <div class="collection-grid__empty">
+            <p>{{ 'sections.collection.empty' | t }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}{
+  "name": "Product grid",
+  "class": "section-collection-product-grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Product cards"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "3/4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "1/1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape 4:3"
+        }
+      ],
+      "default": "3/4"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between cards",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "card_alignment",
+      "label": "Card text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show second image on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Toolbar"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable filtering",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Enable sorting",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product grid"
+    }
+  ]
+}{% endschema %}

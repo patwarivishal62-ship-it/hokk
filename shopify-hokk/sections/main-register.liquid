@@ -1,0 +1,48 @@
+<div class="account-register">
+  <div class="container">
+    <div class="account-register__inner">
+      <h1 class="section-title">{{ 'customer.register.title' | t }}</h1>
+
+      {%- form 'create_customer', class: 'auth-form' -%}
+        {%- if form.errors -%}
+          <p class="auth-form__error" role="alert">
+            {%- render 'icon', icon: 'error' -%}
+            {{ form.errors | default_errors }}
+          </p>
+        {%- endif -%}
+
+        <div class="auth-form__row">
+          <label>
+            <span>{{ 'customer.register.first_name' | t }}</span>
+            <input type="text" name="customer[first_name]" value="{{ form.first_name }}" required autocomplete="given-name">
+          </label>
+          <label>
+            <span>{{ 'customer.register.last_name' | t }}</span>
+            <input type="text" name="customer[last_name]" value="{{ form.last_name }}" required autocomplete="family-name">
+          </label>
+        </div>
+        <label>
+          <span>{{ 'customer.register.email' | t }}</span>
+          <input type="email" name="customer[email]" value="{{ form.email }}" required autocomplete="email">
+        </label>
+        <label>
+          <span>{{ 'customer.register.password' | t }}</span>
+          <input type="password" name="customer[password]" required autocomplete="new-password">
+        </label>
+        <button type="submit" class="btn btn--solid btn--full">{{ 'customer.register.submit' | t }}</button>
+      {%- endform -%}
+
+      <p class="account-register__login">
+        Already have an account? <a href="{{ routes.account_login_url }}">{{ 'customer.login.title' | t }}</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Register",
+  "class": "section-register",
+  "settings": []
+}
+{% endschema %}

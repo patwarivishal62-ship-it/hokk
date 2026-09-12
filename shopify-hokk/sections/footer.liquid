@@ -1,0 +1,147 @@
+{%- liquid
+  assign menu_1 = section.settings.menu_1
+  assign menu_2 = section.settings.menu_2
+  assign menu_3 = section.settings.menu_3
+-%}
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="{{ routes.root_url }}" class="site-footer__logo-link" aria-label="{{ shop.name }}" style="--logo-width: {{ section.settings.logo_width }}px;">
+          {%- if section.settings.logo != blank -%}
+            {{ section.settings.logo | image_url: width: 600 | image_tag:
+              loading: 'lazy',
+              widths: '80, 120, 160, 200, 320, 480, 600',
+              sizes: section.settings.logo_width | append: 'px',
+              class: 'site-footer__logo',
+              alt: shop.name
+            }}
+          {%- else -%}
+            <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy">
+          {%- endif -%}
+        </a>
+        <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>
+        {%- if section.settings.blurb != blank -%}
+          <p class="site-footer__blurb">{{ section.settings.blurb | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- for menu in section.blocks -%}
+        <div class="site-footer__col" {{ menu.shopify_attributes }}>
+          <p class="site-footer__heading">{{ menu.settings.heading | escape }}</p>
+          <ul class="site-footer__list">
+            {%- for link in linklists[menu.settings.menu].links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">{{ 'footer.copyright' | t: shop: shop.name }}</p>
+
+      {%- if section.settings.show_social -%}
+        <ul class="site-footer__social">
+          {%- if settings.social_instagram_link != blank -%}
+            <li><a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">{%- render 'icon', icon: 'instagram' -%}</a></li>
+          {%- endif -%}
+          {%- if settings.social_facebook_link != blank -%}
+            <li><a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">{%- render 'icon', icon: 'facebook' -%}</a></li>
+          {%- endif -%}
+          {%- if settings.social_pinterest_link != blank -%}
+            <li><a href="{{ settings.social_pinterest_link }}" target="_blank" rel="noopener" aria-label="Pinterest">{%- render 'icon', icon: 'pinterest' -%}</a></li>
+          {%- endif -%}
+          {%- if settings.social_youtube_link != blank -%}
+            <li><a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" aria-label="YouTube">{%- render 'icon', icon: 'youtube' -%}</a></li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <ul class="site-footer__payments">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Footer logo width",
+      "min": 80,
+      "max": 260,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "textarea",
+      "id": "blurb",
+      "label": "Brand blurb",
+      "default": "Handloom, ikat, kalamkari and patola — heritage craft, re-cut for everyday life."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "menu", "settings": { "heading": "Shop" } },
+        { "type": "menu", "settings": { "heading": "House of Kala Katha" } },
+        { "type": "menu", "settings": { "heading": "Care" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

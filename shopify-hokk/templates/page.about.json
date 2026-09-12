@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "philosophy": {
+      "type": "philosophy",
+      "settings": {}
+    },
+    "story": {
+      "type": "story",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main-page",
+    "philosophy",
+    "story",
+    "newsletter"
+  ]
+}

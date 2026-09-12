@@ -1,0 +1,294 @@
+<div class="categories categories--align-{{ section.settings.text_alignment }}" data-reveal style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px; --cat-img-ratio: {{ section.settings.image_ratio }}; --cat-img-radius: {{ section.settings.image_radius }}px; --cat-gap: {{ section.settings.gap }}px;">
+  <div class="container">
+    <div class="categories__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="section-title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="categories__subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign category_fallbacks = 'category-shirts.jpg|category-jackets.jpg|lookbook-1.jpg|lookbook-2.jpg' | split: '|' -%}
+    <div class="categories__grid categories__grid--{{ section.settings.columns }}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign collection = block.settings.collection
+          assign image = block.settings.image
+          assign title = block.settings.title
+          if title == blank and collection != blank
+            assign title = collection.title
+          endif
+          assign caption = block.settings.caption
+          assign url = '#'
+          if collection != blank
+            assign url = collection.url
+          endif
+        -%}
+        <a href="{{ url }}" class="category-card" {{ block.shopify_attributes }}>
+          <div class="category-card__media">
+            {%- if image != blank -%}
+              {{ image | image_url: width: 900 | image_tag:
+                loading: 'lazy',
+                widths: '360, 540, 720, 900',
+                class: 'category-card__img',
+                alt: title | escape
+              }}
+            {%- elsif collection != blank and collection.featured_image != blank -%}
+              {{ collection.featured_image | image_url: width: 900 | image_tag:
+                loading: 'lazy',
+                widths: '360, 540, 720, 900',
+                class: 'category-card__img',
+                alt: title | escape
+              }}
+            {%- else -%}
+              {%- assign cf_idx = forloop.index0 | modulo: category_fallbacks.size -%}
+              <img src="{{ category_fallbacks[cf_idx] | asset_url }}" alt="{{ title | escape }}" class="category-card__img" loading="lazy" width="600" height="800">
+            {%- endif -%}
+          </div>
+          <div class="category-card__info">
+            {%- if caption != blank -%}
+              <span class="category-card__caption">{{ caption | escape }}</span>
+            {%- endif -%}
+            <span class="category-card__title">{{ title | escape }}</span>
+            <span class="category-card__arrow">{%- render 'icon', icon: 'arrow-right' -%}</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}{
+  "name": "Categories",
+  "class": "section-categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Wardrobe"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Every Silhouette, Rooted in Craft"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "From your morning shirt to your once-a-year occasion piece — every category carries a thread of the same story."
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "3/4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "1/1",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "16/9",
+          "label": "Wide 16:9"
+        }
+      ],
+      "default": "3/4"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between cards",
+      "min": 16,
+      "max": 56,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Shirts"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "Ikat & Handloom Cotton"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Shirts",
+            "caption": "Ikat & Handloom Cotton"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Co-ords",
+            "caption": "Cut for Today"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Jackets",
+            "caption": "Structured Heritage"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Tees",
+            "caption": "Everyday Motifs"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Shorts & Pants",
+            "caption": "Loomed Comfort"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Dresses & Separates",
+            "caption": "Contemporary Cuts"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Occasion Pieces",
+            "caption": "Refined Drama"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Traditional Silhouettes",
+            "caption": "Reimagined"
+          }
+        }
+      ]
+    }
+  ]
+}{% endschema %}
