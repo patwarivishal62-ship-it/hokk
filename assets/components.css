@@ -26,7 +26,7 @@
   padding-left: 0 !important;
   background: transparent !important;
 }
-.newsletter-form--underline .field--float .field__label { left: 0; }
+[data-floating-labels="true"] .newsletter-form--underline .field--float .field__label { left: 0; }
 .newsletter-form--underline .newsletter-form__row { border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; }
 
 /* ---- predictive-search ---- */

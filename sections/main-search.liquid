@@ -1,10 +1,32 @@
 {%- comment -%}
   Search results template section.
 {%- endcomment -%}
+{%- comment -%}
+  The merchant decides which object types this store searches. The list is used
+  twice: to skip results Liquid-side (a hard guarantee) and to build the
+  `types=` parameter on the scope filter links.
+{%- endcomment -%}
 {%- liquid
   assign results_per_page = section.settings.results_per_page | default: 24
-  assign types = section.settings.search_types | default: 'product,article,page'
+  assign allowed_types = ''
+  if section.settings.show_products
+    assign allowed_types = allowed_types | append: 'product,'
+  endif
+  if section.settings.show_articles
+    assign allowed_types = allowed_types | append: 'article,'
+  endif
+  if section.settings.show_pages
+    assign allowed_types = allowed_types | append: 'page,'
+  endif
+  assign types = allowed_types | split: ',' | compact | join: ','
 -%}
+{%- style -%}
+  /* Section spacing — Theme settings › this section */
+  #shopify-section-{{ section.id }} {
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 <div class="section search-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
   <div class="container">
     {%- render 'breadcrumb' -%}
@@ -18,6 +40,22 @@
         <h1 class="page-header__title">{{ 'search.title' | t }}</h1>
       {%- endif -%}
     </header>
+
+    {%- if section.settings.show_scope_filter and search.performed and types != blank -%}
+      {%- assign scope_query = search.terms | url_encode -%}
+      <nav class="search-section__scopes" aria-label="{{ 'search.all_results' | t }}">
+        <a class="chip" href="{{ routes.search_url }}?q={{ scope_query }}&types={{ types }}">{{ 'search.all_results' | t }}</a>
+        {%- if section.settings.show_products -%}
+          <a class="chip" href="{{ routes.search_url }}?q={{ scope_query }}&types=product">{{ 'search.products' | t }}</a>
+        {%- endif -%}
+        {%- if section.settings.show_articles -%}
+          <a class="chip" href="{{ routes.search_url }}?q={{ scope_query }}&types=article">{{ 'search.articles' | t }}</a>
+        {%- endif -%}
+        {%- if section.settings.show_pages -%}
+          <a class="chip" href="{{ routes.search_url }}?q={{ scope_query }}&types=page">{{ 'search.pages' | t }}</a>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
 
     <div class="search-section__form container--narrow">
       {%- render 'predictive-search', id: 'search-page', large: true -%}
@@ -35,10 +73,20 @@
         {%- else -%}
           <div class="grid search-grid" id="SearchGrid-{{ section.id }}" style="--cols: {{ section.settings.columns | default: 4 }}; --cols-tablet: 3; --cols-mobile: 2;">
             {%- for item in search.results -%}
+              {%- assign out_of_scope = false -%}
+              {%- case item.object_type -%}
+                {%- when 'product' -%}
+                  {%- unless section.settings.show_products -%}{%- assign out_of_scope = true -%}{%- endunless -%}
+                {%- when 'article' -%}
+                  {%- unless section.settings.show_articles -%}{%- assign out_of_scope = true -%}{%- endunless -%}
+                {%- else -%}
+                  {%- unless section.settings.show_pages -%}{%- assign out_of_scope = true -%}{%- endunless -%}
+              {%- endcase -%}
+              {%- unless out_of_scope -%}
               <div class="grid__item" data-load-item data-animate>
                 {%- case item.object_type -%}
                   {%- when 'product' -%}
-                    {%- render 'product-card', product: item, index: forloop.index -%}
+                    {%- render 'product-card', product: item, index: forloop.index, show_vendor: settings.search_show_vendor -%}
                   {%- when 'article' -%}
                     {%- render 'article-card', article: item, blog: item.blog, index: forloop.index, ratio: 'landscape' -%}
                   {%- else -%}
@@ -54,6 +102,7 @@
                     </article>
                 {%- endcase -%}
               </div>
+              {%- endunless -%}
             {%- endfor -%}
           </div>
 
@@ -93,6 +142,7 @@
 
 {% stylesheet %}
 .search-section__header { margin-bottom: 1.6rem; }
+.search-section__scopes { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 0 0 1.8rem; }
 .search-section__form { margin-bottom: clamp(2rem, 1.4rem + 2vw, 3.4rem); }
 .search-section__form .predictive__submit { display: none; }
 .search-section__suggest { text-align: center; }
@@ -111,35 +161,95 @@
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "columns",
       "label": "Results per row",
+      "default": "4",
       "options": [
-        { "value": "3", "label": "3" },
-        { "value": "4", "label": "4" },
-        { "value": "5", "label": "5" }
-      ],
-      "default": "4"
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "results_per_page",
       "label": "Results per page",
+      "default": 24,
       "min": 6,
       "max": 48,
-      "step": 6,
-      "default": 24
+      "step": 6
+    },
+    {
+      "type": "header",
+      "content": "What to search"
+    },
+    {
+      "type": "paragraph",
+      "content": "Switch off anything this store does not want to return in search. Turned-off types are never rendered, even if the search query asks for them."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products",
+      "label": "Include products",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_articles",
+      "label": "Include journal articles",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pages",
+      "label": "Include pages",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scope_filter",
+      "label": "Show scope filter links",
+      "info": "Everything · Products · Journal · Pages",
+      "default": true
     },
     {
       "type": "text",
@@ -147,8 +257,16 @@
       "label": "No results text",
       "default": "Try a different word, or browse the whole house below."
     },
-    { "type": "header", "content": "Before searching" },
-    { "type": "text", "id": "suggestions_heading", "label": "Suggestions heading", "default": "Popular searches" },
+    {
+      "type": "header",
+      "content": "Before searching"
+    },
+    {
+      "type": "text",
+      "id": "suggestions_heading",
+      "label": "Suggestions heading",
+      "default": "Popular searches"
+    },
     {
       "type": "text",
       "id": "suggestions",
@@ -156,8 +274,43 @@
       "info": "Comma separated.",
       "default": "Block print, Brass, Indigo, Table linen, Diwali gifts"
     },
-    { "type": "collection", "id": "featured_collection", "label": "Featured collection" },
-    { "type": "text", "id": "featured_heading", "label": "Featured heading", "default": "Loved by the house" }
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured collection"
+    },
+    {
+      "type": "text",
+      "id": "featured_heading",
+      "label": "Featured heading",
+      "default": "Loved by the house"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px"
+    }
   ]
 }
 {% endschema %}

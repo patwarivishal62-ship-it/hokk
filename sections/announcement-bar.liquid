@@ -159,21 +159,43 @@
   "name": "Announcement bar",
   "tag": "section",
   "class": "announcement-bar-section",
-  "max_blocks": 6,
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
   "settings": [
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "2",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "2"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
     {
       "type": "checkbox",
@@ -191,11 +213,11 @@
       "type": "range",
       "id": "padding",
       "label": "Vertical padding",
+      "default": 12,
       "min": 4,
       "max": 32,
       "step": 2,
-      "unit": "px",
-      "default": 12
+      "unit": "px"
     },
     {
       "type": "checkbox",
@@ -237,21 +259,57 @@
           "type": "select",
           "id": "icon",
           "label": "Icon",
+          "default": "truck",
           "options": [
-            { "value": "none", "label": "None" },
-            { "value": "truck", "label": "Truck" },
-            { "value": "gift", "label": "Gift" },
-            { "value": "sparkle", "label": "Sparkle" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "brush", "label": "Brush" },
-            { "value": "hand", "label": "Handmade" },
-            { "value": "returns", "label": "Returns" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "clock", "label": "Clock" },
-            { "value": "globe", "label": "Globe" },
-            { "value": "star", "label": "Star" }
-          ],
-          "default": "truck"
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "brush",
+              "label": "Brush"
+            },
+            {
+              "value": "hand",
+              "label": "Handmade"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ]
         },
         {
           "type": "header",
@@ -279,16 +337,16 @@
       ]
     }
   ],
+  "max_blocks": 6,
   "presets": [
     {
       "name": "Announcement bar",
       "blocks": [
-        { "type": "announcement" }
+        {
+          "type": "announcement"
+        }
       ]
     }
-  ],
-  "enabled_on": {
-    "groups": ["header"]
-  }
+  ]
 }
 {% endschema %}

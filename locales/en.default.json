@@ -544,7 +544,8 @@
     "collections": "Collections",
     "view_all": "View all",
     "search_for": "Search for “{{ terms }}”",
-    "reset": "Clear"
+    "reset": "Clear",
+    "all_results": "Everything"
   },
   "accessibility": {
     "skip_to_content": "Skip to content",

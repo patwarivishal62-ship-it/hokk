@@ -4,6 +4,13 @@
 {%- liquid
   assign reading = article.content | number_of_words | divided_by: 200 | plus: 1
 -%}
+{%- style -%}
+  /* Section spacing — Theme settings › this section */
+  #shopify-section-{{ section.id }} {
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 <article class="section article-section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
   <div class="container">
     {%- render 'breadcrumb' -%}
@@ -207,43 +214,170 @@
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
-    { "type": "checkbox", "id": "narrow", "label": "Narrow reading column", "default": true },
-    { "type": "checkbox", "id": "show_hero_image", "label": "Show the featured image", "default": true },
+    {
+      "type": "checkbox",
+      "id": "narrow",
+      "label": "Narrow reading column",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero_image",
+      "label": "Show the featured image",
+      "default": true
+    },
     {
       "type": "select",
       "id": "hero_ratio",
       "label": "Featured image ratio",
+      "default": "21 / 9",
       "options": [
-        { "value": "16 / 9", "label": "Wide 16:9" },
-        { "value": "21 / 9", "label": "Cinematic 21:9" },
-        { "value": "3 / 2", "label": "Landscape 3:2" },
-        { "value": "1 / 1", "label": "Square" }
-      ],
-      "default": "21 / 9"
+        {
+          "value": "16 / 9",
+          "label": "Wide 16:9"
+        },
+        {
+          "value": "21 / 9",
+          "label": "Cinematic 21:9"
+        },
+        {
+          "value": "3 / 2",
+          "label": "Landscape 3:2"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        }
+      ]
     },
-    { "type": "checkbox", "id": "hero_arch", "label": "Arch mask on the featured image", "default": false },
-    { "type": "checkbox", "id": "show_blog_name", "label": "Show the journal name", "default": true },
-    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
-    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
-    { "type": "checkbox", "id": "show_reading_time", "label": "Show reading time", "default": true },
-    { "type": "checkbox", "id": "show_excerpt", "label": "Show the excerpt as a standfirst", "default": true },
-    { "type": "checkbox", "id": "show_tags", "label": "Show topics", "default": true },
-    { "type": "header", "content": "Author box" },
-    { "type": "checkbox", "id": "show_author_box", "label": "Show an author box", "default": false },
-    { "type": "textarea", "id": "author_box_text", "label": "Author box text", "default": "Writing from the studio in Jaipur, where every block, brush and loom has a name attached to it." },
-    { "type": "header", "content": "Related posts" },
-    { "type": "checkbox", "id": "show_related", "label": "Show related posts", "default": true },
-    { "type": "text", "id": "related_heading", "label": "Related heading", "default": "Keep reading" }
+    {
+      "type": "checkbox",
+      "id": "hero_arch",
+      "label": "Arch mask on the featured image",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_blog_name",
+      "label": "Show the journal name",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reading_time",
+      "label": "Show reading time",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show the excerpt as a standfirst",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show topics",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Author box"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author_box",
+      "label": "Show an author box",
+      "default": false
+    },
+    {
+      "type": "textarea",
+      "id": "author_box_text",
+      "label": "Author box text",
+      "default": "Writing from the studio in Jaipur, where every block, brush and loom has a name attached to it."
+    },
+    {
+      "type": "header",
+      "content": "Related posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_related",
+      "label": "Show related posts",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "related_heading",
+      "label": "Related heading",
+      "default": "Keep reading"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px"
+    }
   ]
 }
 {% endschema %}

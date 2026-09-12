@@ -312,31 +312,53 @@
   "name": "Footer",
   "tag": "section",
   "class": "footer-section",
-  "max_blocks": 8,
+  "enabled_on": {
+    "groups": [
+      "footer"
+    ]
+  },
   "settings": [
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "2",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "2"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "columns",
       "label": "Columns",
       "info": "How many blocks sit side by side on desktop.",
+      "default": 4,
       "min": 1,
       "max": 6,
-      "step": 1,
-      "default": 4
+      "step": 1
     },
     {
       "type": "checkbox",
@@ -391,27 +413,75 @@
       "type": "text",
       "name": "Text and brand",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "House of Kala Katha" },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "House of Kala Katha"
+        },
         {
           "type": "richtext",
           "id": "text",
           "label": "Text",
           "default": "<p>We work with third-generation block printers, brass casters and weavers across Rajasthan. Every object leaves the studio with the name of the family that made it.</p>"
         },
-        { "type": "checkbox", "id": "show_logo", "label": "Show logo", "default": false },
-        { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 320, "step": 5, "unit": "px", "default": 150 },
-        { "type": "checkbox", "id": "show_social", "label": "Show social icons", "default": true },
-        { "type": "checkbox", "id": "show_social_text", "label": "Show social labels", "default": false },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "" },
-        { "type": "url", "id": "button_link", "label": "Button link" }
+        {
+          "type": "checkbox",
+          "id": "show_logo",
+          "label": "Show logo",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "label": "Logo width",
+          "default": 150,
+          "min": 60,
+          "max": 320,
+          "step": 5,
+          "unit": "px"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show social icons",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social_text",
+          "label": "Show social labels",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": ""
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
       ]
     },
     {
       "type": "menu",
       "name": "Menu",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
-        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
       ]
     },
     {
@@ -419,26 +489,53 @@
       "name": "Newsletter",
       "limit": 1,
       "settings": [
-        { "type": "paragraph", "content": "Anyone who subscribes is added to your customer list as “accepts marketing”." },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Join the house" },
+        {
+          "type": "paragraph",
+          "content": "Anyone who subscribes is added to your customer list as “accepts marketing”."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Join the house"
+        },
         {
           "type": "richtext",
           "id": "text",
           "label": "Text",
           "default": "<p>New drops, studio notes and first access to limited runs. One letter a month, never more.</p>"
         },
-        { "type": "text", "id": "placeholder", "label": "Field placeholder", "default": "Your email address" },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Field placeholder",
+          "default": "Your email address"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Subscribe"
+        },
         {
           "type": "select",
           "id": "form_style",
           "label": "Form style",
+          "default": "inline",
           "options": [
-            { "value": "inline", "label": "Field and button on one line" },
-            { "value": "stacked", "label": "Stacked" },
-            { "value": "underline", "label": "Underlined field" }
-          ],
-          "default": "inline"
+            {
+              "value": "inline",
+              "label": "Field and button on one line"
+            },
+            {
+              "value": "stacked",
+              "label": "Stacked"
+            },
+            {
+              "value": "underline",
+              "label": "Underlined field"
+            }
+          ]
         }
       ]
     },
@@ -451,30 +548,75 @@
           "type": "paragraph",
           "content": "Address, phone, email and hours come from Theme settings → Contact and support."
         },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Visit the studio" },
-        { "type": "checkbox", "id": "show_map_link", "label": "Show directions link", "default": true },
-        { "type": "text", "id": "map_label", "label": "Directions link text", "default": "Get directions" },
-        { "type": "url", "id": "map_url", "label": "Directions link URL" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Visit the studio"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_map_link",
+          "label": "Show directions link",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "map_label",
+          "label": "Directions link text",
+          "default": "Get directions"
+        },
+        {
+          "type": "url",
+          "id": "map_url",
+          "label": "Directions link URL"
+        }
       ]
     },
     {
       "type": "image",
       "name": "Image",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "caption", "label": "Caption", "default": "The studio in Jaipur" },
-        { "type": "checkbox", "id": "arch", "label": "Arch mask", "default": false },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "The studio in Jaipur"
+        },
+        {
+          "type": "checkbox",
+          "id": "arch",
+          "label": "Arch mask",
+          "default": false
+        },
         {
           "type": "select",
           "id": "ratio",
           "label": "Image ratio",
+          "default": "4 / 5",
           "options": [
-            { "value": "1 / 1", "label": "Square" },
-            { "value": "4 / 5", "label": "Portrait" },
-            { "value": "3 / 4", "label": "Tall" },
-            { "value": "16 / 9", "label": "Wide" }
-          ],
-          "default": "4 / 5"
+            {
+              "value": "1 / 1",
+              "label": "Square"
+            },
+            {
+              "value": "4 / 5",
+              "label": "Portrait"
+            },
+            {
+              "value": "3 / 4",
+              "label": "Tall"
+            },
+            {
+              "value": "16 / 9",
+              "label": "Wide"
+            }
+          ]
         }
       ]
     },
@@ -482,7 +624,11 @@
       "type": "custom",
       "name": "Custom Liquid",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading" },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
         {
           "type": "liquid",
           "id": "code",
@@ -493,6 +639,7 @@
       ]
     }
   ],
+  "max_blocks": 8,
   "presets": [
     {
       "name": "Footer",
@@ -513,21 +660,24 @@
         },
         {
           "type": "menu",
-          "settings": { "heading": "Shop" }
+          "settings": {
+            "heading": "Shop"
+          }
         },
         {
           "type": "menu",
-          "settings": { "heading": "The house" }
+          "settings": {
+            "heading": "The house"
+          }
         },
         {
           "type": "contact",
-          "settings": { "heading": "Visit the studio" }
+          "settings": {
+            "heading": "Visit the studio"
+          }
         }
       ]
     }
-  ],
-  "enabled_on": {
-    "groups": ["footer"]
-  }
+  ]
 }
 {% endschema %}

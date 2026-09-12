@@ -7,6 +7,13 @@
   assign card = section.settings.card_style
   assign mobile = section.settings.columns_mobile
 -%}
+{%- style -%}
+  /* Section spacing — Theme settings › this section */
+  #shopify-section-{{ section.id }} {
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 <div class="multicolumn section color-scheme-{{ section.settings.color_scheme }} multicolumn--{{ card }} multicolumn--align-{{ section.settings.text_alignment }}" data-section-id="{{ section.id }}">
   <div class="container">
     {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
@@ -123,137 +130,247 @@
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
-    { "type": "header", "content": "Header" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Kala Katha" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Four reasons to keep it" },
-    { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Why Kala Katha"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Four reasons to keep it"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
     {
       "type": "select",
       "id": "header_alignment",
       "label": "Header alignment",
+      "default": "center",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Centre" }
-      ],
-      "default": "center"
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
     },
-    { "type": "text", "id": "header_link_label", "label": "Header link label" },
-    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
-    { "type": "url", "id": "header_link", "label": "Header link" },
-    { "type": "header", "content": "Layout" },
+    {
+      "type": "text",
+      "id": "header_link_label",
+      "label": "Header link label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_motif",
+      "label": "Show decorative motif",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "header_link",
+      "label": "Header link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
     {
       "type": "select",
       "id": "layout",
       "label": "Layout",
+      "default": "grid",
       "options": [
-        { "value": "grid", "label": "Grid" },
-        { "value": "carousel", "label": "Carousel" }
-      ],
-      "default": "grid"
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "columns_desktop",
       "label": "Columns on desktop",
+      "default": 4,
       "min": 1,
       "max": 5,
-      "step": 1,
-      "default": 4
+      "step": 1
     },
     {
       "type": "select",
       "id": "columns_mobile",
       "label": "Columns on mobile",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "1 column" },
-        { "value": "2", "label": "2 columns" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "card_style",
       "label": "Card style",
+      "default": "box",
       "options": [
-        { "value": "none", "label": "No card" },
-        { "value": "box", "label": "Boxed card" },
-        { "value": "arch", "label": "Arch image" },
-        { "value": "circle", "label": "Round image" }
-      ],
-      "default": "box"
+        {
+          "value": "none",
+          "label": "No card"
+        },
+        {
+          "value": "box",
+          "label": "Boxed card"
+        },
+        {
+          "value": "arch",
+          "label": "Arch image"
+        },
+        {
+          "value": "circle",
+          "label": "Round image"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "media_type",
       "label": "Media",
+      "default": "icon",
       "options": [
-        { "value": "icon", "label": "Icon" },
-        { "value": "image", "label": "Image" }
-      ],
-      "default": "icon"
+        {
+          "value": "icon",
+          "label": "Icon"
+        },
+        {
+          "value": "image",
+          "label": "Image"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "image_ratio",
       "label": "Image ratio",
+      "default": "1 / 1",
       "options": [
-        { "value": "1 / 1", "label": "Square" },
-        { "value": "4 / 5", "label": "Portrait" },
-        { "value": "3 / 4", "label": "Tall" },
-        { "value": "16 / 9", "label": "Wide" }
-      ],
-      "default": "1 / 1"
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Tall"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Wide"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "text_alignment",
       "label": "Content alignment",
+      "default": "center",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Centre" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "center"
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "spacing",
       "label": "Space between columns",
+      "default": 24,
       "min": 8,
       "max": 56,
       "step": 4,
-      "unit": "px",
-      "default": 24
+      "unit": "px"
     },
     {
       "type": "range",
       "id": "padding_top",
       "label": "Top padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
       "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "default": 72
+      "max": 180,
+      "step": 4,
+      "unit": "px"
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "label": "Bottom padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
       "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "default": 72
+      "max": 180,
+      "step": 4,
+      "unit": "px"
     }
   ],
   "blocks": [
@@ -265,27 +382,85 @@
           "type": "select",
           "id": "icon",
           "label": "Icon",
+          "default": "hand",
           "options": [
-            { "value": "hand", "label": "Handmade" },
-            { "value": "truck", "label": "Shipping" },
-            { "value": "returns", "label": "Returns" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "chat", "label": "Chat" },
-            { "value": "gift", "label": "Gift" },
-            { "value": "sparkle", "label": "Sparkle" },
-            { "value": "star", "label": "Star" },
-            { "value": "lotus", "label": "Lotus" },
-            { "value": "elephant", "label": "Elephant" },
-            { "value": "rupee", "label": "Rupee" }
-          ],
-          "default": "hand"
+            {
+              "value": "hand",
+              "label": "Handmade"
+            },
+            {
+              "value": "truck",
+              "label": "Shipping"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "lotus",
+              "label": "Lotus"
+            },
+            {
+              "value": "elephant",
+              "label": "Elephant"
+            },
+            {
+              "value": "rupee",
+              "label": "Rupee"
+            }
+          ]
         },
-        { "type": "image_picker", "id": "image", "label": "Image (used when media is set to image)" },
-        { "type": "text", "id": "title", "label": "Heading", "default": "Handmade, not mass-made" },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Each piece is finished by one maker, whose name is stamped underneath.</p>" },
-        { "type": "text", "id": "link_label", "label": "Link label" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (used when media is set to image)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Handmade, not mass-made"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Each piece is finished by one maker, whose name is stamped underneath.</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ],
@@ -293,10 +468,38 @@
     {
       "name": "Multicolumn",
       "blocks": [
-        { "type": "column", "settings": { "icon": "hand", "title": "Made by one pair of hands", "text": "<p>Every order names its maker. No assembly lines, no anonymous labour.</p>" } },
-        { "type": "column", "settings": { "icon": "leaf", "title": "Natural dyes only", "text": "<p>Indigo, madder, pomegranate and iron — no azo dyes, ever.</p>" } },
-        { "type": "column", "settings": { "icon": "truck", "title": "Ships in 48 hours", "text": "<p>Free across India above ₹5,000, and worldwide with DHL.</p>" } },
-        { "type": "column", "settings": { "icon": "returns", "title": "14-day returns", "text": "<p>Changed your mind? Send it back unwashed and we will refund.</p>" } }
+        {
+          "type": "column",
+          "settings": {
+            "icon": "hand",
+            "title": "Made by one pair of hands",
+            "text": "<p>Every order names its maker. No assembly lines, no anonymous labour.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "leaf",
+            "title": "Natural dyes only",
+            "text": "<p>Indigo, madder, pomegranate and iron — no azo dyes, ever.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "truck",
+            "title": "Ships in 48 hours",
+            "text": "<p>Free across India above ₹5,000, and worldwide with DHL.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "returns",
+            "title": "14-day returns",
+            "text": "<p>Changed your mind? Send it back unwashed and we will refund.</p>"
+          }
+        }
       ]
     }
   ]

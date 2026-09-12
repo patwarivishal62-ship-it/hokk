@@ -4,6 +4,12 @@
   properties. Used by layout/theme.liquid and layout/password.liquid so both
   layouts stay visually identical.
 {%- endcomment -%}
+    {%- comment -%}
+      Per-section padding overrides are scaled on mobile by the same ratio the
+      merchant chose globally (Theme settings › Layout), so a section set to
+      40px on desktop lands at the matching mobile value. `times: 1.0` keeps
+      the division floating point — integer division would round it to 0.
+    {%- endcomment -%}
     {%- liquid
       assign heading_font = settings.type_header_font
       assign heading_font_bold = heading_font | font_modify: 'weight', 'bolder'
@@ -11,6 +17,14 @@
       assign body_font = settings.type_body_font
       assign body_font_bold = body_font | font_modify: 'weight', 'bolder'
       assign body_font_italic = body_font | font_modify: 'style', 'italic'
+
+      assign space_desktop = settings.section_spacing | default: 96
+      assign space_mobile = settings.section_spacing_mobile | times: 1.0
+      if space_desktop > 0
+        assign mobile_ratio = space_mobile | divided_by: space_desktop
+      else
+        assign mobile_ratio = 0.58
+      endif
     -%}
 
     {%- capture font_faces -%}
@@ -58,6 +72,7 @@
         --gutter: {{ settings.page_gutter }}px;
         --section-space: {{ settings.section_spacing }}px;
         --section-space-mobile: {{ settings.section_spacing_mobile }}px;
+        --section-space-mobile-ratio: {{ mobile_ratio }};
         --grid-gap: {{ settings.grid_gap }}px;
         --content-narrow: {{ settings.content_width_narrow }}px;
         --box-padding: {{ settings.box_padding }}px;

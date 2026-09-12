@@ -21,7 +21,14 @@
   assign media_limit = section.settings.media_count
 -%}
 
-<div class="featured-product section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}" data-product-section>
+{%- style -%}
+  /* Section spacing — Theme settings › this section */
+  #shopify-section-{{ section.id }} {
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
+<div class="featured-product section color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}" data-product-section data-variant-media="{% if settings.product_variant_images %}true{% else %}false{% endif %}" data-mark-unavailable="{% if settings.product_hide_variants_unavailable %}true{% else %}false{% endif %}">
   {%- if p != blank -%}
     {%- capture product_json -%}
 {
@@ -120,7 +127,7 @@
             {%- for block in section.blocks -%}
               {%- case block.type -%}
                 {%- when 'vendor' -%}
-                  {%- if p.vendor != blank -%}
+                  {%- if settings.product_show_vendor and p.vendor != blank -%}
                     <p class="eyebrow featured-product__vendor" {{ block.shopify_attributes }}>{{ p.vendor | escape }}</p>
                   {%- endif -%}
 
@@ -313,6 +320,9 @@
 .featured-product__info { display: flex; flex-direction: column; gap: 1rem; }
 .featured-product__info > form { display: contents; }
 .featured-product__vendor { margin: 0; }
+.featured-product__price { margin-top: 0.35rem; }
+.featured-product__rating { margin-top: 0.5rem; }
+.featured-product__share { margin-top: 1.2rem; }
 .featured-product__title { font-size: clamp(1.5rem, 1.2rem + 1.2vw, var(--h2)); margin: 0; line-height: 1.18; }
 .featured-product__title a { color: inherit; text-decoration: none; }
 .featured-product__title a:hover { color: var(--accent); }
@@ -354,103 +364,205 @@
   "tag": "section",
   "class": "featured-product-section",
   "settings": [
-    { "type": "product", "id": "product", "label": "Product" },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
-    { "type": "header", "content": "Header" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Piece of the month" },
-    { "type": "text", "id": "heading", "label": "Heading" },
-    { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Piece of the month"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
     {
       "type": "select",
       "id": "header_alignment",
       "label": "Header alignment",
+      "default": "center",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Centre" },
-        { "value": "split", "label": "Split" }
-      ],
-      "default": "center"
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "split",
+          "label": "Split"
+        }
+      ]
     },
-    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
-    { "type": "header", "content": "Media" },
+    {
+      "type": "checkbox",
+      "id": "show_motif",
+      "label": "Show decorative motif",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
     {
       "type": "select",
       "id": "media_layout",
       "label": "Media layout",
+      "default": "slider",
       "options": [
-        { "value": "single", "label": "Single image" },
-        { "value": "slider", "label": "Slider" },
-        { "value": "grid", "label": "Grid" }
-      ],
-      "default": "slider"
+        {
+          "value": "single",
+          "label": "Single image"
+        },
+        {
+          "value": "slider",
+          "label": "Slider"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "media_count",
       "label": "Maximum images",
+      "default": 4,
       "min": 1,
       "max": 8,
-      "step": 1,
-      "default": 4
+      "step": 1
     },
     {
       "type": "select",
       "id": "image_ratio",
       "label": "Image ratio",
+      "default": "portrait",
       "options": [
-        { "value": "adapt", "label": "Adapt to image" },
-        { "value": "square", "label": "Square" },
-        { "value": "portrait", "label": "Portrait" },
-        { "value": "tall", "label": "Tall" },
-        { "value": "landscape", "label": "Landscape" }
-      ],
-      "default": "portrait"
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "tall",
+          "label": "Tall"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "media_position",
       "label": "Media position",
+      "default": "right",
       "options": [
-        { "value": "right", "label": "Right" },
-        { "value": "left", "label": "Left" }
-      ],
-      "default": "right"
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ]
     },
-    { "type": "checkbox", "id": "zoom", "label": "Enable hover zoom", "default": true },
-    { "type": "checkbox", "id": "lightbox", "label": "Open images in a lightbox", "default": true },
-    { "type": "checkbox", "id": "show_badge", "label": "Show the sale badge", "default": true },
+    {
+      "type": "checkbox",
+      "id": "zoom",
+      "label": "Enable hover zoom",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "lightbox",
+      "label": "Open images in a lightbox",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show the sale badge",
+      "default": true
+    },
     {
       "type": "range",
       "id": "padding_top",
       "label": "Top padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
       "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "default": 72
+      "max": 180,
+      "step": 4,
+      "unit": "px"
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "label": "Bottom padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
       "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "default": 72
+      "max": 180,
+      "step": 4,
+      "unit": "px"
     }
   ],
   "blocks": [
@@ -477,8 +589,18 @@
       "name": "Price",
       "limit": 1,
       "settings": [
-        { "type": "checkbox", "id": "show_sale_badge", "label": "Show sale badge", "default": true },
-        { "type": "checkbox", "id": "show_sku", "label": "Show SKU", "default": false }
+        {
+          "type": "checkbox",
+          "id": "show_sale_badge",
+          "label": "Show sale badge",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_sku",
+          "label": "Show SKU",
+          "default": false
+        }
       ]
     },
     {
@@ -490,13 +612,24 @@
           "type": "select",
           "id": "picker_type",
           "label": "Type",
+          "default": "buttons",
           "options": [
-            { "value": "buttons", "label": "Buttons and swatches" },
-            { "value": "dropdown", "label": "Dropdowns" }
-          ],
-          "default": "buttons"
+            {
+              "value": "buttons",
+              "label": "Buttons and swatches"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdowns"
+            }
+          ]
         },
-        { "type": "checkbox", "id": "show_selected_value", "label": "Show the selected value", "default": true }
+        {
+          "type": "checkbox",
+          "id": "show_selected_value",
+          "label": "Show the selected value",
+          "default": true
+        }
       ]
     },
     {
@@ -510,9 +643,24 @@
       "name": "Buy buttons",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "button_label", "label": "Button label", "info": "Leave blank to use the default" },
-        { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout button", "default": true },
-        { "type": "checkbox", "id": "full_width", "label": "Full-width button", "default": true }
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "info": "Leave blank to use the default"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "label": "Show dynamic checkout button",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "full_width",
+          "label": "Full-width button",
+          "default": true
+        }
       ]
     },
     {
@@ -531,10 +679,10 @@
           "id": "truncate",
           "label": "Truncate to",
           "info": "0 shows the full description",
+          "default": 180,
           "min": 0,
           "max": 400,
-          "step": 20,
-          "default": 180
+          "step": 20
         }
       ]
     },
@@ -559,50 +707,128 @@
           "type": "select",
           "id": "icon_1",
           "label": "First icon",
+          "default": "truck",
           "options": [
-            { "value": "none", "label": "None" },
-            { "value": "truck", "label": "Shipping" },
-            { "value": "hand", "label": "Handmade" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "returns", "label": "Returns" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "gift", "label": "Gift" }
-          ],
-          "default": "truck"
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "truck",
+              "label": "Shipping"
+            },
+            {
+              "value": "hand",
+              "label": "Handmade"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            }
+          ]
         },
-        { "type": "text", "id": "label_1", "label": "First label", "default": "Free shipping over ₹5,000" },
+        {
+          "type": "text",
+          "id": "label_1",
+          "label": "First label",
+          "default": "Free shipping over ₹5,000"
+        },
         {
           "type": "select",
           "id": "icon_2",
           "label": "Second icon",
+          "default": "returns",
           "options": [
-            { "value": "none", "label": "None" },
-            { "value": "truck", "label": "Shipping" },
-            { "value": "hand", "label": "Handmade" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "returns", "label": "Returns" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "gift", "label": "Gift" }
-          ],
-          "default": "returns"
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "truck",
+              "label": "Shipping"
+            },
+            {
+              "value": "hand",
+              "label": "Handmade"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            }
+          ]
         },
-        { "type": "text", "id": "label_2", "label": "Second label", "default": "14-day returns" },
+        {
+          "type": "text",
+          "id": "label_2",
+          "label": "Second label",
+          "default": "14-day returns"
+        },
         {
           "type": "select",
           "id": "icon_3",
           "label": "Third icon",
+          "default": "hand",
           "options": [
-            { "value": "none", "label": "None" },
-            { "value": "truck", "label": "Shipping" },
-            { "value": "hand", "label": "Handmade" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "returns", "label": "Returns" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "gift", "label": "Gift" }
-          ],
-          "default": "hand"
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "truck",
+              "label": "Shipping"
+            },
+            {
+              "value": "hand",
+              "label": "Handmade"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            }
+          ]
         },
-        { "type": "text", "id": "label_3", "label": "Third label", "default": "Maker named on every piece" }
+        {
+          "type": "text",
+          "id": "label_3",
+          "label": "Third label",
+          "default": "Maker named on every piece"
+        }
       ]
     },
     {
@@ -616,7 +842,12 @@
       "name": "Link to full product",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "View full details" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "View full details"
+        }
       ]
     },
     {
@@ -629,17 +860,42 @@
     {
       "name": "Featured product",
       "blocks": [
-        { "type": "vendor" },
-        { "type": "title" },
-        { "type": "rating" },
-        { "type": "price" },
-        { "type": "variant_picker" },
-        { "type": "quantity_selector" },
-        { "type": "buy_buttons" },
-        { "type": "inventory" },
-        { "type": "description", "settings": { "truncate": 180 } },
-        { "type": "icons" },
-        { "type": "link" }
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "rating"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant_picker"
+        },
+        {
+          "type": "quantity_selector"
+        },
+        {
+          "type": "buy_buttons"
+        },
+        {
+          "type": "inventory"
+        },
+        {
+          "type": "description",
+          "settings": {
+            "truncate": 180
+          }
+        },
+        {
+          "type": "icons"
+        },
+        {
+          "type": "link"
+        }
       ]
     }
   ]

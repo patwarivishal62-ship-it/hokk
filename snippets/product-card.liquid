@@ -8,6 +8,7 @@
     card_style    – override the global card style
     quick_add     – override the global quick-add setting
     product_url   – override the link (e.g. /collections/x/products/y)
+    show_vendor   – override the global "show vendor" setting (used on search)
 {%- endcomment -%}
 {%- liquid
   assign p = product
@@ -18,6 +19,10 @@
     assign show_quick = settings.product_quick_add
   endif
   assign url = product_url | default: p.url
+  assign card_show_vendor = show_vendor
+  if card_show_vendor == nil
+    assign card_show_vendor = settings.product_vendor
+  endif
   assign ratio_css = '4 / 5'
   case img_ratio
     when 'square'
@@ -167,8 +172,14 @@
   </div>
 
   <div class="card__body">
-    {%- if settings.product_vendor and p.vendor != blank -%}
-      <span class="product-card__vendor">{{ p.vendor | escape }}</span>
+    {%- if card_show_vendor -%}
+      {%- assign card_vendor_text = p.vendor -%}
+      {%- if card_vendor_text == blank and p.collections.size > 0 -%}
+        {%- assign card_vendor_text = p.collections.first.title -%}
+      {%- endif -%}
+      {%- if card_vendor_text != blank -%}
+        <span class="product-card__vendor">{{ card_vendor_text | escape }}</span>
+      {%- endif -%}
     {%- endif -%}
 
     <h3 class="card__title">

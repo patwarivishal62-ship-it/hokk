@@ -1,6 +1,13 @@
 {%- comment -%}
   Quote — a single statement, optionally with a portrait.
 {%- endcomment -%}
+{%- style -%}
+  /* Section spacing — Theme settings › this section */
+  #shopify-section-{{ section.id }} {
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 <div class="quote-section section color-scheme-{{ section.settings.color_scheme }} quote-style--{{ section.settings.style }} quote-align--{{ section.settings.text_alignment }}" data-section-id="{{ section.id }}">
   <div class="container">
     {%- if section.settings.background_image != blank -%}
@@ -124,83 +131,179 @@
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
-    { "type": "textarea", "id": "quote", "label": "Quote", "default": "We are not selling objects. We are asking you to keep a piece of someone's life's work in your home." },
-    { "type": "text", "id": "author", "label": "Author", "default": "Ananya Kala" },
-    { "type": "text", "id": "role", "label": "Role or attribution", "default": "Founder, House of Kala Katha" },
-    { "type": "image_picker", "id": "image", "label": "Portrait" },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "We are not selling objects. We are asking you to keep a piece of someone's life's work in your home."
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author",
+      "default": "Ananya Kala"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role or attribution",
+      "default": "Founder, House of Kala Katha"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Portrait"
+    },
     {
       "type": "select",
       "id": "style",
       "label": "Style",
+      "default": "plain",
       "options": [
-        { "value": "plain", "label": "Plain" },
-        { "value": "card", "label": "Card" },
-        { "value": "bordered", "label": "Bordered" },
-        { "value": "portrait", "label": "Large portrait above" }
-      ],
-      "default": "plain"
+        {
+          "value": "plain",
+          "label": "Plain"
+        },
+        {
+          "value": "card",
+          "label": "Card"
+        },
+        {
+          "value": "bordered",
+          "label": "Bordered"
+        },
+        {
+          "value": "portrait",
+          "label": "Large portrait above"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "text_alignment",
       "label": "Alignment",
+      "default": "center",
       "options": [
-        { "value": "center", "label": "Centre" },
-        { "value": "left", "label": "Left" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "center"
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
     },
-    { "type": "checkbox", "id": "show_quote_mark", "label": "Show the quote mark", "default": true },
-    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
-    { "type": "image_picker", "id": "background_image", "label": "Background image (behind a wash of the colour scheme)" },
-    { "type": "header", "content": "Button" },
-    { "type": "text", "id": "button_label", "label": "Button label" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "checkbox",
+      "id": "show_quote_mark",
+      "label": "Show the quote mark",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_motif",
+      "label": "Show decorative motif",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image (behind a wash of the colour scheme)"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
     {
       "type": "select",
       "id": "button_style",
       "label": "Button style",
+      "default": "outline",
       "options": [
-        { "value": "solid", "label": "Solid" },
-        { "value": "outline", "label": "Outline" },
-        { "value": "ghost", "label": "Text" }
-      ],
-      "default": "outline"
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "ghost",
+          "label": "Text"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "padding_top",
       "label": "Top padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
       "min": 0,
       "max": 180,
-      "step": 8,
-      "unit": "px",
-      "default": 88
+      "step": 4,
+      "unit": "px"
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "label": "Bottom padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
       "min": 0,
       "max": 180,
-      "step": 8,
-      "unit": "px",
-      "default": 88
+      "step": 4,
+      "unit": "px"
     }
   ],
   "presets": [
-    { "name": "Quote" }
+    {
+      "name": "Quote"
+    }
   ]
 }
 {% endschema %}

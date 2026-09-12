@@ -702,6 +702,16 @@
       var mediaItems = $$('[data-media-id]', section);
       var gallery = $('[data-gallery]', section);
 
+      /* Theme settings › Product page switches arrive as data attributes on the
+         section root. A missing attribute (section === document) means "on". */
+      function flag(name) {
+        if (!section.getAttribute) return true;
+        var value = section.getAttribute(name);
+        return value === null || value === 'true';
+      }
+      var variantMediaOn = flag('data-variant-media');
+      var markUnavailableOn = flag('data-mark-unavailable');
+
       function selectedOptions() {
         var out = [];
         options.forEach(function (opt, idx) {
@@ -781,6 +791,7 @@
       }
 
       function focusMedia(variant) {
+        if (!variantMediaOn) return;
         if (!variant || !variant.featured_media || !mediaItems.length) return;
         var target = mediaItems.find(function (m) {
           return m.getAttribute('data-media-id') === String(variant.featured_media.id);
@@ -806,7 +817,7 @@
         setAvailability(variant);
         setPrice(variant);
         focusMedia(variant);
-        markUnavailable();
+        if (markUnavailableOn) markUnavailable();
         /* keep the selected-value labels in sync */
         $$('[data-option-value]', form).forEach(function (el) {
           var i = parseInt(el.getAttribute('data-option-value'), 10);

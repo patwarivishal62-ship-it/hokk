@@ -61,6 +61,7 @@
     data-card-hover="{% if settings.card_shadow_on_hover %}true{% else %}false{% endif %}"
     data-align="{{ settings.product_text_align }}"
     data-print-border="{% if settings.print_border_enable %}{{ settings.print_border_style }}{% else %}off{% endif %}"
+    data-floating-labels="{% if settings.input_floating_label %}true{% else %}false{% endif %}"
     data-full-bleed="{% if settings.full_bleed_mobile %}true{% else %}false{% endif %}"
   >
     {%- render 'clip-paths' -%}

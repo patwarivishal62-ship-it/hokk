@@ -694,20 +694,43 @@ body.header-is-hide .header-section.is-hidden { transform: translateY(-101%); }
   "name": "Header",
   "tag": "section",
   "class": "header-section",
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
   "settings": [
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
     {
       "type": "header",
@@ -717,32 +740,41 @@ body.header-is-hide .header-section.is-hidden { transform: translateY(-101%); }
       "type": "select",
       "id": "layout",
       "label": "Header layout",
+      "default": "logo-left",
       "options": [
-        { "value": "logo-left", "label": "Logo left, menu centre" },
-        { "value": "logo-center", "label": "Menu left, logo centre" },
-        { "value": "nav-below", "label": "Logo row with menu underneath" }
-      ],
-      "default": "logo-left"
+        {
+          "value": "logo-left",
+          "label": "Logo left, menu centre"
+        },
+        {
+          "value": "logo-center",
+          "label": "Menu left, logo centre"
+        },
+        {
+          "value": "nav-below",
+          "label": "Logo row with menu underneath"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "logo_width",
       "label": "Logo width",
+      "default": 170,
       "min": 60,
       "max": 360,
       "step": 5,
-      "unit": "px",
-      "default": 170
+      "unit": "px"
     },
     {
       "type": "range",
       "id": "padding",
       "label": "Vertical padding",
+      "default": 16,
       "min": 4,
       "max": 40,
       "step": 2,
-      "unit": "px",
-      "default": 16
+      "unit": "px"
     },
     {
       "type": "checkbox",
@@ -777,10 +809,10 @@ body.header-is-hide .header-section.is-hidden { transform: translateY(-101%); }
       "type": "range",
       "id": "mega_columns",
       "label": "Mega menu columns",
+      "default": 4,
       "min": 2,
       "max": 6,
-      "step": 1,
-      "default": 4
+      "step": 1
     },
     {
       "type": "checkbox",
@@ -824,11 +856,17 @@ body.header-is-hide .header-section.is-hidden { transform: translateY(-101%); }
       "type": "select",
       "id": "search_style",
       "label": "Search style",
+      "default": "drawer",
       "options": [
-        { "value": "drawer", "label": "Icon opening a drawer" },
-        { "value": "inline", "label": "Inline field in the header" }
-      ],
-      "default": "drawer"
+        {
+          "value": "drawer",
+          "label": "Icon opening a drawer"
+        },
+        {
+          "value": "inline",
+          "label": "Inline field in the header"
+        }
+      ]
     },
     {
       "type": "checkbox",
@@ -846,11 +884,17 @@ body.header-is-hide .header-section.is-hidden { transform: translateY(-101%); }
       "type": "select",
       "id": "cart_icon",
       "label": "Cart icon",
+      "default": "bag",
       "options": [
-        { "value": "bag", "label": "Shopping bag" },
-        { "value": "cart", "label": "Trolley" }
-      ],
-      "default": "bag"
+        {
+          "value": "bag",
+          "label": "Shopping bag"
+        },
+        {
+          "value": "cart",
+          "label": "Trolley"
+        }
+      ]
     },
     {
       "type": "checkbox",
@@ -923,9 +967,6 @@ body.header-is-hide .header-section.is-hidden { transform: translateY(-101%); }
         "compact_on_scroll": true
       }
     }
-  ],
-  "enabled_on": {
-    "groups": ["header"]
-  }
+  ]
 }
 {% endschema %}

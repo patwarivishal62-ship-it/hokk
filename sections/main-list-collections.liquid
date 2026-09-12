@@ -1,6 +1,13 @@
 {%- comment -%}
   Collections list template section.
 {%- endcomment -%}
+{%- style -%}
+  /* Section spacing — Theme settings › this section */
+  #shopify-section-{{ section.id }} {
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 <div class="section list-collections color-scheme-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
   <div class="container">
     <header class="page-header page-header--center">
@@ -53,76 +60,186 @@
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The house" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "All collections" },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The house"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "All collections"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_motif",
+      "label": "Show decorative motif",
+      "default": true
+    },
     {
       "type": "select",
       "id": "sort",
       "label": "Sort collections by",
+      "default": "alphabetical",
       "options": [
-        { "value": "alphabetical", "label": "Alphabetically" },
-        { "value": "products_high", "label": "Product count, high to low" },
-        { "value": "date", "label": "Date published, new to old" },
-        { "value": "date_ascending", "label": "Date published, old to new" }
-      ],
-      "default": "alphabetical"
+        {
+          "value": "alphabetical",
+          "label": "Alphabetically"
+        },
+        {
+          "value": "products_high",
+          "label": "Product count, high to low"
+        },
+        {
+          "value": "date",
+          "label": "Date published, new to old"
+        },
+        {
+          "value": "date_ascending",
+          "label": "Date published, old to new"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "columns",
       "label": "Columns on desktop",
+      "default": "3",
       "options": [
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" },
-        { "value": "4", "label": "4" }
-      ],
-      "default": "3"
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "collections_per_page",
       "label": "Collections per page",
+      "default": 12,
       "min": 3,
       "max": 36,
-      "step": 3,
-      "default": 12
+      "step": 3
     },
     {
       "type": "select",
       "id": "card_style",
       "label": "Card style",
+      "default": "cover",
       "options": [
-        { "value": "cover", "label": "Text over image" },
-        { "value": "split", "label": "Text below image" },
-        { "value": "arch", "label": "Arch over image" }
-      ],
-      "default": "cover"
+        {
+          "value": "cover",
+          "label": "Text over image"
+        },
+        {
+          "value": "split",
+          "label": "Text below image"
+        },
+        {
+          "value": "arch",
+          "label": "Arch over image"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "image_ratio",
       "label": "Image ratio",
+      "default": "portrait",
       "options": [
-        { "value": "square", "label": "Square" },
-        { "value": "portrait", "label": "Portrait" },
-        { "value": "landscape", "label": "Landscape" },
-        { "value": "wide", "label": "Wide" }
-      ],
-      "default": "portrait"
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ]
     },
-    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": true }
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px"
+    }
   ]
 }
 {% endschema %}

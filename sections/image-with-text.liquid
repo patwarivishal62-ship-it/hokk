@@ -11,6 +11,13 @@
   assign gap = section.settings.spacing
 -%}
 
+{%- style -%}
+  /* Section spacing — Theme settings › this section */
+  #shopify-section-{{ section.id }} {
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 <div class="image-with-text section color-scheme-{{ section.settings.color_scheme }}{{ flip }}" data-section-id="{{ section.id }}" style="--iwt-gap: {{ gap }}px; --iwt-split: {{ section.settings.image_width }}%;">
   <div class="container">
     <div class="iwt__grid">
@@ -223,84 +230,151 @@
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "1",
       "options": [
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "5", "label": "Scheme 5 — Marigold" },
-        { "value": "6", "label": "Scheme 6 — Leaf" }
-      ],
-      "default": "1"
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "5",
+          "label": "Scheme 5 — Marigold"
+        },
+        {
+          "value": "6",
+          "label": "Scheme 6 — Leaf"
+        }
+      ]
     },
-    { "type": "header", "content": "Images" },
-    { "type": "image_picker", "id": "image", "label": "Main image" },
-    { "type": "image_picker", "id": "image_2", "label": "Overlapping round image" },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Main image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Overlapping round image"
+    },
     {
       "type": "select",
       "id": "image_ratio",
       "label": "Image ratio",
+      "default": "4 / 5",
       "options": [
-        { "value": "1 / 1", "label": "Square" },
-        { "value": "4 / 5", "label": "Portrait" },
-        { "value": "3 / 4", "label": "Tall" },
-        { "value": "2 / 3", "label": "Very tall" },
-        { "value": "16 / 9", "label": "Wide" }
-      ],
-      "default": "4 / 5"
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Tall"
+        },
+        {
+          "value": "2 / 3",
+          "label": "Very tall"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Wide"
+        }
+      ]
     },
-    { "type": "checkbox", "id": "arch", "label": "Arch mask", "default": true },
-    { "type": "checkbox", "id": "rounded", "label": "Rounded corners (ignored when arch is on)", "default": false },
-    { "type": "text", "id": "badge", "label": "Corner badge", "default": "Est. 1974" },
+    {
+      "type": "checkbox",
+      "id": "arch",
+      "label": "Arch mask",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "label": "Rounded corners (ignored when arch is on)",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Corner badge",
+      "default": "Est. 1974"
+    },
     {
       "type": "select",
       "id": "image_position",
       "label": "Image position",
+      "default": "left",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "left"
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "image_width",
       "label": "Image column width",
+      "default": 52,
       "min": 36,
       "max": 66,
       "step": 2,
-      "unit": "%",
-      "default": 52
+      "unit": "%"
     },
     {
       "type": "range",
       "id": "spacing",
       "label": "Space between columns",
+      "default": 48,
       "min": 16,
       "max": 96,
       "step": 4,
-      "unit": "px",
-      "default": 48
+      "unit": "px"
     },
     {
       "type": "range",
       "id": "padding_top",
       "label": "Top padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
       "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "default": 72
+      "max": 180,
+      "step": 4,
+      "unit": "px"
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "label": "Bottom padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
       "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "default": 72
+      "max": 180,
+      "step": 4,
+      "unit": "px"
     }
   ],
   "blocks": [
@@ -308,36 +382,67 @@
       "type": "caption",
       "name": "Caption",
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "The workshop" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "The workshop"
+        }
       ]
     },
     {
       "type": "heading",
       "name": "Heading",
       "settings": [
-        { "type": "text", "id": "text", "label": "Heading", "default": "Printed one pass, one colour at a time" },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading",
+          "default": "Printed one pass, one colour at a time"
+        },
         {
           "type": "select",
           "id": "size",
           "label": "Size",
+          "default": "medium",
           "options": [
-            { "value": "large", "label": "Large" },
-            { "value": "medium", "label": "Medium" },
-            { "value": "small", "label": "Small" }
-          ],
-          "default": "medium"
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ]
         },
         {
           "type": "select",
           "id": "tag",
           "label": "Heading level",
+          "default": "h2",
           "options": [
-            { "value": "h2", "label": "H2" },
-            { "value": "h3", "label": "H3" },
-            { "value": "h4", "label": "H4" },
-            { "value": "p", "label": "Paragraph" }
-          ],
-          "default": "h2"
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "p",
+              "label": "Paragraph"
+            }
+          ]
         }
       ]
     },
@@ -357,8 +462,18 @@
       "type": "stat",
       "name": "Stat",
       "settings": [
-        { "type": "text", "id": "value", "label": "Value", "default": "40+" },
-        { "type": "text", "id": "label", "label": "Label", "default": "artisan families" }
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "40+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "artisan families"
+        }
       ]
     },
     {
@@ -375,14 +490,29 @@
           "type": "select",
           "id": "icon",
           "label": "Bullet icon",
+          "default": "check",
           "options": [
-            { "value": "check", "label": "Check" },
-            { "value": "sparkle", "label": "Sparkle" },
-            { "value": "star", "label": "Star" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "minus", "label": "Dash" }
-          ],
-          "default": "check"
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "minus",
+              "label": "Dash"
+            }
+          ]
         }
       ]
     },
@@ -394,42 +524,89 @@
           "type": "range",
           "id": "rating",
           "label": "Rating",
+          "default": 5,
           "min": 1,
           "max": 5,
-          "step": 0.5,
-          "default": 5
+          "step": 0.5
         },
-        { "type": "text", "id": "count", "label": "Number of reviews", "default": "1,240" },
-        { "type": "text", "id": "label", "label": "Label", "default": "from verified buyers" }
+        {
+          "type": "text",
+          "id": "count",
+          "label": "Number of reviews",
+          "default": "1,240"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "from verified buyers"
+        }
       ]
     },
     {
       "type": "quote",
       "name": "Quote",
       "settings": [
-        { "type": "textarea", "id": "text", "label": "Quote", "default": "The cloth remembers the hand that printed it." },
-        { "type": "text", "id": "attribution", "label": "Attribution", "default": "Ramesh Chhipa, master printer" }
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Quote",
+          "default": "The cloth remembers the hand that printed it."
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution",
+          "default": "Ramesh Chhipa, master printer"
+        }
       ]
     },
     {
       "type": "button",
       "name": "Button",
       "settings": [
-        { "type": "text", "id": "label", "label": "Button label", "default": "Explore the craft" },
-        { "type": "url", "id": "link", "label": "Button link" },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label",
+          "default": "Explore the craft"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button link"
+        },
         {
           "type": "select",
           "id": "style",
           "label": "Button style",
+          "default": "solid",
           "options": [
-            { "value": "solid", "label": "Solid" },
-            { "value": "outline", "label": "Outline" },
-            { "value": "ghost", "label": "Text" }
-          ],
-          "default": "solid"
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "ghost",
+              "label": "Text"
+            }
+          ]
         },
-        { "type": "text", "id": "label_2", "label": "Secondary link label", "default": "Meet the makers" },
-        { "type": "url", "id": "link_2", "label": "Secondary link" }
+        {
+          "type": "text",
+          "id": "label_2",
+          "label": "Secondary link label",
+          "default": "Meet the makers"
+        },
+        {
+          "type": "url",
+          "id": "link_2",
+          "label": "Secondary link"
+        }
       ]
     },
     {
@@ -440,11 +617,11 @@
           "type": "range",
           "id": "height",
           "label": "Height",
+          "default": 24,
           "min": 8,
           "max": 80,
           "step": 4,
-          "unit": "px",
-          "default": 24
+          "unit": "px"
         }
       ]
     }
@@ -453,11 +630,30 @@
     {
       "name": "Image with text",
       "blocks": [
-        { "type": "caption", "settings": { "text": "The workshop" } },
-        { "type": "heading", "settings": { "text": "Printed one pass, one colour at a time" } },
-        { "type": "text", "settings": {} },
-        { "type": "list", "settings": {} },
-        { "type": "button", "settings": {} }
+        {
+          "type": "caption",
+          "settings": {
+            "text": "The workshop"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "text": "Printed one pass, one colour at a time"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {}
+        },
+        {
+          "type": "list",
+          "settings": {}
+        },
+        {
+          "type": "button",
+          "settings": {}
+        }
       ]
     }
   ]

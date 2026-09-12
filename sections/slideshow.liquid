@@ -8,6 +8,13 @@
   assign slide_count = section.blocks.size
 -%}
 
+{%- style -%}
+  /* Section spacing — Theme settings › this section */
+  #shopify-section-{{ section.id }} {
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
 <div
   class="slideshow section slideshow--{{ height }} color-scheme-{{ section.settings.color_scheme }}"
   data-section-id="{{ section.id }}"
@@ -300,187 +307,426 @@
       "type": "select",
       "id": "height",
       "label": "Slide height",
+      "default": "large",
       "options": [
-        { "value": "small", "label": "Small" },
-        { "value": "medium", "label": "Medium" },
-        { "value": "large", "label": "Large" },
-        { "value": "full", "label": "Full screen" },
-        { "value": "adapt", "label": "Adapt to content" }
-      ],
-      "default": "large"
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "full",
+          "label": "Full screen"
+        },
+        {
+          "value": "adapt",
+          "label": "Adapt to content"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "color_scheme",
       "label": "Colour scheme",
+      "default": "2",
       "options": [
-        { "value": "2", "label": "Scheme 2 — Ink" },
-        { "value": "1", "label": "Scheme 1 — Ivory" },
-        { "value": "4", "label": "Scheme 4 — Indigo" },
-        { "value": "3", "label": "Scheme 3 — Terracotta" }
-      ],
-      "default": "2"
+        {
+          "value": "2",
+          "label": "Scheme 2 — Ink"
+        },
+        {
+          "value": "1",
+          "label": "Scheme 1 — Ivory"
+        },
+        {
+          "value": "4",
+          "label": "Scheme 4 — Indigo"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3 — Terracotta"
+        }
+      ]
     },
-    { "type": "header", "content": "Slide defaults" },
+    {
+      "type": "header",
+      "content": "Slide defaults"
+    },
     {
       "type": "select",
       "id": "content_position",
       "label": "Content position",
+      "default": "center-left",
       "options": [
-        { "value": "top-left", "label": "Top left" },
-        { "value": "top-center", "label": "Top centre" },
-        { "value": "top-right", "label": "Top right" },
-        { "value": "center-left", "label": "Middle left" },
-        { "value": "center-center", "label": "Middle centre" },
-        { "value": "center-right", "label": "Middle right" },
-        { "value": "bottom-left", "label": "Bottom left" },
-        { "value": "bottom-center", "label": "Bottom centre" },
-        { "value": "bottom-right", "label": "Bottom right" }
-      ],
-      "default": "center-left"
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top centre"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "center-left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center-center",
+          "label": "Middle centre"
+        },
+        {
+          "value": "center-right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom centre"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ]
     },
     {
       "type": "select",
       "id": "text_alignment",
       "label": "Text alignment",
+      "default": "left",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Centre" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "left"
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "overlay_opacity",
       "label": "Overlay opacity",
+      "default": 45,
       "min": 0,
       "max": 90,
       "step": 5,
-      "unit": "%",
-      "default": 45
+      "unit": "%"
     },
-    { "type": "header", "content": "Rotation" },
-    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate slides", "default": true },
+    {
+      "type": "header",
+      "content": "Rotation"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
     {
       "type": "range",
       "id": "autoplay_speed",
       "label": "Change slides every",
+      "default": 6,
       "min": 3,
       "max": 12,
       "step": 1,
-      "unit": "s",
-      "default": 6
+      "unit": "s"
     },
-    { "type": "checkbox", "id": "loop", "label": "Loop back to the first slide", "default": true },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop back to the first slide",
+      "default": true
+    },
     {
       "type": "select",
       "id": "navigation",
       "label": "Navigation",
+      "default": "both",
       "options": [
-        { "value": "dots", "label": "Dots" },
-        { "value": "arrows", "label": "Arrows" },
-        { "value": "both", "label": "Dots and arrows" },
-        { "value": "counter", "label": "Slide counter" },
-        { "value": "none", "label": "None" }
-      ],
-      "default": "both"
+        {
+          "value": "dots",
+          "label": "Dots"
+        },
+        {
+          "value": "arrows",
+          "label": "Arrows"
+        },
+        {
+          "value": "both",
+          "label": "Dots and arrows"
+        },
+        {
+          "value": "counter",
+          "label": "Slide counter"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
     },
-    { "type": "checkbox", "id": "show_progress", "label": "Show auto-rotate progress bar", "default": true }
+    {
+      "type": "checkbox",
+      "id": "show_progress",
+      "label": "Show auto-rotate progress bar",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "info": "Matches the global section spacing by default. On mobile this is scaled by the ratio in Theme settings › Layout.",
+      "default": 96,
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px"
+    }
   ],
   "blocks": [
     {
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New season" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "The Indigo Room" },
-        { "type": "text", "id": "subheading", "label": "Italic subheading", "default": "block-printed by hand in Bagru" },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "New season"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "The Indigo Room"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Italic subheading",
+          "default": "block-printed by hand in Bagru"
+        },
         {
           "type": "richtext",
           "id": "text",
           "label": "Text",
           "default": "<p>Nine passes of natural indigo, dried in the Rajasthan sun.</p>"
         },
-        { "type": "checkbox", "id": "show_motif", "label": "Show decorative motif", "default": true },
-        { "type": "text", "id": "button_label_1", "label": "First button label", "default": "Shop the collection" },
-        { "type": "url", "id": "button_link_1", "label": "First button link" },
+        {
+          "type": "checkbox",
+          "id": "show_motif",
+          "label": "Show decorative motif",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "label": "First button label",
+          "default": "Shop the collection"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "First button link"
+        },
         {
           "type": "select",
           "id": "button_style_1",
           "label": "First button style",
+          "default": "solid",
           "options": [
-            { "value": "solid", "label": "Solid" },
-            { "value": "outline", "label": "Outline" },
-            { "value": "ghost", "label": "Text" }
-          ],
-          "default": "solid"
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "ghost",
+              "label": "Text"
+            }
+          ]
         },
-        { "type": "text", "id": "button_label_2", "label": "Second button label" },
-        { "type": "url", "id": "button_link_2", "label": "Second button link" },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "Second button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Second button link"
+        },
         {
           "type": "select",
           "id": "button_style_2",
           "label": "Second button style",
+          "default": "outline",
           "options": [
-            { "value": "solid", "label": "Solid" },
-            { "value": "outline", "label": "Outline" },
-            { "value": "ghost", "label": "Text" }
-          ],
-          "default": "outline"
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "ghost",
+              "label": "Text"
+            }
+          ]
         },
         {
           "type": "select",
           "id": "content_position",
           "label": "Content position",
+          "default": "",
           "options": [
-            { "value": "", "label": "Use section default" },
-            { "value": "top-left", "label": "Top left" },
-            { "value": "top-center", "label": "Top centre" },
-            { "value": "top-right", "label": "Top right" },
-            { "value": "center-left", "label": "Middle left" },
-            { "value": "center-center", "label": "Middle centre" },
-            { "value": "center-right", "label": "Middle right" },
-            { "value": "bottom-left", "label": "Bottom left" },
-            { "value": "bottom-center", "label": "Bottom centre" },
-            { "value": "bottom-right", "label": "Bottom right" }
-          ],
-          "default": ""
+            {
+              "value": "",
+              "label": "Use section default"
+            },
+            {
+              "value": "top-left",
+              "label": "Top left"
+            },
+            {
+              "value": "top-center",
+              "label": "Top centre"
+            },
+            {
+              "value": "top-right",
+              "label": "Top right"
+            },
+            {
+              "value": "center-left",
+              "label": "Middle left"
+            },
+            {
+              "value": "center-center",
+              "label": "Middle centre"
+            },
+            {
+              "value": "center-right",
+              "label": "Middle right"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Bottom left"
+            },
+            {
+              "value": "bottom-center",
+              "label": "Bottom centre"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Bottom right"
+            }
+          ]
         },
         {
           "type": "select",
           "id": "text_alignment",
           "label": "Text alignment",
+          "default": "",
           "options": [
-            { "value": "", "label": "Use section default" },
-            { "value": "left", "label": "Left" },
-            { "value": "center", "label": "Centre" },
-            { "value": "right", "label": "Right" }
-          ],
-          "default": ""
+            {
+              "value": "",
+              "label": "Use section default"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Centre"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
         },
         {
           "type": "select",
           "id": "text_tone",
           "label": "Text tone",
+          "default": "auto",
           "options": [
-            { "value": "auto", "label": "Auto (light text)" },
-            { "value": "light", "label": "Dark text on a light wash" },
-            { "value": "dark", "label": "Light text (forced)" }
-          ],
-          "default": "auto"
+            {
+              "value": "auto",
+              "label": "Auto (light text)"
+            },
+            {
+              "value": "light",
+              "label": "Dark text on a light wash"
+            },
+            {
+              "value": "dark",
+              "label": "Light text (forced)"
+            }
+          ]
         },
         {
           "type": "range",
           "id": "overlay_opacity",
           "label": "Overlay opacity",
+          "default": 45,
           "min": 0,
           "max": 90,
           "step": 5,
-          "unit": "%",
-          "default": 45
+          "unit": "%"
         }
       ]
     }
