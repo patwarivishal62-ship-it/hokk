@@ -298,11 +298,30 @@
   }
 
   /* ------------------------------------------------------------ cart api */
+  function okJson(response) {
+    if (!response.ok) throw new Error('Cart request failed with HTTP ' + response.status);
+    return response.json();
+  }
+
+  /* Every cart call is fired from a click handler, so a rejection has nowhere to
+     go: report it on the page and resolve to null instead. */
+  function cartFailed(err) {
+    Cart.error((err && (err.description || err.message)) || (CFG.strings && CFG.strings.cartError) || 'Your cart could not be updated.');
+    return null;
+  }
+
   var Cart = {
     busy: false,
     get: function () {
       return fetch(CFG.routes ? CFG.routes.cart + '.js' : '/cart.js', { headers: { Accept: 'application/json' } })
-        .then(function (r) { return r.json(); });
+        .then(function (r) {
+          if (!r.ok) throw new Error('Cart request failed with HTTP ' + r.status);
+          return r.json();
+        })
+        .catch(function (err) {
+          Cart.error((err && err.message) || (CFG.strings && CFG.strings.cartError) || 'Your cart could not be loaded.');
+          return null;
+        });
     },
     add: function (items, cb) {
       var body = { items: Array.isArray(items) ? items : [items] };
@@ -325,19 +344,19 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ changes: changes })
-      }).then(function (r) { return r.json(); }).then(function (cart) { Cart.refresh(cart); return cart; });
+      }).then(okJson).then(function (cart) { Cart.refresh(cart); return cart; }).catch(cartFailed);
     },
     update: function (updates) {
       return fetch((CFG.routes ? CFG.routes.cart + '/update' : '/cart/update') + '.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ updates: updates })
-      }).then(function (r) { return r.json(); }).then(function (cart) { Cart.refresh(cart); return cart; });
+      }).then(okJson).then(function (cart) { Cart.refresh(cart); return cart; }).catch(cartFailed);
     },
     clear: function () {
       return fetch((CFG.routes ? CFG.routes.cart + '/clear' : '/cart/clear') + '.js', {
         method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: '{}'
-      }).then(function (r) { return r.json(); }).then(function (cart) { Cart.refresh(cart); });
+      }).then(okJson).then(function (cart) { Cart.refresh(cart); return cart; }).catch(cartFailed);
     },
     error: function (msg) {
       var box = $('[data-cart-errors]');
@@ -346,6 +365,7 @@
     },
     refresh: function (cart) {
       var done = function (data) {
+        if (!data) return;
         Cart.render(data);
         document.dispatchEvent(new CustomEvent('kk:cart:updated', { detail: { cart: data } }));
       };
@@ -363,12 +383,14 @@
         if (bubble) bubble.hidden = cart.item_count === 0;
       });
 
+      var items = Array.isArray(cart.items) ? cart.items : [];
+
       $$('[data-cart-items]').forEach(function (list) {
-        if (!cart.items.length) {
+        if (!items.length) {
           var empty = $('[data-cart-empty]');
           list.innerHTML = empty ? empty.innerHTML : '';
         } else {
-          list.innerHTML = cart.items.map(itemRow).join('');
+          list.innerHTML = items.map(itemRow).join('');
         }
       });
 
@@ -376,7 +398,7 @@
 
       $$('[data-cart-subtotal]').forEach(function (el) { el.innerHTML = formatMoney(cart.total_price, CFG.moneyFormat); });
       $$('[data-cart-total-savings]').forEach(function (el) {
-        var savings = cart.items.reduce(function (sum, it) {
+        var savings = items.reduce(function (sum, it) {
           return sum + (it.original_line_price - it.final_line_price);
         }, 0);
         el.hidden = savings <= 0;
