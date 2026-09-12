@@ -1,9 +1,3 @@
-{%- liquid
-  assign menu_1 = section.settings.menu_1
-  assign menu_2 = section.settings.menu_2
-  assign menu_3 = section.settings.menu_3
--%}
-
 <footer class="site-footer">
   <div class="container">
     <div class="site-footer__top">
@@ -18,7 +12,7 @@
               alt: shop.name
             }}
           {%- else -%}
-            <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy">
+            <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy" width="140" height="39">
           {%- endif -%}
         </a>
         <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>

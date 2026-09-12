@@ -11,7 +11,7 @@
   endif
 
   if page_image
-    assign og_image = page_image | img_url: '1200x'
+    assign og_image = page_image | image_url: width: 1200
   endif
 -%}
 <meta property="og:site_name" content="{{ shop.name | escape }}">

@@ -21,7 +21,7 @@
                   <button type="reset" class="btn btn--text">{{ 'customer.addresses.cancel' | t }}</button>
                 </div>
               {%- endform -%}
-              <form method="post" action="/account/addresses/{{ address.id }}" class="address-form address-form--delete">
+              <form method="post" action="{{ routes.account_addresses_url }}/{{ address.id }}" class="address-form address-form--delete">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn--text address-form__delete">{{ 'customer.addresses.delete' | t }}</button>
               </form>
