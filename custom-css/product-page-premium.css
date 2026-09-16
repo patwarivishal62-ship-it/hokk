@@ -1,4 +1,11 @@
 /* ============================================================
+   NOTE: This styling is now BUILT INTO theme v3.1+
+   (sections/main-product.liquid + assets/theme.css + theme.js).
+   If you upload theme v3.1 or newer, REMOVE this snippet from
+   your theme's Custom CSS box so the rules are not duplicated.
+   ============================================================ */
+
+/* ============================================================
    HOUSE OF KALA KATHA — Premium product page (custom CSS)
    Paste in: Theme editor → Theme settings → Custom CSS
    (or append to the very bottom of assets/theme.css)

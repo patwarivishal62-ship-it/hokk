@@ -17,27 +17,63 @@
     </nav>
 
     <div class="product__grid">
-      <div class="product__media">
+      <div class="product__media" data-product-gallery>
         {%- if product.media.size > 0 -%}
-          {%- for media in product.media -%}
-            <div class="product__media-item">
-              {%- case media.media_type -%}
-                {%- when 'image' -%}
-                  {{ media | image_url: width: 1400 | image_tag:
-                    loading: 'eager',
-                    widths: '540, 720, 900, 1080, 1296',
-                    class: 'product__media-img',
-                    alt: media.alt | default: product.title | escape
+          <div class="product__media-feature">
+            {%- for media in product.media -%}
+              <div class="product__media-item{% if forloop.first %} is-active{% endif %}" data-feature-item data-media-id="{{ media.id }}">
+                {%- liquid
+                  assign media_alt = media.alt | default: product.title | escape
+                -%}
+                {%- case media.media_type -%}
+                  {%- when 'image' -%}
+                    {{ media | image_url: width: 1400 | image_tag:
+                      loading: 'eager',
+                      widths: '540, 720, 900, 1080, 1296',
+                      class: 'product__media-img',
+                      alt: media_alt
+                    }}
+                  {%- when 'external_video' -%}
+                    {{ media | external_video_tag }}
+                  {%- when 'video' -%}
+                    {{ media | video_tag: controls: true }}
+                  {%- when 'model' -%}
+                    {{ media | model_viewer_tag }}
+                {%- endcase -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {%- if product.media.size > 1 -%}
+            <div class="product__thumbs">
+              {%- for media in product.media -%}
+                {%- liquid
+                  assign thumb_image = media.preview_image | default: media
+                  assign thumb_alt = media.alt | default: product.title | escape
+                -%}
+                <button
+                  type="button"
+                  class="product__thumb{% if forloop.first %} is-active{% endif %}"
+                  data-thumb
+                  data-media-id="{{ media.id }}"
+                  aria-label="Show image {{ forloop.index }} of {{ product.media.size }}"
+                  {% if forloop.first %}aria-current="true"{% endif %}
+                >
+                  {{ thumb_image | image_url: width: 300 | image_tag:
+                    loading: 'lazy',
+                    widths: '150, 220, 300',
+                    class: 'product__thumb-img',
+                    alt: thumb_alt
                   }}
-                {%- when 'external_video' -%}
-                  {{ media | external_video_tag }}
-                {%- when 'video' -%}
-                  {{ media | video_tag: controls: true }}
-                {%- when 'model' -%}
-                  {{ media | model_viewer_tag }}
-              {%- endcase -%}
+                  {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                    <span class="product__thumb-badge">Video</span>
+                  {%- elsif media.media_type == 'model' -%}
+                    <span class="product__thumb-badge">3D</span>
+                  {%- endif -%}
+                </button>
+              {%- endfor -%}
             </div>
-          {%- endfor -%}
+          {%- endif -%}
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag: 'product__media-img product__media-img--placeholder' }}
         {%- endif -%}

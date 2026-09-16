@@ -708,6 +708,32 @@
   doc.querySelectorAll('[data-hero-slider]').forEach(initHeroSlider);
 
   /* ------------------------------------------------------------------ */
+  /* Product gallery: click a thumbnail to feature it                    */
+  /* ------------------------------------------------------------------ */
+  doc.addEventListener('click', function (e) {
+    var thumb = e.target.closest('[data-thumb]');
+    if (!thumb) return;
+    var gallery = thumb.closest('[data-product-gallery]');
+    if (!gallery) return;
+    var mediaId = thumb.getAttribute('data-media-id');
+    if (!mediaId) return;
+
+    gallery.querySelectorAll('[data-thumb]').forEach(function (t) {
+      var active = t === thumb;
+      t.classList.toggle('is-active', active);
+      if (active) {
+        t.setAttribute('aria-current', 'true');
+      } else {
+        t.removeAttribute('aria-current');
+      }
+    });
+
+    gallery.querySelectorAll('[data-feature-item]').forEach(function (item) {
+      item.classList.toggle('is-active', item.getAttribute('data-media-id') === mediaId);
+    });
+  });
+
+  /* ------------------------------------------------------------------ */
   /* Recover password toggle                                             */
   /* ------------------------------------------------------------------ */
   doc.addEventListener('click', function (e) {
