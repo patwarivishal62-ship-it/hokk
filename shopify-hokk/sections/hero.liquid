@@ -24,7 +24,9 @@
       <div class="hero__slide{% if forloop.first %} is-active{% endif %}" data-hero-slide {% unless forloop.first %}aria-hidden="true"{% endunless %} {{ block.shopify_attributes }}>
         <div class="hero__media">
           {%- if section.settings.background_video == blank -%}
-            {%- if image != blank -%}
+            {%- if block.settings.video != blank -%}
+              {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hero__img hero__img--video' }}
+            {%- elsif image != blank -%}
               {%- if image_mobile != blank -%}
                 {{ image_mobile | image_url: width: 1200 | image_tag:
                   loading: loading_attr,
@@ -108,7 +110,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Add banners with the “Add banner” button below — each banner is one full slide with its own image, text and buttons."
+      "content": "Add banners with the “Add banner” button below — each banner is one full slide with its own image or video, text and buttons. Two or more banners become a slideshow with arrows, dots and swipe."
     },
     {
       "type": "select",
@@ -251,7 +253,7 @@
       "type": "video",
       "id": "background_video",
       "label": "Background video",
-      "info": "Plays on loop, muted. Takes priority over all banner images."
+      "info": "Optional global video behind all banners. Takes priority over every banner image/video."
     }
   ],
   "blocks": [
@@ -268,6 +270,12 @@
           "type": "image_picker",
           "id": "image_mobile",
           "label": "Mobile image (optional)"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (optional)",
+          "info": "Replaces this banner's image — autoplay, muted, loop."
         },
         {
           "type": "range",

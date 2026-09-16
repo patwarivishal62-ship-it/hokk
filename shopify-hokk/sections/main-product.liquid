@@ -9,8 +9,10 @@
     --font-heading-family: {{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
     font-family: {{ section.settings.body_font.family }}, {{ section.settings.body_font.fallback_families }};
   ">
-  {{ section.settings.heading_font | font_face: font_display: 'swap' }}
-  {{ section.settings.body_font | font_face: font_display: 'swap' }}
+  {% style %}
+    {{ section.settings.heading_font | font_face: font_display: 'swap' }}
+    {{ section.settings.body_font | font_face: font_display: 'swap' }}
+  {% endstyle %}
   {%- if section.settings.background_video != blank or section.settings.background_image != blank -%}
     {%- render 'section-background', bg_video: section.settings.background_video, bg_image: section.settings.background_image, bg_overlay: section.settings.background_color, bg_overlay_opacity: section.settings.overlay_opacity -%}
   {%- endif -%}
