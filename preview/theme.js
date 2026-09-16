@@ -505,7 +505,9 @@
     if (!modal) return;
     doc.querySelectorAll('.region-modal.is-open').forEach(function (m) {
       m.classList.remove('is-open');
+      m.hidden = true;
     });
+    modal.hidden = false;
     modal.classList.add('is-open');
     doc.body.style.overflow = 'hidden';
   }
@@ -514,6 +516,7 @@
     var anyOpen = false;
     doc.querySelectorAll('.region-modal.is-open').forEach(function (m) {
       m.classList.remove('is-open');
+      m.hidden = true;
       anyOpen = true;
     });
     if (anyOpen && !doc.querySelector('.cart-drawer.is-open, .menu-drawer.is-open, .search-drawer.is-open')) {
