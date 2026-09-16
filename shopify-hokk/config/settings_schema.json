@@ -148,6 +148,17 @@
           }
         ],
         "default": "drawer"
+      },
+      {
+        "type": "range",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "min": 0,
+        "max": 10000,
+        "step": 250,
+        "unit": "₹",
+        "default": 3000,
+        "info": "Shows a progress bar in the cart drawer and cart page. Set to 0 to hide it."
       }
     ]
   },

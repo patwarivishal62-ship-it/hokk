@@ -36,7 +36,10 @@
       "remove": "Remove",
       "error": "There was an error while updating your bag. Please try again.",
       "quantity_error": "You can only add [quantity] of this item to your bag.",
-      "taxes_note": "Shipping, taxes and duties calculated at checkout."
+      "taxes_note": "Shipping, taxes and duties calculated at checkout.",
+      "adding": "Adding…",
+      "free_shipping_remaining": "You're {{ amount }} away from free shipping",
+      "free_shipping_unlocked": "Free shipping unlocked"
     }
   },
   "products": {

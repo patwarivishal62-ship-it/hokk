@@ -2,6 +2,7 @@
   <div class="cart-footer">
     <div class="container">
       <div class="cart-footer__card">
+        {%- render 'cart-progress' -%}
         <p class="cart-footer__subtotal">
           <span>{{ 'cart.general.subtotal' | t }}</span>
           <span>{{ cart.total_price | money }}</span>

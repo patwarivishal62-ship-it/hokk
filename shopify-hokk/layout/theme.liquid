@@ -77,7 +77,7 @@
     </a>
 
     {%- if settings.cart_type == 'drawer' -%}
-      {%- render 'cart-drawer' -%}
+      {% section 'cart-drawer' %}
     {%- endif -%}
 
     {%- sections 'header-group' -%}
@@ -101,7 +101,8 @@
         error: `{{ 'cart.general.error' | t }}`,
         quantityError: `{{ 'cart.general.quantity_error' | t: quantity: '[quantity]' }}`,
         addToCart: `{{ 'products.product.add_to_cart' | t }}`,
-        soldOut: `{{ 'products.product.sold_out' | t }}`
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        adding: `{{ 'cart.general.adding' | t }}`
       };
       window.moneyFormat = {{ shop.money_format | json }};
       window.pageType = '{{ request.page_type }}';

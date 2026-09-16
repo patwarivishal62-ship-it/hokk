@@ -137,6 +137,8 @@
             </button>
           </div>
 
+          <p class="product-form__error" data-cart-error hidden role="alert"></p>
+
           {%- if section.settings.show_dynamic_checkout -%}
             <div class="product-form__buy">
               {{ form | payment_button }}
