@@ -55,19 +55,23 @@
           {%- endif -%}
 
           {%- if section.settings.enable_sorting -%}
-            <label class="facets__sort">
-              <span class="facets__sort-label">{{ 'sections.collection.sort' | t }}</span>
-              <select name="sort_by" data-sort-select>
-                <option value="manual" {% if sort_by == 'manual' %}selected{% endif %}>Featured</option>
-                <option value="best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>Best selling</option>
-                <option value="title-ascending" {% if sort_by == 'title-ascending' %}selected{% endif %}>Alphabetically, A–Z</option>
-                <option value="title-descending" {% if sort_by == 'title-descending' %}selected{% endif %}>Alphabetically, Z–A</option>
-                <option value="price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>Price, low to high</option>
-                <option value="price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>Price, high to low</option>
-                <option value="created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>Date, new to old</option>
-                <option value="created-ascending" {% if sort_by == 'created-ascending' %}selected{% endif %}>Date, old to new</option>
-              </select>
-            </label>
+            <input type="hidden" name="sort_by" value="{{ sort_by }}" data-sort-hidden>
+            <details class="sort-menu" data-sort-menu>
+              <summary class="btn btn--outline sort-menu__toggle">
+                {{ 'sections.collection.sort' | t }}
+                {%- render 'icon', icon: 'chevron-down' -%}
+              </summary>
+              <div class="sort-menu__dropdown">
+                <button type="button" class="sort-menu__option{% if sort_by == 'manual' %} is-current{% endif %}" data-sort-value="manual">Featured</button>
+                <button type="button" class="sort-menu__option{% if sort_by == 'best-selling' %} is-current{% endif %}" data-sort-value="best-selling">Best selling</button>
+                <button type="button" class="sort-menu__option{% if sort_by == 'title-ascending' %} is-current{% endif %}" data-sort-value="title-ascending">Alphabetically, A–Z</button>
+                <button type="button" class="sort-menu__option{% if sort_by == 'title-descending' %} is-current{% endif %}" data-sort-value="title-descending">Alphabetically, Z–A</button>
+                <button type="button" class="sort-menu__option{% if sort_by == 'price-ascending' %} is-current{% endif %}" data-sort-value="price-ascending">Price, low to high</button>
+                <button type="button" class="sort-menu__option{% if sort_by == 'price-descending' %} is-current{% endif %}" data-sort-value="price-descending">Price, high to low</button>
+                <button type="button" class="sort-menu__option{% if sort_by == 'created-descending' %} is-current{% endif %}" data-sort-value="created-descending">Date, new to old</button>
+                <button type="button" class="sort-menu__option{% if sort_by == 'created-ascending' %} is-current{% endif %}" data-sort-value="created-ascending">Date, old to new</button>
+              </div>
+            </details>
           {%- endif -%}
         </div>
       </div>
@@ -75,7 +79,7 @@
       {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
         <div class="facets__panel" data-filters-panel hidden>
           {%- for filter in collection.filters -%}
-            <details class="facet" {% if filter.type == 'price_range' %}open{% endif %}>
+            <details class="facet">
               <summary class="facet__summary">
                 {{ filter.label }}
                 {%- render 'icon', icon: 'chevron-down' -%}

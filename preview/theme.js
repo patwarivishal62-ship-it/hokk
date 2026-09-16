@@ -417,10 +417,30 @@
   /* ------------------------------------------------------------------ */
   doc.addEventListener('click', function (e) {
     var toggle = e.target.closest('[data-filters-toggle]');
-    if (!toggle) return;
-    var form = toggle.closest('[data-filter-form]');
-    var panel = form ? form.querySelector('[data-filters-panel]') : null;
-    if (panel) panel.hidden = !panel.hidden;
+    if (toggle) {
+      var form = toggle.closest('[data-filter-form]');
+      var panel = form ? form.querySelector('[data-filters-panel]') : null;
+      if (panel) panel.hidden = !panel.hidden;
+      var sortMenu = form ? form.querySelector('[data-sort-menu]') : null;
+      if (sortMenu && !panel.hidden) sortMenu.removeAttribute('open');
+      return;
+    }
+
+    var sortOption = e.target.closest('[data-sort-value]');
+    if (sortOption) {
+      var sortForm = sortOption.closest('form');
+      if (sortForm) {
+        var hidden = sortForm.querySelector('[data-sort-hidden]');
+        if (hidden) hidden.value = sortOption.getAttribute('data-sort-value');
+        sortForm.submit();
+      }
+      return;
+    }
+
+    // Close any open sort menu when clicking outside of it
+    doc.querySelectorAll('[data-sort-menu][open]').forEach(function (menu) {
+      if (!menu.contains(e.target)) menu.removeAttribute('open');
+    });
   });
 
   doc.addEventListener('change', function (e) {
