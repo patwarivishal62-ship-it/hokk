@@ -26,7 +26,16 @@
     --card-ratio: {{ section.settings.image_ratio }};
     --cg-img-radius: {{ section.settings.image_radius }}px;
     --cg-gap: {{ section.settings.gap }}px;
+    {% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}
+    {% if section.settings.background_color != blank and section.settings.background_image == blank and section.settings.background_video == blank %}background: {{ section.settings.background_color }};{% endif %}
+    --font-heading-family: {{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
+    font-family: {{ section.settings.body_font.family }}, {{ section.settings.body_font.fallback_families }};
   ">
+  {{ section.settings.heading_font | font_face: font_display: 'swap' }}
+  {{ section.settings.body_font | font_face: font_display: 'swap' }}
+  {%- if section.settings.background_video != blank or section.settings.background_image != blank -%}
+    {%- render 'section-background', bg_video: section.settings.background_video, bg_image: section.settings.background_image, bg_overlay: section.settings.background_color, bg_overlay_opacity: section.settings.overlay_opacity -%}
+  {%- endif -%}
   <div class="container">
     {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
     <form class="facets" method="get" action="{{ collection.url }}" data-filter-form>
@@ -299,6 +308,60 @@
       "step": 4,
       "unit": "px",
       "default": 84
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Solid background on its own — or a tint over the background image/video."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Plays on loop, muted. Takes priority over the image."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Background overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 0,
+      "info": "Fades the background color over the image/video so text stays readable."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "fraunces_n6"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "inter_n4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
     }
   ],
   "presets": [
