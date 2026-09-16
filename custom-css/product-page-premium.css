@@ -1,0 +1,194 @@
+/* ============================================================
+   HOUSE OF KALA KATHA — Premium product page (custom CSS)
+   Paste in: Theme editor → Theme settings → Custom CSS
+   (or append to the very bottom of assets/theme.css)
+   ============================================================ */
+
+/* ---------- Tokens (tweak these to re-tune the look) ---------- */
+.product {
+  --pp-gold: #B98A4E;
+  --pp-frame: #EFE5D2;
+  --pp-pill: 999px;
+}
+
+/* ---------- Rhythm & breadcrumbs ---------- */
+.product { padding-top: 8px; }
+.product .breadcrumbs {
+  gap: 8px;
+  padding: 18px 0 40px;
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.product .breadcrumbs a { transition: color 0.2s ease; }
+.product .breadcrumbs a:hover { color: var(--pp-gold); }
+.product .breadcrumbs span[aria-hidden] { opacity: 0.45; }
+
+.product__grid { gap: clamp(40px, 7vw, 104px); }
+
+/* ---------- Gallery: editorial mosaic + hover zoom ---------- */
+.product__media {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(10px, 1.4vw, 16px);
+}
+.product__media-item:first-child,
+.product__media-item:nth-child(2):last-child { grid-column: 1 / -1; }
+.product__media-item {
+  background: var(--pp-frame);
+  overflow: hidden;
+  /* border-radius: 6px;  ← uncomment for soft corners */
+  box-shadow: 0 1px 2px rgba(33, 25, 18, 0.05), 0 22px 44px -26px rgba(33, 25, 18, 0.35);
+}
+.product__media-img { transition: transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1); }
+.product__media-item:hover .product__media-img { transform: scale(1.045); }
+
+/* ---------- Info column ---------- */
+.product__info { top: 96px; }
+
+.product__vendor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--pp-gold);
+  font-weight: 600;
+}
+.product__vendor::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--pp-gold);
+}
+
+.product__title {
+  font-size: clamp(3.2rem, 4.8vw, 5.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+
+/* ---------- Price ---------- */
+.product__price { align-items: center; margin-bottom: 10px; }
+.product__price .price { font-size: 1.6rem; }
+.product__price .price__current {
+  font-family: var(--font-heading-family);
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.product__price .price__current--sale { color: var(--color-accent); }
+.product__price .price__compare { font-size: 1.6rem; }
+.product__save {
+  background: var(--pp-gold);
+  color: #FFF9EE;
+  padding: 5px 12px;
+  border-radius: var(--pp-pill);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.product__sku {
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---------- Variant pills ---------- */
+.variant-picker__value { color: var(--pp-gold); font-weight: 600; }
+.variant-pill span {
+  padding: 10px 22px;
+  border-radius: var(--pp-pill);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+}
+.variant-pill:hover span { border-color: var(--pp-gold); color: var(--pp-gold); }
+.variant-pill.is-selected span {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: var(--color-dark-text);
+  box-shadow: 0 10px 24px -14px rgba(33, 25, 18, 0.6);
+}
+
+/* ---------- Quantity selector ---------- */
+.quantity {
+  border-radius: var(--pp-pill);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.quantity:hover { border-color: var(--color-base-text); }
+.quantity__btn, .quantity__input { height: 54px; }
+.quantity__input { font-weight: 600; }
+
+/* ---------- Add to cart ---------- */
+.product-form { border-top: 1px solid var(--color-line); margin-top: 28px; padding-top: 30px; }
+.product-form__actions { gap: 12px; }
+.product .product-form__add {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  padding: 17px 34px;
+  letter-spacing: 0.18em;
+  box-shadow: 0 16px 32px -18px rgba(33, 25, 18, 0.55);
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+.product .product-form__add::after {
+  content: "→";
+  margin-left: 4px;
+  transition: transform 0.25s ease;
+}
+.product .product-form__add:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 20px 36px -18px rgba(169, 74, 51, 0.5);
+}
+.product .product-form__add:hover::after { transform: translateX(4px); }
+.product .product-form__add:active { transform: translateY(0); }
+.product .product-form__add[disabled] { opacity: 0.45; box-shadow: none; }
+
+/* Dynamic checkout → quiet outline button */
+.product-form__buy .shopify-payment-button__button {
+  background: transparent !important;
+  color: var(--color-dark) !important;
+  border: 1px solid var(--color-dark);
+  box-shadow: none !important;
+  border-radius: 0;
+  padding: 15px 34px;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+.product-form__buy .shopify-payment-button__button:hover {
+  background: var(--color-dark) !important;
+  color: var(--color-dark-text) !important;
+}
+
+/* Trust line (edit the text below) */
+.product-form::after {
+  content: "Handwoven in India · Free shipping over ₹3,000 · 7-day returns";
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ---------- Accordions ---------- */
+.product-accordion__summary { padding: 20px 0; transition: color 0.2s ease; }
+.product-accordion__summary:hover { color: var(--color-accent); }
+.product-accordion__summary .icon { color: var(--pp-gold); }
+.product-accordion__body { color: var(--color-muted); line-height: 1.75; padding-bottom: 26px; }
+.product-accordion__body p { margin: 0 0 12px; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 749px) {
+  .product__media { grid-template-columns: 1fr; }
+  .product__title { font-size: clamp(2.8rem, 9vw, 3.6rem); }
+  .product-form__actions { flex-direction: column; }
+  .product .product-form__add { width: 100%; }
+}
