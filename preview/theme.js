@@ -623,11 +623,89 @@
           if (node.nodeType !== 1) return;
           if (node.matches && node.matches('[data-testimonial-slider]')) initTestimonialSlider(node);
           if (node.querySelectorAll) node.querySelectorAll('[data-testimonial-slider]').forEach(initTestimonialSlider);
+          if (node.matches && node.matches('[data-hero-slider]')) initHeroSlider(node);
+          if (node.querySelectorAll) node.querySelectorAll('[data-hero-slider]').forEach(initHeroSlider);
         });
       });
     });
     sliderObserver.observe(doc.body, { childList: true, subtree: true });
   }
+
+  /* ------------------------------------------------------------------ */
+  /* Hero banner slideshow                                               */
+  /* ------------------------------------------------------------------ */
+  function initHeroSlider(track) {
+    if (!track || track.dataset.heroInit) return;
+    track.dataset.heroInit = 'true';
+
+    var wrap = track.closest('.hero');
+    if (!wrap) return;
+    var slides = Array.prototype.slice.call(track.querySelectorAll('[data-hero-slide]'));
+    if (slides.length < 2) return;
+
+    var prev = wrap.querySelector('[data-hero-prev]');
+    var next = wrap.querySelector('[data-hero-next]');
+    var dots = Array.prototype.slice.call(wrap.querySelectorAll('[data-hero-dot]'));
+    var autoplay = track.getAttribute('data-autoplay') === 'true';
+    var delay = parseInt(track.getAttribute('data-delay'), 10) || 5000;
+    var index = 0;
+    var timer = null;
+    var hovering = false;
+
+    function render() {
+      slides.forEach(function (slide, i) {
+        slide.classList.toggle('is-active', i === index);
+        slide.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+      });
+      dots.forEach(function (d, i) {
+        d.classList.toggle('is-active', i === index);
+      });
+    }
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      render();
+    }
+
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    function start() {
+      if (!autoplay || hovering) return;
+      stop();
+      timer = setInterval(function () { goTo(index + 1); }, delay);
+    }
+
+    if (prev) prev.addEventListener('click', function () { goTo(index - 1); start(); });
+    if (next) next.addEventListener('click', function () { goTo(index + 1); start(); });
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () { goTo(i); start(); });
+    });
+
+    // Touch swipe
+    var startX = null;
+    track.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      stop();
+    }, { passive: true });
+    track.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) goTo(dx < 0 ? index + 1 : index - 1);
+      startX = null;
+      start();
+    }, { passive: true });
+
+    // Pause on hover
+    wrap.addEventListener('mouseenter', function () { hovering = true; stop(); });
+    wrap.addEventListener('mouseleave', function () { hovering = false; start(); });
+
+    render();
+    start();
+  }
+
+  doc.querySelectorAll('[data-hero-slider]').forEach(initHeroSlider);
 
   /* ------------------------------------------------------------------ */
   /* Recover password toggle                                             */

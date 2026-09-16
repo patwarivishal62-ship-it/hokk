@@ -9,7 +9,7 @@
 
   <div class="container">
     <div class="featured-collection__head">
-      <div>
+      <div class="featured-collection__titles" style="--text-width: {{ section.settings.text_width }}px">
         {%- if section.settings.eyebrow != blank -%}
           <p class="eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
         {%- endif -%}
@@ -111,6 +111,21 @@
       "id": "show_view_all",
       "label": "Show “View all” button",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text block width",
+      "info": "Controls how wide the text block is — smaller widths move words onto new lines.",
+      "min": 320,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 720
     },
     {
       "type": "header",

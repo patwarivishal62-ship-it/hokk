@@ -175,10 +175,13 @@
       "apply": "Apply",
       "clear_all": "Clear all",
       "empty": "No products found in this collection."
+    },
+    "hero": {
+      "go_to_slide": "Go to slide {{ number }}"
     }
   },
   "footer": {
-    "copyright": "© {{ year }} {{ shop }} · Woven in India",
+    "copyright": "© {{ year }} House of Kala Katha · Woven in India",
     "tagline": "Kala is the art. Katha is the story.",
     "newsletter_title": "Join the Katha"
   },

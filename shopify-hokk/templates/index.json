@@ -2,6 +2,15 @@
   "sections": {
     "hero": {
       "type": "hero",
+      "blocks": {
+        "banner-1": {
+          "type": "banner",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "banner-1"
+      ],
       "settings": {}
     },
     "marquee": {
@@ -112,9 +121,9 @@
           "settings": {
             "zone": "east",
             "title": "East India",
-            "intro": "Featherlight silks and narrative weaving, from the Ganges delta to the Northeast hills.",
-            "cultures": "Ikat of Odisha — single ikat | Sambalpuri & Bomkai — Odisha | Jamdani — Bengal | Kantha embroidery — Bengal | Bhagalpuri tussar — Bihar | Muga & Eri silk — Assam",
-            "usp": "Air-light muslins and golden Muga silk. The east weaves stories into every thread."
+            "intro": "Featherlight silks and narrative weaving along the Ganges delta — from Bengal's looms to Odisha's ikat villages.",
+            "cultures": "Jamdani — Bengal | Kantha embroidery — Bengal | Baluchari — Bengal | Sambalpuri & Bomkai — Odisha | Ikat of Odisha — single ikat | Bhagalpuri tussar — Bihar",
+            "usp": "Air-light muslins and story-woven jamdani. The east weaves narratives into every thread."
           }
         },
         "region-south": {
@@ -126,12 +135,23 @@
             "cultures": "Pochampally & Puttapaka ikat — Telangana | Kanjeevaram silk — Tamil Nadu | Uppada jamdani — Andhra | Kalamkari art — Andhra | Mysore silk & Ilkal — Karnataka | Kasavu — Kerala",
             "usp": "The seat of the double ikat. South India dresses temples and weddings in silk and gold zari."
           }
+        },
+        "region-north-east": {
+          "type": "region",
+          "settings": {
+            "zone": "north-east",
+            "title": "North East India",
+            "intro": "Eight sister states and Sikkim — where every home has a loom and silk is a way of life.",
+            "cultures": "Muga silk — Assam | Eri peace silk — Assam & Meghalaya | Pat silk — Manipur | Naga shawl weaves — Nagaland | Mizo puan — Mizoram | Ryndia weaves — Meghalaya | Risa & Rignai — Tripura | Lepcha weaves — Sikkim",
+            "usp": "Home of the golden Muga silk — found nowhere else on earth. Wild, undyed and naturally shimmering; every weave here is an heirloom."
+          }
         }
       },
       "block_order": [
         "region-north",
         "region-west",
         "region-east",
+        "region-north-east",
         "region-south"
       ],
       "settings": {}

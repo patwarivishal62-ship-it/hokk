@@ -1,61 +1,98 @@
 {%- liquid
-  assign image = section.settings.image
-  assign image_mobile = section.settings.image_mobile | default: image
-  assign tone = section.settings.tone
+  assign slide_count = section.blocks.size
+  assign hero_delay = section.settings.autoplay_speed | times: 1000
 -%}
 
-<div class="hero hero--{{ section.settings.height }} hero--{{ tone }} hero--align-{{ section.settings.alignment }}" data-reveal style="--hero-pad-top: {{ section.settings.content_padding_top }}px; --hero-pad-bottom: {{ section.settings.content_padding_bottom }}px;{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
-  <div class="hero__media">
-    {%- render 'section-background', bg_video: section.settings.background_video -%}
+<div class="hero hero--{{ section.settings.height }} hero--{{ section.settings.tone }} hero--align-{{ section.settings.alignment }}{% if slide_count > 1 %} hero--slider{% endif %}" data-reveal style="--hero-pad-top: {{ section.settings.content_padding_top }}px; --hero-pad-bottom: {{ section.settings.content_padding_bottom }}px; --hero-heading-width: {{ section.settings.heading_width }}ch; --hero-sub-width: {{ section.settings.subheading_width }}ch;{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
 
-    {%- if image != blank -%}
-      {%- if image_mobile != blank -%}
-        {{ image_mobile | image_url: width: 1200 | image_tag:
-          loading: 'eager',
-          widths: '540, 720, 900, 1080, 1296, 1512',
-          class: 'hero__img hero__img--mobile',
-          alt: image.alt | escape
-        }}
-      {%- endif -%}
-      {{ image | image_url: width: 2400 | image_tag:
-        loading: 'eager',
-        widths: '750, 900, 1080, 1296, 1512, 1728, 2048',
-        class: 'hero__img',
-        alt: image.alt | escape
-      }}
-    {%- else -%}
-      <img src="{{ 'hero.jpg' | asset_url }}" alt="House of Kala Katha handloom co-ord" class="hero__img" loading="eager" width="1200" height="1600">
-    {%- endif -%}
-    {%- if section.settings.overlay_opacity > 0 -%}
-      <div class="hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};{% if section.settings.background_color != blank %}background: {{ section.settings.background_color }};{% endif %}"></div>
-    {%- endif -%}
-  </div>
+  {%- if section.settings.background_video != blank -%}
+    <div class="hero__media hero__media--global">
+      {%- render 'section-background', bg_video: section.settings.background_video -%}
+    </div>
+  {%- endif -%}
 
-  <div class="hero__content container">
-    {%- if section.settings.eyebrow != blank -%}
-      <p class="hero__eyebrow eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
-    {%- endif -%}
-    {%- if section.settings.heading != blank -%}
-      <h1 class="hero__heading"{% if section.settings.heading_color != blank %} style="color: {{ section.settings.heading_color }};"{% endif %}>{{ section.settings.heading | escape }}</h1>
-    {%- endif -%}
-    {%- if section.settings.subheading != blank -%}
-      <p class="hero__subheading"{% if section.settings.subheading_color != blank %} style="color: {{ section.settings.subheading_color }};"{% endif %}>{{ section.settings.subheading | escape }}</p>
-    {%- endif -%}
-    {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
-      <div class="hero__actions">
-        {%- if section.settings.button_label_1 != blank -%}
-          <a href="{{ section.settings.button_link_1 | default: routes.all_products_collection_url }}" class="btn btn--{{ section.settings.button_style_1 }}">
-            {{ section.settings.button_label_1 | escape }}
-          </a>
-        {%- endif -%}
-        {%- if section.settings.button_label_2 != blank -%}
-          <a href="{{ section.settings.button_link_2 }}" class="btn btn--{{ section.settings.button_style_2 }}">
-            {{ section.settings.button_label_2 | escape }}
-          </a>
-        {%- endif -%}
+  <div class="hero__track" data-hero-slider data-autoplay="{{ section.settings.autoplay }}" data-delay="{{ hero_delay }}">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign image = block.settings.image
+        assign image_mobile = block.settings.image_mobile | default: image
+        assign loading_attr = 'lazy'
+        if forloop.first
+          assign loading_attr = 'eager'
+        endif
+      -%}
+      <div class="hero__slide{% if forloop.first %} is-active{% endif %}" data-hero-slide {% unless forloop.first %}aria-hidden="true"{% endunless %} {{ block.shopify_attributes }}>
+        <div class="hero__media">
+          {%- if section.settings.background_video == blank -%}
+            {%- if image != blank -%}
+              {%- if image_mobile != blank -%}
+                {{ image_mobile | image_url: width: 1200 | image_tag:
+                  loading: loading_attr,
+                  widths: '540, 720, 900, 1080, 1296, 1512',
+                  class: 'hero__img hero__img--mobile',
+                  alt: image.alt | escape
+                }}
+              {%- endif -%}
+              {{ image | image_url: width: 2400 | image_tag:
+                loading: loading_attr,
+                widths: '750, 900, 1080, 1296, 1512, 1728, 2048',
+                class: 'hero__img',
+                alt: image.alt | escape
+              }}
+            {%- elsif forloop.first -%}
+              <img src="{{ 'hero.jpg' | asset_url }}" alt="House of Kala Katha handloom co-ord" class="hero__img" loading="eager" width="1200" height="1600">
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- if block.settings.overlay_opacity > 0 -%}
+            <div class="hero__overlay" style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};{% if block.settings.background_color != blank %}background: {{ block.settings.background_color }};{% endif %}"></div>
+          {%- endif -%}
+        </div>
+
+        <div class="hero__content container">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="hero__eyebrow eyebrow"{% if block.settings.eyebrow_color != blank %} style="color: {{ block.settings.eyebrow_color }};"{% endif %}>{{ block.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h2 class="hero__heading"{% if block.settings.heading_color != blank %} style="color: {{ block.settings.heading_color }};"{% endif %}>{{ block.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if block.settings.subheading != blank -%}
+            <p class="hero__subheading"{% if block.settings.subheading_color != blank %} style="color: {{ block.settings.subheading_color }};"{% endif %}>{{ block.settings.subheading | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.button_label_1 != blank or block.settings.button_label_2 != blank -%}
+            <div class="hero__actions">
+              {%- if block.settings.button_label_1 != blank -%}
+                <a href="{{ block.settings.button_link_1 | default: routes.all_products_collection_url }}" class="btn btn--{{ block.settings.button_style_1 }}">
+                  {{ block.settings.button_label_1 | escape }}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.button_label_2 != blank -%}
+                <a href="{{ block.settings.button_link_2 }}" class="btn btn--{{ block.settings.button_style_2 }}">
+                  {{ block.settings.button_label_2 | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
       </div>
-    {%- endif -%}
+    {%- endfor -%}
   </div>
+
+  {%- if slide_count > 1 -%}
+    <div class="hero__nav">
+      <button type="button" class="hero__arrow" data-hero-prev aria-label="{{ 'pagination.previous' | t }}">
+        {%- render 'icon', icon: 'arrow-left' -%}
+      </button>
+      <button type="button" class="hero__arrow" data-hero-next aria-label="{{ 'pagination.next' | t }}">
+        {%- render 'icon', icon: 'arrow-right' -%}
+      </button>
+    </div>
+    <div class="hero__dots">
+      {%- for block in section.blocks -%}
+        <button type="button" class="hero__dot{% if forloop.first %} is-active{% endif %}" data-hero-dot="{{ forloop.index0 }}" aria-label="{{ 'sections.hero.go_to_slide' | t: number: forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 
   {%- if section.settings.show_scroll -%}
     <div class="hero__scroll" aria-hidden="true">
@@ -70,40 +107,8 @@
   "class": "section-hero",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_mobile",
-      "label": "Mobile image (optional)"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "Overlay opacity",
-      "min": 0,
-      "max": 70,
-      "step": 5,
-      "unit": "%",
-      "default": 25
-    },
-    {
-      "type": "select",
-      "id": "tone",
-      "label": "Text tone",
-      "options": [
-        {
-          "value": "light",
-          "label": "Light"
-        },
-        {
-          "value": "dark",
-          "label": "Dark"
-        }
-      ],
-      "default": "light"
+      "type": "paragraph",
+      "content": "Add banners with the “Add banner” button below — each banner is one full slide with its own image, text and buttons."
     },
     {
       "type": "select",
@@ -142,76 +147,65 @@
       "default": "left"
     },
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "KALA · CRAFT   —   KATHA · STORY"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Indian Craft.\nEveryday Life."
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Why isn't this already in your wardrobe?"
-    },
-    {
-      "type": "text",
-      "id": "button_label_1",
-      "label": "Button 1 label",
-      "default": "Explore the Wardrobe"
-    },
-    {
-      "type": "url",
-      "id": "button_link_1",
-      "label": "Button 1 link"
-    },
-    {
       "type": "select",
-      "id": "button_style_1",
-      "label": "Button 1 style",
+      "id": "tone",
+      "label": "Text tone",
       "options": [
         {
-          "value": "solid",
-          "label": "Solid"
+          "value": "light",
+          "label": "Light"
         },
         {
-          "value": "outline",
-          "label": "Outline"
+          "value": "dark",
+          "label": "Dark"
         }
       ],
-      "default": "solid"
+      "default": "light"
     },
     {
-      "type": "text",
-      "id": "button_label_2",
-      "label": "Button 2 label",
-      "default": "Our Story"
+      "type": "header",
+      "content": "Slideshow"
     },
     {
-      "type": "url",
-      "id": "button_link_2",
-      "label": "Button 2 link"
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate banners",
+      "default": false
     },
     {
-      "type": "select",
-      "id": "button_style_2",
-      "label": "Button 2 style",
-      "options": [
-        {
-          "value": "solid",
-          "label": "Solid"
-        },
-        {
-          "value": "outline",
-          "label": "Outline"
-        }
-      ],
-      "default": "outline"
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Change banners every",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Text wrapping"
+    },
+    {
+      "type": "range",
+      "id": "heading_width",
+      "label": "Heading width",
+      "info": "Smaller widths move words onto the next line sooner.",
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "unit": "ch",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subheading_width",
+      "label": "Subheading width",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "ch",
+      "default": 80
     },
     {
       "type": "checkbox",
@@ -249,48 +243,154 @@
     },
     {
       "type": "color",
-      "id": "background_color",
-      "label": "Overlay color",
-      "info": "Tints the overlay above the image. Leave blank to use the default."
-    },
-    {
-      "type": "color",
       "id": "text_color",
       "label": "Text color",
-      "info": "Leave blank to use the default."
-    },
-    {
-      "type": "header",
-      "content": "Field colors"
-    },
-    {
-      "type": "color",
-      "id": "eyebrow_color",
-      "label": "Eyebrow color",
-      "info": "Leave blank to use the default."
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "info": "Leave blank to use the default."
-    },
-    {
-      "type": "color",
-      "id": "subheading_color",
-      "label": "Subheading color",
-      "info": "Leave blank to use the default."
+      "info": "Leave blank to use the default. Each banner can override with its own field colors."
     },
     {
       "type": "video",
       "id": "background_video",
       "label": "Background video",
-      "info": "Plays on loop, muted. Takes priority over the image."
+      "info": "Plays on loop, muted. Takes priority over all banner images."
     }
   ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Mobile image (optional)"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay opacity",
+          "min": 0,
+          "max": 70,
+          "step": 5,
+          "unit": "%",
+          "default": 25
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "KALA · CRAFT   —   KATHA · STORY"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Indian Craft.\nEveryday Life."
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Why isn't this already in your wardrobe?"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "label": "Button 1 label",
+          "default": "Explore the Wardrobe"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "select",
+          "id": "button_style_1",
+          "label": "Button 1 style",
+          "options": [
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            }
+          ],
+          "default": "solid"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "Button 2 label",
+          "default": "Our Story"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Button 2 link"
+        },
+        {
+          "type": "select",
+          "id": "button_style_2",
+          "label": "Button 2 style",
+          "options": [
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            }
+          ],
+          "default": "outline"
+        },
+        {
+          "type": "header",
+          "content": "Field colors"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Overlay color",
+          "info": "Tints this banner's overlay. Leave blank to use the default."
+        },
+        {
+          "type": "color",
+          "id": "eyebrow_color",
+          "label": "Eyebrow color",
+          "info": "Leave blank to use the default."
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "info": "Leave blank to use the default."
+        },
+        {
+          "type": "color",
+          "id": "subheading_color",
+          "label": "Subheading color",
+          "info": "Leave blank to use the default."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
   "presets": [
     {
-      "name": "Hero"
+      "name": "Hero",
+      "blocks": [
+        {
+          "type": "banner"
+        }
+      ]
     }
   ]
 }{% endschema %}

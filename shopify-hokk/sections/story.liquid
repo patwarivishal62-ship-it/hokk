@@ -15,7 +15,7 @@
   {%- endif -%}
 
   <div class="container">
-    <div class="story__head">
+    <div class="story__head" style="--text-width: {{ section.settings.text_width }}px">
       {%- if section.settings.eyebrow != blank -%}
         <p class="eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
@@ -146,11 +146,26 @@
       "type": "text",
       "id": "text",
       "label": "Intro text",
-      "default": "Four regions, hundreds of looms, thousands of hands. Hover over the map, click a region, and read its katha — the handloom cultures it carries and the speciality that makes it sing."
+      "default": "Five regions, hundreds of looms, thousands of hands. Hover over the map, click a region, and read its katha — the handloom cultures it carries and the speciality that makes it sing."
     },
     {
       "type": "paragraph",
-      "content": "Add one block per region — North, West & Central, East, South. Each block powers one clickable zone on the map and its popup."
+      "content": "Add one block per region — North, West & Central, East, North East, South. Each block powers one clickable zone on the map and its popup."
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text block width",
+      "info": "Smaller widths wrap the intro text onto more lines.",
+      "min": 320,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 760
     },
     {
       "type": "header",
@@ -252,6 +267,10 @@
             {
               "value": "south",
               "label": "South India"
+            },
+            {
+              "value": "north-east",
+              "label": "North East India"
             }
           ],
           "default": "north"
@@ -284,7 +303,7 @@
       ]
     }
   ],
-  "max_blocks": 4,
+  "max_blocks": 5,
   "presets": [
     {
       "name": "Story",
@@ -314,9 +333,19 @@
           "settings": {
             "zone": "east",
             "title": "East India",
-            "intro": "Featherlight silks and narrative weaving, from the Ganges delta to the Northeast hills.",
-            "cultures": "Ikat of Odisha — single ikat | Sambalpuri & Bomkai — Odisha | Jamdani — Bengal | Kantha embroidery — Bengal | Bhagalpuri tussar — Bihar | Muga & Eri silk — Assam",
-            "usp": "Air-light muslins and golden Muga silk. The east weaves stories into every thread."
+            "intro": "Featherlight silks and narrative weaving along the Ganges delta — from Bengal's looms to Odisha's ikat villages.",
+            "cultures": "Jamdani — Bengal | Kantha embroidery — Bengal | Baluchari — Bengal | Sambalpuri & Bomkai — Odisha | Ikat of Odisha — single ikat | Bhagalpuri tussar — Bihar",
+            "usp": "Air-light muslins and story-woven jamdani. The east weaves narratives into every thread."
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "zone": "north-east",
+            "title": "North East India",
+            "intro": "Eight sister states and Sikkim — where every home has a loom and silk is a way of life.",
+            "cultures": "Muga silk — Assam | Eri peace silk — Assam & Meghalaya | Pat silk — Manipur | Naga shawl weaves — Nagaland | Mizo puan — Mizoram | Ryndia weaves — Meghalaya | Risa & Rignai — Tripura | Lepcha weaves — Sikkim",
+            "usp": "Home of the golden Muga silk — found nowhere else on earth. Wild, undyed and naturally shimmering; every weave here is an heirloom."
           }
         },
         {

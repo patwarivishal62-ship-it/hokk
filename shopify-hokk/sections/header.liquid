@@ -55,16 +55,16 @@
         {%- render 'icon', icon: 'search' -%}
       </button>
 
+      <a href="{{ routes.cart_url }}" class="site-header__icon site-header__icon--cart" data-cart-drawer-toggle aria-label="{{ 'header.cart' | t }}">
+        {%- render 'icon', icon: 'bag' -%}
+        <span class="site-header__cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+
       {%- if shop.customer_accounts_enabled -%}
         <a href="{{ routes.account_url }}" class="site-header__icon site-header__icon--account" aria-label="{{ 'general.account' | t }}">
           {%- render 'icon', icon: 'account' -%}
         </a>
       {%- endif -%}
-
-      <a href="{{ routes.cart_url }}" class="site-header__icon site-header__icon--cart" data-cart-drawer-toggle aria-label="{{ 'header.cart' | t }}">
-        {%- render 'icon', icon: 'bag' -%}
-        <span class="site-header__cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
-      </a>
     </div>
   </div>
 

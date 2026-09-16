@@ -15,7 +15,7 @@
   {%- endif -%}
 
   <div class="container">
-    <div class="newsletter__inner">
+    <div class="newsletter__inner" style="--text-width: {{ section.settings.text_width }}px">
       {%- if section.settings.eyebrow != blank -%}
         <p class="eyebrow"{% if section.settings.eyebrow_color != blank %} style="color: {{ section.settings.eyebrow_color }};"{% endif %}>{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
@@ -101,6 +101,21 @@
       "id": "button_label",
       "label": "Button label",
       "default": "Join the Katha"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width",
+      "info": "Controls how wide the text block is — smaller widths move words onto new lines.",
+      "min": 320,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 640
     },
     {
       "type": "header",
