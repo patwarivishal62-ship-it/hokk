@@ -181,15 +181,11 @@
     },
     "hero": {
       "go_to_slide": "Go to slide {{ number }}"
-    },
-    "culture": {
-      "chapter": "Chapter",
-      "signature_weaves": "Signature weaves"
     }
   },
   "footer": {
     "copyright": "© {{ year }} House of Kala Katha · Woven in India",
-    "tagline": "Kala is the art. Katha is the story.",
+    "tagline": "Stories of India, Woven for You.",
     "newsletter_title": "Join the Katha"
   },
   "404": {

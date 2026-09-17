@@ -1,89 +1,37 @@
 {
   "sections": {
-    "culture": {
-      "type": "cultural-regions",
+    "culture-banners": {
+      "type": "culture-banners",
       "settings": {
-        "show_breadcrumb": true,
-        "intro_eyebrow": "The Culture of India",
-        "intro_heading": "Stories Woven Across India",
-        "intro_description": "<p>Indian handloom is not one tradition — it is hundreds, shaped by region and community, by the fibres a place grows and the motifs its weavers remember. Every metre of cloth carries a specific geography: a river delta, a hill town, a family loom, a lineage. This is where we begin reading that map — region by region, weave by weave, story by story.</p>",
-        "show_chapter_numbers": true,
-        "image_ratio": "4/5",
-        "image_width": 55,
-        "container_width": "normal",
-        "padding_top": 96,
-        "padding_bottom": 24,
-        "background_color": "#F7F3EE"
+        "show_page_title": false,
+        "gap": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
       },
       "blocks": {
-        "north": {
-          "type": "region",
-          "settings": {
-            "eyebrow": "Kashmir to Kashi",
-            "title": "North India",
-            "description": "<p>Celebration cloth lives here. In the loom-lined lanes of Varanasi, silk is brocaded pick by pick with gold and silver zari; in Kashmir, kani shawls are woven to a coded notation only the weaver reads. The north has dressed India for its biggest days for centuries — and still does.</p>",
-            "weaves": "Banarasi brocade, Kani shawl, Tanchoi",
-            "button_label": "Explore North India",
-            "image_position": "left",
-            "text_alignment": "left",
-            "padding_y": 120
-          }
+        "banner-1": {
+          "type": "banner",
+          "settings": { "alt_label": "North India" }
         },
-        "north-east": {
-          "type": "region",
-          "settings": {
-            "eyebrow": "The Brahmaputra valley & the hills",
-            "title": "North East India",
-            "description": "<p>The North East weaves with what its land gives — Muga and Eri silk raised in Assam, backstrap looms in the hills, indigo and madder in Nagaland and Manipur. Here cloth is not industry; it is identity, and every community keeps a different grammar of it.</p>",
-            "weaves": "Muga silk, Eri silk, Naga shawl",
-            "button_label": "Explore North East India",
-            "image_position": "right",
-            "text_alignment": "left",
-            "padding_y": 120
-          }
+        "banner-2": {
+          "type": "banner",
+          "settings": { "alt_label": "North East India" }
         },
-        "south": {
-          "type": "region",
-          "settings": {
-            "eyebrow": "Temple towns & river deltas",
-            "title": "South India",
-            "description": "<p>In the south, temple towns and river deltas perfected the silk sari as heirloom architecture — a Kanjivaram's contrast border is woven separately and joined to the cloth, while Pochampally's ikat is dyed into the yarn before a single pick is thrown. Kerala's kasavu keeps its gold quietly in the warp.</p>",
-            "weaves": "Kanjivaram, Pochampally ikat, Kasavu",
-            "button_label": "Explore South India",
-            "image_position": "left",
-            "text_alignment": "left",
-            "padding_y": 120
-          }
+        "banner-3": {
+          "type": "banner",
+          "settings": { "alt_label": "South India" }
         },
-        "west-central": {
-          "type": "region",
-          "settings": {
-            "eyebrow": "Double-ikat country",
-            "title": "West & Central India",
-            "description": "<p>This is India's double-ikat country. In Patan, a single Patola is tied, dyed and aligned so both faces of the cloth match exactly — an art carried by a handful of families. Around it runs a wider guild: Bandhani's tied dots, Chanderi's gossamer cotton-silk, Maheshwari's reversible borders.</p>",
-            "weaves": "Patola, Bandhani, Chanderi, Maheshwari",
-            "button_label": "Explore West & Central India",
-            "image_position": "right",
-            "text_alignment": "left",
-            "padding_y": 120
-          }
+        "banner-4": {
+          "type": "banner",
+          "settings": { "alt_label": "West & Central India" }
         },
-        "east": {
-          "type": "region",
-          "settings": {
-            "eyebrow": "Bengal & beyond",
-            "title": "East India",
-            "description": "<p>Bengal turned fine cotton into narrative — Baluchari pallus carry whole scenes from the epics, and jamdani motifs are woven, not embroidered, thread by floating thread. South of the Gangetic delta, Odisha's Sambalpuri ikat hides its pattern in the yarn, revealed only when the cloth is washed.</p>",
-            "weaves": "Baluchari, Jamdani, Sambalpuri ikat, Tussar",
-            "button_label": "Explore East India",
-            "image_position": "left",
-            "text_alignment": "left",
-            "padding_y": 120
-          }
+        "banner-5": {
+          "type": "banner",
+          "settings": { "alt_label": "East India" }
         }
       },
-      "block_order": ["north", "north-east", "south", "west-central", "east"]
+      "block_order": ["banner-1", "banner-2", "banner-3", "banner-4", "banner-5"]
     }
   },
-  "order": ["culture"]
+  "order": ["culture-banners"]
 }

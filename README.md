@@ -97,18 +97,16 @@ shopify-hokk/
 
 ### Culture page (`/pages/culture`)
 
-`templates/page.culture.json` + `sections/cultural-regions.liquid` — an editorial
-culture page: intro (breadcrumb, eyebrow, H1, copy) followed by regional
-"chapters". Each region is a **block** (type `region`), so merchants reorder by
-dragging, hide with the eye icon, and add new ones (regions, states, weaving
-traditions, weaver stories) without code. Chapter numbers follow visible block
-order automatically. Per region: image + optional mobile image, eyebrow, title,
-richtext description, signature weaves (comma list, optionally linked to store
-search), CTA label + URL, image side (left/right), text alignment, background
-color and vertical spacing. Section-level: intro fields, image ratio, image
-width %, container width, chapter numbering, and the standard background /
-typography group. Setup: create a page titled *Culture* in Shopify admin,
-assign the **culture** template, then add it to your main menu.
+`templates/page.culture.json` + `sections/culture-banners.liquid` — the Culture
+page as a stack of **full-width clickable banner images** (the region text is
+designed into the banners themselves). Each banner is a block: image, optional
+mobile image, link URL (any page/collection/product/blog/external) and an
+accessible label. Banners are never cropped — the complete image always shows.
+Section settings: optional visible page title (a hidden H1 keeps SEO intact
+either way), space between banners, top/bottom padding. Setup: create a page
+titled *Culture* in Shopify admin, assign the **culture** template, then add it
+to your main menu. (An earlier editorial "cultural regions" section exists in
+git history if ever needed again.)
 
 
 ### Shopify norms this theme follows

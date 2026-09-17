@@ -1,0 +1,161 @@
+{%- comment -%}
+  House of Kala Katha — Culture banners
+  The Culture page as a stack of full-width clickable banner images
+  (the region text is designed into the banners themselves).
+
+  Each banner is a BLOCK: upload the image, set the link — reorder by
+  dragging, hide with the eye icon, add more with "Add banner".
+  Images are NEVER cropped: the complete banner always shows, so text
+  designed into the image can never be cut off on any screen.
+{%- endcomment -%}
+
+<div class="culture-banners"
+  style="--banner-gap: {{ section.settings.gap }}px; --section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
+
+  {%- if section.settings.show_page_title -%}
+    <div class="container culture-banners__title-wrap">
+      <h1 class="culture-banners__title">{{ page.title | default: 'Culture' }}</h1>
+    </div>
+  {%- else -%}
+    {%- comment -%} SEO: the page still needs one H1 even when the title lives inside the first banner {%- endcomment -%}
+    <h1 class="visually-hidden">{{ page.title | default: 'Culture' }}</h1>
+  {%- endif -%}
+
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign img = block.settings.image
+      assign img_mobile = block.settings.image_mobile
+      assign banner_alt = block.settings.alt_label | default: img.alt | escape
+      assign loading_attr = 'lazy'
+    -%}
+    <div class="culture-banner" {{ block.shopify_attributes }}>
+      {%- if block.settings.link != blank -%}
+        <a class="culture-banner__link" href="{{ block.settings.link }}">
+      {%- endif -%}
+
+      {%- if img != blank -%}
+        {%- liquid
+          if forloop.first
+            assign loading_attr = 'eager'
+          endif
+        -%}
+        {%- if img_mobile != blank -%}
+          {{ img_mobile | image_url: width: 1200 | image_tag:
+            loading: loading_attr,
+            widths: '375, 480, 640, 828, 1080',
+            sizes: '100vw',
+            class: 'culture-banner__img culture-banner__img--mobile',
+            alt: banner_alt
+          }}
+        {%- endif -%}
+        {{ img | image_url: width: 3000 | image_tag:
+          loading: loading_attr,
+          widths: '750, 1080, 1296, 1512, 1800, 2200, 2600, 3000',
+          sizes: '100vw',
+          class: 'culture-banner__img',
+          alt: banner_alt
+        }}
+      {%- else -%}
+        <div class="culture-banner__placeholder" role="img" aria-label="{{ block.settings.alt_label | default: 'Banner image' | escape }}"></div>
+      {%- endif -%}
+
+      {%- if block.settings.link != blank -%}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Culture banners",
+  "class": "section-culture-banners",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Full-width clickable banners for the Culture page. Upload a banner image per block, then set where it links to. The text is designed into the images themselves — images are never cropped, so nothing gets cut off."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_page_title",
+      "label": "Show a page title above the banners",
+      "info": "Leave off when the title is designed into your first banner. A hidden heading is kept for search engines either way.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between banners",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Banner image",
+          "info": "Full-width, high-resolution (2400px+ wide). Text can be designed into the image — it will never be cropped."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Banner image (mobile)",
+          "info": "Optional. Shown on phones instead of the main image — useful for a taller mobile design."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Banner link",
+          "info": "Where clicking this banner goes — any page, collection, product, blog post or external URL. Leave blank for no link."
+        },
+        {
+          "type": "text",
+          "id": "alt_label",
+          "label": "Accessible label (alt text)",
+          "info": "Describe the banner and its text for screen readers and search engines. Falls back to the image's own alt text."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Culture banners",
+      "settings": {},
+      "blocks": [
+        { "type": "banner" },
+        { "type": "banner" },
+        { "type": "banner" }
+      ]
+    }
+  ]
+}
+{% endschema %}

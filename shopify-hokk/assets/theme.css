@@ -1556,141 +1556,63 @@ svg.icon { width: 20px; height: 20px; }
 }
 
 /* --------------------------------------------------------------------------
-   Culture page — cultural regions (.culture / .culture-chapter)
-   Palette: ivory #F7F3EE · heritage black #171717 · deep maroon #6B2230 ·
-   antique gold #B08D57 · olive sage #7A8063 (used sparingly)
+   Culture page — clickable banner stack (.culture-banners)
+   Full-width banners with text designed into the images. Images are NEVER
+   cropped (width 100%, height auto) so the designed text always shows.
+   Palette: ivory #F7F3EE · antique gold #B08D57 · deep maroon #6B2230
    -------------------------------------------------------------------------- */
-.culture { position: relative; }
-.culture .container { position: relative; z-index: 2; }
-
-/* Introduction ----------------------------------------------------------- */
-.culture__intro { padding: var(--section-pad-top, 96px) 0 var(--section-pad-bottom, 24px); text-align: center; }
-.culture__intro .eyebrow { justify-content: center; }
-.culture__intro .eyebrow::before { display: none; }
-.culture__breadcrumbs { justify-content: center; padding-bottom: 8px; }
-.culture__heading {
+.culture-banners {
+  display: flex;
+  flex-direction: column;
+  gap: var(--banner-gap, 0px);
+  padding-top: var(--section-pad-top, 0px);
+  padding-bottom: var(--section-pad-bottom, 0px);
+}
+.culture-banners__title-wrap { padding: 56px 0 24px; }
+.culture-banners__title {
   font-family: var(--font-heading-family);
-  font-size: clamp(3.4rem, 5.6vw, 5.6rem);
+  font-size: clamp(3rem, 5vw, 5rem);
   line-height: 1.05;
-  letter-spacing: -0.01em;
-  margin: 0.3em 0 0.5em;
+  margin: 0;
 }
-.culture__intro-copy { max-width: 66ch; margin-inline: auto; font-size: 1.75rem; }
-.culture__intro-copy p { margin: 0 auto 1.2em; }
-.culture__intro-copy p:last-child { margin-bottom: 0; }
+.culture-banner { position: relative; }
+.culture-banner__link { display: block; position: relative; }
+.culture-banner__img { display: block; width: 100%; height: auto; }
+.culture-banner__img--mobile { display: none; }
 
-/* Chapters ---------------------------------------------------------------- */
-.culture-chapter { background: var(--chapter-bg, transparent); padding: var(--chapter-pad, 120px) 0; }
-.culture-chapter__inner {
-  display: grid;
-  grid-template-columns: minmax(0, var(--culture-media-fr, 55fr)) minmax(0, var(--culture-content-fr, 45fr));
-  column-gap: clamp(48px, 6vw, 110px);
-  align-items: center;
-}
-.culture-chapter__media { order: 1; position: relative; overflow: hidden; }
-.culture-chapter__content { order: 2; }
-
-/* Image --------------------------------------------------------------- */
-.culture-chapter__img, .culture-chapter__placeholder {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: var(--culture-ratio, 4/5);
-  object-fit: cover;
-}
-.culture-chapter__img { transition: transform 1.2s cubic-bezier(0.2, 0.6, 0.2, 1); }
+/* Subtle darken on hover — signals "clickable" without ever cropping
+   or moving the designed text. Delete the two rules below for zero effect. */
 @media (hover: hover) {
-  .culture-chapter__media:hover .culture-chapter__img { transform: scale(1.02); }
+  .culture-banner__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #171717;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .culture-banner__link:hover::after { opacity: 0.07; }
 }
-.culture-chapter__img--mobile { display: none; }
-.culture-chapter__placeholder {
+
+/* Keyboard focus stays visible on the full-bleed banner */
+.culture-banner__link:focus-visible { outline: 2px solid #B08D57; outline-offset: -3px; }
+
+/* Placeholder until a banner image is uploaded */
+.culture-banner__placeholder {
+  width: 100%;
+  aspect-ratio: 21 / 9;
   background: #EDE4D4;
   box-shadow: inset 0 0 0 1px rgba(176, 141, 87, 0.35);
 }
 
-/* Content -------------------------------------------------------------- */
-.culture-chapter__eyebrow { flex-wrap: wrap; }
-.culture-chapter__num { color: #B08D57; }
-.culture-chapter__eyebrow-sep { opacity: 0.45; }
-.culture-chapter__title {
-  font-family: var(--font-heading-family);
-  font-size: clamp(3rem, 4.2vw, 4.6rem);
-  line-height: 1.04;
-  letter-spacing: -0.01em;
-  margin: 0.3em 0 0.55em;
-}
-.culture-chapter__description { max-width: 52ch; font-size: 1.7rem; line-height: 1.75; }
-.culture-chapter__description p { margin: 0 0 1.15em; }
-.culture-chapter__description p:last-child { margin-bottom: 0; }
-
-/* Signature weaves ------------------------------------------------------ */
-.culture-chapter__weaves {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.6rem 1.1rem;
-  margin: 2.8rem 0 0;
-  padding-top: 1.8rem;
-  border-top: 1px solid rgba(176, 141, 87, 0.35);
-  font-size: 1.25rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.culture-chapter__weaves-label { color: #6B2230; font-weight: 600; margin-right: 0.4rem; }
-.culture-chapter__weave { color: var(--color-muted); padding-bottom: 2px; }
-a.culture-chapter__weave { text-decoration: none; border-bottom: 1px solid rgba(176, 141, 87, 0.4); }
-a.culture-chapter__weave:hover { color: #6B2230; border-color: #6B2230; }
-.culture-chapter__weave-sep { color: rgba(176, 141, 87, 0.7); }
-
-/* CTA -------------------------------------------------------------------- */
-.culture-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin-top: 3rem;
-  padding: 1.6rem 0;
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #6B2230;
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
-}
-.culture-cta__arrow { display: inline-block; transition: transform 0.35s ease; }
-.culture-cta:hover, .culture-cta:focus-visible { color: #171717; }
-.culture-cta:hover .culture-cta__arrow, .culture-cta:focus-visible .culture-cta__arrow { transform: translateX(8px); }
-.culture-cta:focus-visible { outline: 2px solid #B08D57; outline-offset: 4px; }
-
-/* Center-aligned chapters -------------------------------------------------- */
-.culture-chapter--align-center .culture-chapter__content { text-align: center; }
-.culture-chapter--align-center .culture-chapter__description,
-.culture-chapter--align-center .culture-chapter__weaves { margin-inline: auto; justify-content: center; }
-.culture-chapter--align-center .culture-chapter__eyebrow { justify-content: center; }
-.culture-chapter--align-center .culture-chapter__eyebrow::before { display: none; }
-
-/* Container width options -------------------------------------------------- */
-.culture--width-wide .culture-chapter__inner { max-width: min(1560px, 94vw); }
-.culture--width-full .culture-chapter__inner { max-width: none; }
-
-/* Mobile ------------------------------------------------------------------- */
-@media (max-width: 989px) {
-  .culture-chapter { padding: calc(var(--chapter-pad, 120px) / 1.75) 0; }
-  .culture-chapter__inner { grid-template-columns: 1fr; row-gap: 4rem; align-items: start; }
-  .culture-chapter--pos-right .culture-chapter__media { order: 1; }
-  .culture-chapter--pos-right .culture-chapter__content { order: 2; }
-  .culture__heading { font-size: clamp(3rem, 9vw, 4.2rem); }
-  .culture-chapter__title { font-size: clamp(2.8rem, 8vw, 3.8rem); }
-  .culture-chapter__description { max-width: 58ch; }
-}
+/* Mobile: swap to the mobile banner if provided */
 @media (max-width: 749px) {
-  .culture-chapter__img--mobile { display: block; }
-  .culture-chapter__img:not(.culture-chapter__img--mobile) { display: none; }
-  .culture-chapter__weaves { gap: 0.5rem 0.9rem; }
+  .culture-banner__img--mobile { display: block; }
+  .culture-banner__img:not(.culture-banner__img--mobile) { display: none; }
 }
 
-/* Reduced motion ------------------------------------------------------------ */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .culture-chapter__img,
-  .culture-cta__arrow { transition: none !important; transform: none !important; }
+  .culture-banner__link::after { transition: none !important; }
 }
