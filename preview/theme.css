@@ -1526,3 +1526,31 @@ svg.icon { width: 20px; height: 20px; }
   .wordmark__name { font-size: 2rem; }
   .cart-drawer__panel { width: 100vw; }
 }
+
+/* =====================================================================
+   BANNER HEIGHT CONTROL (theme v3.7.1 add-on)
+   ---------------------------------------------------------------------
+   The banner is no longer locked to the screen height. Its height is
+   now:  space above  +  banner text  +  space below.
+   Make the banner taller  -> increase the two numbers below.
+   Make the banner shorter -> decrease the two numbers below.
+   (Uses Height = Full screen. For Large or Medium, change
+   .hero--full below to .hero--large or .hero--medium)
+   ===================================================================== */
+.hero--full .hero__content {
+  --banner-space-top: 240px;     /* space ABOVE the banner text */
+  --banner-space-bottom: 240px;  /* space BELOW the banner text */
+
+  min-height: 320px;             /* safety minimum so it never collapses */
+  padding-top: calc(var(--banner-space-top) + var(--hero-pad-top, 0px));
+  padding-bottom: calc(var(--banner-space-bottom) + var(--hero-pad-bottom, 0px));
+}
+
+/* Phones: smaller spacing keeps the banner balanced */
+@media (max-width: 749px) {
+  .hero--full .hero__content {
+    --banner-space-top: 120px;
+    --banner-space-bottom: 120px;
+    min-height: 240px;
+  }
+}
