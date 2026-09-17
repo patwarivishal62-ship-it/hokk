@@ -95,6 +95,22 @@ shopify-hokk/
 ├── assets/            theme.css · theme.js · starter imagery
 ```
 
+### Culture page (`/pages/culture`)
+
+`templates/page.culture.json` + `sections/cultural-regions.liquid` — an editorial
+culture page: intro (breadcrumb, eyebrow, H1, copy) followed by regional
+"chapters". Each region is a **block** (type `region`), so merchants reorder by
+dragging, hide with the eye icon, and add new ones (regions, states, weaving
+traditions, weaver stories) without code. Chapter numbers follow visible block
+order automatically. Per region: image + optional mobile image, eyebrow, title,
+richtext description, signature weaves (comma list, optionally linked to store
+search), CTA label + URL, image side (left/right), text alignment, background
+color and vertical spacing. Section-level: intro fields, image ratio, image
+width %, container width, chapter numbering, and the standard background /
+typography group. Setup: create a page titled *Culture* in Shopify admin,
+assign the **culture** template, then add it to your main menu.
+
+
 ### Shopify norms this theme follows
 - JSON templates list **content sections only**; header/footer render via `{% sections 'header-group' %}` / `{% sections 'footer-group' %}`.
 - Cart drawer updates through the **Section Rendering API** (`?sections=cart-drawer`).

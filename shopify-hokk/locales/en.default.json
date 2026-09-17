@@ -181,6 +181,10 @@
     },
     "hero": {
       "go_to_slide": "Go to slide {{ number }}"
+    },
+    "culture": {
+      "chapter": "Chapter",
+      "signature_weaves": "Signature weaves"
     }
   },
   "footer": {

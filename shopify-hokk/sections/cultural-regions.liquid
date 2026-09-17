@@ -1,0 +1,448 @@
+{%- comment -%}
+  House of Kala Katha — Cultural regions
+  Editorial culture page: an introduction followed by regional "chapters".
+
+  Architecture
+  ------------
+  Each region is a BLOCK of type "region" so merchants can reorder
+  (drag), hide/show (eye icon), duplicate and add new ones from the
+  theme editor — regions today, states / weaving traditions / weaver
+  stories tomorrow, without touching code. Chapter numbers are derived
+  from the visible block order, so they stay sequential automatically.
+{%- endcomment -%}
+
+{%- liquid
+  assign chapter_count = 0
+  assign content_fr = 100 | minus: section.settings.image_width
+-%}
+
+<div class="culture culture--width-{{ section.settings.container_width }}"
+  style="
+    --section-pad-top: {{ section.settings.padding_top }}px;
+    --section-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --culture-ratio: {{ section.settings.image_ratio }};
+    --culture-media-fr: {{ section.settings.image_width }}fr;
+    --culture-content-fr: {{ content_fr }}fr;
+    {% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}
+    {% if section.settings.background_color != blank and section.settings.background_image == blank and section.settings.background_video == blank %}background: {{ section.settings.background_color }};{% endif %}
+    --font-heading-family: {{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
+    font-family: {{ section.settings.body_font.family }}, {{ section.settings.body_font.fallback_families }};
+  ">
+  {% style %}
+    {{ section.settings.heading_font | font_face: font_display: 'swap' }}
+    {{ section.settings.body_font | font_face: font_display: 'swap' }}
+  {% endstyle %}
+
+  {%- if section.settings.background_video != blank or section.settings.background_image != blank -%}
+    {%- render 'section-background', bg_video: section.settings.background_video, bg_image: section.settings.background_image, bg_overlay: section.settings.background_color, bg_overlay_opacity: section.settings.overlay_opacity -%}
+  {%- endif -%}
+
+  {%- comment -%} ---------------------------------------- Introduction {%- endcomment -%}
+  <header class="culture__intro">
+    <div class="container" data-reveal>
+      {%- if section.settings.show_breadcrumb -%}
+        <nav class="breadcrumbs culture__breadcrumbs" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{{ page.title | default: section.settings.intro_heading }}</span>
+        </nav>
+      {%- endif -%}
+
+      {%- if section.settings.intro_eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.intro_eyebrow | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.intro_heading != blank -%}
+        <h1 class="culture__heading">{{ section.settings.intro_heading | escape }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.intro_description != blank -%}
+        <div class="rte culture__intro-copy">{{ section.settings.intro_description }}</div>
+      {%- endif -%}
+    </div>
+  </header>
+
+  {%- comment -%} ---------------------------------------- Chapters {%- endcomment -%}
+  <div class="culture__chapters">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'region' -%}
+          {%- liquid
+            assign chapter_count = chapter_count | plus: 1
+            assign chapter_num = chapter_count | prepend: '0' | slice: -2, 2
+            assign img = block.settings.image
+            assign img_mobile = block.settings.image_mobile
+            assign img_alt = img.alt | default: block.settings.title | escape
+            assign cta_url = block.settings.button_link | default: routes.all_products_collection_url
+          -%}
+          <article class="culture-chapter culture-chapter--pos-{{ block.settings.image_position }} culture-chapter--align-{{ block.settings.text_alignment }}"
+            style="--chapter-pad: {{ block.settings.padding_y }}px;{% if block.settings.background_color != blank %}--chapter-bg: {{ block.settings.background_color }};{% endif %}"
+            aria-labelledby="culture-title-{{ block.id }}"
+            {{ block.shopify_attributes }}>
+            <div class="container culture-chapter__inner">
+
+              <div class="culture-chapter__media" data-reveal>
+                {%- if img != blank -%}
+                  {%- if img_mobile != blank -%}
+                    {{ img_mobile | image_url: width: 1200 | image_tag:
+                      loading: 'lazy',
+                      widths: '375, 480, 640, 828, 1080',
+                      sizes: '100vw',
+                      class: 'culture-chapter__img culture-chapter__img--mobile',
+                      alt: img_alt
+                    }}
+                  {%- endif -%}
+                  {{ img | image_url: width: 1800 | image_tag:
+                    loading: 'lazy',
+                    widths: '600, 750, 900, 1080, 1296, 1512, 1800',
+                    sizes: '(min-width: 1500px) 810px, (min-width: 990px) 55vw, 100vw',
+                    class: 'culture-chapter__img',
+                    alt: img_alt
+                  }}
+                {%- else -%}
+                  <div class="culture-chapter__placeholder" role="img" aria-label="{{ block.settings.title | escape }}"></div>
+                {%- endif -%}
+              </div>
+
+              <div class="culture-chapter__content" data-reveal>
+                {%- if section.settings.show_chapter_numbers or block.settings.eyebrow != blank -%}
+                  <p class="eyebrow culture-chapter__eyebrow">
+                    {%- if section.settings.show_chapter_numbers -%}
+                      <span class="culture-chapter__num">{{ 'sections.culture.chapter' | t }} {{ chapter_num }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.eyebrow != blank -%}
+                      {%- if section.settings.show_chapter_numbers -%}<span class="culture-chapter__eyebrow-sep" aria-hidden="true">—</span>{%- endif -%}
+                      <span class="culture-chapter__kicker">{{ block.settings.eyebrow | escape }}</span>
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+
+                {%- if block.settings.title != blank -%}
+                  <h2 class="culture-chapter__title" id="culture-title-{{ block.id }}">{{ block.settings.title | escape }}</h2>
+                {%- endif -%}
+
+                {%- if block.settings.description != blank -%}
+                  <div class="rte culture-chapter__description">{{ block.settings.description }}</div>
+                {%- endif -%}
+
+                {%- if block.settings.weaves != blank -%}
+                  {%- assign weave_list = block.settings.weaves | split: ',' -%}
+                  <p class="culture-chapter__weaves">
+                    <span class="culture-chapter__weaves-label">{{ 'sections.culture.signature_weaves' | t }}</span>
+                    {%- for weave_item in weave_list -%}
+                      {%- assign weave = weave_item | strip -%}
+                      {%- if block.settings.weaves_link_search -%}
+                        <a class="culture-chapter__weave" href="{{ routes.search_url }}?q={{ weave | url_encode }}">{{ weave }}</a>
+                      {%- else -%}
+                        <span class="culture-chapter__weave">{{ weave }}</span>
+                      {%- endif -%}
+                      {%- unless forloop.last -%}<span class="culture-chapter__weave-sep" aria-hidden="true">·</span>{%- endunless -%}
+                    {%- endfor -%}
+                  </p>
+                {%- endif -%}
+
+                {%- if block.settings.button_label != blank -%}
+                  <a class="culture-cta" href="{{ cta_url }}">
+                    <span class="culture-cta__label">{{ block.settings.button_label | escape }}</span>
+                    <span class="culture-cta__arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                {%- endif -%}
+              </div>
+
+            </div>
+          </article>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cultural regions",
+  "class": "section-culture",
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "An editorial culture page: an introduction followed by regional chapters. Each region is a block — drag to reorder, click the eye icon to hide, or “Add region” for more (regions, states, weaving traditions, weaver stories)."
+    },
+    {
+      "type": "header",
+      "content": "Introduction"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "Show breadcrumb",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "intro_eyebrow",
+      "label": "Intro eyebrow",
+      "default": "The Culture of India"
+    },
+    {
+      "type": "text",
+      "id": "intro_heading",
+      "label": "Intro heading",
+      "info": "Used as the page's main heading (H1).",
+      "default": "Stories Woven Across India"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_description",
+      "label": "Intro description",
+      "default": "<p>Indian handloom is not one tradition — it is hundreds, shaped by region and community, by the fibres a place grows and the motifs its weavers remember. Every metre of cloth carries a specific geography: a river delta, a hill town, a family loom, a lineage. This is where we begin reading that map — region by region, weave by weave, story by story.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Chapters"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_chapter_numbers",
+      "label": "Number the chapters automatically",
+      "info": "Chapter 01, 02… follows the order of the visible regions.",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "info": "Kept consistent across all chapters for an even visual rhythm.",
+      "options": [
+        { "value": "4/5", "label": "Portrait (4:5)" },
+        { "value": "1/1", "label": "Square (1:1)" },
+        { "value": "3/2", "label": "Landscape (3:2)" },
+        { "value": "16/10", "label": "Wide (16:10)" }
+      ],
+      "default": "4/5"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image width (desktop)",
+      "min": 40,
+      "max": 62,
+      "step": 1,
+      "unit": "%",
+      "default": 55
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Chapters container width",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "wide", "label": "Wide" },
+        { "value": "full", "label": "Full width" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Intro top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Intro bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F7F3EE",
+      "info": "Solid background on its own — or a tint over the background image/video."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Plays on loop, muted. Takes priority over the image."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Background overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 0,
+      "info": "Fades the background color over the image/video so text stays readable."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "fraunces_n6"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "inter_n4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "region",
+      "name": "Region",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Regional image",
+          "info": "Large and high-resolution — at least 1600px wide."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image (mobile)",
+          "info": "Optional. Shown on phones instead of the main image — useful for a taller crop."
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "info": "Small label above the region title, e.g. “Kashmir to Kashi”."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Region title",
+          "default": "North India"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "weaves",
+          "label": "Signature weaves",
+          "info": "Comma-separated list, e.g. “Banarasi brocade, Chanderi, Kota Doria”. Shown as a refined list under the description."
+        },
+        {
+          "type": "checkbox",
+          "id": "weaves_link_search",
+          "label": "Link each weave to store search",
+          "info": "Turns every weave into a link to its search results — a simple way to connect culture to products until dedicated pages exist.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "CTA label",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "CTA link",
+          "info": "Any Shopify page, collection, product, blog post or external URL. Until set, the button points to All products."
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image position (desktop)",
+          "options": [
+            { "value": "left", "label": "Image left" },
+            { "value": "right", "label": "Image right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Text alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "info": "Leave blank to inherit the page background."
+        },
+        {
+          "type": "range",
+          "id": "padding_y",
+          "label": "Vertical spacing",
+          "min": 48,
+          "max": 240,
+          "step": 8,
+          "unit": "px",
+          "default": 120
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cultural regions",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "region",
+          "settings": {
+            "title": "North India",
+            "eyebrow": "Kashmir to Kashi",
+            "button_label": "Explore North India",
+            "image_position": "left"
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "title": "South India",
+            "eyebrow": "Temple towns & river deltas",
+            "button_label": "Explore South India",
+            "image_position": "right"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
