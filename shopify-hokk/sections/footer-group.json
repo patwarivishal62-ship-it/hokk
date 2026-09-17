@@ -29,7 +29,9 @@
         "col-2",
         "col-3"
       ],
-      "settings": {}
+      "settings": {
+        "tagline": "Stories of India, Woven for You."
+      }
     }
   },
   "order": [

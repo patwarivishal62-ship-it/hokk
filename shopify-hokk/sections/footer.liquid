@@ -20,7 +20,11 @@
             <img src="{{ 'logo-light.png' | asset_url }}" alt="{{ shop.name | escape }}" class="site-footer__logo" loading="lazy" width="140" height="39">
           {%- endif -%}
         </a>
-        <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>
+        {%- if section.settings.tagline != blank -%}
+          <p class="site-footer__tagline">{{ section.settings.tagline | escape }}</p>
+        {%- else -%}
+          <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>
+        {%- endif -%}
         {%- if section.settings.blurb != blank -%}
           <p class="site-footer__blurb">{{ section.settings.blurb | escape }}</p>
         {%- endif -%}
@@ -69,8 +73,7 @@
   </div>
 </footer>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Footer",
   "class": "section-footer",
   "settings": [
@@ -92,6 +95,13 @@
       "step": 10,
       "unit": "px",
       "default": 140
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Stories of India, Woven for You.",
+      "info": "Shown under the footer logo. Leave blank to hide it."
     },
     {
       "type": "textarea",
@@ -136,11 +146,25 @@
     {
       "name": "Footer",
       "blocks": [
-        { "type": "menu", "settings": { "heading": "Shop" } },
-        { "type": "menu", "settings": { "heading": "House of Kala Katha" } },
-        { "type": "menu", "settings": { "heading": "Care" } }
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "House of Kala Katha"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Care"
+          }
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}
