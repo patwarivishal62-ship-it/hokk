@@ -356,6 +356,9 @@ svg.icon { width: 20px; height: 20px; }
 .hero--full .hero__content { min-height: 88vh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: calc(14vh + var(--hero-pad-bottom, 0px)); }
 .hero--large .hero__content { min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-end; }
 .hero--medium .hero__content { min-height: 52vh; display: flex; flex-direction: column; justify-content: flex-end; }
+/* Full image (no crop): banner height follows the picture's own shape, so nothing is cut off on any screen */
+.hero--fit .hero__slide { aspect-ratio: var(--slide-ratio, 1.6); display: flex; flex-direction: column; }
+.hero--fit .hero__content { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end; padding-top: calc(4vh + var(--hero-pad-top, 0px)); padding-bottom: calc(4vh + var(--hero-pad-bottom, 0px)); }
 .hero--align-center .hero__content { align-items: center; text-align: center; }
 .hero--align-center .eyebrow::before { display: none; }
 .hero--dark { color: var(--color-base-text); }
@@ -1482,6 +1485,7 @@ svg.icon { width: 20px; height: 20px; }
 
   .hero__img--mobile { display: block; position: absolute; inset: 0; }
   .hero__img:not(.hero__img--mobile) { display: block; }
+  .hero--fit .hero__slide { aspect-ratio: var(--slide-ratio-m, var(--slide-ratio, 1.6)); }
 
   .philosophy__grid, .product__grid, .collection-banner__grid,
   .account-login__inner, .account__grid, .order__addresses { grid-template-columns: 1fr; }

@@ -20,8 +20,22 @@
         if forloop.first
           assign loading_attr = 'eager'
         endif
+        assign slide_ratio = ''
+        assign slide_ratio_mobile = ''
+        if section.settings.height == 'fit'
+          if block.settings.video != blank
+            assign slide_ratio = '1.7778'
+          elsif image != blank
+            assign slide_ratio = image.aspect_ratio | default: 1.6
+          else
+            assign slide_ratio = '0.75'
+          endif
+          if block.settings.image_mobile != blank and block.settings.video == blank
+            assign slide_ratio_mobile = block.settings.image_mobile.aspect_ratio | default: slide_ratio
+          endif
+        endif
       -%}
-      <div class="hero__slide{% if forloop.first %} is-active{% endif %}" data-hero-slide {% unless forloop.first %}aria-hidden="true"{% endunless %} {{ block.shopify_attributes }}>
+      <div class="hero__slide{% if forloop.first %} is-active{% endif %}" data-hero-slide {% unless forloop.first %}aria-hidden="true"{% endunless %}{% if slide_ratio != '' %} style="--slide-ratio: {{ slide_ratio }};{% if slide_ratio_mobile != '' %} --slide-ratio-m: {{ slide_ratio_mobile }};{% endif %}"{% endif %} {{ block.shopify_attributes }}>
         <div class="hero__media">
           {%- if section.settings.background_video == blank -%}
             {%- if block.settings.video != blank -%}
@@ -128,9 +142,17 @@
         {
           "value": "medium",
           "label": "Medium"
+        },
+        {
+          "value": "fit",
+          "label": "Full image (no crop)"
         }
       ],
-      "default": "full"
+      "default": "fit"
+    },
+    {
+      "type": "paragraph",
+      "content": "Height — “Full image (no crop)” keeps the entire banner picture visible on every screen (the banner matches the picture's own shape). “Full screen”, “Large” and “Medium” fill a fixed portion of the screen and crop the picture to fit."
     },
     {
       "type": "select",
