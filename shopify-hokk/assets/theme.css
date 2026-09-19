@@ -1925,3 +1925,69 @@ a.cr-image__link:focus-visible { outline: 2px solid #B08D57; outline-offset: -3p
   .cr-image__img--mobile { display: block; }
   .cr-image__img:not(.cr-image__img--mobile) { display: none; }
 }
+
+/* Visual India map (.cr-mapv) — region pages */
+.cr-mapv { padding: clamp(32px, 5vw, 56px) 0 8px; }
+.cr-mapv__inner { position: relative; max-width: 680px; margin-inline: auto; }
+.cr-mapv__svg { display: block; width: 100%; height: auto; }
+.cr-mapv__state {
+  fill: #E7DCC8;
+  stroke: #FFFFFF;
+  stroke-width: 0.8;
+  transition: fill 0.3s ease;
+}
+.cr-mapv__state.is-hl { fill: #C9A86B; stroke: #F7F3EE; }
+.cr-mapv__state.is-hl:hover { fill: #B08D57; }
+.cr-mapv__pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(22px, 3.4vw, 32px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: #6B2230;
+  color: #F7F3EE;
+  font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 0 0 2px #F7F3EE, 0 3px 8px rgba(23, 23, 23, 0.35);
+  cursor: default;
+}
+.cr-mapv__pin::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #171717;
+  color: #F7F3EE;
+  padding: 0.7rem 1.3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.cr-mapv__pin:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+.cr-mapv__note {
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 2.4rem 0 0;
+}
+@media (max-width: 749px) {
+  .cr-mapv__pin { width: 20px; font-size: 1rem; }
+  .cr-mapv__pin::after { font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cr-mapv__state, .cr-mapv__pin::after { transition: none !important; }
+}

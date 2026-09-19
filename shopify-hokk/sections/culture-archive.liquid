@@ -37,6 +37,34 @@
 
     {%- case block.type -%}
 
+      {%- when 'map-visual' -%}
+        {%- liquid
+          assign mv_start = forloop.index
+          assign mv_pins = ''
+          assign mv_hl = ''
+          assign mv_seen = ''
+          assign mv_count = 0
+        -%}
+        {%- for nb in section.blocks offset: mv_start -%}
+          {%- if nb.type != 'map-card' -%}{%- break -%}{%- endif -%}
+          {%- if nb.settings.pin_state != blank -%}
+            {%- assign mv_state = nb.settings.pin_state -%}
+            {%- assign mv_dup = mv_seen | split: mv_state | size | minus: 1 -%}
+            {%- assign mv_seen = mv_seen | append: mv_state | append: ',' -%}
+            {%- assign mv_count = mv_count | plus: 1 -%}
+            {%- assign mv_pins = mv_pins | append: mv_state | append: '|' | append: mv_count | append: '|' | append: nb.settings.craft | append: '|' | append: mv_dup | append: ';' -%}
+            {%- unless mv_hl contains mv_state -%}
+              {%- assign mv_hl = mv_hl | append: mv_state | append: ',' -%}
+            {%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+        <div class="cr-mapv" data-reveal {{ block.shopify_attributes }}>
+          {%- render 'cr-india-map', highlight: mv_hl, pins: mv_pins -%}
+          {%- if block.settings.note != blank -%}
+            <p class="cr-mapv__note">{{ block.settings.note | escape }}</p>
+          {%- endif -%}
+        </div>
+
       {%- when 'image' -%}
         {%- liquid
           assign i_img = block.settings.image
@@ -345,6 +373,21 @@
       ]
     },
     {
+      "type": "map-visual",
+      "name": "India map",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "A visual map of India: this region's states are highlighted in gold, and every map card below it that has a “Pin state” set gets a numbered pin (hover a pin to see the craft). Place it directly above your map cards."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Caption under the map"
+        }
+      ]
+    },
+    {
       "type": "text",
       "name": "Heading + text",
       "settings": [
@@ -401,6 +444,158 @@
           "id": "link",
           "label": "Link (optional)",
           "info": "Makes the craft name clickable."
+        },
+        {
+          "type": "select",
+          "id": "pin_state",
+          "label": "Pin state (India map)",
+          "options": [
+            {
+              "value": "an",
+              "label": "Andaman & Nicobar"
+            },
+            {
+              "value": "ap",
+              "label": "Andhra Pradesh"
+            },
+            {
+              "value": "ar",
+              "label": "Arunachal Pradesh"
+            },
+            {
+              "value": "as",
+              "label": "Assam"
+            },
+            {
+              "value": "br",
+              "label": "Bihar"
+            },
+            {
+              "value": "ch",
+              "label": "Chandigarh"
+            },
+            {
+              "value": "ct",
+              "label": "Chhattisgarh"
+            },
+            {
+              "value": "dn",
+              "label": "Dadra & Nagar Haveli"
+            },
+            {
+              "value": "dd",
+              "label": "Daman & Diu"
+            },
+            {
+              "value": "dl",
+              "label": "Delhi"
+            },
+            {
+              "value": "ga",
+              "label": "Goa"
+            },
+            {
+              "value": "gj",
+              "label": "Gujarat"
+            },
+            {
+              "value": "hr",
+              "label": "Haryana"
+            },
+            {
+              "value": "hp",
+              "label": "Himachal Pradesh"
+            },
+            {
+              "value": "jh",
+              "label": "Jharkhand"
+            },
+            {
+              "value": "jk",
+              "label": "Jammu & Kashmir"
+            },
+            {
+              "value": "ka",
+              "label": "Karnataka"
+            },
+            {
+              "value": "kl",
+              "label": "Kerala"
+            },
+            {
+              "value": "ld",
+              "label": "Lakshadweep"
+            },
+            {
+              "value": "mh",
+              "label": "Maharashtra"
+            },
+            {
+              "value": "mn",
+              "label": "Manipur"
+            },
+            {
+              "value": "ml",
+              "label": "Meghalaya"
+            },
+            {
+              "value": "mp",
+              "label": "Madhya Pradesh"
+            },
+            {
+              "value": "mz",
+              "label": "Mizoram"
+            },
+            {
+              "value": "nl",
+              "label": "Nagaland"
+            },
+            {
+              "value": "or",
+              "label": "Odisha"
+            },
+            {
+              "value": "pb",
+              "label": "Punjab"
+            },
+            {
+              "value": "py",
+              "label": "Puducherry"
+            },
+            {
+              "value": "rj",
+              "label": "Rajasthan"
+            },
+            {
+              "value": "sk",
+              "label": "Sikkim"
+            },
+            {
+              "value": "tn",
+              "label": "Tamil Nadu"
+            },
+            {
+              "value": "tg",
+              "label": "Telangana"
+            },
+            {
+              "value": "tr",
+              "label": "Tripura"
+            },
+            {
+              "value": "up",
+              "label": "Uttar Pradesh"
+            },
+            {
+              "value": "ut",
+              "label": "Uttarakhand"
+            },
+            {
+              "value": "wb",
+              "label": "West Bengal"
+            }
+          ],
+          "info": "Where this craft's pin appears on the India map block above. Leave unset for no pin."
         }
       ]
     },
@@ -636,5 +831,4 @@
       "name": "Region archive"
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

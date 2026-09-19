@@ -118,9 +118,11 @@ instances carrying the full content: landscape essay, in-flow images, 5 map
 cards, 5 tradition chapters, technique rows, materials, motifs, colour
 palettes with swatches, artisan essay, then-and-now comparison, authenticity
 guide, future section, closing with cross-region links. Content companions:
-`culture-content/*.md` (fact-verified, GI appendix each). The archive's 8
-block types: image, heading+text, map card, tradition chapter, technique row,
-comparison row, study item, link. The hero
+`culture-content/*.md` (fact-verified, GI appendix each). The archive's 9
+block types: image, India map (visual map of India with the region's states
+gold-highlighted and numbered pins per craft, from each map card's “Pin
+state”), heading+text, map card, tradition chapter, technique row, comparison
+row, study item, link. The hero
 section carries breadcrumb/eyebrow/H1/supporting line/intro; the archive
 section builds the entire body from blocks: heading+text (H2 sections),
 map cards (auto-group into a grid), tradition chapters (image, tags, body,

@@ -15,7 +15,11 @@
     },
     "archive-1": {
       "type": "culture-archive",
-      "settings": { "background_color": "#FFFFFF", "padding_top": 0, "padding_bottom": 0 },
+      "settings": {
+        "background_color": "#FFFFFF",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
       "blocks": {
         "landscape": {
           "type": "text",
@@ -47,7 +51,8 @@
             "craft": "Muga Silk",
             "technique": "Wild-silk reeling and handloom weaving",
             "material": "Muga silk (Antheraea assamensis)",
-            "signature": "Natural gold lustre that deepens with age"
+            "signature": "Natural gold lustre that deepens with age",
+            "pin_state": "as"
           }
         },
         "map-eri": {
@@ -57,7 +62,8 @@
             "craft": "Eri Silk",
             "technique": "Spun (not reeled) silk, woven on handlooms",
             "material": "Eri silk (Samia cynthia ricini)",
-            "signature": "Matte, wool-like warmth — the peace silk"
+            "signature": "Matte, wool-like warmth — the peace silk",
+            "pin_state": "as"
           }
         },
         "map-naga": {
@@ -67,7 +73,8 @@
             "craft": "Naga Shawls",
             "technique": "Backstrap-loom weaving with warp patterning",
             "material": "Cotton (traditionally handspun)",
-            "signature": "Bold horizontal bands and tribe-specific patterns"
+            "signature": "Bold horizontal bands and tribe-specific patterns",
+            "pin_state": "nl"
           }
         },
         "map-manipur": {
@@ -77,7 +84,8 @@
             "craft": "Shaphee Lanphee & Moirang Phee",
             "technique": "Handloom weaving with stitched and woven motifs",
             "material": "Cotton with silk accents",
-            "signature": "Motifs once reserved for warriors and nobility"
+            "signature": "Motifs once reserved for warriors and nobility",
+            "pin_state": "mn"
           }
         },
         "map-mizo": {
@@ -87,7 +95,8 @@
             "craft": "Puan",
             "technique": "Backstrap-loom weaving",
             "material": "Cotton",
-            "signature": "Vivid horizontal stripes; ceremonial puanchei"
+            "signature": "Vivid horizontal stripes; ceremonial puanchei",
+            "pin_state": "mz"
           }
         },
         "traditions-heading": {
@@ -177,12 +186,19 @@
             "image_position": "left",
             "padding_y": 104
           }
+        },
+        "india-map": {
+          "type": "map-visual",
+          "settings": {
+            "note": "The gold states are this region — hover a pin to see the craft."
+          }
         }
       },
       "block_order": [
         "landscape",
         "img-valley",
         "map-heading",
+        "india-map",
         "map-muga",
         "map-eri",
         "map-naga",
@@ -198,7 +214,11 @@
     },
     "archive-2": {
       "type": "culture-archive",
-      "settings": { "background_color": "#F7F3EE", "padding_top": 0, "padding_bottom": 0 },
+      "settings": {
+        "background_color": "#F7F3EE",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
       "blocks": {
         "techniques-heading": {
           "type": "text",
@@ -481,19 +501,35 @@
         },
         "region-north": {
           "type": "link",
-          "settings": { "title": "North India", "description": "Pashmina, Phulkari, Chikankari, Banarasi", "url": "/pages/north-india" }
+          "settings": {
+            "title": "North India",
+            "description": "Pashmina, Phulkari, Chikankari, Banarasi",
+            "url": "/pages/north-india"
+          }
         },
         "region-east": {
           "type": "link",
-          "settings": { "title": "East India", "description": "Baluchari, Jamdani, Sambalpuri, Kantha", "url": "/pages/east-india" }
+          "settings": {
+            "title": "East India",
+            "description": "Baluchari, Jamdani, Sambalpuri, Kantha",
+            "url": "/pages/east-india"
+          }
         },
         "region-west": {
           "type": "link",
-          "settings": { "title": "West & Central India", "description": "Patola, Bandhani, Chanderi, Ajrakh", "url": "/pages/west-central-india" }
+          "settings": {
+            "title": "West & Central India",
+            "description": "Patola, Bandhani, Chanderi, Ajrakh",
+            "url": "/pages/west-central-india"
+          }
         },
         "region-south": {
           "type": "link",
-          "settings": { "title": "South India", "description": "Kanjivaram, Pochampally, Kasavu", "url": "/pages/south-india" }
+          "settings": {
+            "title": "South India",
+            "description": "Kanjivaram, Pochampally, Kasavu",
+            "url": "/pages/south-india"
+          }
         }
       },
       "block_order": [
@@ -538,5 +574,9 @@
       ]
     }
   },
-  "order": ["hero", "archive-1", "archive-2"]
+  "order": [
+    "hero",
+    "archive-1",
+    "archive-2"
+  ]
 }

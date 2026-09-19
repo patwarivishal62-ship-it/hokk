@@ -15,7 +15,11 @@
     },
     "archive-1": {
       "type": "culture-archive",
-      "settings": { "background_color": "#FFFFFF", "padding_top": 0, "padding_bottom": 0 },
+      "settings": {
+        "background_color": "#FFFFFF",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
       "blocks": {
         "landscape": {
           "type": "text",
@@ -47,7 +51,8 @@
             "craft": "Baluchari",
             "technique": "Narrative silk weaving (jacquard-assisted)",
             "material": "Mulberry silk",
-            "signature": "Pallu panels carrying scenes from the epics"
+            "signature": "Pallu panels carrying scenes from the epics",
+            "pin_state": "wb"
           }
         },
         "map-jamdani": {
@@ -57,7 +62,8 @@
             "craft": "Jamdani",
             "technique": "Discontinuous supplementary-weft hand weaving",
             "material": "Fine cotton (and silk)",
-            "signature": "Motifs floating in gossamer ground — UNESCO-listed"
+            "signature": "Motifs floating in gossamer ground — UNESCO-listed",
+            "pin_state": "wb"
           }
         },
         "map-sambalpuri": {
@@ -67,7 +73,8 @@
             "craft": "Sambalpuri Bandha",
             "technique": "Warp-and-weft ikat (bandha tie-dye)",
             "material": "Cotton and silk",
-            "signature": "Geometry that appears only when weaving completes"
+            "signature": "Geometry that appears only when weaving completes",
+            "pin_state": "or"
           }
         },
         "map-bhagalpur": {
@@ -77,7 +84,8 @@
             "craft": "Bhagalpuri Tussar",
             "technique": "Wild-silk weaving and printing",
             "material": "Tussar silk",
-            "signature": "Natural gold sheen with slubbed, tactile grain"
+            "signature": "Natural gold sheen with slubbed, tactile grain",
+            "pin_state": "br"
           }
         },
         "map-kantha": {
@@ -87,7 +95,8 @@
             "craft": "Nakshi Kantha",
             "technique": "Running-stitch embroidery on layered old cloth",
             "material": "Recycled saris and dhotis",
-            "signature": "Worn cloth reborn as narrative quilt"
+            "signature": "Worn cloth reborn as narrative quilt",
+            "pin_state": "wb"
           }
         },
         "traditions-heading": {
@@ -177,12 +186,19 @@
             "image_position": "left",
             "padding_y": 104
           }
+        },
+        "india-map": {
+          "type": "map-visual",
+          "settings": {
+            "note": "The gold states are this region — hover a pin to see the craft."
+          }
         }
       },
       "block_order": [
         "landscape",
         "img-village",
         "map-heading",
+        "india-map",
         "map-baluchari",
         "map-jamdani",
         "map-sambalpuri",
@@ -198,7 +214,11 @@
     },
     "archive-2": {
       "type": "culture-archive",
-      "settings": { "background_color": "#F7F3EE", "padding_top": 0, "padding_bottom": 0 },
+      "settings": {
+        "background_color": "#F7F3EE",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
       "blocks": {
         "techniques-heading": {
           "type": "text",
@@ -481,19 +501,35 @@
         },
         "region-north": {
           "type": "link",
-          "settings": { "title": "North India", "description": "Pashmina, Phulkari, Chikankari, Banarasi", "url": "/pages/north-india" }
+          "settings": {
+            "title": "North India",
+            "description": "Pashmina, Phulkari, Chikankari, Banarasi",
+            "url": "/pages/north-india"
+          }
         },
         "region-north-east": {
           "type": "link",
-          "settings": { "title": "North East India", "description": "Muga, Eri, Naga shawls, Puan", "url": "/pages/north-east-india" }
+          "settings": {
+            "title": "North East India",
+            "description": "Muga, Eri, Naga shawls, Puan",
+            "url": "/pages/north-east-india"
+          }
         },
         "region-west": {
           "type": "link",
-          "settings": { "title": "West & Central India", "description": "Patola, Bandhani, Chanderi, Ajrakh", "url": "/pages/west-central-india" }
+          "settings": {
+            "title": "West & Central India",
+            "description": "Patola, Bandhani, Chanderi, Ajrakh",
+            "url": "/pages/west-central-india"
+          }
         },
         "region-south": {
           "type": "link",
-          "settings": { "title": "South India", "description": "Kanjivaram, Pochampally, Kasavu", "url": "/pages/south-india" }
+          "settings": {
+            "title": "South India",
+            "description": "Kanjivaram, Pochampally, Kasavu",
+            "url": "/pages/south-india"
+          }
         }
       },
       "block_order": [
@@ -538,5 +574,9 @@
       ]
     }
   },
-  "order": ["hero", "archive-1", "archive-2"]
+  "order": [
+    "hero",
+    "archive-1",
+    "archive-2"
+  ]
 }

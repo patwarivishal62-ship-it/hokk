@@ -44,7 +44,8 @@
             "craft": "Pashmina & Kani Shawls",
             "technique": "Hand-spinning and handloom weaving; Kani patterning by wound bobbin-sticks",
             "material": "Pashmina goat undercoat",
-            "signature": "Soft twill ground with woven paisley and florals"
+            "signature": "Soft twill ground with woven paisley and florals",
+            "pin_state": "jk"
           }
         },
         "map-himachal": {
@@ -54,7 +55,8 @@
             "craft": "Kullu & Kinnauri Shawls",
             "technique": "Pit-loom handloom weaving with patterned borders",
             "material": "Sheep wool",
-            "signature": "Bold geometric borders in high-contrast colour"
+            "signature": "Bold geometric borders in high-contrast colour",
+            "pin_state": "hp"
           }
         },
         "map-punjab": {
@@ -64,7 +66,8 @@
             "craft": "Phulkari",
             "technique": "Darning-stitch embroidery worked from the reverse",
             "material": "Silk floss on khaddar cotton",
-            "signature": "Dense floral fields — the front blooms from the back"
+            "signature": "Dense floral fields — the front blooms from the back",
+            "pin_state": "pb"
           }
         },
         "map-lucknow": {
@@ -74,7 +77,8 @@
             "craft": "Chikankari",
             "technique": "Shadow, knot and lattice hand embroidery",
             "material": "Thread on fine cotton",
-            "signature": "Tonal stitchery — pattern as texture, not colour"
+            "signature": "Tonal stitchery — pattern as texture, not colour",
+            "pin_state": "up"
           }
         },
         "map-varanasi": {
@@ -84,7 +88,8 @@
             "craft": "Banarasi Brocade",
             "technique": "Handloom brocade with supplementary zari wefts",
             "material": "Katan silk and zari",
-            "signature": "Gold buti, jaal and borders woven into the cloth itself"
+            "signature": "Gold buti, jaal and borders woven into the cloth itself",
+            "pin_state": "up"
           }
         },
         "traditions-heading": {
@@ -174,11 +179,18 @@
             "image_position": "left",
             "padding_y": 104
           }
+        },
+        "india-map": {
+          "type": "map-visual",
+          "settings": {
+            "note": "The gold states are this region — hover a pin to see the craft."
+          }
         }
       },
       "block_order": [
         "landscape",
         "map-heading",
+        "india-map",
         "map-kashmir",
         "map-himachal",
         "map-punjab",

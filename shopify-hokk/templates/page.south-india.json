@@ -15,7 +15,11 @@
     },
     "archive-1": {
       "type": "culture-archive",
-      "settings": { "background_color": "#FFFFFF", "padding_top": 0, "padding_bottom": 0 },
+      "settings": {
+        "background_color": "#FFFFFF",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
       "blocks": {
         "landscape": {
           "type": "text",
@@ -47,7 +51,8 @@
             "craft": "Kanjivaram Silk",
             "technique": "Handloom silk weaving with interlocked korvai borders",
             "material": "Mulberry silk and zari",
-            "signature": "Contrast borders joined so the cloth tears first"
+            "signature": "Contrast borders joined so the cloth tears first",
+            "pin_state": "tn"
           }
         },
         "map-pochampally": {
@@ -57,7 +62,8 @@
             "craft": "Pochampally Ikat",
             "technique": "Tie-and-dye of warp and weft before weaving",
             "material": "Silk and cotton",
-            "signature": "Geometric diamonds and chakras with feathered edges"
+            "signature": "Geometric diamonds and chakras with feathered edges",
+            "pin_state": "tg"
           }
         },
         "map-kasavu": {
@@ -67,7 +73,8 @@
             "craft": "Kasavu",
             "technique": "Fine cotton weaving with zari border",
             "material": "Unbleached cotton and zari",
-            "signature": "Ivory cloth, golden border — Kerala's minimalism"
+            "signature": "Ivory cloth, golden border — Kerala's minimalism",
+            "pin_state": "kl"
           }
         },
         "map-uppada": {
@@ -77,7 +84,8 @@
             "craft": "Uppada Jamdani",
             "technique": "Discontinuous supplementary-weft weaving by hand",
             "material": "Cotton and silk",
-            "signature": "Floating motifs on gossamer cloth, no jacquard"
+            "signature": "Floating motifs on gossamer cloth, no jacquard",
+            "pin_state": "ap"
           }
         },
         "map-mysore": {
@@ -87,7 +95,8 @@
             "craft": "Mysore Silk",
             "technique": "Pure silk weaving with minimal zari",
             "material": "Mulberry silk and zari",
-            "signature": "Rich solid colours, deep lustre, crepe-silk drape"
+            "signature": "Rich solid colours, deep lustre, crepe-silk drape",
+            "pin_state": "ka"
           }
         },
         "traditions-heading": {
@@ -177,12 +186,19 @@
             "image_position": "left",
             "padding_y": 104
           }
+        },
+        "india-map": {
+          "type": "map-visual",
+          "settings": {
+            "note": "The gold states are this region — hover a pin to see the craft."
+          }
         }
       },
       "block_order": [
         "landscape",
         "img-temple",
         "map-heading",
+        "india-map",
         "map-kanji",
         "map-pochampally",
         "map-kasavu",
@@ -198,7 +214,11 @@
     },
     "archive-2": {
       "type": "culture-archive",
-      "settings": { "background_color": "#F7F3EE", "padding_top": 0, "padding_bottom": 0 },
+      "settings": {
+        "background_color": "#F7F3EE",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
       "blocks": {
         "techniques-heading": {
           "type": "text",
@@ -488,19 +508,35 @@
         },
         "region-north": {
           "type": "link",
-          "settings": { "title": "North India", "description": "Pashmina, Phulkari, Chikankari, Banarasi", "url": "/pages/north-india" }
+          "settings": {
+            "title": "North India",
+            "description": "Pashmina, Phulkari, Chikankari, Banarasi",
+            "url": "/pages/north-india"
+          }
         },
         "region-north-east": {
           "type": "link",
-          "settings": { "title": "North East India", "description": "Muga, Eri, Naga shawls, Puan", "url": "/pages/north-east-india" }
+          "settings": {
+            "title": "North East India",
+            "description": "Muga, Eri, Naga shawls, Puan",
+            "url": "/pages/north-east-india"
+          }
         },
         "region-east": {
           "type": "link",
-          "settings": { "title": "East India", "description": "Baluchari, Jamdani, Sambalpuri, Kantha", "url": "/pages/east-india" }
+          "settings": {
+            "title": "East India",
+            "description": "Baluchari, Jamdani, Sambalpuri, Kantha",
+            "url": "/pages/east-india"
+          }
         },
         "region-west": {
           "type": "link",
-          "settings": { "title": "West & Central India", "description": "Patola, Bandhani, Chanderi, Ajrakh", "url": "/pages/west-central-india" }
+          "settings": {
+            "title": "West & Central India",
+            "description": "Patola, Bandhani, Chanderi, Ajrakh",
+            "url": "/pages/west-central-india"
+          }
         }
       },
       "block_order": [
@@ -546,5 +582,9 @@
       ]
     }
   },
-  "order": ["hero", "archive-1", "archive-2"]
+  "order": [
+    "hero",
+    "archive-1",
+    "archive-2"
+  ]
 }
