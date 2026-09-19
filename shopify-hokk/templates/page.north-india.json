@@ -556,32 +556,32 @@
           "type": "link",
           "settings": {
             "title": "North East India",
-            "description": "Muga and Eri silk, backstrap looms, indigo and identity",
-            "url": "/pages/culture"
+            "description": "Muga, Eri, Naga shawls, Puan",
+            "url": "/pages/north-east-india"
           }
         },
         "region-east": {
           "type": "link",
           "settings": {
             "title": "East India",
-            "description": "Baluchari, jamdani, Sambalpuri ikat",
-            "url": "/pages/culture"
+            "description": "Baluchari, Jamdani, Sambalpuri, Kantha",
+            "url": "/pages/east-india"
           }
         },
         "region-west": {
           "type": "link",
           "settings": {
             "title": "West & Central India",
-            "description": "Patola, bandhani, Chanderi, Maheshwari",
-            "url": "/pages/culture"
+            "description": "Patola, Bandhani, Chanderi, Ajrakh",
+            "url": "/pages/west-central-india"
           }
         },
         "region-south": {
           "type": "link",
           "settings": {
             "title": "South India",
-            "description": "Kanjivaram, Pochampally ikat, kasavu",
-            "url": "/pages/culture"
+            "description": "Kanjivaram, Pochampally, Kasavu",
+            "url": "/pages/south-india"
           }
         }
       },
@@ -636,5 +636,9 @@
       ]
     }
   },
-  "order": ["hero", "archive-1", "archive-2"]
+  "order": [
+    "hero",
+    "archive-1",
+    "archive-2"
+  ]
 }

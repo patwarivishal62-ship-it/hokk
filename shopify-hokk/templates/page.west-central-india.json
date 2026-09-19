@@ -1,0 +1,558 @@
+{
+  "sections": {
+    "hero": {
+      "type": "culture-hero",
+      "settings": {
+        "show_breadcrumb": true,
+        "eyebrow": "The Culture of India · Region 05",
+        "heading": "West & Central India's Textile & Handcraft Cultures",
+        "supporting": "Double ikat, tied dots, gossamer weaves and printed geometry.",
+        "intro": "<p>West and Central India hold the most astonishing concentration of pattern technique in the country. In Patan, a handful of families weave Patola — double ikat so precise that its patterns align on both faces of the cloth, thread for thread. Across Gujarat and Rajasthan, bandhani's tied dots pattern cloth by the thousand-fold knot. In Madhya Pradesh's handloom towns, Chanderi weaves gossamer cotton-silk and Maheshwar builds reversible borders on the Narmada's banks. And in Kutch, Ajrakh printers stamp geometry in indigo and madder — sixteen steps of resist and dye. What follows is a journey through five traditions that treat pattern as a puzzle to be solved before the cloth even exists.</p>",
+        "background_color": "#F7F3EE",
+        "padding_top": 96,
+        "padding_bottom": 40
+      }
+    },
+    "archive-1": {
+      "type": "culture-archive",
+      "settings": { "background_color": "#FFFFFF", "padding_top": 0, "padding_bottom": 0 },
+      "blocks": {
+        "landscape": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Landscape",
+            "heading": "The Textile Landscape of the West & Centre",
+            "body": "<p>Gujarat's craft economy grew on trade: a coastline of ports moving indigo, bandhani and patola to Africa, Arabia and Southeast Asia for centuries, and a desert peninsula — Kutch — whose pastoral and artisan communities, including the Khatri printers and Rabari embroiderers, built one of the world's densest craft cultures. The industrial belt from Ahmedabad to Surat then gave the region India's textile mill nerve-centre — which is why the West holds both the most ancient patterning techniques and the largest modern textile industry, side by side.</p><p>Central India's story is quieter: princely patronage along the Narmada. Maharani Ahilyabai Holkar's eighteenth-century court at Maheshwar planted the weaving tradition that still bears the town's name; Chanderi's weavers served a chain of royal and merchant patrons from the Malwa sultanates onward. Scindia's Gwalior and the Holkar state kept handloom alive through the colonial period.</p><p>The result is a region of contrasts: double ikat beside digital print, desert dye vats beside mill chimneys — and, in Kutch, a craft-revival ecosystem that has become a global model.</p>"
+          }
+        },
+        "img-rann": {
+          "type": "image",
+          "settings": {
+            "caption": "Kutch — bandhani and Ajrakh country",
+            "width": "wide"
+          }
+        },
+        "map-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Map",
+            "heading": "Where to Find What",
+            "body": "<p>Five places, five crafts — the puzzle-solving traditions of the West and Centre.</p>"
+          }
+        },
+        "map-patola": {
+          "type": "map-card",
+          "settings": {
+            "location": "Patan, Gujarat",
+            "craft": "Patan Patola",
+            "technique": "Double ikat — warp and weft both tie-dyed",
+            "material": "Silk",
+            "signature": "Patterns matched on both faces, thread for thread"
+          }
+        },
+        "map-bandhani": {
+          "type": "map-card",
+          "settings": {
+            "location": "Kutch & Jamnagar, Gujarat",
+            "craft": "Bandhani",
+            "technique": "Tie-and-dye — knotted resist dots",
+            "material": "Cotton, gajji silk, wool",
+            "signature": "Fields of rings made by thousands of tied dots"
+          }
+        },
+        "map-chanderi": {
+          "type": "map-card",
+          "settings": {
+            "location": "Chanderi, Madhya Pradesh",
+            "craft": "Chanderi",
+            "technique": "Handloom weaving of gossamer cotton-silk",
+            "material": "Cotton, silk, zari",
+            "signature": "Transparent cloth with woven gold borders"
+          }
+        },
+        "map-maheshwari": {
+          "type": "map-card",
+          "settings": {
+            "location": "Maheshwar, Madhya Pradesh",
+            "craft": "Maheshwari",
+            "technique": "Handloom weaving with reversible borders",
+            "material": "Cotton-silk, silk",
+            "signature": "Borders readable on both faces — the reversible weave"
+          }
+        },
+        "map-ajrakh": {
+          "type": "map-card",
+          "settings": {
+            "location": "Kutch, Gujarat",
+            "craft": "Ajrakh",
+            "technique": "Resist block printing with natural dyes",
+            "material": "Cotton",
+            "signature": "Indigo and madder geometry in sixteen steps"
+          }
+        },
+        "traditions-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Five Traditions",
+            "heading": "The Five Textile Traditions",
+            "body": "<p>From the sub-millimetre alignment of double ikat to the humble knot that patterns a whole cloth — five chapters of the West and Centre.</p>"
+          }
+        },
+        "t-patola": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Patan, Gujarat",
+            "title": "Patan Patola",
+            "technique_tag": "Double ikat",
+            "material_tag": "Silk",
+            "description": "<p>The summit of ikat: warp and weft both tie-dyed, then aligned on the loom so the patterns meet thread for thread — identical on both faces of the cloth. Woven in Patan by a small community of master families.</p>",
+            "body": "<p>Double ikat is the most exacting technique in the weaving world. In Patola, both the warp and the weft are tied and dyed in sequence — the weaver must calculate, in advance, where every colour on every thread will fall. On the loom, the two dyed systems meet, and the pattern appears only where they align: a grid of silk threads matched to fractions of a millimetre. The finished cloth is fully reversible — the pattern identical front and back, because it is genuinely, structurally, on both.</p><p>Patan's Patola has been woven for centuries by the Salvi families, whose ancestors are said to have come from Maharashtra in the twelfth century under royal patronage; the craft's documented ties to Gujarati trading and Vohra Muslim ceremonial use are deep. Patan Patola holds a Geographical Indication (registered 2013), and the number of practising master families remains small — a fact often quoted about the craft's rarity.</p><p>A single Patola sari — traditionally woven in a width that takes two weavers working in rhythm — can take the better part of a year. The classic patterns — chhabdi bhat (basket), narikunjar (elephant-and-woman), popat kunjar (parrot) — are household names in Gujarat, and the cloth remains central to certain community wedding traditions.</p>",
+            "characteristic": "Look at the reverse: identical. The pattern is in every thread, on both faces.",
+            "related": "Related traditions: Pochampally ikat · Sambalpuri bandha · Rajkot patolu",
+            "cta_label": "Explore Patan Patola",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-bandhani": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Kutch & Jamnagar",
+            "title": "Bandhani",
+            "technique_tag": "Tie & dye",
+            "material_tag": "Cotton, silk, wool",
+            "description": "<p>Pattern by the knot: artisans pinch the cloth and bind thousands of tiny dots with waxed thread; dyed, unbound, each becomes a ring. India's great tie-dye tradition, at home in Kutch and Jamnagar.</p>",
+            "body": "<p>Bandhani — from bandhan, 'to tie' — patterns cloth by resisting it in miniature. The bandhani artisan, traditionally the Khatri community of Kutch and Saurashtra, lifts a point of fabric with a fingernail or pointed tool, winds thread around it, and ties a knot smaller than a lentil. A fine odhani carries thousands of these knots — laid out from a printed pattern guide, then tied, dyed, and unpicked. Where each knot sat, a ring of colour remains — white halo in a coloured field. The diagonal or grid fields of these rings are bandhani's unmistakable signature, read at a glance across Gujarat and Rajasthan.</p><p>The craft's great centres are Kutch (Bhuj and its villages) and Jamnagar in Saurashtra — Jamnagar's alizarin-bandhani tradition is especially associated with the deep reds of bridal odhanis. Jamnagari Bandhani holds a GI registration (2010), and Kutch Bandhani was separately registered in 2021. Gharcholu — the checked silk bandhani of Gujarati weddings — and the leheriya and mothida tie-dyes of neighbouring Rajasthan are siblings of the same intelligence.</p><p>Bandhani's tactile proof is the tiny puckered dimple each tied dot leaves in the cloth — the fingerprint of the hand, never fully smoothed away.</p>",
+            "characteristic": "Turn a bandhani to the light: every dot leaves a tiny dimple — the hand's fingerprint.",
+            "related": "Related traditions: Leheriya & Mothida (Rajasthan) · Shibori · Ajrakh",
+            "cta_label": "Explore Bandhani",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-chanderi": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Madhya Pradesh",
+            "title": "Chanderi",
+            "technique_tag": "Handloom weaving",
+            "material_tag": "Cotton, silk & zari",
+            "description": "<p>Gossamer cloth from the Malwa plateau: silk-warp cotton weaves so fine they are near-transparent, edged in woven zari borders — three generations of texture in one sari.</p>",
+            "body": "<p>Chanderi cloth is defined by transparency. The town's weavers work with handspun-fine cotton in the weft over a silk warp (and in pure silk variants), producing a fabric so light it seems to hover — historically prized by royal and mercantile households, today one of India's most loved handloom saris. The zari border — often with the woven butis of ashrafi (coin), churi (bangle) and flora — gives the gossamer body its gold architecture.</p><p>The weaving community is long-established — the Ansari Muslim weavers of Chanderi dominate the craft, sustained by successive patrons from the Malwa sultanates to Scindia's Gwalior state and, today, by a flourishing direct market. Chanderi Sarees hold a GI registration (2005, among India's earliest handloom GIs).</p><p>Chanderi's contemporary range runs from cotton checks to silk-zari bridal work, and its weight — or near-absence of it — keeps it a summer favourite across India. The test of a good one: hold it to the light. The cloth should glow, not block.</p>",
+            "characteristic": "Cloth you can read a newspaper through — with gold at the edge.",
+            "related": "Related traditions: Maheshwari · Kota Doria · Bengal's muslins",
+            "cta_label": "Discover Chanderi",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-maheshwari": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Madhya Pradesh",
+            "title": "Maheshwari",
+            "technique_tag": "Handloom weaving",
+            "material_tag": "Cotton-silk & silk",
+            "description": "<p>Border-first design from the banks of the Narmada: Maheshwari's woven borders are fully reversible, named motif by motif, in a tradition planted by Maharani Ahilyabai Holkar's eighteenth-century court.</p>",
+            "body": "<p>Maheshwari weaving is organised around the border. The town's signature designs are named border motifs — the 'hans' (swan), 'ulta hans', ' bel Buti', the 'thab bānk' lines — woven so that the pattern reads identically on both faces of the cloth: a genuinely reversible border that makes the sari's drape forgiving from every angle. The body may be cotton, silk or the classic cotton-silk blend; the pallu often carries five stripes (the 'panchkui' and related patterns) with two contrasting bands.</p><p>The tradition's documented origin lies with Maharani Ahilyabai Holkar, the eighteenth-century Holkar ruler whose court at Maheshwar commissioned cloth for the royal household and temple use — an account preserved in the craft's local memory and in the Rehwa Society's revival history. Maheshwar Sarees & Fabrics hold a GI registration (2012).</p><p>Today the town's weavers — organised through cooperatives and the pioneering Rehwa Society, founded to sustain weaver livelihoods on the ghats — produce saris, dupattas, stoles and fabric that balance structure with airiness. Maheshwari is Chanderi's more structured sibling: less transparent, more architectural.</p>",
+            "characteristic": "The border is the sari — named, woven, reversible.",
+            "related": "Related traditions: Chanderi · Chattisgarh's Kosa · Ilkal",
+            "cta_label": "Discover Maheshwari",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-ajrakh": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Kutch, Gujarat",
+            "title": "Ajrakh",
+            "technique_tag": "Block printing & resist",
+            "material_tag": "Cotton, natural dyes",
+            "description": "<p>Geometry in sixteen steps: Ajrakh's indigo and madder patterns are built by successive resist-printing, mordanting and dyeing — a cloth that passes through the printer's hands again and again before it is finished.</p>",
+            "body": "<p>Ajrakh is not printing so much as sequencing. The cloth is washed, mordanted, resist-printed with lime and gum, dyed in indigo, printed again with mordant, dyed in madder — each stage adding one colour while protecting the others, until the final wash reveals the full composition: a field of deep indigo and madder red, black outlines, white geometry, in patterns of astonishing complexity. The classic ajrakh is a square grid of sixteen-fold symmetry — its name linked in popular etymology to the Arabic-Persian word for sixteen, azrak (blue) being the other candidate — worn by Kutch's pastoral communities as lungi, turban and shoulder cloth.</p><p>The printers are the Khatri community of Kutch — most famously the village of Ajrakhpur and the historic workshops of Dhamadka — with a sibling tradition in Sindh across the border. The greatest living revivals have come from within the community: masters like the late Khatri printers of Ajrakhpur rebuilt natural-dye ajrakh after decades of synthetic shortcuts, and the craft now supplies global fashion with its most sophisticated print language.</p><p>Ajrakh rewards handling as much as viewing: the natural indigo's living blue, the madder's wine red, and the slight scent of the process itself — cloth that carries its chemistry honestly.</p>",
+            "characteristic": "Sixteen steps, two master dyes, zero shortcuts — the deepest print in India.",
+            "related": "Related traditions: Bagh print (MP) · Sanganer & Bagru block prints · Indigo traditions worldwide",
+            "cta_label": "Explore Ajrakh",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        }
+      },
+      "block_order": [
+        "landscape",
+        "img-rann",
+        "map-heading",
+        "map-patola",
+        "map-bandhani",
+        "map-chanderi",
+        "map-maheshwari",
+        "map-ajrakh",
+        "traditions-heading",
+        "t-patola",
+        "t-bandhani",
+        "t-chanderi",
+        "t-maheshwari",
+        "t-ajrakh"
+      ]
+    },
+    "archive-2": {
+      "type": "culture-archive",
+      "settings": { "background_color": "#F7F3EE", "padding_top": 0, "padding_bottom": 0 },
+      "blocks": {
+        "techniques-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Technique",
+            "heading": "Five Traditions, Five Ways of Making",
+            "body": "<p>The West and Centre hold every major way of patterning cloth: dye the threads (double ikat), tie the cloth (bandhani), weave the border (Chanderi, Maheshwari), print the resist (Ajrakh). Pattern as puzzle, solved four different ways.</p>"
+          }
+        },
+        "tech-patola": {
+          "type": "technique",
+          "settings": {
+            "title": "Patan Patola",
+            "action": "Ties and dyes both warp and weft in sequence, then aligns them on the loom thread by thread",
+            "material": "Silk",
+            "tool": "Tying frame, dye vats, inclined patola loom",
+            "pattern": "Two dyed thread systems meet — the design exists only where both align",
+            "distinctive": "Fully reversible; months per sari"
+          }
+        },
+        "tech-bandhani": {
+          "type": "technique",
+          "settings": {
+            "title": "Bandhani",
+            "action": "Pinches points of cloth and binds each with thread, thousands per piece, then dyes and unpicks",
+            "material": "Cotton, gajji silk, wool",
+            "tool": "Fingernail / pointed tool, waxed thread, dye vats",
+            "pattern": "Each knot leaves a ring — a field of tied dots",
+            "distinctive": "The dimple: tied cloth never forgets the hand"
+          }
+        },
+        "tech-chanderi": {
+          "type": "technique",
+          "settings": {
+            "title": "Chanderi",
+            "action": "Weaves handspun-fine cotton weft over silk warp, with zari borders and butis",
+            "material": "Cotton, silk, zari",
+            "tool": "Pit handloom",
+            "pattern": "Transparency itself, edged in woven gold",
+            "distinctive": "Weight that isn't there"
+          }
+        },
+        "tech-maheshwari": {
+          "type": "technique",
+          "settings": {
+            "title": "Maheshwari",
+            "action": "Weaves named, reversible border motifs with contrasting pallu stripes",
+            "material": "Cotton-silk",
+            "tool": "Pit handloom",
+            "pattern": "The border designed first, the body after",
+            "distinctive": "Reads identically on both faces"
+          }
+        },
+        "tech-ajrakh": {
+          "type": "technique",
+          "settings": {
+            "title": "Ajrakh",
+            "action": "Washes, mordants, resist-prints and dyes the cloth through up to sixteen stages",
+            "material": "Cotton, indigo, madder, alum, lime, gum",
+            "tool": "Carved teak blocks and dye vats",
+            "pattern": "Each stage protects one colour and adds another — geometry assembled in sequence",
+            "distinctive": "The print that is really a process"
+          }
+        },
+        "img-ghats": {
+          "type": "image",
+          "settings": {
+            "caption": "Maheshwar's ghats on the Narmada — where the looms overlook the river",
+            "width": "normal"
+          }
+        },
+        "materials-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Materials",
+            "heading": "Materials of the West & Centre",
+            "body": "<p>Silk and cotton, indigo and madder, and the metals and mordants that fix them.</p>"
+          }
+        },
+        "mat-silk": {
+          "type": "item",
+          "settings": {
+            "title": "Silk (patolu & gajji)",
+            "text": "<p>Patola's medium — strong silk that survives repeated tying, dyeing and high-tension weaving. Gajji silk, the satin ground of classic bandhani odhanis, belongs to the same coastal trade world.</p>"
+          }
+        },
+        "mat-cotton": {
+          "type": "item",
+          "settings": {
+            "title": "Fine cotton",
+            "text": "<p>Chanderi's weft, Maheshwari's body, Ajrakh's ground and bandhani's daily cloth — cotton is the region's constant, from desert lungis to summer saris.</p>"
+          }
+        },
+        "mat-indigo": {
+          "type": "item",
+          "settings": {
+            "title": "Indigo",
+            "text": "<p>The West's blue — Gujarat was historically India's great indigo exporter, and Ajrakh's deep vats still ferment the living dye the old way.</p>"
+          }
+        },
+        "mat-madder": {
+          "type": "item",
+          "settings": {
+            "title": "Madder",
+            "text": "<p>Root-dyed red, fixed with alum mordant — Ajrakh's wine red and Jamnagar's alizarin bandhani reds share the same botanical chemistry.</p>"
+          }
+        },
+        "mat-zari": {
+          "type": "item",
+          "settings": {
+            "title": "Zari",
+            "text": "<p>Chanderi and Maheshwari's gold — woven borders and butis that give transparent cloth its architecture.</p>"
+          }
+        },
+        "mat-kala": {
+          "type": "item",
+          "settings": {
+            "title": "Kala cotton",
+            "text": "<p>Desert-grown, rain-fed, short-staple cotton — Kutch's indigenous fibre, revived by its weavers as a sustainable, coarse-textured alternative to mill yarn.</p>"
+          }
+        },
+        "motifs-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Motifs",
+            "heading": "Motifs & Visual Language",
+            "body": "<p>Named, documented vocabularies — patola's kunjar bhat, bandhani's fields, Chanderi's butis, Maheshwari's reversible borders, ajrakh's grids. Meaning lives in use and name; where symbolism is folklore, we say so.</p>"
+          }
+        },
+        "mot-patola": {
+          "type": "item",
+          "settings": {
+            "title": "Patan Patola",
+            "text": "<p>Chhabdi bhat (basket), narikunjar (elephant-woman), popat kunjar (parrot), voragaji (vohra ceremonial grid) — patterns named for generations and central to Gujarati wedding customs.</p>"
+          }
+        },
+        "mot-bandhani": {
+          "type": "item",
+          "settings": {
+            "title": "Bandhani",
+            "text": "<p>White-ringed dots in diagonals (lehariya-kin), grids, chandekhani moons and the gharcholu's checked field with its woven mata-goddess panels — a vocabulary of thousands of knots.</p>"
+          }
+        },
+        "mot-chanderi": {
+          "type": "item",
+          "settings": {
+            "title": "Chanderi",
+            "text": "<p>Ashrafi coin butis, churi bangles, jhumka earrings and flora — small woven gold on transparent ground.</p>"
+          }
+        },
+        "mot-maheshwari": {
+          "type": "item",
+          "settings": {
+            "title": "Maheshwari",
+            "text": "<p>Named borders — hans swan, ulta hans, bel-buti — with the panchkui five-stripe pallu: a design library kept by the weaving families.</p>"
+          }
+        },
+        "mot-ajrakh": {
+          "type": "item",
+          "settings": {
+            "title": "Ajrakh",
+            "text": "<p>Sixteen-fold grid symmetry — the classic ekdali to jaal complications — stars, jaali trellises and the koru spiral, in indigo, madder, black and white.</p>"
+          }
+        },
+        "colour-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Colour",
+            "heading": "The Colour Language",
+            "body": "<p>The West's colour is dye-chemistry made visible — indigo blues and madder reds fixed for centuries. Documented tendencies:</p>"
+          }
+        },
+        "pal-patola": {
+          "type": "item",
+          "settings": {
+            "title": "Patola",
+            "swatch": "#8C1D18",
+            "text": "<p>Deep red grounds with black, white, green and yellow geometry — the ceremonial patolu register.</p>"
+          }
+        },
+        "pal-bandhani": {
+          "type": "item",
+          "settings": {
+            "title": "Bandhani",
+            "swatch": "#B3283D",
+            "text": "<p>White dots on red and black; saffron, green and blue odhanis; gharcholu's red-gold checks.</p>"
+          }
+        },
+        "pal-chanderi": {
+          "type": "item",
+          "settings": {
+            "title": "Chanderi",
+            "swatch": "#F0E4C8",
+            "text": "<p>Ivory, pastel and jewel silk-cottons, always with zari gold.</p>"
+          }
+        },
+        "pal-maheshwari": {
+          "type": "item",
+          "settings": {
+            "title": "Maheshwari",
+            "swatch": "#35524A",
+            "text": "<p>Deep greens, magentas, mustards and blacks with contrast stripe pallus.</p>"
+          }
+        },
+        "pal-ajrakh": {
+          "type": "item",
+          "settings": {
+            "title": "Ajrakh",
+            "swatch": "#1F3A5F",
+            "text": "<p>Indigo blue, madder red, iron black, resist white — the four-colour grid that names the craft.</p>"
+          }
+        },
+        "artisan": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Artisan",
+            "heading": "The Hands Behind the Textile",
+            "body": "<p>The West and Centre are where India's craft-revival playbook was written. Kutch's artisans — the Khatri printers of Ajrakhpur, the bandhani tiers of Bhuj, the kala-cotton weavers of Bhujodi — organised themselves into cooperatives and direct-market institutions (Khamir among them) that are studied worldwide; the Rehwa Society on Maheshwar's ghats rebuilt a weaving town's livelihoods around its looms; Chanderi's weaver-owned companies sell their own cloth. The masters here are celebrities in the craft world — national award winners whose families have signed their work in thread for centuries. Their challenge is the region's own success: mass-market 'bandhani print' and 'ajrakh print' imitations, churned out by machines, borrow these names while the originals' sixteen-step processes and thousand-knot fields are what the names actually mean. The artisans' answer has been the same as this page's: teach the difference.</p>"
+          }
+        },
+        "contemporary-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Then & Now",
+            "heading": "From Tradition to Contemporary",
+            "body": "<p>Desert and court traditions dressing the present.</p>"
+          }
+        },
+        "cont-patola": {
+          "type": "compare",
+          "settings": {
+            "left_label": "Traditional use",
+            "right_label": "Contemporary life",
+            "label": "Patan Patola",
+            "left_text": "Ceremonial cloth of Gujarati trading communities; heirloom saris",
+            "right_text": "Collector textiles, stoles, and the Rajkot single-ikat patolu for daily wear"
+          }
+        },
+        "cont-bandhani": {
+          "type": "compare",
+          "settings": {
+            "label": "Bandhani",
+            "left_text": "Bridal odhanis, turbans and festival cloth of Gujarat and Rajasthan",
+            "right_text": "Couture dupattas, dress fabric and menswear accents — knots by the thousand"
+          }
+        },
+        "cont-chanderi": {
+          "type": "compare",
+          "settings": {
+            "label": "Chanderi",
+            "left_text": "Court and merchant saris of Malwa",
+            "right_text": "India's favourite summer handloom — saris, kurtas, scarves, shirts"
+          }
+        },
+        "cont-maheshwari": {
+          "type": "compare",
+          "settings": {
+            "label": "Maheshwari",
+            "left_text": "Royal-household cloth of Holkar Maheshwar",
+            "right_text": "Structured saris, stoles and soft furnishings from weaver cooperatives"
+          }
+        },
+        "cont-ajrakh": {
+          "type": "compare",
+          "settings": {
+            "label": "Ajrakh",
+            "left_text": "Pastoral lungis, turbans and shoulder cloths of Kutch and Sindh",
+            "right_text": "Global fashion's favourite print language — yards, garments, collaborations"
+          }
+        },
+        "authenticity": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Authenticity",
+            "heading": "How to Read a Western or Central Textile",
+            "body": "<p>Patola: both faces identical, always — single ikat or print is not patola; the GI (2013) belongs to Patan's double ikat. Bandhani: rub the dots — tied cloth keeps a dimpled texture, and true bandhani's rings are slightly irregular; 'bandhani print' is flat. Chanderi: transparency with woven (not stitched) borders; check the reverse. Maheshwari: the border reads identically on both faces. Ajrakh: natural indigo and madder have depth and slight variation print to print; synthetic versions sit on the surface — and true ajrakh's geometry aligns across the whole cloth, which demands block after block placed by hand. Jamnagari Bandhani (2010), Kutch Bandhani (2021), Patan Patola (2013), Chanderi (2005) and Maheshwar (2012) are GI-registered. As ever: GI certifies origin, handloom marks certify the loom, and neither is a substitute for looking closely and asking honestly.</p>"
+          }
+        },
+        "future": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Future",
+            "heading": "The Future of Western & Central Textiles",
+            "body": "<p>This region's traditions have the best-defended names in Indian craft — five GI registrations across five techniques — and the most sophisticated artisan institutions. Kutch's craft ecosystem weathered the 2001 earthquake and turned reconstruction into renaissance; Maheshwar's Rehwa model proved a weaver town could market its own cloth; Chanderi's weaver-companies sell direct. The threats arename-theft and scale: printed imitations of bandhani and ajrakh, powerloom 'Chanderi', and the sheer fashion cycle. The defences are exactly what you have read: named motifs, countable knots, reversible borders, sixteen-step processes — crafts whose authenticity can be demonstrated, not just asserted. What these traditions need now is customers who ask the questions this page has taught you to ask.</p>"
+          }
+        },
+        "closing": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Keep Exploring",
+            "heading": "Pattern as Puzzle",
+            "body": "<p>Dye the threads and align them. Tie the knots and count them. Weave the border and reverse it. Print the resist and repeat it, sixteen times. The West and Centre treat pattern as a problem solved before the cloth exists — and the cloth, finished, is the proof. Continue across India's textile map.</p>"
+          }
+        },
+        "region-north": {
+          "type": "link",
+          "settings": { "title": "North India", "description": "Pashmina, Phulkari, Chikankari, Banarasi", "url": "/pages/north-india" }
+        },
+        "region-north-east": {
+          "type": "link",
+          "settings": { "title": "North East India", "description": "Muga, Eri, Naga shawls, Puan", "url": "/pages/north-east-india" }
+        },
+        "region-east": {
+          "type": "link",
+          "settings": { "title": "East India", "description": "Baluchari, Jamdani, Sambalpuri, Kantha", "url": "/pages/east-india" }
+        },
+        "region-south": {
+          "type": "link",
+          "settings": { "title": "South India", "description": "Kanjivaram, Pochampally, Kasavu", "url": "/pages/south-india" }
+        }
+      },
+      "block_order": [
+        "techniques-heading",
+        "tech-patola",
+        "tech-bandhani",
+        "tech-chanderi",
+        "tech-maheshwari",
+        "tech-ajrakh",
+        "img-ghats",
+        "materials-heading",
+        "mat-silk",
+        "mat-cotton",
+        "mat-indigo",
+        "mat-madder",
+        "mat-zari",
+        "mat-kala",
+        "motifs-heading",
+        "mot-patola",
+        "mot-bandhani",
+        "mot-chanderi",
+        "mot-maheshwari",
+        "mot-ajrakh",
+        "colour-heading",
+        "pal-patola",
+        "pal-bandhani",
+        "pal-chanderi",
+        "pal-maheshwari",
+        "pal-ajrakh",
+        "artisan",
+        "contemporary-heading",
+        "cont-patola",
+        "cont-bandhani",
+        "cont-chanderi",
+        "cont-maheshwari",
+        "cont-ajrakh",
+        "authenticity",
+        "future",
+        "closing",
+        "region-north",
+        "region-north-east",
+        "region-east",
+        "region-south"
+      ]
+    }
+  },
+  "order": ["hero", "archive-1", "archive-2"]
+}

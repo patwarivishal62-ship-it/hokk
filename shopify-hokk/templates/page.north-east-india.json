@@ -1,0 +1,542 @@
+{
+  "sections": {
+    "hero": {
+      "type": "culture-hero",
+      "settings": {
+        "show_breadcrumb": true,
+        "eyebrow": "The Culture of India · Region 02",
+        "heading": "North East India's Textile & Handcraft Cultures",
+        "supporting": "Wild silk, backstrap looms, and cloth as identity.",
+        "intro": "<p>The North East weaves with what its land gives. In Assam, two wild silks — golden muga and matte eri — are raised beside houses and woven into the region's most valued cloth. In the hills, women weave on backstrap looms strapped to their own bodies, producing textiles whose patterns declare which community, which village, which stage of life the wearer belongs to. This is a region where cloth is not decoration; it is identity, carried on the shoulder and read at a glance. What follows is a journey through five of these traditions — silk of the valley, shawls of the hills, and the looms that bind them.</p>",
+        "background_color": "#F7F3EE",
+        "padding_top": 96,
+        "padding_bottom": 40
+      }
+    },
+    "archive-1": {
+      "type": "culture-archive",
+      "settings": { "background_color": "#FFFFFF", "padding_top": 0, "padding_bottom": 0 },
+      "blocks": {
+        "landscape": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Landscape",
+            "heading": "A Textile Region Like No Other",
+            "body": "<p>Geography did something unusual in the North East. The Brahmaputra valley gave Assam sericulture of a kind found nowhere else — muga and eri silks that belong to this climate and to no other. The hills around it, folded and forested, kept weaving domestic and personal: looms in homes, patterns in memory, cloth made by the woman who wears it.</p><p>The backstrap loom is the region's signature tool — a simple, portable frame in which the weaver's own body provides the tension. It produces narrow cloth, woven slowly, and demands a closeness between maker and material that factory weaving never knows. What the loom lacks in speed it returns in specificity: every community keeps its own patterns, and some textiles could historically be worn only by those with the right to them.</p><p>Fibre follows the same logic. Muga and eri in the valley; cotton in the hills; wool along the high borders. Dyes were local — indigo and madder among them — and colours still carry meaning in communities where a shawl can tell you who someone is before a word is spoken.</p>"
+          }
+        },
+        "img-valley": {
+          "type": "image",
+          "settings": {
+            "caption": "The Brahmaputra valley — Assam's weaving heartland",
+            "width": "wide"
+          }
+        },
+        "map-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Map",
+            "heading": "Where to Find What",
+            "body": "<p>Five places, five crafts, five ways of making. Return to this map to orient yourself between chapters.</p>"
+          }
+        },
+        "map-muga": {
+          "type": "map-card",
+          "settings": {
+            "location": "Assam",
+            "craft": "Muga Silk",
+            "technique": "Wild-silk reeling and handloom weaving",
+            "material": "Muga silk (Antheraea assamensis)",
+            "signature": "Natural gold lustre that deepens with age"
+          }
+        },
+        "map-eri": {
+          "type": "map-card",
+          "settings": {
+            "location": "Assam",
+            "craft": "Eri Silk",
+            "technique": "Spun (not reeled) silk, woven on handlooms",
+            "material": "Eri silk (Samia cynthia ricini)",
+            "signature": "Matte, wool-like warmth — the peace silk"
+          }
+        },
+        "map-naga": {
+          "type": "map-card",
+          "settings": {
+            "location": "Nagaland",
+            "craft": "Naga Shawls",
+            "technique": "Backstrap-loom weaving with warp patterning",
+            "material": "Cotton (traditionally handspun)",
+            "signature": "Bold horizontal bands and tribe-specific patterns"
+          }
+        },
+        "map-manipur": {
+          "type": "map-card",
+          "settings": {
+            "location": "Manipur",
+            "craft": "Shaphee Lanphee & Moirang Phee",
+            "technique": "Handloom weaving with stitched and woven motifs",
+            "material": "Cotton with silk accents",
+            "signature": "Motifs once reserved for warriors and nobility"
+          }
+        },
+        "map-mizo": {
+          "type": "map-card",
+          "settings": {
+            "location": "Mizoram",
+            "craft": "Puan",
+            "technique": "Backstrap-loom weaving",
+            "material": "Cotton",
+            "signature": "Vivid horizontal stripes; ceremonial puanchei"
+          }
+        },
+        "traditions-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Five Traditions",
+            "heading": "The Five Textile Traditions",
+            "body": "<p>From the valley's wild silks to the hills' identity-woven shawls — five chapters, one region.</p>"
+          }
+        },
+        "t-muga": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Assam",
+            "title": "Muga Silk",
+            "technique_tag": "Weaving",
+            "material_tag": "Wild silk",
+            "description": "<p>The golden wild silk of Assam — reared on som and soalu leaves, woven in Sualkuchi, and prized for a natural lustre that grows richer with every wash and every year.</p>",
+            "body": "<p>Muga is a wild silk with a protected identity: the caterpillar Antheraea assamensis feeds on the region's trees, and the silk it yields carries a natural gold colour that no dye produces. Assam holds the GI registration for Muga Silk (granted 2007, the state's first), and the fibre's association with the region is total — the golden silk of Assam is mentioned in texts going back centuries.</p><p>The cloth is woven around Sualkuchi, Assam's great weaving town, into mekhela chadors — the two-piece dress of Assamese women — as well as saris and stoles. Its signature quality is durability with lustre: muga is said to outlast its owner, and unlike most silks its sheen deepens with age rather than fading.</p><p>Mekhela chador in muga remains the ceremonial dress of Assam, worn at Bihu and weddings alike. Look for the Silk Mark and GI indicators when buying — muga's price and prestige have made it a frequent subject of blending and mislabelling.</p>",
+            "characteristic": "A gold that nature makes and time improves.",
+            "related": "Related traditions: Eri silk · other wild silks of India",
+            "cta_label": "Explore Muga Silk",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-eri": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Assam",
+            "title": "Eri Silk",
+            "technique_tag": "Spinning & weaving",
+            "material_tag": "Wild silk",
+            "description": "<p>The other Assam silk — matte, soft, warm, and spun rather than reeled, because eri cocoons are open-ended. Often called peace silk: the moth leaves the cocoon before harvest.</p>",
+            "body": "<p>Eri is everything muga is not. Where muga gleams, eri is matte; where muga is reeled in long filaments, eri's open cocoons must be spun like cotton, giving a slubbed, gentle thread. The result is a silk that behaves like wool — warm, breathable, draping softly — and that has found devotees far beyond Assam.</p><p>Eri is also the traditional peace silk: the moth emerges from the cocoon before it is harvested, which is why eri culture has long sat comfortably beside the region's non-violent food and craft traditions. The fibre takes dye beautifully, and eri shawls, stoles and yardage are now a quiet export success — a craft textile with a contemporary global following.</p><p>Both of Assam's silks share one home industry: rearing happens in households, weaving in and around Sualkuchi and village looms, and the two fibres are often combined — muga borders on eri cloth, or eri weft in muga warps.</p>",
+            "characteristic": "The silk that behaves like wool — and the moth flies free.",
+            "related": "Related traditions: Muga silk · tussar silks of eastern India",
+            "cta_label": "Discover Eri Silk",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-naga": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Nagaland",
+            "title": "Naga Shawls",
+            "technique_tag": "Backstrap weaving",
+            "material_tag": "Cotton",
+            "description": "<p>Woven on backstrap looms by women across Nagaland's tribes, Naga shawls carry bold bands of colour and pattern — some once restricted to warriors, headhunters and the honoured dead.</p>",
+            "body": "<p>The Naga shawl is a document. Woven on the backstrap loom — the weaver's body providing the tension — each tribe's shawls carry patterns specific to that community, and within communities, specific cloths historically marked achievement and status. Certain shawls could be worn only by men who had taken heads in the old days; others belonged to feasts of merit. The pattern language was, and remains, a system of rights recorded in thread.</p><p>Traditional cloth was handspun cotton, dyed with indigo and other local dyes, with red often dominant and dog's hair occasionally woven in for value — a documented practice of certain tribes. Today's shawls use commercial yarns, but the structure persists: horizontal bands, bold geometric motifs, and the woven-in identity of sixteen-plus tribes.</p><p>The Chakhesang shawl — a specific Naga textile — holds a Geographical Indication registration, a recognition of the tradition's regional identity. Contemporary Naga designers have carried the shawl's vocabulary into modern fashion while the home looms continue.</p>",
+            "characteristic": "The shawl tells you who the wearer is — before a word is spoken.",
+            "related": "Related traditions: Puan of Mizoram · Manipur's woven textiles",
+            "cta_label": "Explore Naga Shawls",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-manipur": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Manipur",
+            "title": "Shaphee Lanphee & Moirang Phee",
+            "technique_tag": "Weaving + stitching",
+            "material_tag": "Cotton & silk",
+            "description": "<p>Manipur's heritage textiles: the shaphee lanphee, a woven cloth with stitched motifs historically bestowed on warriors and nobility, and the fine moirang phee, named for the town of Moirang and its distinctive border.</p>",
+            "body": "<p>Two of Manipur's most storied cloths carry Geographical Indication registrations: the shaphee lanphee and the moirang phee. The shaphee lanphee is a handwoven cotton textile whose motifs — worked in thread on the woven ground — were historically associated with honour: accounts describe it as a cloth bestowed by Meitei royalty on warriors for deeds of valour. Woven and stitched by women, it belongs to the valley's Meitei culture.</p><p>The moirang phee, named for Moirang on Loktak lake, is a fine, near-transparent woven cloth — historically cotton, sometimes silk — known for a distinctive woven border motif. Like the shaphee lanphee, it is a Manipuri textile with a documented place in the state's courtly and ceremonial past, and both survive on household looms today.</p><p>Manipur's weaving culture is broad — from the wangkhei phee, a fine cotton muslin-like cloth, to the Lainingthou and tribal traditions of the hills. What unites it is the loom: mostly the loin or backstrap loom, in the hands of women, producing some of India's most quietly refined cloth.</p>",
+            "characteristic": "Cloth as honour — motifs once bestowed, never bought.",
+            "related": "Related traditions: Naga shawls · puan of Mizoram",
+            "cta_label": "Discover Manipur's Textiles",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-puan": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Mizoram",
+            "title": "Puan",
+            "technique_tag": "Backstrap weaving",
+            "material_tag": "Cotton",
+            "description": "<p>Mizoram's woven textiles — puan — are the daily and ceremonial dress of Mizo women, striped and banded in colour, with the puanchei reserved for weddings and celebration.</p>",
+            "body": "<p>In Mizo, puan means cloth — but in practice it names a whole woven wardrobe: wraps, skirts and ceremonial textiles woven on the loin loom, striped and banded in vivid colour combinations that identify the textile's purpose and, historically, the wearer's community. The puanchei, the richest of them, is the ceremonial wrap worn by brides and dancers at festivals such as Chapchar Kut.</p><p>Weaving is women's work and household work in Mizoram, as across much of the North East hills — the loom sits in the home, and girls learn the vocabulary of stripes and motifs as they learn to read. Traditional puan used handspun cotton dyed in strong colours; today's weavers work with commercial yarns while keeping the pattern language intact.</p><p>Where Naga shawls declare status and Manipur's cloths carry courtly memory, puan is above all worn identity — everyday cloth raised, at its best, to the level of ceremony.</p>",
+            "characteristic": "A wardrobe of stripes — every wrap a known name.",
+            "related": "Related traditions: Naga shawls · Manipur's woven textiles",
+            "cta_label": "Explore Puan",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        }
+      },
+      "block_order": [
+        "landscape",
+        "img-valley",
+        "map-heading",
+        "map-muga",
+        "map-eri",
+        "map-naga",
+        "map-manipur",
+        "map-mizo",
+        "traditions-heading",
+        "t-muga",
+        "t-eri",
+        "t-naga",
+        "t-manipur",
+        "t-puan"
+      ]
+    },
+    "archive-2": {
+      "type": "culture-archive",
+      "settings": { "background_color": "#F7F3EE", "padding_top": 0, "padding_bottom": 0 },
+      "blocks": {
+        "techniques-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Technique",
+            "heading": "Five Traditions, Five Ways of Making",
+            "body": "<p>Silk reeled and silk spun; cloth woven on the backstrap loom; motifs stitched onto woven ground. The North East's variety is its lesson.</p>"
+          }
+        },
+        "tech-muga": {
+          "type": "technique",
+          "settings": {
+            "title": "Muga Silk",
+            "action": "Reels continuous golden filament from boiled cocoons, then weaves it on the throw-shuttle loom",
+            "material": "Muga wild silk",
+            "tool": "Loom and charki reeling frame",
+            "pattern": "Woven borders and motifs — often plain cloth letting the gold speak",
+            "distinctive": "The only major silk with a natural gold colour"
+          }
+        },
+        "tech-eri": {
+          "type": "technique",
+          "settings": {
+            "title": "Eri Silk",
+            "action": "Spins the open-ended cocoons into soft slubbed yarn, like cotton, then weaves",
+            "material": "Eri wild silk",
+            "tool": "Spindle / spinning wheel and loom",
+            "pattern": "Plain and striped cloth; the texture is the design",
+            "distinctive": "Spun, not reeled — matte, warm, wool-like"
+          }
+        },
+        "tech-naga": {
+          "type": "technique",
+          "settings": {
+            "title": "Naga Shawls",
+            "action": "Wears the loom — backstrap tension from the body — building bands of colour pick by pick",
+            "material": "Cotton",
+            "tool": "Backstrap (loin) loom",
+            "pattern": "Warp stripes and woven bands carrying tribe identity",
+            "distinctive": "The weaver is part of the machine"
+          }
+        },
+        "tech-manipur": {
+          "type": "technique",
+          "settings": {
+            "title": "Shaphee Lanphee & Moirang Phee",
+            "action": "Weaves fine ground cloth, then works motifs in thread on the surface",
+            "material": "Cotton with silk",
+            "tool": "Loin loom and needle",
+            "pattern": "Stitched and woven motifs with courtly associations",
+            "distinctive": "Weaving and embroidery in one textile"
+          }
+        },
+        "tech-puan": {
+          "type": "technique",
+          "settings": {
+            "title": "Puan",
+            "action": "Weaves striped and banded wraps on the loin loom, counting colour sequences",
+            "material": "Cotton",
+            "tool": "Loin loom",
+            "pattern": "Horizontal colour bands, named and known",
+            "distinctive": "A pattern library held by the community"
+          }
+        },
+        "img-loom": {
+          "type": "image",
+          "settings": {
+            "caption": "A weaver at the backstrap loom — the region's signature tool",
+            "width": "normal"
+          }
+        },
+        "materials-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Materials",
+            "heading": "Materials of the North East",
+            "body": "<p>What the valley and the hills give the weaver.</p>"
+          }
+        },
+        "mat-muga": {
+          "type": "item",
+          "settings": {
+            "title": "Muga silk",
+            "text": "<p>Reared on som and soalu trees across Assam; naturally gold, extraordinarily durable, and said to improve with age. Woven into mekhela chadors, saris and stoles.</p>"
+          }
+        },
+        "mat-eri": {
+          "type": "item",
+          "settings": {
+            "title": "Eri silk",
+            "text": "<p>The peace silk — moth-friendly, spun not reeled, matte and warm. Takes dye deeply; shawls and stoles of eri are the region's quiet export.</p>"
+          }
+        },
+        "mat-cotton": {
+          "type": "item",
+          "settings": {
+            "title": "Handspun cotton",
+            "text": "<p>The hill tradition's base — traditionally spun at home, dyed with indigo and madder, woven into shawls and wraps across Nagaland, Manipur and Mizoram.</p>"
+          }
+        },
+        "mat-dyes": {
+          "type": "item",
+          "settings": {
+            "title": "Natural dyes",
+            "text": "<p>Indigo, madder and other local dye plants colour the hill textiles' reds and blues; the strong commercial colours of modern puan and Naga shawls continue the same love of saturation.</p>"
+          }
+        },
+        "mat-silk-mix": {
+          "type": "item",
+          "settings": {
+            "title": "Silk-and-cotton blends",
+            "text": "<p>Muga borders on eri cloth, silk motifs on cotton ground — the valley's silks and the hills' cotton meet on single textiles across the region.</p>"
+          }
+        },
+        "motifs-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Motifs",
+            "heading": "Motifs & Visual Language",
+            "body": "<p>The North East's pattern languages are structured and specific — bands, stripes and motifs that name their wearer. Where meanings are documented, we say so; where they live in oral tradition, we say that too.</p>"
+          }
+        },
+        "mot-muga": {
+          "type": "item",
+          "settings": {
+            "title": "Muga & Eri",
+            "text": "<p>Restrained woven borders — parijat and kingkhap patterns among them — on cloth whose gold or matte texture is itself the ornament.</p>"
+          }
+        },
+        "mot-naga": {
+          "type": "item",
+          "settings": {
+            "title": "Naga shawls",
+            "text": "<p>Elephant, tiger, human and mithun figures in bold bands — patterns historically tied to status and achievement, tribe by tribe.</p>"
+          }
+        },
+        "mot-manipur": {
+          "type": "item",
+          "settings": {
+            "title": "Manipur textiles",
+            "text": "<p>Stitched boat, temple and floral motifs on shaphee lanphee; the moirang phee's distinctive woven border — patterns with courtly memory.</p>"
+          }
+        },
+        "mot-puan": {
+          "type": "item",
+          "settings": {
+            "title": "Puan",
+            "text": "<p>Named stripe sequences and colour bands — a grammar of stripes every Mizo weaver reads at a glance.</p>"
+          }
+        },
+        "colour-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Colour",
+            "heading": "The Colour Language",
+            "body": "<p>Muga supplies a gold no dye can copy; the hills love saturated reds, blues and blacks on white. Documented tendencies, not fixed rules:</p>"
+          }
+        },
+        "pal-muga": {
+          "type": "item",
+          "settings": {
+            "title": "Muga",
+            "swatch": "#C99A3C",
+            "text": "<p>Natural gold — from pale champagne to deep amber, deepening with age and wash.</p>"
+          }
+        },
+        "pal-eri": {
+          "type": "item",
+          "settings": {
+            "title": "Eri",
+            "swatch": "#E4D6BF",
+            "text": "<p>Natural ivory and ecru, and the full dyed range — eri takes colour like a canvas.</p>"
+          }
+        },
+        "pal-naga": {
+          "type": "item",
+          "settings": {
+            "title": "Naga shawls",
+            "swatch": "#2B2B2B",
+            "text": "<p>Indigo black, madder red and natural white — strong bands on dark grounds.</p>"
+          }
+        },
+        "pal-puan": {
+          "type": "item",
+          "settings": {
+            "title": "Puan",
+            "swatch": "#B3283D",
+            "text": "<p>Vivid reds, greens and oranges in bold stripes — festival colour on cotton.</p>"
+          }
+        },
+        "pal-mekhela": {
+          "type": "item",
+          "settings": {
+            "title": "Mekhela chador",
+            "swatch": "#8A1538",
+            "text": "<p>Deep reds and greens with gold muga borders — Assam's ceremonial register.</p>"
+          }
+        },
+        "artisan": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Artisan",
+            "heading": "The Hands Behind the Textile",
+            "body": "<p>In the North East, the weaver is most often a woman at home — and the loom is her own body. Backstrap weaving builds cloth slowly, at the pace of the person making it, and the knowledge travels mother to daughter, household to household. The region's sericulture is equally domestic: eri and muga rearing happens beside houses, an agriculture of silk.</p><p>This is also a region of exceptional skill diversity in small compass — reelers and spinners in the valley, pattern-weavers in the hills, dyers everywhere — and of real change: youth migration pulls at the apprenticeship chain, while GI registration, craft collectives and a global interest in eri have opened new markets. The makers here are neither relics nor victims; they are specialists in textiles the rest of the world is only now learning to name.</p>"
+          }
+        },
+        "contemporary-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Then & Now",
+            "heading": "From Tradition to Contemporary",
+            "body": "<p>How each tradition dresses the present without losing its grammar.</p>"
+          }
+        },
+        "cont-muga": {
+          "type": "compare",
+          "settings": {
+            "left_label": "Traditional use",
+            "right_label": "Contemporary life",
+            "label": "Muga",
+            "left_text": "Mekhela chador and ceremonial dress of Assam",
+            "right_text": "Saris, stoles and global couture accents in wild gold silk"
+          }
+        },
+        "cont-eri": {
+          "type": "compare",
+          "settings": {
+            "label": "Eri",
+            "left_text": "Household shawls and wraps of the valley",
+            "right_text": "International peace-silk fashion — scarves, jackets, drapes"
+          }
+        },
+        "cont-naga": {
+          "type": "compare",
+          "settings": {
+            "label": "Naga shawls",
+            "left_text": "Status cloth of warriors and feast-givers",
+            "right_text": "Heritage shawls and contemporary Naga fashion statements"
+          }
+        },
+        "cont-manipur": {
+          "type": "compare",
+          "settings": {
+            "label": "Manipur textiles",
+            "left_text": "Cloth of court, honour and ceremony",
+            "right_text": "GI-registered heritage weaves on household looms and runways"
+          }
+        },
+        "cont-puan": {
+          "type": "compare",
+          "settings": {
+            "label": "Puan",
+            "left_text": "Daily and bridal dress of Mizo women",
+            "right_text": "Festival fashion and a proud identity textile for a young state"
+          }
+        },
+        "authenticity": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Authenticity",
+            "heading": "How to Read a North East Textile",
+            "body": "<p>Muga's gold is natural — but blending and mislabelling are common, so look for the GI tag and Silk Mark before trusting a price. Eri's slubbed, matte texture is hard to fake and easy to learn. Backstrap cloth is narrow by nature — wide panels mean wider looms or joins, so ask how the cloth was made. On Naga shawls and puan, the pattern language is community property: well-made copies exist, but the right to certain patterns is a cultural fact worth respecting. Handspun cotton, natural dyes and hand-joined mekhela chadors all reward close looking — and honest sellers will tell you exactly what you are holding.</p>"
+          }
+        },
+        "future": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Future",
+            "heading": "The Future of the North East's Textiles",
+            "body": "<p>The North East's textile economy is small-scale, household-based and quietly booming. Eri has a global peace-silk market; muga's GI protects a fibre found nowhere else; Naga and Mizo textiles ride a strong wave of identity fashion among the region's own young people. The pressures are real — mechanised imitation, youth migration, the fragility of household economics — but the region holds something rare: textiles people still wear, on ordinary days, because they are theirs. Traditions with daily life left in them do not need rescuing. They need fair prices and good photography.</p>"
+          }
+        },
+        "closing": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Keep Exploring",
+            "heading": "Silk of the Valley, Identity of the Hills",
+            "body": "<p>Two wild silks found nowhere else on earth. A loom strapped to the weaver's own back. Patterns that carry rights, memory and belonging. The North East's textiles are proof that cloth can be identity — and that identity, well woven, travels.</p>"
+          }
+        },
+        "region-north": {
+          "type": "link",
+          "settings": { "title": "North India", "description": "Pashmina, Phulkari, Chikankari, Banarasi", "url": "/pages/north-india" }
+        },
+        "region-east": {
+          "type": "link",
+          "settings": { "title": "East India", "description": "Baluchari, Jamdani, Sambalpuri, Kantha", "url": "/pages/east-india" }
+        },
+        "region-west": {
+          "type": "link",
+          "settings": { "title": "West & Central India", "description": "Patola, Bandhani, Chanderi, Ajrakh", "url": "/pages/west-central-india" }
+        },
+        "region-south": {
+          "type": "link",
+          "settings": { "title": "South India", "description": "Kanjivaram, Pochampally, Kasavu", "url": "/pages/south-india" }
+        }
+      },
+      "block_order": [
+        "techniques-heading",
+        "tech-muga",
+        "tech-eri",
+        "tech-naga",
+        "tech-manipur",
+        "tech-puan",
+        "img-loom",
+        "materials-heading",
+        "mat-muga",
+        "mat-eri",
+        "mat-cotton",
+        "mat-dyes",
+        "mat-silk-mix",
+        "motifs-heading",
+        "mot-muga",
+        "mot-naga",
+        "mot-manipur",
+        "mot-puan",
+        "colour-heading",
+        "pal-muga",
+        "pal-eri",
+        "pal-naga",
+        "pal-puan",
+        "pal-mekhela",
+        "artisan",
+        "contemporary-heading",
+        "cont-muga",
+        "cont-eri",
+        "cont-naga",
+        "cont-manipur",
+        "cont-puan",
+        "authenticity",
+        "future",
+        "closing",
+        "region-north",
+        "region-east",
+        "region-west",
+        "region-south"
+      ]
+    }
+  },
+  "order": ["hero", "archive-1", "archive-2"]
+}

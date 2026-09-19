@@ -108,10 +108,19 @@ titled *Culture* in Shopify admin, assign the **culture** template, then add it
 to your main menu. (An earlier editorial "cultural regions" section exists in
 git history if ever needed again.)
 
-### Region pages (`/pages/north-india`, …)
+### Region pages (all five regions)
 
-`templates/page.north-india.json` + `sections/culture-hero.liquid` +
-`sections/culture-archive.liquid` — deep editorial region chapters. The hero
+`templates/page.{north-india, north-east-india, south-india, east-india,
+west-central-india}.json` + `sections/culture-hero.liquid` +
+`sections/culture-archive.liquid` — deep editorial region chapters. Each page:
+hero (breadcrumb/eyebrow/H1/supporting line/intro) + two Region archive
+instances carrying the full content: landscape essay, in-flow images, 5 map
+cards, 5 tradition chapters, technique rows, materials, motifs, colour
+palettes with swatches, artisan essay, then-and-now comparison, authenticity
+guide, future section, closing with cross-region links. Content companions:
+`culture-content/*.md` (fact-verified, GI appendix each). The archive's 8
+block types: image, heading+text, map card, tradition chapter, technique row,
+comparison row, study item, link. The hero
 section carries breadcrumb/eyebrow/H1/supporting line/intro; the archive
 section builds the entire body from blocks: heading+text (H2 sections),
 map cards (auto-group into a grid), tradition chapters (image, tags, body,
@@ -119,8 +128,7 @@ characteristic, CTA), technique rows, comparison rows (auto-group into one
 table under the first row's column titles), study items (optional colour
 swatch) and links. North India ships with all content preloaded across two
 archive instances (Shopify caps blocks at 50 per section). Content source of
-truth: `culture-content/north-india-page-content.md`. Repeat the pattern for
-future regions (north-east-india, east-india, west-central-india, south-india).
+truth: `culture-content/` (one doc per region).
 
 
 ### Shopify norms this theme follows

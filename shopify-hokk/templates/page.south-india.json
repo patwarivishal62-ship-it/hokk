@@ -1,0 +1,550 @@
+{
+  "sections": {
+    "hero": {
+      "type": "culture-hero",
+      "settings": {
+        "show_breadcrumb": true,
+        "eyebrow": "The Culture of India · Region 03",
+        "heading": "South India's Textile & Handcraft Cultures",
+        "supporting": "Temple towns, river deltas, and the silk sari as heirloom architecture.",
+        "intro": "<p>South India's textile traditions are built like its temples: structured, precise, and made to last generations. In Kanchipuram, a sari's border is woven separately and joined to its body by an interlock so strong the cloth is said to tear before the seam. In Pochampally, pattern is dyed into the yarn before a single pick is thrown. Kerala keeps its gold quietly in the warp of the kasavu, and Andhra's Uppada weavers float jamdani motifs in cloth light enough to fold through a ring. What follows is a journey through five southern traditions — each a different answer to the same devotion: the sari as inheritance.</p>",
+        "background_color": "#F7F3EE",
+        "padding_top": 96,
+        "padding_bottom": 40
+      }
+    },
+    "archive-1": {
+      "type": "culture-archive",
+      "settings": { "background_color": "#FFFFFF", "padding_top": 0, "padding_bottom": 0 },
+      "blocks": {
+        "landscape": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Landscape",
+            "heading": "The Textile Landscape of South India",
+            "body": "<p>The South is silk and cotton country, organised around temple towns and river deltas. Kanchipuram's weavers serve a temple city whose devotees demand cloth worthy of the gods; the Kaveri delta's cotton belt dresses the everyday; coastal Andhra and Telangana perfected their own answers — jamdani lightness at Uppada, ikat geometry at Pochampally. Kerala, warm and coastal, kept its textile minimal: unbleached cotton with a gold border, the kasavu, worn as mundu and veshti.</p><p>Patronage here was both sacred and domestic. Temple endowments and royal courts — Mysore's Wodeyars among them — supported silk weaving for centuries, while the sari itself became the unit of inheritance: a grandmother's Kanjivaram is stored like bullion and lent like jewellery. The South's looms answer to that double demand — cloth for God, cloth for the family ledger.</p><p>The results share a taste for structure: contrast borders, mathematical repeat patterns, and weight. Where the North embroidered onto cloth, the South built pattern into the weave itself.</p>"
+          }
+        },
+        "img-temple": {
+          "type": "image",
+          "settings": {
+            "caption": "Kanchipuram — temple city and silk capital",
+            "width": "wide"
+          }
+        },
+        "map-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Map",
+            "heading": "Where to Find What",
+            "body": "<p>Five places, five crafts — one southern sari tradition with many accents.</p>"
+          }
+        },
+        "map-kanji": {
+          "type": "map-card",
+          "settings": {
+            "location": "Kanchipuram, Tamil Nadu",
+            "craft": "Kanjivaram Silk",
+            "technique": "Handloom silk weaving with interlocked korvai borders",
+            "material": "Mulberry silk and zari",
+            "signature": "Contrast borders joined so the cloth tears first"
+          }
+        },
+        "map-pochampally": {
+          "type": "map-card",
+          "settings": {
+            "location": "Pochampally, Telangana",
+            "craft": "Pochampally Ikat",
+            "technique": "Tie-and-dye of warp and weft before weaving",
+            "material": "Silk and cotton",
+            "signature": "Geometric diamonds and chakras with feathered edges"
+          }
+        },
+        "map-kasavu": {
+          "type": "map-card",
+          "settings": {
+            "location": "Balaramapuram, Kerala",
+            "craft": "Kasavu",
+            "technique": "Fine cotton weaving with zari border",
+            "material": "Unbleached cotton and zari",
+            "signature": "Ivory cloth, golden border — Kerala's minimalism"
+          }
+        },
+        "map-uppada": {
+          "type": "map-card",
+          "settings": {
+            "location": "Uppada, Andhra Pradesh",
+            "craft": "Uppada Jamdani",
+            "technique": "Discontinuous supplementary-weft weaving by hand",
+            "material": "Cotton and silk",
+            "signature": "Floating motifs on gossamer cloth, no jacquard"
+          }
+        },
+        "map-mysore": {
+          "type": "map-card",
+          "settings": {
+            "location": "Mysore, Karnataka",
+            "craft": "Mysore Silk",
+            "technique": "Pure silk weaving with minimal zari",
+            "material": "Mulberry silk and zari",
+            "signature": "Rich solid colours, deep lustre, crepe-silk drape"
+          }
+        },
+        "traditions-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Five Traditions",
+            "heading": "The Five Textile Traditions",
+            "body": "<p>From heirloom architecture to gossamer lightness — five chapters of the southern sari.</p>"
+          }
+        },
+        "t-kanjivaram": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Kanchipuram, Tamil Nadu",
+            "title": "Kanjivaram Silk",
+            "technique_tag": "Silk weaving",
+            "material_tag": "Mulberry silk & zari",
+            "description": "<p>The heirloom sari of South India — dense mulberry silk, zari borders, and the korvai join in which border and body are woven separately and interlocked by hand into a single cloth.</p>",
+            "body": "<p>A Kanjivaram is engineered, not merely woven. The body is woven in one silk, the contrast border in another, and the two are joined by the korvai technique — an interlocking weave performed by hand, so strong that the sari is said to tear before the joint gives. The pallu is often woven separately and attached with a laborious 'petni' join. The result is architecture in cloth: a sari that holds three silks, two zaris and a structure designed to outlive its owner.</p><p>Kanchipuram's weavers — many of them Devanga and Saligar (Saliyar) communities — serve a tradition inseparable from the temple city itself. Kancheepuram Silk has held a Geographical Indication since 2005.</p><p>Motifs speak the temple's language: pyramid borders echoing gopuram towers, rudraksha beads, peacocks, yali — the mythical lion — and checks that frame every southern bride's trousseau. Contemporary Kanjivaram runs from bridal maroons to pastel moderns, but the grammar is constant: contrast, weight, structure.</p>",
+            "characteristic": "The border and body are two cloths made one — tear the sari and the join holds.",
+            "related": "Related traditions: Mysore silk · Banarasi brocade · Paithani",
+            "cta_label": "Explore Kanjivaram",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-pochampally": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Pochampally, Telangana",
+            "title": "Pochampally Ikat",
+            "technique_tag": "Ikat — tie & dye",
+            "material_tag": "Silk & cotton",
+            "description": "<p>The pattern is made before the cloth exists: yarn is tied and dyed section by section, then woven so the resist-dyed threads align into diamonds, chakras and chevrons.</p>",
+            "body": "<p>Ikat is dyeing turned inside out. Instead of patterning finished cloth, the weaver ties and dyes the yarn first — binding sections of warp, weft, or both so the dye strikes only where it is allowed — and then weaves. As the dyed threads cross on the loom, the pattern assembles itself, edge-blurred by the slight bleed of dye under the ties. That soft edge is ikat's signature: geometry with a pulse.</p><p>Pochampally — a cluster of villages around Bhoodan Pochampally in Telangana — is India's most famous ikat address for combined warp-and-weft work in geometric repeats. Pochampally Ikat holds GI protection (registered in the mid-2000s), and the cluster supports thousands of weaving families.</p><p>The classic vocabulary is mathematical: diamonds, chakras, chevrons, stripes. The classic palette — red, black and white — has been joined by pastels and neons for a new generation. The craft's magic is invisible until explained: look closely at any Pochampally and you are seeing dyed-through thread, not surface print.</p>",
+            "characteristic": "The pattern is inside the yarn — visible on both faces, impossible to print.",
+            "related": "Related traditions: Sambalpuri ikat · Patan Patola · other ikat schools",
+            "cta_label": "Explore Pochampally Ikat",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-kasavu": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Kerala",
+            "title": "Kasavu",
+            "technique_tag": "Cotton weaving",
+            "material_tag": "Unbleached cotton & zari",
+            "description": "<p>Kerala's answer to ornament is restraint: unbleached cotton cloth with a golden zari border — the kasavu — worn as mundu and sari, set mundu for ceremony.</p>",
+            "body": "<p>The kasavu is the most quietly confident textile in India. A plain weave of unbleached — 'kora' — cotton, edged with a band of zari: that's the whole design, and it has dressed Kerala for generations. The mundu and veshti are the daily form; the set mundu — mundu and neriyathu worn together — is the ceremonial one; and the kasavu sari carries the same grammar north.</p><p>The name comes from kasavu, the gold border itself. Balaramapuram, near Thiruvananthapuram, is the best-known weaving centre — its kasavu weaves are GI-registered — with Kuthampully and Chendamangalam holding their own lineage of the same cloth. The classic border is a plain gold band; newer versions weave peacocks and florals into it, but restraint remains the Kerala signature.</p><p>Onam is kasavu's festival — the season when the whole state wears gold-edged white. In a South Indian sari culture of maximal silk, kasavu proves the opposite thesis: that a single well-placed line of gold can carry an entire aesthetic.</p>",
+            "characteristic": "One line of gold on unbleached cotton — an entire aesthetic in restraint.",
+            "related": "Related traditions: Karnataka's Ilkal · fine cottons of the Coromandel",
+            "cta_label": "Discover Kasavu",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-uppada": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Uppada, Andhra Pradesh",
+            "title": "Uppada Jamdani",
+            "technique_tag": "Jamdani weaving",
+            "material_tag": "Cotton & silk",
+            "description": "<p>The jamdani technique — motifs floated in by hand, thread by thread, with no jacquard — carried to Andhra's coast, producing gossamer saris of extraordinary lightness.</p>",
+            "body": "<p>Uppada, a coastal village in East Godavari district, weaves jamdani: a technique in which the weaver inserts discontinuous supplementary wefts by hand, building each motif — flower, leaf, geometric — as a float laid into transparent ground cloth. There is no punched card, no jacquard, no embroidery: the pattern lives in the weaver's timing, worked in with a kandi — a fine stick that carries each motif thread.</p><p>The jamdani tradition belongs to Bengal's muslin history, and it travelled: weavers who moved to Uppada in the twentieth century married the technique to coastal Andhra's cotton and silk, creating the Uppada Jamdani — GI-registered since 2009 — known for its lightness, its soft colours and its floating, two-sided motifs.</p><p>A fine Uppada can take months on the loom; the cloth is so fine that weavers work humid hours — tradition holds that dry air snaps the thread. The result is a sari that packs into a fist and unfolds like weather.</p>",
+            "characteristic": "No cards, no jacquard, no print — the motif is the weaver's timing.",
+            "related": "Related traditions: Bengal's jamdani · Dhaka muslin lineage",
+            "cta_label": "Discover Uppada Jamdani",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-mysore": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Mysore, Karnataka",
+            "title": "Mysore Silk",
+            "technique_tag": "Silk weaving",
+            "material_tag": "Mulberry silk & zari",
+            "description": "<p>Karnataka's pure-silk classic — deep solid colours, minimal zari, and a crepe-silk drape — produced under India's most tightly controlled silk label.</p>",
+            "body": "<p>Mysore Silk is the minimalist pole of southern silk weaving. Where Kanjivaram declares, Mysore whispers: a pure mulberry silk — often a crepe weave — in rich single colours, carrying a narrow zari border and, on classic pieces, a pallu of woven 'inbuti' dots. The drape is liquid; the palette runs to deep maroons, mustards, emeralds and Navarathri-inspired jewel tones.</p><p>The name is guarded unusually strictly: Mysore Silk carries a GI registration (2005) and its authorised production is tied to the Karnataka Silk Industries Corporation — the successor of a silk factory founded under the Wodeyar Maharajas in the early twentieth century. A Mysore Silk sari comes with a code and a certificate; the label and the cloth rarely part company.</p><p>For the buyer, Mysore Silk is the entry to South India's silk heritage: lighter than a Kanjivaram, plainer than a Banarasi, and among the most reliable silk purchases in the country — precisely because its supply chain is short and certified.</p>",
+            "characteristic": "The most traceable silk sari in India — one mill, one code, one cloth.",
+            "related": "Related traditions: Kanjivaram · Ilkal · Kanchi cottons",
+            "cta_label": "Explore Mysore Silk",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        }
+      },
+      "block_order": [
+        "landscape",
+        "img-temple",
+        "map-heading",
+        "map-kanji",
+        "map-pochampally",
+        "map-kasavu",
+        "map-uppada",
+        "map-mysore",
+        "traditions-heading",
+        "t-kanjivaram",
+        "t-pochampally",
+        "t-kasavu",
+        "t-uppada",
+        "t-mysore"
+      ]
+    },
+    "archive-2": {
+      "type": "culture-archive",
+      "settings": { "background_color": "#F7F3EE", "padding_top": 0, "padding_bottom": 0 },
+      "blocks": {
+        "techniques-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Technique",
+            "heading": "Five Traditions, Five Ways of Making",
+            "body": "<p>The South's lesson is that 'handloom' covers opposite worlds: pattern joined, pattern dyed, pattern floated, pattern certified. All weaving — four different intelligences.</p>"
+          }
+        },
+        "tech-kanji": {
+          "type": "technique",
+          "settings": {
+            "title": "Kanjivaram",
+            "action": "Weaves body and contrast border on separate shuttles and interlocks them by hand — korvai",
+            "material": "Mulberry silk, zari",
+            "tool": "Pit loom with three shuttles",
+            "pattern": "Borders and pallu woven as separate cloths, then joined into one",
+            "distinctive": "The join is stronger than the cloth"
+          }
+        },
+        "tech-pochampally": {
+          "type": "technique",
+          "settings": {
+            "title": "Pochampally Ikat",
+            "action": "Ties and dyes the yarn before weaving, then aligns dyed sections on the loom",
+            "material": "Silk or cotton yarn",
+            "tool": "Tying frame, dye vats, loom",
+            "pattern": "Dye-resist creates the design in the thread itself",
+            "distinctive": "The pattern exists before the cloth does"
+          }
+        },
+        "tech-kasavu": {
+          "type": "technique",
+          "settings": {
+            "title": "Kasavu",
+            "action": "Weaves fine unbleached cotton with a zari band, often woven separately and joined",
+            "material": "Kora cotton, zari",
+            "tool": "Pit loom",
+            "pattern": "One gold band — the kasavu — as the entire ornament",
+            "distinctive": "Restraint as a technique"
+          }
+        },
+        "tech-uppada": {
+          "type": "technique",
+          "settings": {
+            "title": "Uppada Jamdani",
+            "action": "Inserts discontinuous weft motifs by hand, counting threads of transparent ground",
+            "material": "Fine cotton / silk",
+            "tool": "Loom and kandi motif stick — no jacquard",
+            "pattern": "Each motif floated in individually, visible on both faces",
+            "distinctive": "Pattern as the weaver's timing"
+          }
+        },
+        "tech-mysore": {
+          "type": "technique",
+          "settings": {
+            "title": "Mysore Silk",
+            "action": "Weaves certified pure silk — often crepe — with narrow zari, in a single certified supply chain",
+            "material": "Mulberry silk, zari",
+            "tool": "Power-assisted and handlooms under one label",
+            "pattern": "Solid colour; tiny inbuti dots on the pallu",
+            "distinctive": "Certification as craft protection"
+          }
+        },
+        "img-zari": {
+          "type": "image",
+          "settings": {
+            "caption": "Zari thread on the loom — the South's gold standard",
+            "width": "normal"
+          }
+        },
+        "materials-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Materials",
+            "heading": "Materials of South India",
+            "body": "<p>Mulberry silk, kora cotton, zari and dye — the South's palette of stuff.</p>"
+          }
+        },
+        "mat-mulberry": {
+          "type": "item",
+          "settings": {
+            "title": "Mulberry silk",
+            "text": "<p>The South is India's mulberry heartland — Karnataka and Tamil Nadu rear the silkworm on mulberry leaf, feeding the looms of Kanchipuram, Mysore and Arni. Dense, lustrous, dye-deep.</p>"
+          }
+        },
+        "mat-kora": {
+          "type": "item",
+          "settings": {
+            "title": "Kora cotton",
+            "text": "<p>Unbleached, handwoven cotton — Kerala's kasavu ground and the base of a hundred southern cotton clusters. Cool, absorbent, quietly beautiful.</p>"
+          }
+        },
+        "mat-zari": {
+          "type": "item",
+          "settings": {
+            "title": "Zari",
+            "text": "<p>Silk core wrapped in silver and plated gold — the border of every southern sari worth inheriting. Tested zari grades carry certification; always ask.</p>"
+          }
+        },
+        "mat-ikat-yarn": {
+          "type": "item",
+          "settings": {
+            "title": "Tie-dyed yarn",
+            "text": "<p>Pochampally's raw material is patterned before it is cloth: bundles of yarn tied at intervals and dipped so the dye draws the motif into the thread.</p>"
+          }
+        },
+        "mat-crepe": {
+          "type": "item",
+          "settings": {
+            "title": "Silk crepe",
+            "text": "<p>Mysore's signature weave — high-twist silk with a pebbled, liquid hand that drapes like water and photographs like satin.</p>"
+          }
+        },
+        "motifs-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Motifs",
+            "heading": "Motifs & Visual Language",
+            "body": "<p>The South speaks in structure: borders, repeats and temple geometry rather than scattered sprigs. Motif names are documented craft vocabulary; meanings belong to the communities who wove them.</p>"
+          }
+        },
+        "mot-kanji": {
+          "type": "item",
+          "settings": {
+            "title": "Kanjivaram",
+            "text": "<p>Temple-pyramid borders, rudraksha beads, yali lions, peacock and annam bird motifs, bold checks — a grammar of power and protection.</p>"
+          }
+        },
+        "mot-pochampally": {
+          "type": "item",
+          "settings": {
+            "title": "Pochampally",
+            "text": "<p>Diamonds, chakras, chevrons, zigzag stripes — geometry with the soft, dyed-through edge that only ikat gives.</p>"
+          }
+        },
+        "mot-kasavu": {
+          "type": "item",
+          "settings": {
+            "title": "Kasavu",
+            "text": "<p>The gold band itself — plain, striped or woven with modest peacock rows. The restraint is the motif.</p>"
+          }
+        },
+        "mot-uppada": {
+          "type": "item",
+          "settings": {
+            "title": "Uppada Jamdani",
+            "text": "<p>Floating florals, paisleys and geometric butis, identical on both faces of transparent cloth.</p>"
+          }
+        },
+        "mot-mysore": {
+          "type": "item",
+          "settings": {
+            "title": "Mysore",
+            "text": "<p>Inbuti dots on the pallu, mango motifs, narrow zari lines — smallness as elegance.</p>"
+          }
+        },
+        "colour-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Colour",
+            "heading": "The Colour Language",
+            "body": "<p>Bridal maroon and temple gold, ikat's red-black-white, Kerala's ivory — the South's palettes are as structured as its borders.</p>"
+          }
+        },
+        "pal-kanji": {
+          "type": "item",
+          "settings": {
+            "title": "Kanjivaram",
+            "swatch": "#7A1E2B",
+            "text": "<p>Maroon, emerald, rani pink, mustard and peacock blue, always in contrast pairs joined by gold.</p>"
+          }
+        },
+        "pal-pochampally": {
+          "type": "item",
+          "settings": {
+            "title": "Pochampally",
+            "swatch": "#8C1D18",
+            "text": "<p>Classic red-black-white geometry; modern pastels and neons for new generations.</p>"
+          }
+        },
+        "pal-kasavu": {
+          "type": "item",
+          "settings": {
+            "title": "Kasavu",
+            "swatch": "#F0E9DC",
+            "text": "<p>Ivory and ecru cotton with pure gold — white heat, gold line.</p>"
+          }
+        },
+        "pal-uppada": {
+          "type": "item",
+          "settings": {
+            "title": "Uppada",
+            "swatch": "#D9A5B3",
+            "text": "<p>Soft pastels — seafoam, blush, ivory — with white or gold floating motifs.</p>"
+          }
+        },
+        "pal-mysore": {
+          "type": "item",
+          "settings": {
+            "title": "Mysore",
+            "swatch": "#22354F",
+            "text": "<p>Deep single tones — navy, maroon, emerald, mustard — saturated and even.</p>"
+          }
+        },
+        "artisan": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Artisan",
+            "heading": "The Hands Behind the Textile",
+            "body": "<p>The South's weaving households are institutions — some, like Kanchipuram's, trace centuries of cloth for temple and trousseau. Skill here is structural: the korvai join needs two weavers in rhythm on one loom; jamdani needs a memory for thread counts that machines still cannot replicate; ikat needs tiers and dyers whose measurements must survive the tying, the dyeing and the loom. Between them, the South keeps alive some of the most technically demanding handloom work on earth — and its weavers, master-craftsmen several times over, hold national awards and state honours in numbers that reflect it. The challenge is the familiar one: matching inheritance-speed production to fashion-speed markets. The answer being written now is clusters, collectives and GI discipline — plus a generation of South Indian designers who grew up inside these looms.</p>"
+          }
+        },
+        "contemporary-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Then & Now",
+            "heading": "From Tradition to Contemporary",
+            "body": "<p>Heirloom cloth learning new lives.</p>"
+          }
+        },
+        "cont-kanji": {
+          "type": "compare",
+          "settings": {
+            "left_label": "Traditional use",
+            "right_label": "Contemporary life",
+            "label": "Kanjivaram",
+            "left_text": "Wedding sari and family inheritance",
+            "right_text": "Bridal couture, light-weight 'soft' Kanjivarams, heirloom re-cuts"
+          }
+        },
+        "cont-pochampally": {
+          "type": "compare",
+          "settings": {
+            "label": "Pochampally",
+            "left_text": "Daily-wear cotton and silk saris of Telangana",
+            "right_text": "Ikat in home decor, menswear and global resortwear"
+          }
+        },
+        "cont-kasavu": {
+          "type": "compare",
+          "settings": {
+            "label": "Kasavu",
+            "left_text": "Mundu, veshti and Onam's gold-edged white",
+            "right_text": "Minimal fashion's favourite Indian textile — saris, dresses, drapes"
+          }
+        },
+        "cont-uppada": {
+          "type": "compare",
+          "settings": {
+            "label": "Uppada Jamdani",
+            "left_text": "Fine occasion saris of coastal Andhra",
+            "right_text": "Collector saris and couture fabrics of feather weight"
+          }
+        },
+        "cont-mysore": {
+          "type": "compare",
+          "settings": {
+            "label": "Mysore Silk",
+            "left_text": "Certified pure-silk saris of the royal mill",
+            "right_text": "Chic minimal saris, scarves and shirts under one coded label"
+          }
+        },
+        "authenticity": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Authenticity",
+            "heading": "How to Read a Southern Textile",
+            "body": "<p>Kanjivaram: check the korvai join at the border — the interlock is visible as a woven seam on the reverse, and a genuine one resists gentle picking. Pochampally: the motif's edges are feathered, not crisp — printed imitations are sharp, and identical on close inspection of both faces. Uppada: motifs must float identically front and back. Kasavu: real zari dulls evenly and ages gold; metallic film flakes. Mysore Silk carries a unique silk-code and certificate — verify rather than trust. Kancheepuram, Pochampally Ikat, Uppada Jamdani and Mysore Silk are all GI-registered; kasavu's Balaramapuram weave is too. As everywhere: GI certifies origin, the Silk Mark certifies silk content, and handloom certification certifies the loom. Ask which you are paying for.</p>"
+          }
+        },
+        "future": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Future",
+            "heading": "The Future of Southern Textiles",
+            "body": "<p>South India's handloom sector is among the most organised in the country: GI-registered clusters, active weavers' cooperatives, and state emporia that have sold this cloth for generations. Silk consumption keeps the looms busy; ikat's global fashion moment keeps Pochampally in demand; kasavu has become international minimalism's favourite import. The pressure points are age-old — powerloom imitation, price competition, and the slow leak of the young from the loom to the city — but the South also has the strongest defences: certifiable structures (korvai, ikat, jamdani) that machines copy badly, and a domestic market that still knows the difference. What this tradition needs is not rescue; it is the visibility its quality deserves.</p>"
+          }
+        },
+        "closing": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Keep Exploring",
+            "heading": "Structure, Gold, Restraint",
+            "body": "<p>The South builds its beauty into the cloth: borders joined, patterns dyed into yarn, motifs floated by hand, gold kept to a single line. Five traditions, one devotion — the sari as something made to outlast its owner. Carry that structure north, east, west, and see how each region answers it.</p>"
+          }
+        },
+        "region-north": {
+          "type": "link",
+          "settings": { "title": "North India", "description": "Pashmina, Phulkari, Chikankari, Banarasi", "url": "/pages/north-india" }
+        },
+        "region-north-east": {
+          "type": "link",
+          "settings": { "title": "North East India", "description": "Muga, Eri, Naga shawls, Puan", "url": "/pages/north-east-india" }
+        },
+        "region-east": {
+          "type": "link",
+          "settings": { "title": "East India", "description": "Baluchari, Jamdani, Sambalpuri, Kantha", "url": "/pages/east-india" }
+        },
+        "region-west": {
+          "type": "link",
+          "settings": { "title": "West & Central India", "description": "Patola, Bandhani, Chanderi, Ajrakh", "url": "/pages/west-central-india" }
+        }
+      },
+      "block_order": [
+        "techniques-heading",
+        "tech-kanji",
+        "tech-pochampally",
+        "tech-kasavu",
+        "tech-uppada",
+        "tech-mysore",
+        "img-zari",
+        "materials-heading",
+        "mat-mulberry",
+        "mat-kora",
+        "mat-zari",
+        "mat-ikat-yarn",
+        "mat-crepe",
+        "motifs-heading",
+        "mot-kanji",
+        "mot-pochampally",
+        "mot-kasavu",
+        "mot-uppada",
+        "mot-mysore",
+        "colour-heading",
+        "pal-kanji",
+        "pal-pochampally",
+        "pal-kasavu",
+        "pal-uppada",
+        "pal-mysore",
+        "artisan",
+        "contemporary-heading",
+        "cont-kanji",
+        "cont-pochampally",
+        "cont-kasavu",
+        "cont-uppada",
+        "cont-mysore",
+        "authenticity",
+        "future",
+        "closing",
+        "region-north",
+        "region-north-east",
+        "region-east",
+        "region-west"
+      ]
+    }
+  },
+  "order": ["hero", "archive-1", "archive-2"]
+}

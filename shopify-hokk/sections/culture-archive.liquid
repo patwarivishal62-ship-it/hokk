@@ -37,6 +37,44 @@
 
     {%- case block.type -%}
 
+      {%- when 'image' -%}
+        {%- liquid
+          assign i_img = block.settings.image
+          assign i_img_mobile = block.settings.image_mobile
+          assign i_alt = block.settings.alt | default: i_img.alt | default: block.settings.caption | escape
+        -%}
+        <figure class="cr-image cr-image--{{ block.settings.width | default: 'normal' }}" data-reveal {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}
+            <a class="cr-image__link" href="{{ block.settings.link }}">
+          {%- endif -%}
+          {%- if i_img != blank -%}
+            {%- if i_img_mobile != blank -%}
+              {{ i_img_mobile | image_url: width: 1200 | image_tag:
+                loading: 'lazy',
+                widths: '375, 480, 640, 828, 1080',
+                sizes: '100vw',
+                class: 'cr-image__img cr-image__img--mobile',
+                alt: i_alt
+              }}
+            {%- endif -%}
+            {{ i_img | image_url: width: 2400 | image_tag:
+              loading: 'lazy',
+              widths: '750, 1080, 1296, 1512, 1800, 2200, 2400',
+              sizes: '(min-width: 1500px) 1400px, 92vw',
+              class: 'cr-image__img',
+              alt: i_alt
+            }}
+          {%- else -%}
+            <div class="cr-image__placeholder" role="img" aria-label="{{ i_alt | default: 'Image' }}"></div>
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}
+            </a>
+          {%- endif -%}
+          {%- if block.settings.caption != blank -%}
+            <figcaption class="cr-image__caption">{{ block.settings.caption | escape }}</figcaption>
+          {%- endif -%}
+        </figure>
+
       {%- when 'text' -%}
         <section class="cr-block cr-text" id="{{ block.settings.heading | handle }}" {{ block.shopify_attributes }}>
           <div class="container" data-reveal>
@@ -211,15 +249,14 @@
   {%- endfor -%}
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Region archive",
   "class": "section-cr-archive",
   "max_blocks": 50,
   "settings": [
     {
       "type": "paragraph",
-      "content": "The body of a regional culture page. Blocks render in order — text blocks create section headings, map cards group into a grid, comparison rows group into one table. A page can use several Region archive sections in sequence (Shopify allows up to 50 blocks per section)."
+      "content": "The body of a regional culture page. Blocks render in order — text blocks create section headings, map cards group into a grid, comparison rows group into one table, images sit between any blocks. A page can use several Region archive sections in sequence (Shopify allows up to 50 blocks per section)."
     },
     {
       "type": "color",
@@ -256,102 +293,348 @@
   ],
   "blocks": [
     {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "A relevant photograph placed between content blocks — a loom at work, a material close-up, an artisan's hands, a landscape. Shows a placeholder with its caption until an image is uploaded."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image (mobile)"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text",
+          "info": "Falls back to the caption, then the image's own alt text."
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Width",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Page width"
+            },
+            {
+              "value": "wide",
+              "label": "Full bleed (edge to edge)"
+            }
+          ],
+          "default": "normal"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    },
+    {
       "type": "text",
       "name": "Heading + text",
       "settings": [
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-        { "type": "text", "id": "heading", "label": "Heading (H2)" },
-        { "type": "richtext", "id": "body", "label": "Body" }
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading (H2)"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body"
+        }
       ]
     },
     {
       "type": "map-card",
       "name": "Map card",
       "settings": [
-        { "type": "text", "id": "location", "label": "Location", "default": "Kashmir" },
-        { "type": "text", "id": "craft", "label": "Textile / craft", "default": "Pashmina & Kani Shawls" },
-        { "type": "text", "id": "technique", "label": "Primary technique" },
-        { "type": "text", "id": "material", "label": "Major material" },
-        { "type": "text", "id": "signature", "label": "One-line visual characteristic" },
-        { "type": "url", "id": "link", "label": "Link (optional)", "info": "Makes the craft name clickable." }
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Kashmir"
+        },
+        {
+          "type": "text",
+          "id": "craft",
+          "label": "Textile / craft",
+          "default": "Pashmina & Kani Shawls"
+        },
+        {
+          "type": "text",
+          "id": "technique",
+          "label": "Primary technique"
+        },
+        {
+          "type": "text",
+          "id": "material",
+          "label": "Major material"
+        },
+        {
+          "type": "text",
+          "id": "signature",
+          "label": "One-line visual characteristic"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)",
+          "info": "Makes the craft name clickable."
+        }
       ]
     },
     {
       "type": "tradition",
       "name": "Tradition chapter",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image", "info": "High-resolution craft photograph (text is NOT designed into this one — it may crop gently to 4:5)." },
-        { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile)" },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "info": "e.g. “Kashmir”" },
-        { "type": "text", "id": "title", "label": "Title (H2)", "default": "Tradition" },
-        { "type": "text", "id": "technique_tag", "label": "Technique tag", "info": "e.g. “Weaving”, “Hand embroidery”" },
-        { "type": "text", "id": "material_tag", "label": "Material tag", "info": "e.g. “Goat undercoat”, “Silk floss”" },
-        { "type": "richtext", "id": "description", "label": "Short description", "info": "The 2–3 line summary shown under the title." },
-        { "type": "richtext", "id": "body", "label": "Body", "info": "The full editorial copy for this tradition." },
-        { "type": "text", "id": "characteristic", "label": "One distinctive characteristic" },
-        { "type": "text", "id": "related", "label": "Related traditions line" },
-        { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Explore" },
-        { "type": "url", "id": "cta_link", "label": "CTA link", "info": "Until set, the button points to the Culture page." },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "High-resolution craft photograph (text is NOT designed into this one — it may crop gently to 4:5)."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image (mobile)"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "info": "e.g. “Kashmir”"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (H2)",
+          "default": "Tradition"
+        },
+        {
+          "type": "text",
+          "id": "technique_tag",
+          "label": "Technique tag",
+          "info": "e.g. “Weaving”, “Hand embroidery”, “Tie-dye”, “Block printing”"
+        },
+        {
+          "type": "text",
+          "id": "material_tag",
+          "label": "Material tag",
+          "info": "e.g. “Wild silk”, “Cotton”"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Short description",
+          "info": "The 2–3 line summary shown under the title."
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "info": "The full editorial copy for this tradition."
+        },
+        {
+          "type": "text",
+          "id": "characteristic",
+          "label": "One distinctive characteristic"
+        },
+        {
+          "type": "text",
+          "id": "related",
+          "label": "Related traditions line"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA link",
+          "info": "Until set, the button points to the Culture page."
+        },
         {
           "type": "select",
           "id": "image_position",
           "label": "Image position (desktop)",
           "options": [
-            { "value": "left", "label": "Image left" },
-            { "value": "right", "label": "Image right" }
+            {
+              "value": "left",
+              "label": "Image left"
+            },
+            {
+              "value": "right",
+              "label": "Image right"
+            }
           ],
           "default": "left"
         },
-        { "type": "color", "id": "background_color", "label": "Background color", "info": "Leave blank to inherit the page background." },
-        { "type": "range", "id": "padding_y", "label": "Vertical spacing", "min": 48, "max": 240, "step": 8, "unit": "px", "default": 104 }
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "info": "Leave blank to inherit the page background."
+        },
+        {
+          "type": "range",
+          "id": "padding_y",
+          "label": "Vertical spacing",
+          "min": 48,
+          "max": 240,
+          "step": 8,
+          "unit": "px",
+          "default": 104
+        }
       ]
     },
     {
       "type": "technique",
       "name": "Technique row",
       "settings": [
-        { "type": "text", "id": "title", "label": "Tradition" },
-        { "type": "text", "id": "action", "label": "What the artisan physically does" },
-        { "type": "text", "id": "material", "label": "Primary material" },
-        { "type": "text", "id": "tool", "label": "Primary tool" },
-        { "type": "text", "id": "pattern", "label": "How the pattern is created" },
-        { "type": "text", "id": "distinctive", "label": "What makes it distinct" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tradition"
+        },
+        {
+          "type": "text",
+          "id": "action",
+          "label": "What the artisan physically does"
+        },
+        {
+          "type": "text",
+          "id": "material",
+          "label": "Primary material"
+        },
+        {
+          "type": "text",
+          "id": "tool",
+          "label": "Primary tool"
+        },
+        {
+          "type": "text",
+          "id": "pattern",
+          "label": "How the pattern is created"
+        },
+        {
+          "type": "text",
+          "id": "distinctive",
+          "label": "What makes it distinct"
+        }
       ]
     },
     {
       "type": "compare",
       "name": "Comparison row",
       "settings": [
-        { "type": "paragraph", "content": "Consecutive comparison rows group into one table. Set the two column titles on the FIRST row of each group." },
-        { "type": "text", "id": "left_label", "label": "Left column title (first row only)" },
-        { "type": "text", "id": "right_label", "label": "Right column title (first row only)" },
-        { "type": "text", "id": "label", "label": "Row label" },
-        { "type": "text", "id": "left_text", "label": "Left text" },
-        { "type": "text", "id": "right_text", "label": "Right text" }
+        {
+          "type": "paragraph",
+          "content": "Consecutive comparison rows group into one table. Set the two column titles on the FIRST row of each group."
+        },
+        {
+          "type": "text",
+          "id": "left_label",
+          "label": "Left column title (first row only)"
+        },
+        {
+          "type": "text",
+          "id": "right_label",
+          "label": "Right column title (first row only)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Row label"
+        },
+        {
+          "type": "text",
+          "id": "left_text",
+          "label": "Left text"
+        },
+        {
+          "type": "text",
+          "id": "right_text",
+          "label": "Right text"
+        }
       ]
     },
     {
       "type": "item",
       "name": "Study item",
       "settings": [
-        { "type": "paragraph", "content": "A materials, motifs or colour-palette entry." },
-        { "type": "text", "id": "title", "label": "Title" },
-        { "type": "richtext", "id": "text", "label": "Text" },
-        { "type": "color", "id": "swatch", "label": "Colour swatch (optional)", "info": "Leave unset for no swatch." }
+        {
+          "type": "paragraph",
+          "content": "A materials, motifs or colour-palette entry."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "color",
+          "id": "swatch",
+          "label": "Colour swatch (optional)",
+          "info": "Leave unset for no swatch."
+        }
       ]
     },
     {
       "type": "link",
       "name": "Link",
       "settings": [
-        { "type": "text", "id": "title", "label": "Label" },
-        { "type": "text", "id": "description", "label": "Small description" },
-        { "type": "url", "id": "url", "label": "URL", "info": "Leave blank to show as plain text (not clickable)." }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Small description"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL",
+          "info": "Leave blank to show as plain text (not clickable)."
+        }
       ]
     }
   ],
   "presets": [
-    { "name": "Region archive" }
+    {
+      "name": "Region archive"
+    }
   ]
 }
 {% endschema %}

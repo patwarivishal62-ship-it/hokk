@@ -1,0 +1,542 @@
+{
+  "sections": {
+    "hero": {
+      "type": "culture-hero",
+      "settings": {
+        "show_breadcrumb": true,
+        "eyebrow": "The Culture of India · Region 04",
+        "heading": "East India's Textile & Handcraft Cultures",
+        "supporting": "Storytelling cloth — narrative pallus, floating motifs, dyed yarn and the embroidered quilt.",
+        "intro": "<p>Eastern India weaves stories literally. A Baluchari sari's pallu carries scenes from the epics across its panels; a jamdani's motifs float in cloth fine enough to pull through a ring; a Sambalpuri's pattern hides in the yarn, revealed only when the weaving is done. And when cloth grows old, Bengal does not discard it — it layers it and stitches it into a kantha, embroidery that turns worn saris into narrative quilts. What follows is a journey through five traditions of the Gangetic plain and the Odia heartland — where the sari has long been a canvas, and the needle a pen.</p>",
+        "background_color": "#F7F3EE",
+        "padding_top": 96,
+        "padding_bottom": 40
+      }
+    },
+    "archive-1": {
+      "type": "culture-archive",
+      "settings": { "background_color": "#FFFFFF", "padding_top": 0, "padding_bottom": 0 },
+      "blocks": {
+        "landscape": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Landscape",
+            "heading": "The Textile Landscape of East India",
+            "body": "<p>The East's textile geography runs on two rivers and one delta. The Ganges plain gave Bengal the world's most famous cotton — muslin — and the weaving culture that grew around it; colonial destruction and industrialisation ended the muslin trade, but the region's finesse survived in jamdani. The Bhagirathi's bank towns — Bishnupur, Bankura, Murshidabad — built narrative silk weaving on local mulberry cultivation. Bihar's Bhagalpur tannery-and-tussar economy grew from the wild silk of its forests, and Odisha's western districts wove a tie-dye intelligence — bandha — that turns yarn into code.</p><p>Patronage shifted with every era: Mughal courts, colonial bungalows, Marxist cooperatives, and now the online sari revival — each leaving a layer on the cloth. Bengal's weavers and embroiderers absorbed them all, which is why a single eastern sari can carry Mughal motif, colonial anecdote and cooperative label at once.</p><p>The East also contributes this page's structural insight: here, alone among regions, the old cloth itself becomes the raw material — kantha's layered saris make textile memory physical.</p>"
+          }
+        },
+        "img-village": {
+          "type": "image",
+          "settings": {
+            "caption": "Village Bengal — where looms hum in home courtyards",
+            "width": "wide"
+          }
+        },
+        "map-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Map",
+            "heading": "Where to Find What",
+            "body": "<p>Five places, five crafts — from narrative silk to the embroidered quilt.</p>"
+          }
+        },
+        "map-baluchari": {
+          "type": "map-card",
+          "settings": {
+            "location": "Bishnupur, West Bengal",
+            "craft": "Baluchari",
+            "technique": "Narrative silk weaving (jacquard-assisted)",
+            "material": "Mulberry silk",
+            "signature": "Pallu panels carrying scenes from the epics"
+          }
+        },
+        "map-jamdani": {
+          "type": "map-card",
+          "settings": {
+            "location": "Bengal",
+            "craft": "Jamdani",
+            "technique": "Discontinuous supplementary-weft hand weaving",
+            "material": "Fine cotton (and silk)",
+            "signature": "Motifs floating in gossamer ground — UNESCO-listed"
+          }
+        },
+        "map-sambalpuri": {
+          "type": "map-card",
+          "settings": {
+            "location": "Bargarh & Sonepur, Odisha",
+            "craft": "Sambalpuri Bandha",
+            "technique": "Warp-and-weft ikat (bandha tie-dye)",
+            "material": "Cotton and silk",
+            "signature": "Geometry that appears only when weaving completes"
+          }
+        },
+        "map-bhagalpur": {
+          "type": "map-card",
+          "settings": {
+            "location": "Bhagalpur, Bihar",
+            "craft": "Bhagalpuri Tussar",
+            "technique": "Wild-silk weaving and printing",
+            "material": "Tussar silk",
+            "signature": "Natural gold sheen with slubbed, tactile grain"
+          }
+        },
+        "map-kantha": {
+          "type": "map-card",
+          "settings": {
+            "location": "Bengal",
+            "craft": "Nakshi Kantha",
+            "technique": "Running-stitch embroidery on layered old cloth",
+            "material": "Recycled saris and dhotis",
+            "signature": "Worn cloth reborn as narrative quilt"
+          }
+        },
+        "traditions-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Five Traditions",
+            "heading": "The Five Textile Traditions",
+            "body": "<p>From epic silk to embroidered memory — five chapters of the East.</p>"
+          }
+        },
+        "t-baluchari": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "West Bengal",
+            "title": "Baluchari",
+            "technique_tag": "Silk weaving",
+            "material_tag": "Mulberry silk",
+            "description": "<p>The narrative sari of Bengal: a mulberry silk ground whose pallu carries woven panels of epic scenes — gods and courts, horses and boats — once figured by hand, today jacquard-assisted.</p>",
+            "body": "<p>Baluchari is Bengal's cinema. The sari's pallu unfolds in framed panels — scenes from the Mahabharata and Ramayana, courtly processions, even (in documented historical episodes) European officers and steam trains — woven into the silk, figure by figure. The tradition belongs to the Bankura-Bishnupur belt, with roots in Murshidabad's weaving past; its named progenitor, the nineteenth-century weaver Subho Thakur of Bishnupur, is remembered locally as the one who brought the craft to its modern form.</p><p>The technique is supplementary-weft figuration on mulberry silk — once executed entirely from memory and hand-tied jala patterning, now typically assisted by punched-card jacquards that carry the naqshaband's drawings. The cloth's story panels reward close reading: a good Baluchari pallu is a sequence, not a repeat.</p><p>Baluchari Saree holds a Geographical Indication (registered 2012, held through West Bengal's Patent Information Centre). The tradition also includes its silken sibling, the Swanchalpur, and the whole family of Bengal's figured-silk weaving centred on Bishnupur's looms.</p>",
+            "characteristic": "A pallu you read like a comic strip — epic panels in woven silk.",
+            "related": "Related traditions: Jamdani · Garad-Benarasi blends · Bengal figured silks",
+            "cta_label": "Explore Baluchari",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-jamdani": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Bengal",
+            "title": "Jamdani",
+            "technique_tag": "Fine weaving",
+            "material_tag": "Fine cotton",
+            "description": "<p>The most celebrated technique in Bengali weaving — motifs inserted by hand as discontinuous wefts into cloth so fine it barely holds together. UNESCO inscribed the jamdani tradition in 2013.</p>",
+            "body": "<p>Jamdani is the descendant of Bengal's legendary muslin, and its method is unique: working on transparent ground cloth, the weaver lifts warp threads with a fine stick — a kandi — and inserts each motif as a separate, discontinuous weft, building flowers, paisleys and geometric butis that float between the threads. Nothing is embroidered, printed or mechanical; the motif is a decision made thousands of times per sari, in rhythm, by hand. Bengal's jamdani — woven around Dhaka's historic orbit and today on both sides of the border, with West Bengal's weavers holding their own GI registration (2016) — is fine cotton work; silk jamdani extends the technique to dressier cloth.</p><p>The tradition's standing is unique: UNESCO inscribed the art of jamdani weaving on its Representative List of the Intangible Cultural of Humanity in 2013. The cloth's tell-tale signs — motifs identical on both faces, feather-light drape, months on the loom — are exactly the things imitation cannot reach.</p><p>Contemporary jamdani runs from white-on-white collector saris to coloured silks; at its best, one sari means two weavers and the better part of a year.</p>",
+            "characteristic": "Motifs that float — nothing holds them but the weaver's timing.",
+            "related": "Related traditions: Uppada Jamdani · muslin's lost history · Kantha",
+            "cta_label": "Explore Jamdani",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-sambalpuri": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Odisha",
+            "title": "Sambalpuri Bandha",
+            "technique_tag": "Ikat — tie & dye",
+            "material_tag": "Cotton & silk",
+            "description": "<p>Odisha's ikat, called bandha — binding. Yarn is tied and dyed in sequence until the thread itself carries the pattern; the design appears only as the weaving completes.</p>",
+            "body": "<p>Bandha means 'tied', and it names Odisha's entire ikat intelligence: warp threads, weft threads, or both are bound at intervals and dyed in stages, each binding holding a future motif against the dye. The weaver aligns the dyed yarn on the loom with a precision measured in fractions of a millimetre, and the pattern — conch shells, wheels, fish, lotus, the famous Sambalpuri fish-and-chakra geometry — resolves only as the cloth grows. Nothing on the loom looks like anything until, row by row, it does.</p><p>The Sambalpuri cluster — Bargarh, Sonepur, Boudh and surrounding districts of western Odisha — weaves both cotton and silk, in single ikat and, at the highest level, double ikat (the Bichitrapuri and other complex patterns). Sambalpuri Bandha Saree and Fabrics holds a GI registration (2012) through Odisha's Directorate of Textiles & Handloom.</p><p>Sambalpuri's cultural weight in Odisha is hard to overstate — it is the state's signature sari, worn by everyone from students at Nuakhai to chief ministers, and its motifs read instantly as Odia identity.</p>",
+            "characteristic": "The pattern does not exist until the weaving finishes — it is hidden in the yarn.",
+            "related": "Related traditions: Pochampally ikat · Patan Patola · Odisha's Bomkai",
+            "cta_label": "Explore Sambalpuri",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-bhagalpur": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Bihar",
+            "title": "Bhagalpuri Tussar",
+            "technique_tag": "Wild-silk weaving",
+            "material_tag": "Tussar silk",
+            "description": "<p>The wild silk of Bihar's forests, woven for generations in Bhagalpur — a city so synonymous with tussar that its silk bears the town's name under a 2013 GI registration.</p>",
+            "body": "<p>Tussar is the silk of the forest: short-fibred, slubbed, gold-toned, with a grainy hand nothing like mulberry's gloss. Bhagalpur — 'Silk City' — has been its great weaving and trading centre for generations, its weavers converting cocoons from Bihar's san-yielding forest belts into the dhotis, saris, stoles and yardage that eastern India dresses in. The Bhagalpuri style runs from plain natural gold cloth to printed and woven designs, often on tussar-silk blends.</p><p>The city's tussar economy is huge and famously informal — tens of thousands of households reel, spin, weave and print. Bhagalpur Silk holds a Geographical Indication (registered 2013, held by the Bhagalpur Tussar Silk Development Samiti).</p><p>Tussar's moment has broadened: the fibre's matte gold and hand-grain suit international fashion's current taste for texture, and Bhagalpuri stoles and fabric now travel well beyond the sari heartland. It remains, at heart, a forest-product textile — silk whose supply chain starts under trees, not on mulberry trays.</p>",
+            "characteristic": "Wild silk with a grainy gold hand — forest-grown, city-woven.",
+            "related": "Related traditions: Eri and Muga · Kosa of Chhattisgarh · tussar of Jharkhand",
+            "cta_label": "Discover Bhagalpuri Tussar",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-kantha": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Bengal",
+            "title": "Nakshi Kantha",
+            "technique_tag": "Embroidery",
+            "material_tag": "Old cloth, reborn",
+            "description": "<p>Bengal's domestic embroidery: worn saris layered and covered in running stitch — flowers, rivers, villages, stories — turning old cloth into quilts, wraps and narrative textiles.</p>",
+            "body": "<p>Kantha begins where other textiles end. Old saris and dhotis — soft with years of washing — are layered and joined by thousands of running stitches worked across the whole surface, quilting the layers into one cloth. In the best nakshi kantha — 'figured' kantha — the stitching draws pictures: lotus centres, borders of rivers and vines, scenes of village life, birds, fish, temple processions. The quilt becomes a document of the maker's world.</p><p>It was, historically, women's household work — made for family use, for a daughter's trousseau, stitched in spare seasons — and its revival as a commercial craft in the twentieth century is one of Bengal's great craft stories: today kantha is stitched both in homes and in organised workshops, on new cloth as well as old.</p><p>The single rule that survives every version: the stitch travels. Whether quilting lines or picture panels, the running stitch is the whole technique — the most humble stitch in the needlework book, taken the furthest.</p>",
+            "characteristic": "The only great textile on this page that begins as another textile.",
+            "related": "Related traditions: Sujani of Bihar · Bengal's embroideries · Baluchari",
+            "cta_label": "Discover Nakshi Kantha",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        }
+      },
+      "block_order": [
+        "landscape",
+        "img-village",
+        "map-heading",
+        "map-baluchari",
+        "map-jamdani",
+        "map-sambalpuri",
+        "map-bhagalpur",
+        "map-kantha",
+        "traditions-heading",
+        "t-baluchari",
+        "t-jamdani",
+        "t-sambalpuri",
+        "t-bhagalpur",
+        "t-kantha"
+      ]
+    },
+    "archive-2": {
+      "type": "culture-archive",
+      "settings": { "background_color": "#F7F3EE", "padding_top": 0, "padding_bottom": 0 },
+      "blocks": {
+        "techniques-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Technique",
+            "heading": "Five Traditions, Five Ways of Making",
+            "body": "<p>Three weavings, one ikat, one embroidery — and a reminder that the East's weavers hold two of the world's most honoured textile techniques: jamdani and kantha.</p>"
+          }
+        },
+        "tech-baluchari": {
+          "type": "technique",
+          "settings": {
+            "title": "Baluchari",
+            "action": "Weaves figured panels in supplementary weft, following drawn designs carried on jacquard cards",
+            "material": "Mulberry silk",
+            "tool": "Handloom with jacquard head",
+            "pattern": "Narrative scenes placed panel by panel across the pallu",
+            "distinctive": "The sari as sequential art"
+          }
+        },
+        "tech-jamdani": {
+          "type": "technique",
+          "settings": {
+            "title": "Jamdani",
+            "action": "Lifts warp threads with a kandi stick and inserts each motif as a separate discontinuous weft",
+            "material": "Fine cotton",
+            "tool": "Handloom, kandi, two weavers in rhythm",
+            "pattern": "Motifs floated into transparent ground, identical on both faces",
+            "distinctive": "No mechanism between the design and the hands"
+          }
+        },
+        "tech-sambalpuri": {
+          "type": "technique",
+          "settings": {
+            "title": "Sambalpuri Bandha",
+            "action": "Ties and stage-dyes warp and weft, then aligns the patterned yarn on the loom",
+            "material": "Cotton / silk yarn",
+            "tool": "Tying frame, dye vats, loom",
+            "pattern": "The design lives in the thread and resolves row by row",
+            "distinctive": "The pattern is invisible until it is finished"
+          }
+        },
+        "tech-bhagalpur": {
+          "type": "technique",
+          "settings": {
+            "title": "Bhagalpuri Tussar",
+            "action": "Reels and weaves short-fibred wild silk, often printing or weaving the finished cloth",
+            "material": "Tussar silk",
+            "tool": "Reeling frame, handloom, print blocks",
+            "pattern": "Plain gold grounds with printed or woven motifs",
+            "distinctive": "A whole city organised around one wild fibre"
+          }
+        },
+        "tech-kantha": {
+          "type": "technique",
+          "settings": {
+            "title": "Nakshi Kantha",
+            "action": "Layers worn cloth and quilts it entirely in running stitch, drawing figures with the stitch line",
+            "material": "Old saris and dhotis",
+            "tool": "Needle and thread",
+            "pattern": "Embroidered narrative across the whole quilted surface",
+            "distinctive": "Recycling as an art form"
+          }
+        },
+        "img-bandha": {
+          "type": "image",
+          "settings": {
+            "caption": "Bandha — the pattern tied into the yarn before weaving",
+            "width": "normal"
+          }
+        },
+        "materials-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Materials",
+            "heading": "Materials of East India",
+            "body": "<p>Mulberry and tussar silk, fine cotton, and cloth with a past.</p>"
+          }
+        },
+        "mat-mulberry": {
+          "type": "item",
+          "settings": {
+            "title": "Mulberry silk",
+            "text": "<p>Bengal's sericulture feeds the Baluchari belt — smooth, even, dyed in the deep tones narrative panels need.</p>"
+          }
+        },
+        "mat-tussar": {
+          "type": "item",
+          "settings": {
+            "title": "Tussar silk",
+            "text": "<p>Wild, short-fibred, gold — with a grainy hand and honest slubs. Forest-sourced in Bihar and Jharkhand, woven in Bhagalpur.</p>"
+          }
+        },
+        "mat-cotton": {
+          "type": "item",
+          "settings": {
+            "title": "Fine cotton",
+            "text": "<p>Jamdani's transparent ground — handspun in the muslin era, fine mill-spun today — is the lightest cloth on this page.</p>"
+          }
+        },
+        "mat-oldcloth": {
+          "type": "item",
+          "settings": {
+            "title": "Old cloth",
+            "text": "<p>Kantha's raw material: saris softened by years of washing, valued precisely because they are already loved.</p>"
+          }
+        },
+        "mat-dyes": {
+          "type": "item",
+          "settings": {
+            "title": "Dye vats",
+            "text": "<p>Sambalpuri's stage-dyeing builds patterns colour by colour through successive tying and dipping — the vat is half the loom.</p>"
+          }
+        },
+        "motifs-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Motifs",
+            "heading": "Motifs & Visual Language",
+            "body": "<p>The East's motifs carry stories — epics on silk, villages in stitch, geometry in dyed thread. Named vocabularies, documented use, honest about folklore.</p>"
+          }
+        },
+        "mot-baluchari": {
+          "type": "item",
+          "settings": {
+            "title": "Baluchari",
+            "text": "<p>Framed epic scenes — deities in procession, courtiers, horses, boats — and documented colonial-era intrusions: officers, trains, bicycles.</p>"
+          }
+        },
+        "mot-jamdani": {
+          "type": "item",
+          "settings": {
+            "title": "Jamdani",
+            "text": "<p>Classic butis — panna hajar (thousand emeralds), kalka paisley, charkona squares — floating in white-on-white or colour.</p>"
+          }
+        },
+        "mot-sambalpuri": {
+          "type": "item",
+          "settings": {
+            "title": "Sambalpuri",
+            "text": "<p>Shankha conch, chakra wheel, machha fish, lotus and phula — Odisha's marine and temple world in geometric repeat.</p>"
+          }
+        },
+        "mot-kantha": {
+          "type": "item",
+          "settings": {
+            "title": "Nakshi Kantha",
+            "text": "<p>Lotus centres, rivers and vines as borders, village scenes, birds and fish — a stitched map of the maker's world.</p>"
+          }
+        },
+        "colour-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Colour",
+            "heading": "The Colour Language",
+            "body": "<p>Bengal's deep ceremonial tones, tussar's natural gold, Sambalpuri's saturated dyes and kantha's softened pastels — the East keeps many registers.</p>"
+          }
+        },
+        "pal-baluchari": {
+          "type": "item",
+          "settings": {
+            "title": "Baluchari",
+            "swatch": "#6B2230",
+            "text": "<p>Deep reds, maroons, purples and navies with contrast figure panels.</p>"
+          }
+        },
+        "pal-jamdani": {
+          "type": "item",
+          "settings": {
+            "title": "Jamdani",
+            "swatch": "#F3ECE1",
+            "text": "<p>White-on-white and ivory grounds with fine coloured motifs; pastel silks for modern pieces.</p>"
+          }
+        },
+        "pal-sambalpuri": {
+          "type": "item",
+          "settings": {
+            "title": "Sambalpuri",
+            "swatch": "#B02318",
+            "text": "<p>Saturated red, black, white, indigo and parrot green in bold geometry.</p>"
+          }
+        },
+        "pal-bhagalpur": {
+          "type": "item",
+          "settings": {
+            "title": "Bhagalpuri Tussar",
+            "swatch": "#C9A45C",
+            "text": "<p>Natural gold as the base note, with printed colour layered over.</p>"
+          }
+        },
+        "pal-kantha": {
+          "type": "item",
+          "settings": {
+            "title": "Nakshi Kantha",
+            "swatch": "#A34A5E",
+            "text": "<p>Softened, sun-faded grounds with red, indigo and yellow stitch — old cloth's palette.</p>"
+          }
+        },
+        "artisan": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Artisan",
+            "heading": "The Hands Behind the Textile",
+            "body": "<p>Eastern India's textile workforce is vast, skilled and — too often — underpaid. Jamdani's two-weaver looms support families whose craft is UNESCO-honoured and whose wages have historically lagged far behind that honour; kantha's commercial revival lifted thousands of rural women into paid work while raising real questions about who captures the value; Bhagalpur's tussar economy runs on household units whose margins are thin. The story is not pity — it is precision: these are among the most technically accomplished textile workers alive, holding techniques the world has declared heritage. The craft-defence tools exist — GI registrations for Baluchari, Sambalpuri and Bhagalpur, cooperative structures, the sari revival's direct-to-weaver platforms — and the task is to connect that skill to that market at prices that let the skill survive its own success.</p>"
+          }
+        },
+        "contemporary-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Then & Now",
+            "heading": "From Tradition to Contemporary",
+            "body": "<p>Old cloth learning new lives — without forgetting the old ones.</p>"
+          }
+        },
+        "cont-baluchari": {
+          "type": "compare",
+          "settings": {
+            "left_label": "Traditional use",
+            "right_label": "Contemporary life",
+            "label": "Baluchari",
+            "left_text": "Ceremonial sari of Bengal's elite households",
+            "right_text": "Collector saris, panels framed as art, contemporary figure weaves"
+          }
+        },
+        "cont-jamdani": {
+          "type": "compare",
+          "settings": {
+            "label": "Jamdani",
+            "left_text": "The finest muslin-era luxury cloth of Bengal",
+            "right_text": "Heritage saris, silk jamdani couture, global muslin revivals"
+          }
+        },
+        "cont-sambalpuri": {
+          "type": "compare",
+          "settings": {
+            "label": "Sambalpuri",
+            "left_text": "Daily and festival sari of western Odisha",
+            "right_text": "Odia identity fashion — handloom shirts, dupattas, menswear"
+          }
+        },
+        "cont-bhagalpur": {
+          "type": "compare",
+          "settings": {
+            "label": "Bhagalpuri Tussar",
+            "left_text": "Saris, dhotis and stoles of the east's daily silk economy",
+            "right_text": "Textile-fashion's favourite wild silk — jackets, drapes, interiors"
+          }
+        },
+        "cont-kantha": {
+          "type": "compare",
+          "settings": {
+            "label": "Nakshi Kantha",
+            "left_text": "Household quilts and trousseau pieces made from worn cloth",
+            "right_text": "Designer scarves, jackets, wall art — stitch running over new cloth too"
+          }
+        },
+        "authenticity": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Authenticity",
+            "heading": "How to Read an Eastern Textile",
+            "body": "<p>Jamdani: motifs must be identical on both faces and float between threads — machine imitations show clipped floats on the reverse. Baluchari: the figure panels should be legible and the reverse honest — supplementary wefts travel, but cleanly. Sambalpuri: the motif edges feather slightly from the dye, and the pattern shows on both faces of the yarn itself; print is flat. Kantha: the running stitch should quilt through all layers — hold it up to light. Tussar: natural slubs and grain are the fibre's signature; suspicious evenness means mill silk. Baluchari, Sambalpuri Bandha and Bhagalpur Silk are GI-registered; jamdani's Bengal weave holds its own GI and the tradition holds UNESCO listing. GI certifies origin; handloom and silk marks certify loom and fibre. Ask which one you are paying for — and expect a straight answer.</p>"
+          }
+        },
+        "future": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Future",
+            "heading": "The Future of Eastern Textiles",
+            "body": "<p>No region in India has had its textile story told as dramatically as Bengal's — the fall of muslin is the industry's founding tragedy — and few regions have rebounded as visibly. The sari revival of the last fifteen years was substantially an eastern revival: jamdani waiting lists, Baluchari panels on Instagram, kantha on global runways, Sambalpuri as Odia pride wear. The dangers are the classic ones — powerloom jamdani imitations, kantha's workshop wages, tussar's informal economy — but the East holds unique assets: two UNESCO-and-GI-honoured techniques, deep cooperative and NGO infrastructure, and a diaspora that buys its own heritage. The next chapter is being written by weavers' collectives selling directly, by designers collaborating rather than extracting, and by customers who have learned what 'handwoven' costs. That education is the whole game.</p>"
+          }
+        },
+        "closing": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Keep Exploring",
+            "heading": "The Region That Reads Its Cloth",
+            "body": "<p>Epics on a pallu. Villages in a stitch. Patterns hidden in yarn until the loom reveals them. The East's textiles assume the cloth can carry a story — and prove it, five ways. Continue the journey across India's textile map.</p>"
+          }
+        },
+        "region-north": {
+          "type": "link",
+          "settings": { "title": "North India", "description": "Pashmina, Phulkari, Chikankari, Banarasi", "url": "/pages/north-india" }
+        },
+        "region-north-east": {
+          "type": "link",
+          "settings": { "title": "North East India", "description": "Muga, Eri, Naga shawls, Puan", "url": "/pages/north-east-india" }
+        },
+        "region-west": {
+          "type": "link",
+          "settings": { "title": "West & Central India", "description": "Patola, Bandhani, Chanderi, Ajrakh", "url": "/pages/west-central-india" }
+        },
+        "region-south": {
+          "type": "link",
+          "settings": { "title": "South India", "description": "Kanjivaram, Pochampally, Kasavu", "url": "/pages/south-india" }
+        }
+      },
+      "block_order": [
+        "techniques-heading",
+        "tech-baluchari",
+        "tech-jamdani",
+        "tech-sambalpuri",
+        "tech-bhagalpur",
+        "tech-kantha",
+        "img-bandha",
+        "materials-heading",
+        "mat-mulberry",
+        "mat-tussar",
+        "mat-cotton",
+        "mat-oldcloth",
+        "mat-dyes",
+        "motifs-heading",
+        "mot-baluchari",
+        "mot-jamdani",
+        "mot-sambalpuri",
+        "mot-kantha",
+        "colour-heading",
+        "pal-baluchari",
+        "pal-jamdani",
+        "pal-sambalpuri",
+        "pal-bhagalpur",
+        "pal-kantha",
+        "artisan",
+        "contemporary-heading",
+        "cont-baluchari",
+        "cont-jamdani",
+        "cont-sambalpuri",
+        "cont-bhagalpur",
+        "cont-kantha",
+        "authenticity",
+        "future",
+        "closing",
+        "region-north",
+        "region-north-east",
+        "region-west",
+        "region-south"
+      ]
+    }
+  },
+  "order": ["hero", "archive-1", "archive-2"]
+}
