@@ -108,6 +108,20 @@ titled *Culture* in Shopify admin, assign the **culture** template, then add it
 to your main menu. (An earlier editorial "cultural regions" section exists in
 git history if ever needed again.)
 
+### Region pages (`/pages/north-india`, …)
+
+`templates/page.north-india.json` + `sections/culture-hero.liquid` +
+`sections/culture-archive.liquid` — deep editorial region chapters. The hero
+section carries breadcrumb/eyebrow/H1/supporting line/intro; the archive
+section builds the entire body from blocks: heading+text (H2 sections),
+map cards (auto-group into a grid), tradition chapters (image, tags, body,
+characteristic, CTA), technique rows, comparison rows (auto-group into one
+table under the first row's column titles), study items (optional colour
+swatch) and links. North India ships with all content preloaded across two
+archive instances (Shopify caps blocks at 50 per section). Content source of
+truth: `culture-content/north-india-page-content.md`. Repeat the pattern for
+future regions (north-east-india, east-india, west-central-india, south-india).
+
 
 ### Shopify norms this theme follows
 - JSON templates list **content sections only**; header/footer render via `{% sections 'header-group' %}` / `{% sections 'footer-group' %}`.

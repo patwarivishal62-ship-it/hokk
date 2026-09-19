@@ -1,0 +1,357 @@
+{%- comment -%}
+  House of Kala Katha — Region archive
+  The body of a regional culture page, built entirely from blocks:
+
+  • Text block      — section heading + essay copy (H2 per block)
+  • Map card        — a place on the textile map (cards group into a grid)
+  • Tradition       — a full editorial chapter with image, tags, body, CTA
+  • Technique row   — how a tradition is physically made
+  • Comparison row  — two-column comparison (rows group under one header)
+  • Study item      — material / motif / palette entry (optional colour swatch)
+  • Link            — related tradition or region link
+
+  Merchants reorder by dragging, hide with the eye icon, add new blocks
+  freely — no code. Consecutive map cards group into a grid; consecutive
+  comparison rows group into one table automatically.
+{%- endcomment -%}
+
+<div class="cr-archive"
+  style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;{% if section.settings.background_color != blank %}background: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
+
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign idx = forloop.index0
+      assign prev_idx = idx | minus: 1
+      assign next_idx = idx | plus: 1
+      assign prev_type = ''
+      assign next_type = ''
+      if prev_idx >= 0
+        assign prev_block = section.blocks[prev_idx]
+        assign prev_type = prev_block.type
+      endif
+      if next_idx < section.blocks.size
+        assign next_block = section.blocks[next_idx]
+        assign next_type = next_block.type
+      endif
+    -%}
+
+    {%- case block.type -%}
+
+      {%- when 'text' -%}
+        <section class="cr-block cr-text" id="{{ block.settings.heading | handle }}" {{ block.shopify_attributes }}>
+          <div class="container" data-reveal>
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h2 class="cr-text__heading">{{ block.settings.heading | escape }}</h2>
+            {%- endif -%}
+            {%- if block.settings.body != blank -%}
+              <div class="rte cr-text__body">{{ block.settings.body }}</div>
+            {%- endif -%}
+          </div>
+        </section>
+
+      {%- when 'map-card' -%}
+        {%- if prev_type != 'map-card' -%}<div class="cr-map">{%- endif -%}
+        <div class="cr-map__card" data-reveal {{ block.shopify_attributes }}>
+          <p class="cr-map__location">{{ block.settings.location | escape }}</p>
+          <h3 class="cr-map__craft">
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">{{ block.settings.craft | escape }}</a>
+            {%- else -%}
+              {{ block.settings.craft | escape }}
+            {%- endif -%}
+          </h3>
+          <dl class="cr-map__facts">
+            <div><dt>Technique</dt><dd>{{ block.settings.technique | escape }}</dd></div>
+            <div><dt>Material</dt><dd>{{ block.settings.material | escape }}</dd></div>
+            <div><dt>Look</dt><dd>{{ block.settings.signature | escape }}</dd></div>
+          </dl>
+        </div>
+        {%- if next_type != 'map-card' -%}</div>{%- endif -%}
+
+      {%- when 'tradition' -%}
+        {%- liquid
+          assign t_img = block.settings.image
+          assign t_img_mobile = block.settings.image_mobile
+          assign t_alt = t_img.alt | default: block.settings.title | escape
+          assign t_url = block.settings.cta_link | default: pages['culture'].url | default: routes.root_url
+        -%}
+        <article class="cr-tradition cr-tradition--pos-{{ block.settings.image_position }}" id="{{ block.settings.title | handle }}" style="--chapter-pad: {{ block.settings.padding_y }}px;{% if block.settings.background_color != blank %}--chapter-bg: {{ block.settings.background_color }};{% endif %}" {{ block.shopify_attributes }}>
+          <div class="container cr-tradition__inner">
+            <div class="cr-tradition__media" data-reveal>
+              {%- if t_img != blank -%}
+                {%- if t_img_mobile != blank -%}
+                  {{ t_img_mobile | image_url: width: 1200 | image_tag:
+                    loading: 'lazy',
+                    widths: '375, 480, 640, 828, 1080',
+                    sizes: '100vw',
+                    class: 'cr-tradition__img cr-tradition__img--mobile',
+                    alt: t_alt
+                  }}
+                {%- endif -%}
+                {{ t_img | image_url: width: 1800 | image_tag:
+                  loading: 'lazy',
+                  widths: '600, 750, 900, 1080, 1296, 1512, 1800',
+                  sizes: '(min-width: 990px) 46vw, 100vw',
+                  class: 'cr-tradition__img',
+                  alt: t_alt
+                }}
+              {%- else -%}
+                <div class="cr-tradition__placeholder" role="img" aria-label="{{ block.settings.title | escape }}"></div>
+              {%- endif -%}
+            </div>
+            <div class="cr-tradition__content" data-reveal>
+              {%- if block.settings.eyebrow != blank -%}
+                <p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>
+              {%- endif -%}
+              <h2 class="cr-tradition__title">{{ block.settings.title | escape }}</h2>
+              {%- if block.settings.technique_tag != blank or block.settings.material_tag != blank -%}
+                <p class="cr-tradition__tags">
+                  {%- if block.settings.technique_tag != blank -%}<span class="cr-tradition__tag">{{ block.settings.technique_tag | escape }}</span>{%- endif -%}
+                  {%- if block.settings.material_tag != blank -%}<span class="cr-tradition__tag">{{ block.settings.material_tag | escape }}</span>{%- endif -%}
+                </p>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <div class="rte cr-tradition__lede">{{ block.settings.description }}</div>
+              {%- endif -%}
+              {%- if block.settings.body != blank -%}
+                <div class="rte cr-tradition__body">{{ block.settings.body }}</div>
+              {%- endif -%}
+              {%- if block.settings.characteristic != blank -%}
+                <p class="cr-tradition__characteristic">{{ block.settings.characteristic | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.related != blank -%}
+                <p class="cr-tradition__related">{{ block.settings.related | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.cta_label != blank -%}
+                <a class="culture-cta" href="{{ t_url }}">
+                  <span class="culture-cta__label">{{ block.settings.cta_label | escape }}</span>
+                  <span class="culture-cta__arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+
+      {%- when 'technique' -%}
+        <div class="cr-block cr-technique" {{ block.shopify_attributes }}>
+          <div class="container" data-reveal>
+            <h3 class="cr-technique__title">{{ block.settings.title | escape }}</h3>
+            <dl class="cr-technique__facts">
+              {%- if block.settings.action != blank -%}<div><dt>The hands</dt><dd>{{ block.settings.action | escape }}</dd></div>{%- endif -%}
+              {%- if block.settings.material != blank -%}<div><dt>Material</dt><dd>{{ block.settings.material | escape }}</dd></div>{%- endif -%}
+              {%- if block.settings.tool != blank -%}<div><dt>Tool</dt><dd>{{ block.settings.tool | escape }}</dd></div>{%- endif -%}
+              {%- if block.settings.pattern != blank -%}<div><dt>Making the pattern</dt><dd>{{ block.settings.pattern | escape }}</dd></div>{%- endif -%}
+              {%- if block.settings.distinctive != blank -%}<div><dt>What makes it distinct</dt><dd>{{ block.settings.distinctive | escape }}</dd></div>{%- endif -%}
+            </dl>
+          </div>
+        </div>
+
+      {%- when 'compare' -%}
+        {%- if prev_type != 'compare' -%}
+          <div class="cr-block cr-compare-wrap">
+            <div class="container">
+              {%- if block.settings.left_label != blank or block.settings.right_label != blank -%}
+                <div class="cr-compare cr-compare__head" data-reveal>
+                  <span class="cr-compare__label">{{ block.settings.left_label | escape }}</span>
+                  <span class="cr-compare__label">{{ block.settings.right_label | escape }}</span>
+                </div>
+              {%- endif -%}
+        {%- endif -%}
+              <div class="cr-compare" data-reveal {{ block.shopify_attributes }}>
+                <span class="cr-compare__row-label">{{ block.settings.label | escape }}</span>
+                <span class="cr-compare__cell">{{ block.settings.left_text | escape }}</span>
+                <span class="cr-compare__cell">{{ block.settings.right_text | escape }}</span>
+              </div>
+        {%- if next_type != 'compare' -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+      {%- when 'item' -%}
+        <div class="cr-block cr-item" {{ block.shopify_attributes }}>
+          <div class="container" data-reveal>
+            <div class="cr-item__row">
+              {%- if block.settings.swatch != blank and block.settings.swatch != 'rgba(0,0,0,0)' -%}
+                <span class="cr-item__swatch" style="background: {{ block.settings.swatch }};" aria-hidden="true"></span>
+              {%- endif -%}
+              <div class="cr-item__content">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="cr-item__title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="rte cr-item__text">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {%- when 'link' -%}
+        <div class="cr-block cr-link" {{ block.shopify_attributes }}>
+          <div class="container" data-reveal>
+            {%- if block.settings.url != blank -%}
+              <a class="cr-link__row" href="{{ block.settings.url }}">
+                <span class="cr-link__label">{{ block.settings.title | escape }}</span>
+                {%- if block.settings.description != blank -%}<span class="cr-link__desc">{{ block.settings.description | escape }}</span>{%- endif -%}
+                <span class="cr-link__arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            {%- else -%}
+              <div class="cr-link__row cr-link__row--plain">
+                <span class="cr-link__label">{{ block.settings.title | escape }}</span>
+                {%- if block.settings.description != blank -%}<span class="cr-link__desc">{{ block.settings.description | escape }}</span>{%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+    {%- endcase -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Region archive",
+  "class": "section-cr-archive",
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "The body of a regional culture page. Blocks render in order — text blocks create section headings, map cards group into a grid, comparison rows group into one table. A page can use several Region archive sections in sequence (Shopify allows up to 50 blocks per section)."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use the default."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Heading + text",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "heading", "label": "Heading (H2)" },
+        { "type": "richtext", "id": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "map-card",
+      "name": "Map card",
+      "settings": [
+        { "type": "text", "id": "location", "label": "Location", "default": "Kashmir" },
+        { "type": "text", "id": "craft", "label": "Textile / craft", "default": "Pashmina & Kani Shawls" },
+        { "type": "text", "id": "technique", "label": "Primary technique" },
+        { "type": "text", "id": "material", "label": "Major material" },
+        { "type": "text", "id": "signature", "label": "One-line visual characteristic" },
+        { "type": "url", "id": "link", "label": "Link (optional)", "info": "Makes the craft name clickable." }
+      ]
+    },
+    {
+      "type": "tradition",
+      "name": "Tradition chapter",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "High-resolution craft photograph (text is NOT designed into this one — it may crop gently to 4:5)." },
+        { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile)" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "info": "e.g. “Kashmir”" },
+        { "type": "text", "id": "title", "label": "Title (H2)", "default": "Tradition" },
+        { "type": "text", "id": "technique_tag", "label": "Technique tag", "info": "e.g. “Weaving”, “Hand embroidery”" },
+        { "type": "text", "id": "material_tag", "label": "Material tag", "info": "e.g. “Goat undercoat”, “Silk floss”" },
+        { "type": "richtext", "id": "description", "label": "Short description", "info": "The 2–3 line summary shown under the title." },
+        { "type": "richtext", "id": "body", "label": "Body", "info": "The full editorial copy for this tradition." },
+        { "type": "text", "id": "characteristic", "label": "One distinctive characteristic" },
+        { "type": "text", "id": "related", "label": "Related traditions line" },
+        { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Explore" },
+        { "type": "url", "id": "cta_link", "label": "CTA link", "info": "Until set, the button points to the Culture page." },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image position (desktop)",
+          "options": [
+            { "value": "left", "label": "Image left" },
+            { "value": "right", "label": "Image right" }
+          ],
+          "default": "left"
+        },
+        { "type": "color", "id": "background_color", "label": "Background color", "info": "Leave blank to inherit the page background." },
+        { "type": "range", "id": "padding_y", "label": "Vertical spacing", "min": 48, "max": 240, "step": 8, "unit": "px", "default": 104 }
+      ]
+    },
+    {
+      "type": "technique",
+      "name": "Technique row",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Tradition" },
+        { "type": "text", "id": "action", "label": "What the artisan physically does" },
+        { "type": "text", "id": "material", "label": "Primary material" },
+        { "type": "text", "id": "tool", "label": "Primary tool" },
+        { "type": "text", "id": "pattern", "label": "How the pattern is created" },
+        { "type": "text", "id": "distinctive", "label": "What makes it distinct" }
+      ]
+    },
+    {
+      "type": "compare",
+      "name": "Comparison row",
+      "settings": [
+        { "type": "paragraph", "content": "Consecutive comparison rows group into one table. Set the two column titles on the FIRST row of each group." },
+        { "type": "text", "id": "left_label", "label": "Left column title (first row only)" },
+        { "type": "text", "id": "right_label", "label": "Right column title (first row only)" },
+        { "type": "text", "id": "label", "label": "Row label" },
+        { "type": "text", "id": "left_text", "label": "Left text" },
+        { "type": "text", "id": "right_text", "label": "Right text" }
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Study item",
+      "settings": [
+        { "type": "paragraph", "content": "A materials, motifs or colour-palette entry." },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "text", "label": "Text" },
+        { "type": "color", "id": "swatch", "label": "Colour swatch (optional)", "info": "Leave unset for no swatch." }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Label" },
+        { "type": "text", "id": "description", "label": "Small description" },
+        { "type": "url", "id": "url", "label": "URL", "info": "Leave blank to show as plain text (not clickable)." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Region archive" }
+  ]
+}
+{% endschema %}

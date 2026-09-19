@@ -1,0 +1,640 @@
+{
+  "sections": {
+    "hero": {
+      "type": "culture-hero",
+      "settings": {
+        "show_breadcrumb": true,
+        "eyebrow": "The Culture of India · Region 01",
+        "heading": "North India's Textile & Handcraft Cultures",
+        "supporting": "Wool from high pastures, silk on a holy river, needlework in courtyards and cities.",
+        "intro": "<p>North India is stitched together from very different textile worlds. In the high Himalaya, herders comb fine goat undercoat from animals built for altitude; in the valleys below, that fibre becomes shawl cloth of patient, coded weaving. On the plains of Punjab, embroidery turned rough cotton into gardens of silk floss. In Lucknow, needlework learned the manners of a court. And on the ghats of Varanasi, silk looms have dressed weddings for generations. What follows is a journey through five of these traditions — not five versions of the same craft, but five different answers to the same questions: what does this place have, what does it need, and what can a pair of hands make from it?</p>",
+        "background_color": "#F7F3EE",
+        "padding_top": 96,
+        "padding_bottom": 40
+      }
+    },
+    "archive-1": {
+      "type": "culture-archive",
+      "settings": {
+        "background_color": "#FFFFFF",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {
+        "landscape": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Landscape",
+            "heading": "The Textile Landscape of North India",
+            "body": "<p>The Himalaya gives the North its wool. Goats and sheep adapted to altitude grow undercoats soft enough to spin and warm enough to matter; pastoral communities move with their herds between seasonal pastures, combing the fine undercoat each spring. Without that vertical landscape there is no pashmina — and without cold winters to justify it, no shawl culture.</p><p>The plains answer differently. Punjab is agricultural country, and its historic textile was domestic: handspun cotton khaddar, embroidered at home by women with silk floss. Lucknow, under Nawabi patronage, refined embroidery into something courtly and quiet. Varanasi organised an entire city around silk and zari — dyers, thread makers, pattern masters and weaving families working in one ecosystem.</p><p>Movement connects it all. Wool moves from Ladakh down to Kashmir; silk historically reached Varanasi along trade networks; dyes, motifs and ideas travelled the same routes. Patronage — courts, temples, wedding households — decided which crafts flourished, and at what level of ambition.</p><p>The results differ on every axis that matters: fibre, weight, texture, colour, construction and intended use. Woven pattern in the mountains and on the river; embroidered pattern on the plains. Five traditions, five answers to the same questions.</p>"
+          }
+        },
+        "map-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Map",
+            "heading": "Where to Find What",
+            "body": "<p>Five places, five crafts, five ways of making. Return to this map to orient yourself between chapters.</p>"
+          }
+        },
+        "map-kashmir": {
+          "type": "map-card",
+          "settings": {
+            "location": "Kashmir",
+            "craft": "Pashmina & Kani Shawls",
+            "technique": "Hand-spinning and handloom weaving; Kani patterning by wound bobbin-sticks",
+            "material": "Pashmina goat undercoat",
+            "signature": "Soft twill ground with woven paisley and florals"
+          }
+        },
+        "map-himachal": {
+          "type": "map-card",
+          "settings": {
+            "location": "Himachal Pradesh",
+            "craft": "Kullu & Kinnauri Shawls",
+            "technique": "Pit-loom handloom weaving with patterned borders",
+            "material": "Sheep wool",
+            "signature": "Bold geometric borders in high-contrast colour"
+          }
+        },
+        "map-punjab": {
+          "type": "map-card",
+          "settings": {
+            "location": "Punjab",
+            "craft": "Phulkari",
+            "technique": "Darning-stitch embroidery worked from the reverse",
+            "material": "Silk floss on khaddar cotton",
+            "signature": "Dense floral fields — the front blooms from the back"
+          }
+        },
+        "map-lucknow": {
+          "type": "map-card",
+          "settings": {
+            "location": "Lucknow, Uttar Pradesh",
+            "craft": "Chikankari",
+            "technique": "Shadow, knot and lattice hand embroidery",
+            "material": "Thread on fine cotton",
+            "signature": "Tonal stitchery — pattern as texture, not colour"
+          }
+        },
+        "map-varanasi": {
+          "type": "map-card",
+          "settings": {
+            "location": "Varanasi, Uttar Pradesh",
+            "craft": "Banarasi Brocade",
+            "technique": "Handloom brocade with supplementary zari wefts",
+            "material": "Katan silk and zari",
+            "signature": "Gold buti, jaal and borders woven into the cloth itself"
+          }
+        },
+        "traditions-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Five Traditions",
+            "heading": "The Five Textile Traditions",
+            "body": "<p>Five chapters, each with its own place, people, process and present. Together they map the North's textile imagination — from fibre combed on a high plateau to gold laid on a river city's looms.</p>"
+          }
+        },
+        "t-pashmina": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Kashmir",
+            "title": "Pashmina & Kani Shawls",
+            "technique_tag": "Weaving",
+            "material_tag": "Goat undercoat",
+            "description": "<p>Pashmina is a fibre — the spring undercoat of the Changthangi goat, combed by Changpa herders on the Ladakh plateau. Kani is a weaving technique — pattern built into the cloth on the loom, stick by coloured stick, in the Kashmir Valley.</p>",
+            "body": "<p>The word comes from pashm — the soft undercoat combed each spring from the Changthangi goat. Under the Kashmir Pashmina GI specification (registered December 2005), the name is reserved for cloth that is 100% pashm of around 16 microns fineness, hand-spun and hand-woven by registered artisans in Jammu & Kashmir.</p><p>Kani is what happens to that fibre in the Valley. Around Kanihama, weavers build pattern into the cloth itself, tapestry-style: each colour is carried on its own kani — a small eyeless wooden stick wound with weft yarn — and laid in only where the design requires it, row by row, following a written code called a taleem. The motif is not added to the fabric; it is the fabric. The Kani shawl carries its own GI (No. 51, registered February 2006).</p><p>The classic vocabulary is the buta — the paisley cone — framed by florals and borders, woven in dyed pashmina wefts over deep grounds. Documented accounts put a single stole at around three months on the loom; larger shawls take longer.</p><p>Today the strongest guarantee of authenticity is the J&K Handicrafts Department's lab-tested, QR-coded GI label — more than 30,000 shawls certified since 2014. Pashmina is worn worldwide as stoles and wraps; the craft itself is unchanged: pattern built at the loom, one coded row at a time.</p>",
+            "characteristic": "The motif exists nowhere except inside the weave — it is the cloth, not on it.",
+            "related": "Related traditions: Kullu & Kinnauri shawls · Sozni embroidery",
+            "cta_label": "Explore Pashmina & Kani",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-kullu": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Himachal Pradesh",
+            "title": "Kullu & Kinnauri Shawls",
+            "technique_tag": "Handloom weaving",
+            "material_tag": "Sheep wool",
+            "description": "<p>Two wool traditions of Himachal Pradesh: Kullu's bold geometric borders on plain grounds, and Kinnaur's denser, finer patterning — related looms, different visual worlds.</p>",
+            "body": "<p>Himachal's cold demands wool, and its sheep supply it. Spinning and weaving have been household and village activities across the hill regions for as long as record and memory agree — shawls woven on pit and treadle looms, patterned through borders and bands rather than all-over figured work.</p><p>Kullu shawls typically keep the body plain — natural wool tones or a single colour — and place their identity in bold geometric borders: diamonds, zigzags and hooks in high-contrast colour. The patterned pattu remains part of traditional women's dress in the valley. A widely told local account credits a Kinnauri weaver with bringing finer patterning to Kullu's looms, where it was simplified and brightened; the story is oral tradition, but the visual debt to Kinnaur is plain to see. Kullu Shawl is GI-registered (mid-2000s).</p><p>Kinnauri shawls, from the high border district, are denser and finer: intricate geometric borders, rich colour banding, motifs specific to Kinnaur's communities. Kinnauri Shawl was registered as a GI in October 2010 (No. 149) through the Kinnaur Handloom Weavers' Association.</p><p>Both traditions now weave stoles, mufflers, caps and yardage alongside the classic shawl, organised significantly through cooperatives — the Bhutti Weavers' Cooperative in Kullu among the oldest.</p>",
+            "characteristic": "A Kullu border is legible from across a room; a Kinnauri one rewards a close look.",
+            "related": "Related traditions: Pashmina & Kani · Himachali pattu and topi weaving",
+            "cta_label": "Discover Kullu & Kinnauri",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-phulkari": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Punjab",
+            "title": "Phulkari",
+            "technique_tag": "Hand embroidery",
+            "material_tag": "Silk floss on khaddar",
+            "description": "<p>Punjab's domestic embroidery: silk floss darned from the reverse of handspun khaddar until the front blooms. Embroidery — not weaving — and made at home, for family.</p>",
+            "body": "<p>Phulkari means flower work — a fair description of its vocabulary and an understatement of its coverage. Nothing here is woven: a finished cloth, handspun cotton khaddar, is embroidered with pat — untwisted, glossy silk floss — darned in long stitches from the reverse side of the fabric.</p><p>The embroiderer counts the fabric's threads rather than drawing a design; the motif is a pattern held in the maker's head and hands. Because the surface floats are long and the silk untwisted, light plays along the stitch direction — a shimmer built into the technique itself.</p><p>Collectors and museums distinguish documented forms: phulkari, with scattered embroidery and visible ground; bagh — garden — so dense the ground nearly disappears; and chope, worked in double-sided darning and traditionally associated with wedding garments. What individual motifs mean is a murkier question: the folklore is rich, but fixed symbolic readings should be treated with care.</p><p>Made historically by women at home across rural Punjab — odhnis, dupattas and wedding textiles — phulkari today runs from bridal couture to prêt, its floral density reworked on modern fabrics. Punjab holds a GI registration for the name (early 2010s).</p>",
+            "characteristic": "Worked from the back, blooming on the front — light catches the untwisted silk.",
+            "related": "Related traditions: Chikankari · Chamba rumal embroidery",
+            "cta_label": "Explore Phulkari",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        },
+        "t-chikankari": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Lucknow, Uttar Pradesh",
+            "title": "Chikankari",
+            "technique_tag": "Hand embroidery",
+            "material_tag": "Thread on fine cotton",
+            "description": "<p>Lucknow's hand embroidery in white and pastel — a stitch vocabulary of shadows, knots and lattices that reads as light rather than colour.</p>",
+            "body": "<p>Chikankari is hand embroidery, and its home is Lucknow. Its documented golden age is the eighteenth and nineteenth centuries, under the Nawabs of Awadh — a court culture of restraint and finish. Older origin stories circulate — a popular one credits Empress Noor Jahan — but these belong to folklore rather than record. Lucknow Chikankari has held a GI since 2008 (No. 102).</p><p>It is a family of named stitches, not one stitch: tepchi, a fine running stitch; bakhiya — shadow work — stitched on the reverse so the design surfaces as a soft shadow through the cloth; murri and phanda, knotted dots like rice grains and millet seeds; jaali, tension work that pulls the fabric into tiny lattices without cutting it.</p><p>Because the thread traditionally matches the cloth, pattern registers as light and texture rather than colour — turn a panel in daylight and the embroidery appears and disappears. The process is organised: designs are block-printed in washable outline (chhapai), embroidered — much of it by women working from home across Lucknow's districts — then washed and starched flat.</p><p>From kurtas and dupattas to anarkalis, gowns and menswear, chikankari is now one of India's most recognised craft vocabularies on runways worldwide.</p>",
+            "characteristic": "Turn it in daylight and the pattern appears and disappears — texture as design.",
+            "related": "Related traditions: Phulkari · Kashmiri kashida",
+            "cta_label": "Discover Chikankari",
+            "image_position": "right",
+            "padding_y": 104
+          }
+        },
+        "t-banarasi": {
+          "type": "tradition",
+          "settings": {
+            "eyebrow": "Varanasi, Uttar Pradesh",
+            "title": "Banarasi Brocade",
+            "technique_tag": "Silk weaving · brocade",
+            "material_tag": "Katan silk & zari",
+            "description": "<p>Varanasi's silk brocade: gold and silver zari motifs woven into the cloth itself on handlooms — the work of an entire city's ecosystem, not a single maker.</p>",
+            "body": "<p>A Banarasi sari is a city's work. Varanasi's weaving quarters — Madanpura, Alaipura and the lanes around them — hold an ecosystem refined over centuries: dyers, zari thread makers, naqshaband pattern masters and weaving families, among them the city's long-established Ansari weaving community. No single person makes a Banarasi from start to finish.</p><p>The cloth is katan silk; the figure is zari — a silk core wound with silver wire, gold-plated in tested grades. The pattern is woven as supplementary weft: extra threads floated over the ground only where the design requires. In kadhwa work each motif is woven as a self-contained unit; in cutwork, floats travel between motifs and are cut and finished by hand.</p><p>Pattern-lifting is mechanical, the weaving is not: the jala — and later the punched-card jacquard head — lifts selected warp threads so the weaver can place each pick, following the naqshaband's design.</p><p>The vocabulary is deep: buti and butidar, jaal trellises, kalga and bel borders, jhallar fringes, shikargah hunting scenes. The sari is planned architecturally — body, borders, pallu — and remains the canonical North Indian wedding garment. Banaras Brocades and Sarees has held a GI since 2009.</p>",
+            "characteristic": "The gold is woven, not stuck — turn the sari over and the craft is still there.",
+            "related": "Related traditions: Kanjivaram · Paithani · Tanchoi",
+            "cta_label": "Explore Banarasi",
+            "image_position": "left",
+            "padding_y": 104
+          }
+        }
+      },
+      "block_order": [
+        "landscape",
+        "map-heading",
+        "map-kashmir",
+        "map-himachal",
+        "map-punjab",
+        "map-lucknow",
+        "map-varanasi",
+        "traditions-heading",
+        "t-pashmina",
+        "t-kullu",
+        "t-phulkari",
+        "t-chikankari",
+        "t-banarasi"
+      ]
+    },
+    "archive-2": {
+      "type": "culture-archive",
+      "settings": {
+        "background_color": "#F7F3EE",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {
+        "techniques-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Technique",
+            "heading": "Five Traditions, Five Ways of Making",
+            "body": "<p>The single most important idea on this page: these crafts differ by how the pattern is made. Weaving builds pattern into cloth while the cloth is being made — warp and weft are the design's medium. Embroidery builds pattern onto cloth after it exists — the needle adds another layer. Same paisley, three techniques, three different worlds of skill.</p>"
+          }
+        },
+        "tech-pashmina": {
+          "type": "technique",
+          "settings": {
+            "title": "Pashmina / Kani",
+            "action": "Interlaces coloured wefts row by row, following a written code (taleem)",
+            "material": "Hand-spun pashmina",
+            "tool": "Kani — small wound wooden bobbin-sticks",
+            "pattern": "Woven as tapestry: each colour laid in only where it appears, becoming the cloth itself",
+            "distinctive": "The motif exists nowhere except inside the weave"
+          }
+        },
+        "tech-kullu": {
+          "type": "technique",
+          "settings": {
+            "title": "Kullu / Kinnauri",
+            "action": "Throws pattern wefts to build geometric borders on the loom",
+            "material": "Sheep wool and blends",
+            "tool": "Pit / treadle handloom",
+            "pattern": "Pattern wefts build borders and bands row by row",
+            "distinctive": "Bold geometry; identity coded in colour"
+          }
+        },
+        "tech-phulkari": {
+          "type": "technique",
+          "settings": {
+            "title": "Phulkari",
+            "action": "Lays dense darning stitches from the reverse of the cloth",
+            "material": "Silk floss (pat) on khaddar cotton",
+            "tool": "Needle",
+            "pattern": "Embroidered as long floats on a finished fabric — the front blooms from the back",
+            "distinctive": "Light plays on the untwisted floss"
+          }
+        },
+        "tech-chikankari": {
+          "type": "technique",
+          "settings": {
+            "title": "Chikankari",
+            "action": "Stitches tonal motifs — shadow work, knots, lattices",
+            "material": "White and pastel thread on fine cotton",
+            "tool": "Needle",
+            "pattern": "Embroidered same-colour-on-cloth, reading as texture and shadow",
+            "distinctive": "Pattern registers as light, not colour"
+          }
+        },
+        "tech-banarasi": {
+          "type": "technique",
+          "settings": {
+            "title": "Banarasi",
+            "action": "Weaves ground cloth while lifting warps to place zari and silk motifs",
+            "material": "Katan silk and zari",
+            "tool": "Handloom with jala / jacquard pattern-lifting",
+            "pattern": "Supplementary wefts float over the ground to build motifs — brocade",
+            "distinctive": "Gold you can find on the reverse of the sari, woven not stuck"
+          }
+        },
+        "materials-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Materials",
+            "heading": "Materials of North India",
+            "body": "<p>What each tradition is physically made of — fibre, thread and metal, and what each feels like in the hand.</p>"
+          }
+        },
+        "mat-pashmina": {
+          "type": "item",
+          "settings": {
+            "title": "Pashmina",
+            "text": "<p>Source: the combed undercoat of the Changthangi goat, Ladakh. Exceptionally light and warm — around 16 microns under the GI spec — and spun and woven in Kashmir into shawl cloth. Cloud-soft, warming immediately to the touch.</p>"
+          }
+        },
+        "mat-wool": {
+          "type": "item",
+          "settings": {
+            "title": "Sheep wool",
+            "text": "<p>Source: Himachali mountain sheep; merino and angora blends now common in Kullu. Durable and elastic — the honest texture of daily Himalayan life, forming the body and pattern of Kullu and Kinnauri shawls.</p>"
+          }
+        },
+        "mat-silk": {
+          "type": "item",
+          "settings": {
+            "title": "Katan silk",
+            "text": "<p>Silk filament twisted and degummed for warp and weft. Strong, lustrous, deep-dyeing — the ground and figure of Banarasi brocade, with the cool, fluid drape that made sari culture possible.</p>"
+          }
+        },
+        "mat-cotton": {
+          "type": "item",
+          "settings": {
+            "title": "Cotton & khaddar",
+            "text": "<p>Punjab's handspun khaddar is sturdy and rough-weave — the canvas for phulkari. Lucknow's fine cottons and mulmul are near-weightless — the medium that lets chikankari read as shadow.</p>"
+          }
+        },
+        "mat-zari": {
+          "type": "item",
+          "settings": {
+            "title": "Zari",
+            "text": "<p>A silk core wound with silver wire, gold-plated in tested grades. Slightly cool and textured under the fingertip — a woven sari's jewellery, laid in as supplementary weft.</p>"
+          }
+        },
+        "mat-pat": {
+          "type": "item",
+          "settings": {
+            "title": "Pat (silk floss)",
+            "text": "<p>Untwisted silk dyed in saturated shades and darned in long floats — phulkari's medium. Maximum sheen; catches light along the stitch like enamel.</p>"
+          }
+        },
+        "motifs-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Motifs",
+            "heading": "Motifs & Visual Language",
+            "body": "<p>The five traditions share a broad motif world and pronounce it in five different accents. A note on meaning: popular writing loves fixed symbolic readings of individual motifs; documentation does not always support them. Motifs here are described by name and documented use — folklore is labelled as folklore.</p>"
+          }
+        },
+        "mot-pashmina": {
+          "type": "item",
+          "settings": {
+            "title": "Pashmina & Kani",
+            "text": "<p>Intricate woven motifs: the buta or paisley cone, florals and vases in dense woven borders. Fineness is the signature.</p>"
+          }
+        },
+        "mot-kullu": {
+          "type": "item",
+          "settings": {
+            "title": "Kullu & Kinnauri",
+            "text": "<p>Geometric regional patterns: diamonds, zigzags, hooks. A Kullu border is legible from across a room; a Kinnauri one rewards a close look.</p>"
+          }
+        },
+        "mot-phulkari": {
+          "type": "item",
+          "settings": {
+            "title": "Phulkari",
+            "text": "<p>Bold embroidered vocabulary: stylised flowers, wheels and sunburst fields — from scattered phulkari to full-coverage bagh.</p>"
+          }
+        },
+        "mot-chikankari": {
+          "type": "item",
+          "settings": {
+            "title": "Chikankari",
+            "text": "<p>Delicate botanical embroidery: vines, buds and petals rendered in stitches that read as light and shadow.</p>"
+          }
+        },
+        "mot-banarasi": {
+          "type": "item",
+          "settings": {
+            "title": "Banarasi",
+            "text": "<p>Woven floral and ornamental pattern: buti, butidar, jaal, kalga-bel, jhallar, shikargah — opulence with architectural order.</p>"
+          }
+        },
+        "colour-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Colour",
+            "heading": "The Colour Language",
+            "body": "<p>There is no single North Indian palette. Colour varies by region, period, material, intended use, dye availability and fashion — today's pastel Banarasi and neon-adjacent phulkari are chapters in that history, not departures from it. These swatches are documented tendencies, not fixed rules.</p>"
+          }
+        },
+        "pal-pashmina": {
+          "type": "item",
+          "settings": {
+            "title": "Pashmina & Kani",
+            "swatch": "#2C3A5C",
+            "text": "<p>Deep grounds — indigo, lac red, ivory, black — patterned in madder, saffron, teal and rose wefts.</p>"
+          }
+        },
+        "pal-kullu": {
+          "type": "item",
+          "settings": {
+            "title": "Kullu",
+            "swatch": "#D0502F",
+            "text": "<p>High-contrast borders: vermillion, marigold, leaf green and cobalt on black, white or natural grounds.</p>"
+          }
+        },
+        "pal-kinnauri": {
+          "type": "item",
+          "settings": {
+            "title": "Kinnauri",
+            "swatch": "#6B2230",
+            "text": "<p>Deep layering: oxblood, rust, gold, forest green and indigo bands on black.</p>"
+          }
+        },
+        "pal-phulkari": {
+          "type": "item",
+          "settings": {
+            "title": "Phulkari",
+            "swatch": "#B3283D",
+            "text": "<p>Earth and saturation: khaddar in rust and madder brown; pat floss in crimson, orange, fuchsia and gold.</p>"
+          }
+        },
+        "pal-chikankari": {
+          "type": "item",
+          "settings": {
+            "title": "Chikankari",
+            "swatch": "#F3ECE1",
+            "text": "<p>Tonal pastels: white on ivory, powder blue, blush, pistachio and pearl grey.</p>"
+          }
+        },
+        "pal-banarasi": {
+          "type": "item",
+          "settings": {
+            "title": "Banarasi",
+            "swatch": "#8E2443",
+            "text": "<p>Ceremonial depth: bridal red and maroon, rani pink, midnight blue and emerald, strung with zari gold.</p>"
+          }
+        },
+        "compare-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Two Shawls Compared",
+            "heading": "Kullu vs Kinnauri",
+            "body": "<p>Related looms, different visual worlds. The clearest way to tell Himachal's two shawl traditions apart.</p>"
+          }
+        },
+        "cmp-geo": {
+          "type": "compare",
+          "settings": {
+            "left_label": "Kullu",
+            "right_label": "Kinnauri",
+            "label": "Geography",
+            "left_text": "Kullu Valley, central Himachal",
+            "right_text": "Kinnaur district, high border country"
+          }
+        },
+        "cmp-visual": {
+          "type": "compare",
+          "settings": {
+            "label": "Visual language",
+            "left_text": "Bold, graphic, open",
+            "right_text": "Dense, fine, fully patterned"
+          }
+        },
+        "cmp-motifs": {
+          "type": "compare",
+          "settings": {
+            "label": "Motifs",
+            "left_text": "Large geometric border motifs — diamonds, zigzags, hooks",
+            "right_text": "Smaller intricate borders and bands, often across the body"
+          }
+        },
+        "cmp-colours": {
+          "type": "compare",
+          "settings": {
+            "label": "Colours",
+            "left_text": "High-contrast brights on plain grounds",
+            "right_text": "Deep, rich colour layering"
+          }
+        },
+        "cmp-construction": {
+          "type": "compare",
+          "settings": {
+            "label": "Construction",
+            "left_text": "Plain or twill ground plus woven border",
+            "right_text": "More elaborate border construction, finer patterning"
+          }
+        },
+        "cmp-use": {
+          "type": "compare",
+          "settings": {
+            "label": "Traditional use",
+            "left_text": "Daily wear and dress (pattu), gifts, trade",
+            "right_text": "Community dress and ceremony in Kinnaur"
+          }
+        },
+        "artisan": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Artisan",
+            "heading": "The Hands Behind the Textile",
+            "body": "<p>Every object on this page passed through multiple specialists, and most of their names are unrecorded. What is recorded is the shape of their skill: a Kani weaver reads a taleem the way a musician reads a score; a pashmina spinner judges fineness by feel between fingertips; a chikankar's hands know the difference between murri and phanda without looking.</p><p>These crafts transmit through households and workshops — children absorb the vocabulary alongside the work, and a family's specialism becomes its identity. Division of labour is how quality scales in hand work: the Banarasi sari divides dyeing, zari-making, pattern-cutting and weaving across a whole city; much of Lucknow's chikankari is stitched by women working from home, organised through workshops and cooperatives.</p><p>Skilled hand-work sits inside real economic pressure — imitations, uneven markets, intermediaries who capture value. But the makers on this page are not museum exhibits awaiting rescue. They are technicians, designers and teachers — knowledge-holders negotiating a modern market on their own terms. The honest framing is neither pity nor romance; it is respect, plus a willingness to pay for skill.</p>"
+          }
+        },
+        "contemporary-heading": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Then & Now",
+            "heading": "From Tradition to Contemporary",
+            "body": "<p>A tradition that only repeats its old forms is a tradition with no customers. The interesting question is what changes and what must not: fabric and silhouette can move; the grammar of the technique is the tradition.</p>"
+          }
+        },
+        "cont-pashmina": {
+          "type": "compare",
+          "settings": {
+            "left_label": "Traditional use",
+            "right_label": "Contemporary life",
+            "label": "Pashmina & Kani",
+            "left_text": "Winter shawls for dress and status; courtly and export luxury",
+            "right_text": "Stoles and wraps for global wardrobes; GI-certified investment pieces"
+          }
+        },
+        "cont-kullu": {
+          "type": "compare",
+          "settings": {
+            "label": "Kullu & Kinnauri",
+            "left_text": "Daily and ceremonial dress — shawls, pattu, sashes",
+            "right_text": "Stoles, mufflers, caps, yardage and soft furnishings"
+          }
+        },
+        "cont-phulkari": {
+          "type": "compare",
+          "settings": {
+            "label": "Phulkari",
+            "left_text": "Odhnis, dupattas and wedding textiles made at home",
+            "right_text": "Bridal and prêt fashion; the bagh aesthetic revived on modern fabrics"
+          }
+        },
+        "cont-chikankari": {
+          "type": "compare",
+          "settings": {
+            "label": "Chikankari",
+            "left_text": "Kurtas, angarkhas, dupattas, sari fabric",
+            "right_text": "Anarkalis, gowns, shirts and menswear — a global runway vocabulary"
+          }
+        },
+        "cont-banarasi": {
+          "type": "compare",
+          "settings": {
+            "label": "Banarasi",
+            "left_text": "Wedding and ceremonial saris; courtly brocade",
+            "right_text": "Pastel saris, gowns, bandhgalas, unstitched yardage, interiors"
+          }
+        },
+        "authenticity": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Authenticity",
+            "heading": "How to Read a Textile",
+            "body": "<p>No single check proves authenticity — but ten honest observations make you much harder to fool.</p><ol><li><strong>Weave or embroidery?</strong> Is the motif built into the fabric (Kani, Kullu, Banarasi) or added onto it (phulkari, chikankari)? Mislabelled goods fail here first.</li><li><strong>The reverse.</strong> Woven motifs appear on both faces; phulkari blooms from reverse-side darning; kadhwa Banarasi shows clean motif reverses.</li><li><strong>Fibre.</strong> Pashmina's fineness is a lab measurement, not a fingertip's opinion. Touch suggests; it never certifies.</li><li><strong>Zari.</strong> A magnifier shows the wrapped thread's core; tested zari is a certified grade — ask for it.</li><li><strong>Selvedge.</strong> Handloom selvedges carry small irregularities; powerloom edges are unbroken and uniform.</li><li><strong>Motif logic.</strong> Traditional vocabularies have structure — taleem grids, border geometry, buti-and-jaal architecture. Random placement is a copyist's tell.</li><li><strong>Finishing.</strong> Hand-knotted fringes, hand-hemmed edges, washed and calibrated embroidery.</li><li><strong>Irregularity.</strong> Slight slubs and tension shifts are the handwriting of hands, not flaws.</li><li><strong>Paperwork.</strong> GI labels and QR codes, Handloom Mark, India Handloom Brand, Silk Mark — tags tied to verification systems, not stories.</li><li><strong>Price honesty.</strong> Three months of a weaver's life is not a bargain.</li></ol><p>Three protections, three meanings: a GI protects place of origin; the Handloom Mark certifies hand weaving; the India Handloom Brand certifies hand weaving plus quality parameters (and Silk Mark certifies pure silk). A product can carry one, several, or none — and visual inspection alone can never guarantee authenticity.</p>"
+          }
+        },
+        "future": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "The Future",
+            "heading": "The Future of North India's Textile Traditions",
+            "body": "<p>A balanced reading of where these crafts stand. All five face price pressure from powerloom and machine-embroidery imitations — and all five also ride genuine demand revivals: GI-certified pashmina tagging has grown every year since 2014, chikankari is a global fashion vocabulary, and Banarasi bridal demand underwrites thousands of looms.</p><p>The apprenticeship pipeline is the real long-term question. Where the craft pays, the young learn it — Varanasi's weaving lanes still run on family succession; where piece-rates are poor, the workshop ages. Documentation efforts, craft clusters and design schools are extending what families alone used to carry. Mechanisation, meanwhile, is an old story here: jacquards came to Varanasi in the colonial era and are part of the tradition now — the hands still weave. The honest distinction is between tools that extend hand-work and machines that replace it while borrowing its name; GI and certification systems exist precisely to police that line.</p><p>What would actually kill these traditions is not change but economic invisibility: buyers who cannot tell the difference between a three-month Kani and a printed acrylic imitation — and therefore will not pay for the difference. The remedy is education, labelling, and demand that knows what it is asking for. The evidence supports neither doom nor complacency. It supports attention.</p>"
+          }
+        },
+        "closing": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Keep Exploring",
+            "heading": "Five Crafts. Three Fibres. Two Kinds of Making. One North.",
+            "body": "<p>The mountains wove warmth, the plains embroidered, the courts refined, the river city gilded. Every piece of cloth on this page is a record of decisions — fibre combed or spun or thrown, pattern woven in or stitched on, colour chosen against weather, wealth and occasion. Learn to read one textile honestly and you hold the key to all of them.</p>"
+          }
+        },
+        "region-ne": {
+          "type": "link",
+          "settings": {
+            "title": "North East India",
+            "description": "Muga and Eri silk, backstrap looms, indigo and identity",
+            "url": "/pages/culture"
+          }
+        },
+        "region-east": {
+          "type": "link",
+          "settings": {
+            "title": "East India",
+            "description": "Baluchari, jamdani, Sambalpuri ikat",
+            "url": "/pages/culture"
+          }
+        },
+        "region-west": {
+          "type": "link",
+          "settings": {
+            "title": "West & Central India",
+            "description": "Patola, bandhani, Chanderi, Maheshwari",
+            "url": "/pages/culture"
+          }
+        },
+        "region-south": {
+          "type": "link",
+          "settings": {
+            "title": "South India",
+            "description": "Kanjivaram, Pochampally ikat, kasavu",
+            "url": "/pages/culture"
+          }
+        }
+      },
+      "block_order": [
+        "techniques-heading",
+        "tech-pashmina",
+        "tech-kullu",
+        "tech-phulkari",
+        "tech-chikankari",
+        "tech-banarasi",
+        "materials-heading",
+        "mat-pashmina",
+        "mat-wool",
+        "mat-silk",
+        "mat-cotton",
+        "mat-zari",
+        "mat-pat",
+        "motifs-heading",
+        "mot-pashmina",
+        "mot-kullu",
+        "mot-phulkari",
+        "mot-chikankari",
+        "mot-banarasi",
+        "colour-heading",
+        "pal-pashmina",
+        "pal-kullu",
+        "pal-kinnauri",
+        "pal-phulkari",
+        "pal-chikankari",
+        "pal-banarasi",
+        "compare-heading",
+        "cmp-geo",
+        "cmp-visual",
+        "cmp-motifs",
+        "cmp-colours",
+        "cmp-construction",
+        "cmp-use",
+        "artisan",
+        "contemporary-heading",
+        "cont-pashmina",
+        "cont-kullu",
+        "cont-phulkari",
+        "cont-chikankari",
+        "cont-banarasi",
+        "authenticity",
+        "future",
+        "closing",
+        "region-ne",
+        "region-east",
+        "region-west",
+        "region-south"
+      ]
+    }
+  },
+  "order": ["hero", "archive-1", "archive-2"]
+}
