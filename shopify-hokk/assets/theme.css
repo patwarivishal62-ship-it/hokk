@@ -1683,9 +1683,14 @@ svg.icon { width: 20px; height: 20px; }
 .cr-archive { padding: var(--section-pad-top, 24px) 0 var(--section-pad-bottom, 24px); }
 .cr-block { padding: clamp(40px, 6vw, 72px) 0; }
 
-/* Text blocks (section headings + essays) ------------------------------------ */
-.cr-text { max-width: 900px; }
-.cr-text .container { padding-inline: var(--gutter); }
+/* Text blocks (section headings + essays) — centred reading column,
+   width configurable per block (narrow 680 / medium 900 / wide 1160 / full) */
+.cr-text { margin-inline: auto; max-width: 900px; padding-inline: var(--gutter); }
+.cr-text .container { padding-inline: 0; }
+.cr-text--w-narrow { max-width: 680px; }
+.cr-text--w-medium { max-width: 900px; }
+.cr-text--w-wide { max-width: 1160px; }
+.cr-text--w-full { max-width: none; }
 .cr-text__heading {
   font-family: var(--font-heading-family);
   font-size: clamp(2.6rem, 3.8vw, 4rem);
@@ -1701,13 +1706,19 @@ svg.icon { width: 20px; height: 20px; }
 .cr-text__body li { margin-bottom: 0.7em; }
 .cr-text__body a { color: #6B2230; }
 
-/* Map grid ---------------------------------------------------------------- */
+/* Map grid — cards per row is a section setting (2–5); responsive collapse */
 .cr-map {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(var(--cr-map-cols, 3), minmax(0, 1fr));
   gap: 2px;
   background: rgba(176, 141, 87, 0.35);
   margin: clamp(40px, 6vw, 72px) 0;
+}
+@media (max-width: 989px) {
+  .cr-map { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 749px) {
+  .cr-map { grid-template-columns: 1fr; }
 }
 .cr-map__card { background: #FFFFFF; padding: 3.2rem 3rem; }
 .cr-map__location {

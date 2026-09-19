@@ -16,7 +16,7 @@
 {%- endcomment -%}
 
 <div class="cr-archive"
-  style="--section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;{% if section.settings.background_color != blank %}background: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
+  style="--cr-map-cols: {{ section.settings.map_columns | default: 3 }}; --section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;{% if section.settings.background_color != blank %}background: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
 
   {%- for block in section.blocks -%}
     {%- liquid
@@ -104,7 +104,7 @@
         </figure>
 
       {%- when 'text' -%}
-        <section class="cr-block cr-text" id="{{ block.settings.heading | handle }}" {{ block.shopify_attributes }}>
+        <section class="cr-block cr-text cr-text--w-{{ block.settings.width | default: 'medium' }}" id="{{ block.settings.heading | handle }}" {{ block.shopify_attributes }}>
           <div class="container" data-reveal>
             {%- if block.settings.eyebrow != blank -%}
               <p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>
@@ -287,6 +287,31 @@
       "content": "The body of a regional culture page. Blocks render in order — text blocks create section headings, map cards group into a grid, comparison rows group into one table, images sit between any blocks. A page can use several Region archive sections in sequence (Shopify allows up to 50 blocks per section)."
     },
     {
+      "type": "select",
+      "id": "map_columns",
+      "label": "Map cards per row",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 per row"
+        },
+        {
+          "value": "3",
+          "label": "3 per row"
+        },
+        {
+          "value": "4",
+          "label": "4 per row"
+        },
+        {
+          "value": "5",
+          "label": "5 per row"
+        }
+      ],
+      "default": "3",
+      "info": "Rows of the textile map grid. Tablets always show 2 per row, phones 1. With five cards, 3 per row gives a balanced 3 + 2 layout."
+    },
+    {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
@@ -400,6 +425,31 @@
           "type": "text",
           "id": "heading",
           "label": "Heading (H2)"
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Text width",
+          "options": [
+            {
+              "value": "narrow",
+              "label": "Narrow (680px)"
+            },
+            {
+              "value": "medium",
+              "label": "Medium (900px)"
+            },
+            {
+              "value": "wide",
+              "label": "Wide (1160px)"
+            },
+            {
+              "value": "full",
+              "label": "Full width"
+            }
+          ],
+          "default": "medium",
+          "info": "The text column is centred on the page — choose how wide it reads."
         },
         {
           "type": "richtext",
