@@ -66,8 +66,7 @@
   {%- endfor -%}
 </div>
 
-{% schema %}
-{
+{% schema %}{
   "name": "Culture banners",
   "class": "section-culture-banners",
   "max_blocks": 12,
@@ -91,7 +90,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 0
+      "default": 24
     },
     {
       "type": "range",
@@ -101,7 +100,7 @@
       "max": 200,
       "step": 4,
       "unit": "px",
-      "default": 0
+      "default": 32
     },
     {
       "type": "range",
@@ -111,7 +110,7 @@
       "max": 200,
       "step": 4,
       "unit": "px",
-      "default": 0
+      "default": 32
     }
   ],
   "blocks": [
@@ -151,11 +150,16 @@
       "name": "Culture banners",
       "settings": {},
       "blocks": [
-        { "type": "banner" },
-        { "type": "banner" },
-        { "type": "banner" }
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        }
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}

@@ -4,34 +4,52 @@
       "type": "culture-banners",
       "settings": {
         "show_page_title": false,
-        "gap": 0,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "gap": 24,
+        "padding_top": 32,
+        "padding_bottom": 32
       },
       "blocks": {
         "banner-1": {
           "type": "banner",
-          "settings": { "alt_label": "North India" }
+          "settings": {
+            "alt_label": "North India"
+          }
         },
         "banner-2": {
           "type": "banner",
-          "settings": { "alt_label": "North East India" }
+          "settings": {
+            "alt_label": "North East India"
+          }
         },
         "banner-3": {
           "type": "banner",
-          "settings": { "alt_label": "South India" }
+          "settings": {
+            "alt_label": "South India"
+          }
         },
         "banner-4": {
           "type": "banner",
-          "settings": { "alt_label": "West & Central India" }
+          "settings": {
+            "alt_label": "West & Central India"
+          }
         },
         "banner-5": {
           "type": "banner",
-          "settings": { "alt_label": "East India" }
+          "settings": {
+            "alt_label": "East India"
+          }
         }
       },
-      "block_order": ["banner-1", "banner-2", "banner-3", "banner-4", "banner-5"]
+      "block_order": [
+        "banner-1",
+        "banner-2",
+        "banner-3",
+        "banner-4",
+        "banner-5"
+      ]
     }
   },
-  "order": ["culture-banners"]
+  "order": [
+    "culture-banners"
+  ]
 }
