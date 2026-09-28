@@ -1580,6 +1580,15 @@ svg.icon { width: 20px; height: 20px; }
 .culture-banner__img { display: block; width: 100%; height: auto; }
 .culture-banner__img--mobile { display: none; }
 
+/* Hover: gentle zoom — the image grows inside its rounded frame while the
+   darken deepens and the gold arrow rises. Only active while hovering;
+   at rest the image is never cropped. */
+.culture-banner__img { transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1); will-change: transform; }
+@media (hover: hover) {
+  .culture-banner__link:hover .culture-banner__img,
+  .culture-banner__link:focus-visible .culture-banner__img { transform: scale(1.045); }
+}
+
 /* Subtle darken on hover — signals "clickable" without ever cropping
    or moving the designed text. Delete the two rules below for zero effect. */
 @media (hover: hover) {
@@ -1592,7 +1601,7 @@ svg.icon { width: 20px; height: 20px; }
     transition: opacity 0.4s ease;
     pointer-events: none;
   }
-  .culture-banner__link:hover::after { opacity: 0.12; }
+  .culture-banner__link:hover::after { opacity: 0.18; }
 }
 
 /* Hover cue: antique-gold arrow badge rises into the bottom-right corner.
@@ -1647,6 +1656,7 @@ svg.icon { width: 20px; height: 20px; }
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .culture-banner__link::after, .culture-banner__link::before { transition: none !important; }
+  .culture-banner__img { transition: none !important; transform: none !important; }
 }
 
 /* --------------------------------------------------------------------------
