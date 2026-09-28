@@ -1575,7 +1575,7 @@ svg.icon { width: 20px; height: 20px; }
   line-height: 1.05;
   margin: 0;
 }
-.culture-banner { position: relative; }
+.culture-banner { position: relative; border-radius: var(--banner-radius, 0px); overflow: hidden; }
 .culture-banner__link { display: block; position: relative; }
 .culture-banner__img { display: block; width: 100%; height: auto; }
 .culture-banner__img--mobile { display: none; }

@@ -10,7 +10,7 @@
 {%- endcomment -%}
 
 <div class="culture-banners"
-  style="--banner-gap: {{ section.settings.gap }}px; --section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
+  style="--banner-gap: {{ section.settings.gap }}px; --banner-radius: {{ section.settings.corner_radius }}px; --section-pad-top: {{ section.settings.padding_top }}px; --section-pad-bottom: {{ section.settings.padding_bottom }}px;">
 
   {%- if section.settings.show_page_title -%}
     <div class="container culture-banners__title-wrap">
@@ -91,6 +91,17 @@
       "step": 4,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "info": "Rounds the banner corners — 0 for square edges, 10–16 for a gentle curve."
     },
     {
       "type": "range",

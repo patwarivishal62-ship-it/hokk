@@ -6,7 +6,8 @@
         "show_page_title": false,
         "gap": 24,
         "padding_top": 32,
-        "padding_bottom": 32
+        "padding_bottom": 32,
+        "corner_radius": 12
       },
       "blocks": {
         "banner-1": {
